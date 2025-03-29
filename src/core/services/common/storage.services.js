@@ -4,6 +4,7 @@ const setItem = (key, value) => {
 
 const getItem = (key) => {
   if (localStorage.getItem(key)) return JSON.parse(localStorage.getItem(key));
+  return false;
 };
 
 const getItemGeneric = (key) => {
@@ -16,9 +17,9 @@ const setItemGeneric = (key, value) => {
 };
 
 const removeItem = (key) => {
-  if (getItem(key) === true) {
-    localStorage.removeItem(key);
-  };
+
+  if (getItem(key) === false) return false;
+  localStorage.removeItem(key);
 };
 
 const clearStorage = () => {

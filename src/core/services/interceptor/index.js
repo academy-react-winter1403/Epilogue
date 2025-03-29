@@ -1,39 +1,32 @@
 import axios from "axios";
 
-import { logout } from "../../utils/logout.services";
-import { clearStorage, getItem, removeItem } from "../common/storage.services";
+import { getItem } from "../common/storage.services";
 
-const baseURL = "https://classapi.sepehracademy.ir/api"
+const baseURL = import.meta.env.VITE_BASE_URL;
 
 const instance = axios.create({
-    baseURL: baseURL,
+  baseURL: baseURL,
 });
 
-
 const onSuccess = (response) => {
-    return response.data;
+  return response.data;
 };
-
 
 const onError = (err) => {
-    console.log(err);
+  console.log(err);
 
-    if (err.response.status === 401){
-        logout()
-    }
+  if (err.response.status >= 400 && err.response.status < 500) {
+    alert("Client error: " + err.response.status);
+  }
 
-
-    return Promise.reject(err);
+  return Promise.reject(err);
 };
-
 
 instance.interceptors.response.use(onSuccess, onError);
 
-instance.interceptors.request.use((option) => {
-    const token = getItem("token");
-    
-    if(token) option.headers.Authorization = "Bearer " + token;
-    return option;
+instance.interceptors.request.use((opt) => {
+  opt.headers["MessageTest"] = "Hello world!";
+  return opt;
 });
 
 export default instance;

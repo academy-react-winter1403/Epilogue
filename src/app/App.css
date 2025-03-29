@@ -1,6 +1,29 @@
 @import "tailwindcss";
-
-body {
+html {
+  box-sizing: border-box;
   direction: rtl;
 }
 
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 90rem;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  display: block;
+}
+
+body{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    direction:rtl;
+}
