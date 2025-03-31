@@ -1,3 +1,4 @@
+import Landing from "../../../pages/Landing";
 import { authRoute } from "./auth";
 import { mainPages } from "./MainPages";
 

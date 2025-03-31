@@ -9,6 +9,7 @@ export const mainPages = {
   element: <Root />,
   children: [
     {
+      index: true,
       path: "/",
       element: <Landing />,
     },
