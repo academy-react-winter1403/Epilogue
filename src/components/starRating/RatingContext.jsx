@@ -1,6 +1,7 @@
 import { createContext, useContext, useState} from 'react'
 import axios from 'axios'
 
+
 const RatingsContext = createContext()
 export const RatingContext = (children, courseId) => {
 

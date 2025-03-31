@@ -14,7 +14,7 @@ export const mainPages = createBrowserRouter([
                 element: <Landing />,
             },
             {
-                path: "/course-detail",
+                path: "/course-detail/:CourseId",
                 element: <CourseDetail />,
             },
         ],
