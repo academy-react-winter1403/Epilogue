@@ -1,3 +1,4 @@
 import { authRoute } from "./auth";
+import { mainPages } from "./MainPages";
 
-export const publicRoute = [{ path: "/", element: <>home</>, ...authRoute }];
+export const publicRoute =[mainPages,authRoute ];
