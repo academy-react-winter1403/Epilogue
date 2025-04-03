@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { logout } from "../../../core/utils/logout.services";
 import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { Cancel01Icon } from "../Icons/Cancel";
+import { Logout03Icon } from "../Icons/LogoutIcon";
 
 const style = {
   position: "absolute",
@@ -25,7 +25,7 @@ const LogoutButton = () => {
     <div className="w-full">
       <button onClick={handleOpen} style={{ width: "100%" }}>
         <div className=" flex items-center py-[10px] px-2 rounded-[45px] border border-[#FF5353] duration-200 w-full cursor-pointer">
-          <Cancel01Icon size={"24px"} />
+          <Logout03Icon size={"24px"} />
           <p className="text-[16px] font-yekan-500 text-[#FF5353] flex items-center justify-center m-auto">
             {" "}
             خروج از حساب کاربری{" "}
@@ -60,6 +60,12 @@ const LogoutButton = () => {
               </div>
 
               <motion.button
+              onClick={()=>{
+                console.log('logged out');
+                logout()
+                navigate("/")
+              }
+              }
                 className="cursor-pointer absolute w-[112px] h-[47px] top-[100px] left-[50px] gap-[8px] rounded-[40px] pt-[9px] pr-[75px] pb-[9px] pl-[75px] bg-blue-500 text-white font-dana font-bold"
                 whileTap={{ scale: 0.95 }}
                 animate={{

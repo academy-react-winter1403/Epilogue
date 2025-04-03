@@ -109,7 +109,7 @@ export function ForgetPassword() {
                       </div>
                         <button
                           type="submit"
-                          className="w-[398px] bg-blue-500 text-white p-2 rounded-[40px] hover:bg-blue-600 mt-[31px]"
+                          className="w-[398px] cursor-pointer bg-blue-500 text-white p-2 rounded-[40px] hover:bg-blue-600 mt-[31px]"
                         >
                           ارسال لینک
                         </button>

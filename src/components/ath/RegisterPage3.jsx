@@ -126,7 +126,7 @@ export function RegisterPage3() {
                           <button
                             type="button"
                             onClick={togglePasswordVisibility}
-                            className="absolute inset-y-0 right-85 top-3 flex items-center pr-3"
+                            className="absolute cursor-pointer inset-y-0 right-85 top-3 flex items-center pr-3"
                           >
                             {showPassword ? (
                               <svg
@@ -170,7 +170,7 @@ export function RegisterPage3() {
 
                         <button
                           type="submit"
-                          className="w-[398px] bg-blue-500 text-white p-2 rounded-[40px] hover:bg-blue-600 mt-[31px]"
+                          className="w-[398px] cursor-pointer bg-blue-500 text-white p-2 rounded-[40px] hover:bg-blue-600 mt-[31px]"
                         >
                           تایید
                         </button>

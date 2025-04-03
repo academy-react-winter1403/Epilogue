@@ -6,6 +6,8 @@ import Vector from "../../assets/Vector.png";
 import { Link, useNavigate } from "react-router-dom";
 import { loginStep1 } from "../../core/services/api/auth/login.api";
 import { loginValidation } from "../../core/validations/auth.validation";
+import { setItem } from "../../core/utils/storage.services";
+import  {toast, Toaster } from "react-hot-toast";
 
 export function LogIn() {
   const [showPassword, setShowPassword] = useState(false);
@@ -18,11 +20,13 @@ export function LogIn() {
   const handleSubmit = async (value) => {
     console.log(value);
     const data = await loginStep1(value);
-    console.log(data)
+    console.log(data);
     if (data.success) {
-      //navigate
-    } else {
-      // error
+      setItem("token", data.token);
+      toast.success("خوش آمدید");
+      navigate("/dashboard/student-panel");
+    } else if (!data.success) {
+      toast.error("خطا");
     }
   };
 
@@ -82,6 +86,8 @@ export function LogIn() {
                 >
                   {() => (
                     <Form>
+                      <Toaster />
+
                       <div className="mb-3 flex flex-col">
                         <label
                           htmlFor="phoneOrGmail"
@@ -173,15 +179,15 @@ export function LogIn() {
                           مرا به خاطر بسپار
                         </label>
                         <div className="w-[175px] h-[36px] mr-[82px] rounded-[40px] bg-[#F6F6F6] text-center">
-                          <h3 className="text-[#3772FF] font-semibold text-sm mt-1.5">
+                          <Link to={"/auth/forgetPassword"} className="text-[#3772FF] font-semibold text-sm flex items-center justify-center mt-1.5">
                             رمزعبور را فراموش کردید؟
-                          </h3>
+                          </Link>
                         </div>
                       </div>
-                      
+
                       <button
                         type="submit"
-                        className="w-[398px] bg-blue-500 text-white p-2 rounded-[40px] hover:bg-blue-600 mt-[31px]"
+                        className="w-[398px] cursor-pointer bg-blue-500 text-white p-2 rounded-[40px] hover:bg-blue-600 mt-[31px]"
                       >
                         ورود به حساب
                       </button>
@@ -194,18 +200,18 @@ export function LogIn() {
                         </div>
 
                         <div className="w-2.25/5 text-center relative right-[8px]">
-                          <h3 className="font-semibold text-base text-[#3772FF] underline">
+                          <Link to={"/auth/RegisterPage"} className="font-semibold text-base text-[#3772FF] underline">
                             ایجاد حساب کاربری
-                          </h3>
+                          </Link>
                         </div>
                       </div>
                       <div className="border border-[#DCDCDC] w-[141px] h-[40px] rounded-[34px] relative top-[32px] right-[120px] hidden md:block">
                         <div className="w-[24px] h-[24px] relative top-[8px] right-[105px]">
                           <img src={Vector} alt="Vector" />
                         </div>
-                        <h3 className="text-base font-medium text-[#3772FF] relative right-[16px] bottom-[18px]">
+                        <Link to={"/"} className="text-base font-medium text-[#3772FF] relative right-[16px] bottom-[18px]">
                           صفحه اصلی
-                        </h3>
+                        </Link>
                       </div>
                     </Form>
                   )}

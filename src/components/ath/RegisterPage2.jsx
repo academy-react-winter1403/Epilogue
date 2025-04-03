@@ -105,7 +105,7 @@ export function RegisterPage2() {
                           className="text-red-600 text-sm"
                         />
                       </div>
-                      <button className="w-[190px] h-[36px] bg-[#F6F6F6] mt-2 rounded-10 text-[#3772FF]">
+                      <button className="w-[190px] h-[36px] cursor-pointer bg-[#F6F6F6] mt-2 rounded-10 text-[#3772FF]">
                         ارسال مجدد کد تایید
                       </button>
                       <button
