@@ -1,13 +1,28 @@
 // import { Button } from "@heroui/button";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import h1 from "../../assets/img/h1.svg";
 import bahr from "../../assets/img/bahr.svg";
+import Pappe from "../../assets/img/Peppe.png";
 import Menu from "./Menu";
 import { Moon02Icon } from "./Icons/MoonIcon";
 import { Notification02Icon } from "./Icons/NotificationIcon";
+import useUserStore from "../../core/constant/user-info";
 
 const Header = () => {
+  const setUserInfo = useUserStore((state) => state.setUserInfo);
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, []);
+
   return (
     <>
       <div className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-10">
@@ -70,13 +85,19 @@ const Header = () => {
             >
               درباره ما
             </NavLink>
+            {isLoggedIn ? (
+              <Link to={"/dashboard/student-panel"}>
+              <img className="size-full rounded-full  w-12 border h-12"  src={setUserInfo?.currentPictureAddress}></img>
+            </Link>
+                        ) : (
 
-            <NavLink
+            <Link
               to="/auth/RegisterPage"
               className="text-sm/6 text-[#FCFCFC] bg-[#3772FF] rounded-[56px] px-5 py-[8px]"
             >
               ثبت نام یا ورود
-            </NavLink>
+            </Link>
+                 )}
           </div>
         </div>
 

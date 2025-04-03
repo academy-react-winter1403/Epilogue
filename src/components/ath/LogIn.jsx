@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { loginStep1 } from "../../core/services/api/auth/login.api";
 import { loginValidation } from "../../core/validations/auth.validation";
 import { setItem } from "../../core/utils/storage.services";
-import  {toast, Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 export function LogIn() {
   const [showPassword, setShowPassword] = useState(false);
@@ -18,9 +18,8 @@ export function LogIn() {
   };
 
   const handleSubmit = async (value) => {
-    console.log(value);
     const data = await loginStep1(value);
-    console.log(data);
+
     if (data.success) {
       setItem("token", data.token);
       toast.success("خوش آمدید");
@@ -68,7 +67,7 @@ export function LogIn() {
             <div className="flex-col mt-5">
               <div className="flex-col">
                 <h1 className="text-2xl font-semibold  relative">
-                  خوش برگشتی!{" "}
+                  خوش برگشتی!
                 </h1>
                 <h3 className="font-medium text-base text-[#707070] relative  top-[12px]">
                   لطفا شماره همراه یا ایمیل و رمزعبور خود را برای ورود
@@ -179,7 +178,10 @@ export function LogIn() {
                           مرا به خاطر بسپار
                         </label>
                         <div className="w-[175px] h-[36px] mr-[82px] rounded-[40px] bg-[#F6F6F6] text-center">
-                          <Link to={"/auth/forgetPassword"} className="text-[#3772FF] font-semibold text-sm flex items-center justify-center mt-1.5">
+                          <Link
+                            to={"/auth/forgetPassword"}
+                            className="text-[#3772FF] font-semibold text-sm flex items-center justify-center mt-1.5"
+                          >
                             رمزعبور را فراموش کردید؟
                           </Link>
                         </div>
@@ -200,7 +202,10 @@ export function LogIn() {
                         </div>
 
                         <div className="w-2.25/5 text-center relative right-[8px]">
-                          <Link to={"/auth/RegisterPage"} className="font-semibold text-base text-[#3772FF] underline">
+                          <Link
+                            to={"/auth/RegisterPage"}
+                            className="font-semibold text-base text-[#3772FF] underline"
+                          >
                             ایجاد حساب کاربری
                           </Link>
                         </div>
@@ -209,7 +214,10 @@ export function LogIn() {
                         <div className="w-[24px] h-[24px] relative top-[8px] right-[105px]">
                           <img src={Vector} alt="Vector" />
                         </div>
-                        <Link to={"/"} className="text-base font-medium text-[#3772FF] relative right-[16px] bottom-[18px]">
+                        <Link
+                          to={"/"}
+                          className="text-base font-medium text-[#3772FF] relative right-[16px] bottom-[18px]"
+                        >
                           صفحه اصلی
                         </Link>
                       </div>
