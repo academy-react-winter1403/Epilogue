@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const DashboardPageHolder = styled.div({
     border: "1px solid #000000",
-    height:"520px",
+    minHeight:"520px",
+    height:"auto",
     width:"78%",
     background : "white",
     borderRadius: "25px",

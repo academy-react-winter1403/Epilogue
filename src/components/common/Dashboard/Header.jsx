@@ -1,37 +1,42 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+
+import Pappe from "../../../assets/img/Peppe.png";
 import h1 from "../../../assets/img/h1.svg";
 import bahr from "../../../assets/img/bahr.svg";
-import Pappe from "../../../assets/img/Peppe.png";
-
 import { Moon02Icon } from "../Icons/MoonIcon";
 import { Notification02Icon } from "../Icons/NotificationIcon";
+import useUserStore from "../../../core/constant/user-info";
 
 const Header = () => {
-  return (
-    <div className="flex flex-wrap items-center max-w-7xl justify-between p-4 px-8">
-      <div className=" flex items-center gap-[39px]">
-        <div className=" items-center gap-1 hidden lg:flex">
-          <img src={h1} className="pl-1 w-[42px] h-[40px]" />
-            <img src={bahr} className="pt-1 w-[138px] h-[38px]" />
-        </div>
+  const setUserInfo = useUserStore((state) => state.setUserInfo);
 
+  return (
+    <div className="flex flex-wrap items-center max-w-7xl justify-between p-2 px-8">
+      <div className=" flex items-center gap-[39px] ">
         {/* UserInfo */}
-        <div className="flex items-center gap-2">
-          <img className="rounded-full  w-[48px] h-[48px] " src={Pappe} />
-          <div className=" flex flex-col">
-            <p className="font-yekan-700 text-[16px] text-nowrap text-[#FCFCFC]">
-              پارسا اقایی
-            </p>
-            <p className="font-yekan-500 text-[14px] text-nowrap text-[#FCFCFC]">
-              دانشجو
-            </p>
+        <div className="flex items-center gap-[50px]">
+          <div className=" items-center gap-1 hidden lg:flex">
+            <img src={h1} className="pl-1 w-[42px] h-[40px]" />
+            <img src={bahr} className="pt-1 w-[138px] h-[38px]" />
+          </div>
+
+          <div className="flex flex-row gap-2">
+            <img className="rounded-full w-[48px] h-[48px] " src={setUserInfo?.currentPictureAddress} />
+            <div className=" flex flex-col">
+              <p className="font-yekan-700 text-[16px] text-nowrap text-[#FCFCFC]">
+                پارسا اقایی
+              </p>
+              <p className="font-yekan-500 text-[14px] text-nowrap text-[#FCFCFC]">
+                دانشجو
+              </p>
+            </div>
           </div>
         </div>
       </div>
 
       {/* NavBar */}
-      <div className=" flex flex-1 justify-center">
+      <div className=" flex flex-1 pl-[100px] items-center justify-center">
         <div className="flex gap-6 md:gap-9 lg:gap-16 items-center rounded-[56px] ">
           <NavLink
             to="/"
@@ -74,7 +79,7 @@ const Header = () => {
         </div>
       </div>
 
-      <div className=" flex gap-2">
+      <div className="fixed  left-0 top-4 flex gap-2 lg:pl-6">
         <button className="rounded-full w-[48px] h-[48px] bg-[#2F2F2F] text-black">
           <div className="flex items-center justify-center">
             <Notification02Icon color={"#ffff"} />

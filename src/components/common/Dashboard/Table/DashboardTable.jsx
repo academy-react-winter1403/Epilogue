@@ -7,46 +7,49 @@ import {
   TableRow,
 } from "@heroui/react";
 import React from "react";
+import { ViewIcon } from "../../Icons/ViewIcon";
 
 const DashboardTable = ({ courses }) => {
   return (
-    <Table
-      slots={{
-        thead: "bg-blue-500 text-white text-lg font-bold rounded-t-3xl",
-      }}
-      className="bg-[#F6F6F6] rounded-3xl w-[730px] h-[246px]"
-      aria-label="جدول دوره‌ها"
-    >
-      <TableHeader>
-        <TableColumn>#</TableColumn>
-        <TableColumn> دوره</TableColumn>
-        <TableColumn>مدرس</TableColumn>
-        <TableColumn>تاریخ برگزاری</TableColumn>
-        <TableColumn>سطح</TableColumn>
-        <TableColumn></TableColumn>
-      </TableHeader>
-      <TableBody>
-        {courses.map((course) => (
-          <TableRow key={course.id}>
-            <TableCell>
+    <div>
+        <div className="bg-[#F1F1F1] rounded-[16px] text-[#707070]">
+          <div className="gap-[30px] p-3 flex text-sm font-yekan-600 text-nowrap">
+            <p className=" w-[100px]">#</p>
+            <p className=" w-[90px]">دوره</p>
+            <p className=" w-[100px]">مدرس</p>
+            <p className=" w-[120px]">تاریخ برگزاری</p>
+            <p className=" w-[95px]">سطح</p>
+            <p className=" w-[40px]"></p>
+          </div>
+        </div>
+      <div>
+        {courses.map((course, index) => (
+          <div
+            key={course.id}
+            className="flex items-center gap-[50px] py-[22px] text-nowrap  text-sm"
+          >
+            <div>
               <img
                 src={course.image}
-                className="w-[83px] h-[52px] rounded-xl object-cover"
+                className="min-w-[83px] h-[52px] border rounded-[12px] object-cover"
+                alt=""
               />
-            </TableCell>
-            <TableCell>{course.title}</TableCell>
-            <TableCell>{course.instructor}</TableCell>
-            <TableCell>{course.date}</TableCell>
-            <TableCell>{course.level}</TableCell>
-            <TableCell>
-              <button className="text-blue-500 hover:text-blue-700">
-                {/* <EyeIcon className="w-6 h-6" /> */}
-              </button>
-            </TableCell>
-          </TableRow>
+            </div>
+            <p className="min-w-0 font-yekan-600">{course.title}</p>
+            <p className=" font-yekan-600">{course.instructor}</p>
+            <p className="font-yekan-600">{course.date}</p>
+            <p className="px-2 py-1 flex items-center justify-center bg-[#FF37F5] rounded-3xl text-white text-[14px]">
+              {course.level}
+            </p>
+            <div className="p-2 ">
+
+            <ViewIcon width={24} height={24} />
+
+            </div>
+          </div>
         ))}
-      </TableBody>
-    </Table>
+      </div>
+    </div>
   );
 };
 

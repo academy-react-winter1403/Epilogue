@@ -13,6 +13,8 @@ import { Books02Icon } from "../Icons/BookIcon2";
 import { LibraryIcon } from "../Icons/LibraryIcon";
 import { UserSquareIcon } from "../Icons/UserSquerIcon";
 import { MoneySend02Icon } from "../Icons/MoneyIcon";
+// import h1 from "../../../assets/img/h1.svg";
+// import bahr from "../../../assets/img/bahr.svg";
 
 const DashboardMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,7 +25,11 @@ const DashboardMenu = () => {
   return (
     <div>
       <div className="flex flex-col w-[250px] h-full bg-[#242424] text-white">
-        <div className="px-[24px] space-y-1 flex flex-col ">
+        {/* <div className=" items-center gap-1 hidden lg:flex">
+          <img src={h1} className="pl-1 w-[42px] h-[40px]" />
+          <img src={bahr} className="pt-1 w-[138px] h-[38px]" />
+        </div> */}
+        <div className="px-[20px] space-y-1 flex flex-col ">
           {[
             ["داشبرد", <Activity01Icon />, "/dashboard/student-panel"],
             ["دوره من", <CourseIcon />, "/dashboard/edit-profile"],
@@ -44,7 +50,7 @@ const DashboardMenu = () => {
               url={item[2]}
             />
           ))}
-          <div className="pt-11">
+          <div className="pt-7">
             <LogoutButton />
           </div>
         </div>
