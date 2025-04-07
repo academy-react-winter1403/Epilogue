@@ -28,7 +28,7 @@ export function ForgetPassword() {
       );
       navigate("/auth/forgetPassword/NewPassword")
     }
-    else toast.error("مثل اینکه در تکرار رمز عبور اشتباهی پیش آمده!");
+    else toast.Field("error");
   };
   return (
     <>
@@ -109,7 +109,7 @@ export function ForgetPassword() {
                       </div>
                         <button
                           type="submit"
-                          className="w-[398px] cursor-pointer bg-blue-500 text-white p-2 rounded-[40px] hover:bg-blue-600 mt-[31px]"
+                          className="w-[398px] bg-blue-500 text-white p-2 rounded-[40px] hover:bg-blue-600 mt-[31px]"
                         >
                           ارسال لینک
                         </button>
@@ -117,9 +117,9 @@ export function ForgetPassword() {
                         <div className="w-[24px] h-[24px] relative top-[8px] right-[75px]">
                           <img src={arrow} />
                         </div>
-                        <Link to={"/auth/login"} className="text-base font-medium text-[#3772FF] relative right-[19px] bottom-[18px]">
+                        <h3 className="text-base font-medium text-[#3772FF] relative right-[19px] bottom-[18px]">
                           بازگشت
-                        </Link>
+                        </h3>
                       </div>
                     </Form>
                   )}
