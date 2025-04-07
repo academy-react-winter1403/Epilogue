@@ -1,20 +1,25 @@
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Register } from '../components/ath/Register';
-import { LogIn } from '../components/ath/LogIn';
-import { ForgetPassword } from '../components/ath/ForgetPassword';
-import { NewPassword } from '../components/ath/NewPassword';
-import { Register2 } from '../components/ath/Register2';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Header } from '../components/CourseList/Header';
+import { Body } from '../components/CourseList/Body';
 import './App.css';
+import { Footer } from '../components/CourseList/Footer';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
-<div></div>
+    <div className="rtl">
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <Header />
+          <Body />
+          <Footer />
+        </Router>
+      </QueryClientProvider>
+    </div>
   );
 }
-
-// const NotFound = () => {
-//   return <h1>صفحه مورد نظر یافت نشد</h1>;
-// }
 
 export default App;
