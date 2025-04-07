@@ -1,8 +1,8 @@
 import React from "react";
 import Landing from "../../../pages/Landing";
 import Root from "../../../app/layout/Landing/Root";
-import { createBrowserRouter } from "react-router-dom";
 import CourseDetail from "../../../pages/CourseDetail";
+import { Body } from "../../../components/CourseList/Body";
 
 export const mainPages = {
   path: "/",
@@ -16,6 +16,10 @@ export const mainPages = {
     {
       path: "/course-detail",
       element: <CourseDetail />,
+    },
+    {
+      path: "/CourseList",
+      element: <Body />,
     },
   ],
 };

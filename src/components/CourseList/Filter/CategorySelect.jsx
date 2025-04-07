@@ -1,22 +1,28 @@
-
 import Select from "react-select";
 import layersIcon from "../../../assets/layers.png";
 
-export const CategorySelect = ({ technologyOptions, setTechnologies, setTechCount }) => {
+export const CategorySelect = ({
+  technologyOptions,
+  setTechnologies,
+  setTechCount,
+}) => {
   return (
     <div className="mb-6">
       <div className="flex gap-2">
         <div className="w-[24px] h-[24px]">
           <img src={layersIcon} alt="Category Icon" />
         </div>
-        <label className="font-medium block mb-[9px] text-base" htmlFor="category">
+        <label
+          className="font-medium block mb-[9px] text-base"
+          htmlFor="category"
+        >
           دسته بندی
         </label>
       </div>
       <Select
         name="category"
         options={technologyOptions}
-        onInputChange={(option) => {
+        onChange={(option) => {
           console.log(option, "test");
           setTechnologies(option.value);
           setTechCount(1);

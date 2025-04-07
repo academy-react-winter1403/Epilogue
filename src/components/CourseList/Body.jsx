@@ -1,22 +1,21 @@
-
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import useStore from "../../core/Store/Zustand-Store";
-import Pagination from "./Pagination"; 
-import CardList from "./CardList"; 
-import Filter from "./Filter/Filter"; 
-import Sorting from "./Sorting"; 
+import Pagination from "./Pagination";
+import CardList from "./CardList";
+import Filter from "./Filter/Filter";
+import Sorting from "./Sorting";
 
 const fetchCourses = async (pageNumber, teacherId, technologies, techCount) => {
   const params = {
     PageNumber: pageNumber,
     RowsOFPage: 9,
     TeacherId: teacherId,
-    ListTech: [technologies],
+    ListTech: technologies,
     TechCount: techCount,
   };
-
+  console.log(params, "params");
   try {
     const response = await axios.get(
       `https://classapi.sepehracademy.ir/api/Home/GetCoursesWithPagination`,
@@ -38,7 +37,8 @@ export function Body() {
   const [activeSort, setActiveSort] = useState("newest");
   const [priceRange, setPriceRange] = useState([0, 100000000]);
 
-  const { pageNumber, setPageNumber, teacherId, technologies, techCount } = useStore((state) => state);
+  const { pageNumber, setPageNumber, teacherId, technologies, techCount } =
+    useStore((state) => state);
   const { data, isLoading, error } = useQuery({
     queryKey: ["courses", pageNumber, teacherId, technologies, techCount],
     queryFn: () => fetchCourses(pageNumber, teacherId, technologies, techCount),
@@ -58,10 +58,10 @@ export function Body() {
   if (error) {
     return <div>خطا: {error.message}</div>;
   }
-   const cardsPerPage = 12;
+  const cardsPerPage = 12;
   const offset = currentPage * cardsPerPage;
   const currentCards = courses.slice(offset, offset + cardsPerPage);
-  const totalPages = Math.ceil(totalCount / 12); 
+  const totalPages = Math.ceil(totalCount / 12);
 
   const handleSortChange = (sortType) => {
     setActiveSort(sortType);
@@ -69,12 +69,14 @@ export function Body() {
   const filteredCards = currentCards.filter((card) => {
     const matchesSearch =
       !searchTerm ||
-      (card.title && card.title.toLowerCase().includes(searchTerm.toLowerCase()));
+      (card.title &&
+        card.title.toLowerCase().includes(searchTerm.toLowerCase()));
     const matchesInstructor =
       !selectedInstructor || card.teacherName === selectedInstructor;
     const matchesCategory =
       !selectedCategory ||
-      (card.technologyList && card.technologyList.split(",").includes(selectedCategory.value));
+      (card.technologyList &&
+        card.technologyList.split(",").includes(selectedCategory.value));
     const matchesLevel =
       !selectedLevel || card.levelName === selectedLevel.value;
     const matchesPrice =
@@ -112,14 +114,11 @@ export function Body() {
           setSelectedLevel={setSelectedLevel}
           setPriceRange={setPriceRange}
         />
-        
-        <CardList 
-sortedCards={filteredCards}
-currentCards={currentCards}
-        /> 
+
+        <CardList sortedCards={filteredCards} currentCards={currentCards} />
       </div>
-      
-      <Pagination 
+
+      <Pagination
         totalPages={totalPages}
         currentPage={currentPage}
         setPageNumber={setPageNumber}
