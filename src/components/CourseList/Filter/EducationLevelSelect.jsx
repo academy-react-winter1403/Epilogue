@@ -2,7 +2,7 @@
 import Select from "react-select";
 import cellsIcon from "../../../assets/cells.png";
 
-export const EducationLevelSelect = ({ educationLevels, setFieldValue, values, setSelectedLevel }) => {
+export const EducationLevelSelect = ({  LevelOptions,setLevelName,}) => {
   return (
     <div className="mb-6">
       <div className="flex gap-2">
@@ -15,11 +15,10 @@ export const EducationLevelSelect = ({ educationLevels, setFieldValue, values, s
       </div>
       <Select
         name="educationLevel"
-        options={educationLevels}
-        value={values.educationLevel || null}
+        options={LevelOptions}
         onChange={(option) => {
-          setFieldValue("educationLevel", option || null);
-          setSelectedLevel(option);
+          console.log(option, "test");
+          setLevelName(option.value);
         }}
         placeholder="سطح آموزشی را انتخاب کنید"
         className="react-select-container"

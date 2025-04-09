@@ -9,19 +9,14 @@ import { CategorySelect } from "./CategorySelect";
 import { EducationLevelSelect } from "./EducationLevelSelect";
 import { DateRangePicker } from "./DateRangePicker";
 import { PriceSlider } from "./PriceSlider";
+
 function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
-  const [priceRange, setPriceRangeState] = useState([0, 100000000]);
+  const [priceRangeState, setPriceRangeState] = useState([0, 100000000]);
   const [dateRange, setDateRange] = useState([null, null]);
+  const [isFormOpen, setFormOpen] = useState(false);
 
-  const educationLevels = [
-    { value: "نامبتدی", label: "نا مبتدی" },
-    { value: "متوسط", label: "متوسط" },
-    { value: "پیشرفته", label: "پیشرفته" },
-  ];
-
-  const { setTeacherId, setTechnologies, setTechCount } = useStore(
-    (state) => state
-  );
+  const { setTeacherId, setTechnologies, setTechCount, setLevelName } =
+    useStore((state) => state);
 
   const {
     data: teachers,
@@ -57,6 +52,21 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
     },
   });
 
+  const { data: levelName } = useQuery({
+    queryKey: ["levelName"],
+    queryFn: async () => {
+      try {
+        const response = await axios.get(
+          "https://classapi.sepehracademy.ir/api/CourseLevel/GetAllCourseLevel"
+        );
+        return response.data;
+      } catch (error) {
+        console.error("خطا در بارگذاری دسته بندی:", error);
+        throw error;
+      }
+    },
+  });
+
   const technologyOptions = technologieses?.map((e) => ({
     value: e?.id,
     label: e?.techName,
@@ -67,60 +77,161 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
     label: teacher?.fullName,
   }));
 
+  const LevelOptions = levelName?.map((e) => ({
+    value: e?.id,
+    label: e?.levelName,
+  }));
+
   return (
-    <div className="w-[258px] h-[625px]">
-      <Formik
-        initialValues={{
-          search: "",
-          instructor: null,
-          educationLevel: null,
-          category: null,
-          price: priceRange,
-          dateRange: dateRange,
-        }}
-        onSubmit={(values) => {
-          console.log(values);
-          console.log(
-            `Selected Price Range: ${values.price[0]} - ${values.price[1]}`
-          );
-        }}
-      >
-        {({ setFieldValue, values }) => (
-          <Form>
-            <SearchFilter
-              searchTerm={searchTerm}
-              setSearchTerm={setSearchTerm}
-              setFieldValue={setFieldValue}
-            />
-            <InstructorSelect
-              isLoading={isLoading}
-              error={error}
-              uniqueTeachers={uniqueTeachers}
-              setTeacherId={setTeacherId}
-            />
-            <CategorySelect
-              technologyOptions={technologyOptions}
-              setTechnologies={setTechnologies}
-              setTechCount={setTechCount}
-            />
-            <EducationLevelSelect
-              educationLevels={educationLevels}
-              setFieldValue={setFieldValue}
-              values={values}
-              setSelectedLevel={(level) => {}}
-            />
-            <DateRangePicker
-              dateRange={dateRange}
-              setDateRange={setDateRange}
-            />
-            <PriceSlider
-              priceRange={priceRange}
-              setPriceRange={setPriceRangeState}
-            />
-          </Form>
-        )}
-      </Formik>
+    <div>
+      {/* حالت عادی */}
+      <div className="hidden md:block">
+        <div
+          className={`w-[258px] h-[625px] border border-[#DCDCDC] rounded-3xl`}
+        >
+          <h1 className="font-bold text-2xl">فیلتر</h1>
+          <Formik
+            initialValues={{
+              search: "",
+              instructor: null,
+              Level: null,
+              category: null,
+              price: priceRangeState,
+              dateRange: dateRange,
+            }}
+            onSubmit={(values) => {
+              console.log(values);
+              console.log(
+                `Selected Price Range: ${values.price[0]} - ${values.price[1]}`
+              );
+            }}
+          >
+            {({ setFieldValue, values }) => (
+              <Form className="mt-4">
+                <SearchFilter
+                  searchTerm={searchTerm}
+                  setSearchTerm={setSearchTerm}
+                  setFieldValue={setFieldValue}
+                />
+                <InstructorSelect
+                  isLoading={isLoading}
+                  error={error}
+                  uniqueTeachers={uniqueTeachers}
+                  setTeacherId={setTeacherId}
+                />
+                <CategorySelect
+                  technologyOptions={technologyOptions}
+                  setTechnologies={setTechnologies}
+                  setTechCount={setTechCount}
+                />
+                <EducationLevelSelect
+                  LevelOptions={LevelOptions}
+                  setLevelName={setLevelName}
+                />
+                <DateRangePicker
+                  dateRange={dateRange}
+                  setDateRange={setDateRange}
+                />
+                <PriceSlider
+                  priceRange={priceRangeState}
+                  setPriceRange={setPriceRangeState}
+                />
+              </Form>
+            )}
+          </Formik>
+        </div>
+      </div>
+
+      {/* حالت md */}
+      <div className="block md:hidden">
+        <div
+          className={`${
+            isFormOpen
+              ? "w-[258px] h-[625px] animate-slide-up border border-[#DCDCDC] rounded-3xl"
+              : "w-[95px] h-[48px] rounded-[40px] bg-gray-200 cursor-pointer flex items-center justify-center"
+          }`}
+          onClick={() => !isFormOpen && setFormOpen(true)}
+        >
+          {!isFormOpen && <span>فیلتر</span>}
+          {isFormOpen && (
+            <div>
+              {/* دایوی برای بستن فرم */}
+              <div
+                style={{
+                  width: "101px",
+                  height: "40px",
+                  borderRadius: "34px",
+                  border: "1px solid",
+                  padding: "7px 16px",
+                  gap: "8px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: "#f0f0f0",
+                  cursor: "pointer",
+                  marginBottom: "10px",
+                }}
+                onClick={() => setFormOpen(false)}
+              >
+                بستن فرم
+              </div>
+
+              {/* فرم اصلی */}
+              <Formik
+                initialValues={{
+                  search: "",
+                  instructor: null,
+                  Level: null,
+                  category: null,
+                  price: priceRangeState,
+                  dateRange: dateRange,
+                }}
+                onSubmit={(values) => {
+                  console.log(values);
+                  console.log(
+                    `Selected Price Range: ${values.price[0]} - ${values.price[1]}`
+                  );
+                }}
+              >
+                {({ setFieldValue, values }) => (
+                  <Form>
+                    <SearchFilter
+                      searchTerm={searchTerm}
+                      setSearchTerm={setSearchTerm}
+                      setFieldValue={setFieldValue}
+                    />
+                    <InstructorSelect
+                      isLoading={isLoading}
+                      error={error}
+                      uniqueTeachers={uniqueTeachers}
+                      setTeacherId={setTeacherId}
+                    />
+                    <CategorySelect
+                      technologyOptions={technologyOptions}
+                      setTechnologies={setTechnologies}
+                      setTechCount={setTechCount}
+                    />
+                    <EducationLevelSelect
+                      LevelOptions={LevelOptions}
+                      setLevelName={setLevelName}
+                    />
+                    <DateRangePicker
+                      dateRange={dateRange}
+                      setDateRange={setDateRange}
+                    />
+                    <PriceSlider
+                      priceRange={priceRangeState}
+                      setPriceRange={setPriceRangeState}
+                    />
+                  </Form>
+                )}
+              </Formik>
+            </div>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
+
 export default Filter;

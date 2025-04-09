@@ -1,9 +1,11 @@
-
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import moneyIcon from "../../../assets/money.png";
+import useStore from "../../../core/Store/Zustand-Store";
 
-export const PriceSlider = ({ priceRange, setPriceRange }) => {
+export const PriceSlider = () => {
+  const { priceRange, setPriceRange } = useStore((state) => state);
+
   const handlePriceChange = (range) => {
     setPriceRange(range);
   };

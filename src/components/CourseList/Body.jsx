@@ -7,15 +7,26 @@ import CardList from "./CardList";
 import Filter from "./Filter/Filter";
 import Sorting from "./Sorting";
 
-const fetchCourses = async (pageNumber, teacherId, technologies, techCount) => {
+const fetchCourses = async (
+  pageNumber,
+  teacherId,
+  technologies,
+  techCount,
+  levelName,
+  SortCol,
+  SortType
+) => {
   const params = {
     PageNumber: pageNumber,
     RowsOFPage: 9,
     TeacherId: teacherId,
     ListTech: technologies,
     TechCount: techCount,
+    courseLevelId: levelName,
+    SortingCol: SortCol, // اضافه کردن ستون مرتب‌سازی
+    SortType: SortType, // اضافه کردن نوع مرتب‌سازی
   };
-  console.log(params, "params");
+  console.log(params)
   try {
     const response = await axios.get(
       `https://classapi.sepehracademy.ir/api/Home/GetCoursesWithPagination`,
@@ -23,29 +34,56 @@ const fetchCourses = async (pageNumber, teacherId, technologies, techCount) => {
     );
     return response.data;
   } catch (error) {
-    console.error("خطا در درخواست به API:", error);
+    console.error("Error fetching data:", error);
     throw error;
   }
 };
 
 export function Body() {
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedInstructor, setSelectedInstructor] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedLevel, setSelectedLevel] = useState(null);
-  const [activeSort, setActiveSort] = useState("newest");
-  const [priceRange, setPriceRange] = useState([0, 100000000]);
 
-  const { pageNumber, setPageNumber, teacherId, technologies, techCount } =
-    useStore((state) => state);
+  const {
+    pageNumber,
+    setPageNumber,
+    teacherId,
+    technologies,
+    techCount,
+    levelName,
+    priceRange,
+    SortCol, // گرفتن ستون مرتب‌سازی از Zustand
+    SortType, // گرفتن نوع مرتب‌سازی از Zustand
+  } = useStore((state) => state);
+
   const { data, isLoading, error } = useQuery({
-    queryKey: ["courses", pageNumber, teacherId, technologies, techCount],
-    queryFn: () => fetchCourses(pageNumber, teacherId, technologies, techCount),
+    queryKey: [
+      "courses",
+      pageNumber,
+      teacherId,
+      technologies,
+      techCount,
+      levelName,
+      SortCol,
+      SortType,
+    ],
+    queryFn: () =>
+      fetchCourses(
+        pageNumber,
+        teacherId,
+        technologies,
+        techCount,
+        levelName,
+        SortCol,
+        SortType
+      ),
   });
+  console.log(SortCol,SortType)
 
   const totalCount = data?.totalCount;
-  const courses = data?.courseFilterDtos;
+  const courses = data?.courseFilterDtos || [];
 
   if (isLoading) {
     return (
@@ -58,15 +96,8 @@ export function Body() {
   if (error) {
     return <div>خطا: {error.message}</div>;
   }
-  const cardsPerPage = 12;
-  const offset = currentPage * cardsPerPage;
-  const currentCards = courses.slice(offset, offset + cardsPerPage);
-  const totalPages = Math.ceil(totalCount / 12);
 
-  const handleSortChange = (sortType) => {
-    setActiveSort(sortType);
-  };
-  const filteredCards = currentCards.filter((card) => {
+  const filteredCards = courses.filter((card) => {
     const matchesSearch =
       !searchTerm ||
       (card.title &&
@@ -78,7 +109,9 @@ export function Body() {
       (card.technologyList &&
         card.technologyList.split(",").includes(selectedCategory.value));
     const matchesLevel =
-      !selectedLevel || card.levelName === selectedLevel.value;
+      !selectedLevel ||
+      (card.LevelList &&
+        card.LevelList.split(",").includes(selectedLevel.value));
     const matchesPrice =
       card.cost >= priceRange[0] && card.cost <= priceRange[1];
 
@@ -90,6 +123,9 @@ export function Body() {
       matchesPrice
     );
   });
+
+  const totalPages = Math.ceil(totalCount / 9);
+
   return (
     <div className="container mx-auto px-4">
       <div className="text-center mt-10">
@@ -99,11 +135,10 @@ export function Body() {
         </h2>
       </div>
 
-      <Sorting onSortChange={handleSortChange} />
+      <Sorting />
 
-      <div className="flex mt-10 gap-10">
+      <div className="mt-10 gap-10 md:flex">
         <Filter
-          cards={courses}
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
           selectedInstructor={selectedInstructor}
@@ -112,16 +147,15 @@ export function Body() {
           setSelectedCategory={setSelectedCategory}
           selectedLevel={selectedLevel}
           setSelectedLevel={setSelectedLevel}
-          setPriceRange={setPriceRange}
         />
 
-        <CardList sortedCards={filteredCards} currentCards={currentCards} />
+        <CardList sortedCards={filteredCards} currentCards={courses} />
       </div>
 
       <Pagination
         totalPages={totalPages}
         currentPage={currentPage}
-        setPageNumber={setPageNumber}
+        setPageNumber={setPageNumber} 
       />
     </div>
   );

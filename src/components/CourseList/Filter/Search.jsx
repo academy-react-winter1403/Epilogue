@@ -1,4 +1,3 @@
-
 import { Field } from "formik";
 import search from "../../../assets/search.png";
 import search2 from "../../../assets/search2.png";
@@ -27,8 +26,9 @@ export const SearchFilter = ({ searchTerm, setSearchTerm, setFieldValue }) => {
               className="bg-[#F1F1F1] w-full h-12 p-2 pl-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 font-medium text-xs"
               value={searchTerm}
               onChange={(e) => {
-                setSearchTerm(e.target.value);
-                setFieldValue("search", e.target.value);
+                const value = e.target.value;
+                setSearchTerm(value);
+                setFieldValue("search", value);
               }}
             />
           )}
