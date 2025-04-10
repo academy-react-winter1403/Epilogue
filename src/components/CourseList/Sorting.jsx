@@ -26,8 +26,8 @@ const Sorting = () => {
       {/* حالت عادی */}
       <div className="hidden md:block">
         <div className="flex items-center justify-center mt-[72px]">
-          <span className="font-bold mt-1 ml-2 text-xl">مرتب‌سازی</span>
-          <div className="flex gap-6">
+          <span className="font-bold mt-1.5 ml-4 text-xl">ترتیب</span>
+          <div className="flex gap-2">
             {sortOptions.map((option) => (
               <div
                 key={option.type}

@@ -5,7 +5,7 @@ import search2 from "../../../assets/search2.png";
 export const SearchFilter = ({ searchTerm, setSearchTerm, setFieldValue }) => {
   return (
     <div className="mb-6 rounded-4 border border-[#F1F1F1] ">
-      <div className="flex gap-2">
+      <div className="flex gap-2 mr-3">
         <div className="w-[24px] h-[24px]">
           <img src={search} alt="Search Icon" />
         </div>
@@ -23,7 +23,7 @@ export const SearchFilter = ({ searchTerm, setSearchTerm, setFieldValue }) => {
               {...field}
               type="text"
               placeholder="دوره مورد نظر را جست‌جو کنید..."
-              className="bg-[#F1F1F1] w-full h-12 p-2 pl-12 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 font-medium text-xs"
+              className="bg-[#F1F1F1]  p-2 pl-12 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400 font-medium text-xs w-[258px] h-[48px] rounded-lg mr-auto ml-auto"
               value={searchTerm}
               onChange={(e) => {
                 const value = e.target.value;

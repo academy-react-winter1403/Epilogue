@@ -8,7 +8,7 @@ export const CategorySelect = ({
 }) => {
   return (
     <div className="mb-6">
-      <div className="flex gap-2">
+      <div className="flex gap-2 mr-3">
         <div className="w-[24px] h-[24px]">
           <img src={layersIcon} alt="Category Icon" />
         </div>
@@ -28,7 +28,7 @@ export const CategorySelect = ({
           setTechCount(1);
         }}
         placeholder="دسته مورد نظر را انتخاب کنید"
-        className="react-select-container"
+        className="react-select-container ml-auto mr-auto"
         classNamePrefix="react-select"
         styles={{
           control: (base) => ({
@@ -36,6 +36,8 @@ export const CategorySelect = ({
             backgroundColor: "#F1F1F1",
             borderRadius: "0.5rem",
             border: "1px solid #D1D5DB",
+            width:"258px",
+              height:"48px",
           }),
         }}
       />

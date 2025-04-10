@@ -87,9 +87,9 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
       {/* حالت عادی */}
       <div className="hidden md:block">
         <div
-          className={`w-[258px] h-[625px] border border-[#DCDCDC] rounded-3xl`}
+          className={`w-[278px] h-[665px] border border-[#DCDCDC] rounded-3xl`}
         >
-          <h1 className="font-bold text-2xl">فیلتر</h1>
+          <h1 className="font-bold text-2xl mt-4 mr-5">فیلتر</h1>
           <Formik
             initialValues={{
               search: "",

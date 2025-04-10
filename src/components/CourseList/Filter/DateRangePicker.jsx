@@ -6,7 +6,7 @@ import calendarIcon from "../../../assets/calendar.png";
 export const DateRangePicker = ({ dateRange, setDateRange }) => {
   return (
     <div className="mb-6">
-      <div className="flex gap-2">
+      <div className="flex gap-2 mr-3">
         <div className="w-[24px] h-[24px]">
           <img src={calendarIcon} alt="Date Icon" />
         </div>
