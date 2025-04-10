@@ -87,7 +87,7 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
       {/* حالت عادی */}
       <div className="hidden md:block">
         <div
-          className={`w-[278px] h-[665px] border border-[#DCDCDC] rounded-3xl`}
+          className={`w-[298px] h-[665px] border border-[#DCDCDC] rounded-3xl`}
         >
           <h1 className="font-bold text-2xl mt-4 mr-5">فیلتر</h1>
           <Formik
@@ -107,7 +107,7 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
             }}
           >
             {({ setFieldValue, values }) => (
-              <Form className="mt-4">
+              <Form className="pt-6">
                 <SearchFilter
                   searchTerm={searchTerm}
                   setSearchTerm={setSearchTerm}
@@ -128,13 +128,14 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
                   LevelOptions={LevelOptions}
                   setLevelName={setLevelName}
                 />
-                <DateRangePicker
-                  dateRange={dateRange}
-                  setDateRange={setDateRange}
-                />
+
                 <PriceSlider
                   priceRange={priceRangeState}
                   setPriceRange={setPriceRangeState}
+                />
+                <DateRangePicker
+                  dateRange={dateRange}
+                  setDateRange={setDateRange}
                 />
               </Form>
             )}

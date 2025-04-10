@@ -3,7 +3,7 @@ import React from "react";
  const CardList = ({sortedCards,currentCards}) => {
 
   return (
-    <div className="w-screen h-auto flex-col   md:grid grid-cols-3 gap-[32px] w-[971px]">
+    <div className="w-screen h-auto flex-col  md:grid grid-cols-3 gap-[32px] ">
       {sortedCards.length > 0 ? (
         sortedCards.map((card, index) => (
           <div key={index} className="card w-[322px] h-[366px] flex flex-col">

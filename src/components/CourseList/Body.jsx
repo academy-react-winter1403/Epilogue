@@ -127,17 +127,17 @@ export function Body() {
   const totalPages = Math.ceil(totalCount / 9);
 
   return (
-    <div className="container mx-auto px-4">
-      <div className="text-center mt-10">
+    <div className="container px-4">
+      <div className="text-center pt-10">
         <h1 className="text-4xl font-bold">شروع ماجراجویی جدید</h1>
-        <h2 className="text-lg font-medium text-gray-700 mt-4">
+        <h2 className="text-lg font-medium text-gray-700 pt-4">
           یک شروع قوی برای یادگیری یک مسئله جدید میتونه تو پیشرفت کمکت کنه
         </h2>
       </div>
 
       <Sorting />
 
-      <div className="mt-10 gap-10 md:flex">
+      <div className="pt-10 px-10 gap-[31px] md:flex">
         <Filter
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
