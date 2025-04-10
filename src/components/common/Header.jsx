@@ -87,17 +87,19 @@ const Header = () => {
             </NavLink>
             {isLoggedIn ? (
               <Link to={"/dashboard/student-panel"}>
-              <img className="size-full rounded-full  w-12 border h-12"  src={setUserInfo?.currentPictureAddress}></img>
-            </Link>
-                        ) : (
-
-            <Link
-              to="/auth/RegisterPage"
-              className="text-sm/6 text-[#FCFCFC] bg-[#3772FF] rounded-[56px] px-5 py-[8px]"
-            >
-              ثبت نام یا ورود
-            </Link>
-                 )}
+                <img
+                  className="size-full rounded-full  w-12 border h-12"
+                  src={setUserInfo?.currentPictureAddress}
+                ></img>
+              </Link>
+            ) : (
+              <Link
+                to="/auth/RegisterPage"
+                className="text-sm/6 text-[#FCFCFC] bg-[#3772FF] rounded-[56px] px-5 py-[8px]"
+              >
+                ثبت نام یا ورود
+              </Link>
+            )}
           </div>
         </div>
 
@@ -108,10 +110,9 @@ const Header = () => {
             </div>
           </button>
           <button className="rounded-full p-3 bg-[#2F2F2F]">
-              <Moon02Icon />
+            <Moon02Icon />
           </button>
         </div>
-
         <Menu />
       </div>
     </>

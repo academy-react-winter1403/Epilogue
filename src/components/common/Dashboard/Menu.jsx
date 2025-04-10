@@ -29,11 +29,11 @@ const DashboardMenu = () => {
           <img src={h1} className="pl-1 w-[42px] h-[40px]" />
           <img src={bahr} className="pt-1 w-[138px] h-[38px]" />
         </div> */}
-        <div className="px-[20px] space-y-1 flex flex-col ">
+        <div className=" space-y-1 flex flex-col ">
           {[
             ["داشبرد", <Activity01Icon />, "/dashboard/student-panel"],
-            ["دوره من", <CourseIcon />, "/dashboard/edit-profile"],
-            ["رزرو من", <Book02Icon />, "/dashboard/my-courses"],
+            ["دوره من", <CourseIcon />, "/dashboard/my-courses"],
+            ["رزرو من", <Book02Icon />, "/dashboard/my-reserve"],
             [
               "دوره های موردعلاقه",
               <Books02Icon />,
@@ -50,7 +50,7 @@ const DashboardMenu = () => {
               url={item[2]}
             />
           ))}
-          <div className="pt-7">
+          <div className="pt-7 pl-[20px]">
             <LogoutButton />
           </div>
         </div>

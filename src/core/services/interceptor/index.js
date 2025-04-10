@@ -2,7 +2,10 @@ import axios from "axios";
 
 import { getItem } from "../common/storage.services";
 
-const baseURL = import.meta.env.VITE_BASE_URL;
+import { logout } from "../../utils/logout.services";
+
+
+const baseURL = "https://classapi.sepehracademy.ir/api"
 
 const instance = axios.create({
   baseURL: baseURL,
@@ -15,9 +18,9 @@ const onSuccess = (response) => {
 const onError = (err) => {
   console.log(err);
 
-  if (err.response.status >= 400 && err.response.status < 500) {
-    alert("Client error: " + err.response.status);
-  }
+  if (err?.response.status === 401) 
+    logout()
+  
 
   return Promise.reject(err);
 };
@@ -25,7 +28,8 @@ const onError = (err) => {
 instance.interceptors.response.use(onSuccess, onError);
 
 instance.interceptors.request.use((opt) => {
-  opt.headers["MessageTest"] = "Hello world!";
+  const token = getItem("token")
+  if (token) opt.headers.Authorization = "Bearer " + token;
   return opt;
 });
 

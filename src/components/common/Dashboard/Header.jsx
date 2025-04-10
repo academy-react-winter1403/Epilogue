@@ -12,7 +12,7 @@ const Header = () => {
   const setUserInfo = useUserStore((state) => state.setUserInfo);
 
   return (
-    <div className="flex flex-wrap items-center max-w-7xl justify-between p-2 px-8">
+    <div className="flex flex-wrap items-center max-w-7xl justify-between p-2 px-5">
       <div className=" flex items-center gap-[39px] ">
         {/* UserInfo */}
         <div className="flex items-center gap-[50px]">
