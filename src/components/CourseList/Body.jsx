@@ -26,7 +26,7 @@ const fetchCourses = async (
     SortingCol: SortCol, // اضافه کردن ستون مرتب‌سازی
     SortType: SortType, // اضافه کردن نوع مرتب‌سازی
   };
-  console.log(params)
+  console.log(params);
   try {
     const response = await axios.get(
       `https://classapi.sepehracademy.ir/api/Home/GetCoursesWithPagination`,
@@ -80,7 +80,7 @@ export function Body() {
         SortType
       ),
   });
-  console.log(SortCol,SortType)
+  console.log(SortCol, SortType);
 
   const totalCount = data?.totalCount;
   const courses = data?.courseFilterDtos || [];
@@ -137,7 +137,7 @@ export function Body() {
 
       <Sorting />
 
-      <div className="pt-10 px-10 gap-[31px] md:flex">
+      <div className=" px-10 gap-[31px] md:flex">
         <Filter
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
@@ -152,11 +152,13 @@ export function Body() {
         <CardList sortedCards={filteredCards} currentCards={courses} />
       </div>
 
-      <Pagination
-        totalPages={totalPages}
-        currentPage={currentPage}
-        setPageNumber={setPageNumber} 
-      />
+      <div className=" pr-[180px] pt-10 pb-14">
+        <Pagination
+          totalPages={totalPages}
+          currentPage={currentPage}
+          setPageNumber={setPageNumber}
+        />
+      </div>
     </div>
   );
 }

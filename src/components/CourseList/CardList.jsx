@@ -3,26 +3,26 @@ import React from "react";
  const CardList = ({sortedCards,currentCards}) => {
 
   return (
-    <div className="w-screen h-auto flex-col  md:grid grid-cols-3 gap-[32px] ">
+    <div className="w-screen h-auto grid grid-col  md:grid grid-cols-2 lg:gap-[30px] lg:grid-cols-3 gap-[32px] ">
       {sortedCards.length > 0 ? (
         sortedCards.map((card, index) => (
           <div key={index} className="card w-[322px] h-[366px] flex flex-col">
-            <div className="w-[302px] h-[293px] rounded-[32px] bg-[#87DFFF] flex flex-col p-4 relative text-[#FCFCFC]">
-              <div className="absolute top-4 right-4 flex">
-                <div className="w-[65px] h-[24px] bg-[#FF37F5] text-center font-medium text-sm rounded-[32px] text-[#FCFCFC]">
+            <div className="w-[302px] h-[293px] rounded-[32px] flex flex-col p-4  relative text-[#FCFCFC]">
+              <div className="absolute top-4 px-4 py-2 gap-1 flex">
+                <div className="w-[89px] h-[24px] bg-[#FF37F5] text-nowrap flex items-center justify-center  text-sm rounded-[32px] text-[#FCFCFC]">
                   <h3>{card.levelName}</h3>
                 </div>
-                <div className="w-[89px] h-[24px] bg-[#3772FF] text-center font-medium text-sm rounded-[32px] ml-2">
+                <div className="w-[89px] h-[24px] bg-[#3772FF]  flex items-center justify-center  font-medium text-sm rounded-[32px] ml-2">
                   <h3>{card.technologyList && card.technologyList.split(",")[0]?.trim()}</h3>
                 </div>
               </div>
               <img
-                src={card.tumbImageAddress || "path/to/default/image.jpg"}
+                src={card.tumbImageAddress || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTO8H6mRVR83mbxemvDIPW8rbiLZ1b8XVl6Q&s"}
                 alt={card.title}
-                className="w-full h-[293px] rounded-t-lg"
+                className="w-full h-[293px] rounded-2xl"
                 onError={(e) => {
                   e.target.onerror = null;
-                  e.target.src = "path/to/default/image.jpg"; 
+                  e.target.src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTO8H6mRVR83mbxemvDIPW8rbiLZ1b8XVl6Q&s"; 
                 }}
               />
             </div>
