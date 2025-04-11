@@ -6,6 +6,7 @@ import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import ReservedCoursesTable from "../../common/Dashboard/Table/ReserveCourseTable";
 import { Link } from "react-router-dom";
 import YourComment from "./YourComment";
+import { PencilEdit01Icon } from "../../common/Icons/PencelIcon";
 const StudentPanelPage = () => {
   const percentage = 66;
 
@@ -31,7 +32,7 @@ const StudentPanelPage = () => {
             وضعیت اطلاعات حساب کاربری
           </p>
           <div className="flex items-center">
-            <ViewIcon width={20} height={20} color={"#3772FF"} />
+            <PencilEdit01Icon width={20} height={20} color={"#3772FF"} />
           </div>
         </div>
         <div className="mt-[22px] m-auto w-[136px] ">
