@@ -3,6 +3,7 @@ import Landing from "../../../pages/Landing";
 import Root from "../../../app/layout/Landing/Root";
 import CourseDetail from "../../../pages/CourseDetail";
 import { Body } from "../../../components/CourseList/Body";
+import { BlogeList } from "../../../components/BlogeList/BlogeList";
 
 export const mainPages = {
   path: "/",
@@ -20,6 +21,10 @@ export const mainPages = {
     {
       path: "/CourseList",
       element: <Body />,
+    },
+    {
+      path: "/BlogeList",
+      element: <BlogeList />,
     },
   ],
 };

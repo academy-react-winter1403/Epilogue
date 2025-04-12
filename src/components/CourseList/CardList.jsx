@@ -19,7 +19,7 @@ import React from "react";
               <img
                 src={card.tumbImageAddress || "path/to/default/image.jpg"}
                 alt={card.title}
-                className="w-full h-[293px] rounded-t-lg"
+                className="w-full h-full rounded-t-lg"
                 onError={(e) => {
                   e.target.onerror = null;
                   e.target.src = "path/to/default/image.jpg"; 
