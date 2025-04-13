@@ -7,6 +7,7 @@ import ReservedCoursesTable from "../../common/Dashboard/Table/ReserveCourseTabl
 import { Link } from "react-router-dom";
 import YourComment from "./YourComment";
 import { PencilEdit01Icon } from "../../common/Icons/PencelIcon";
+import { ArrowLeft01Icon } from "../../common/Icons/ArrowLeftIcon";
 const StudentPanelPage = () => {
   const percentage = 66;
 
@@ -19,8 +20,9 @@ const StudentPanelPage = () => {
       <div className="md:col-span-9 bg-[#F6F6F6]  rounded-3xl">
         <div className="flex flex-row justify-between items-center">
           <p className="text-[14px] font-yekan-600 px-4 py-2">دوره من</p>
-          <Link to={"/dashboard/my-courses"} className="text-[14px] text-[#3772FF] font-yekan-600 px-4 py-2">
+          <Link to={"/dashboard/my-courses"} className="text-[14px] text-[#3772FF] flex flex-row gap-1 font-yekan-600 px-4 py-2">
             مشاهده بیشتر
+            <ArrowLeft01Icon color={"#3772FF"}/>
           </Link>
         </div>
         <DashboardTable/>
@@ -57,8 +59,10 @@ const StudentPanelPage = () => {
       <div className="md:col-span-7 bg-[#F6F6F6] flex flex-col rounded-3xl">
         <div className="flex flex-row justify-between items-center">
           <p className="text-[14px] font-yekan-600 px-4  py-2">رزرو من</p>
-          <Link to={"/dashboard/my-reserve"} className="text-[14px] text-[#3772FF] px-4  font-yekan-600 py-2">
+          <Link to={"/dashboard/my-reserve"} className="text-[14px] text-[#3772FF] px-4 flex flex-row gap-1 font-yekan-600 py-2">
             مشاهده بیشتر
+            <ArrowLeft01Icon color={"#3772FF"}/>
+
           </Link>
         </div>
         <ReservedCoursesTable />
@@ -68,7 +72,10 @@ const StudentPanelPage = () => {
         <div className="justify-between items-center flex flex-row text-nowrap text-[14px] font-yekan-600 px-4 py-2">
           <p>نظرات شما</p>
           <YourComment/>
-          <p className="text-[#3772FF]">مشاهده بیشتر</p>
+          <p className="text-[#3772FF] flex flex-row gap-1 ">مشاهده بیشتر
+          <ArrowLeft01Icon color={"#3772FF"}/>
+
+          </p>
         </div>
       </div>
     </div>

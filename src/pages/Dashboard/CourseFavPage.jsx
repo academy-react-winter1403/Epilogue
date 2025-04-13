@@ -1,13 +1,14 @@
 import React from "react";
-import DashboardTable from "../../components/common/Dashboard/Table/DashboardTable";
-import TopOfTable from "../../components/dashboard/MyCourses";
+import CourseFavTable from "../../components/dashboard/MyFavCourse/CourseFav";
 import { Search01Icon } from "../../components/common/Icons/SearchIcon";
 import { Calendar02Icon } from "../../components/common/Icons/CalenderIcon";
 
-const MyCoursePage = () => {
+const CourseFavPage = () => {
   return (
     <div className="py-6 px-6 flex flex-col h-full gap-6 ">
-      <p className="text-[24px] text-nowrap font-yekan-600 py-2">دوره من</p>
+      <p className="text-[24px] text-nowrap font-yekan-600 py-2">
+        دوره های موردعلاقه
+      </p>
       <div className="flex flex-row gap-[56px]">
         <div className="w-[86px] h-[43px] flex flex-row gap-2 ">
           <div className="rounded-full w-[40px] h-[40px]  bg-[#F1F1F1] ">
@@ -16,7 +17,7 @@ const MyCoursePage = () => {
             </div>
           </div>
           <div className="flex flex-col">
-            <p className="text-[14px] text-black">جست‌جو</p>
+            <p className="text-[14px]  text-black">جست‌جو</p>
             {/* <p className="font-yekan-600">{dateTime.time}</p> */}
           </div>
         </div>
@@ -38,10 +39,10 @@ const MyCoursePage = () => {
         </div>
       </div>
       <div className="md:col-span-full  min-h-full bg-[#F6F6F6] rounded-3xl">
-        <DashboardTable />
+        <CourseFavTable />
       </div>
     </div>
   );
 };
 
-export default MyCoursePage;
+export default CourseFavPage;

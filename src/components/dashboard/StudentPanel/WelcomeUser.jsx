@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Time02Icon } from "../../common/Icons/TimeIcon";
-import { Calendar03Icon } from "../../common/Icons/CalenderIcon";
+import { Calendar03Icon } from "../../common/Icons/Calender";
 
 const WelcomeUser = () => {
-  const [dateTime, setDateTime] = useState({ time: "", date: "",greeting: "" });
+  const [dateTime, setDateTime] = useState({
+    time: "",
+    date: "",
+    greeting: "",
+  });
   const now = new Date();
 
   const hour = now.getHours();
@@ -24,9 +28,8 @@ const WelcomeUser = () => {
       month: "long",
       day: "numeric",
       year: "numeric",
-
     });
-    setDateTime({ time, date,greeting });
+    setDateTime({ time, date, greeting });
   }, []);
   return (
     <div className="flex flex-row gap-10">
@@ -59,7 +62,9 @@ const WelcomeUser = () => {
             </div>
             <div className="flex flex-col">
               <p className="text-[14px]  text-[#707070]">تاریخ</p>
-              <p className="text-[14px] font-yekan-600 text-nowrap">{dateTime.date}</p>
+              <p className="text-[14px] font-yekan-600 text-nowrap">
+                {dateTime.date}
+              </p>
             </div>
           </div>
         </div>

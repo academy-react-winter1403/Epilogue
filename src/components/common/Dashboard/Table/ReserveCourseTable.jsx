@@ -2,7 +2,8 @@ import React from "react";
 import { ViewIcon } from "../../Icons/ViewIcon";
 import dateModifier from "../../../../core/utils/dateModifier";
 import { useQuery } from "@tanstack/react-query";
-import { getReservedCourses } from "../../../../core/services/api/Dashboard/myCourseReserve";
+import { Cancel01Icon } from "../../Icons/Cancel";
+import { getReservedCourses } from "../../../../core/services/api/Dashboard/dashborad";
 
 const ReservedCoursesTable = () => {
   const { data: courseReserved } = useQuery({
@@ -11,13 +12,13 @@ const ReservedCoursesTable = () => {
   });
   console.log(courseReserved, "courseReserved : ");
   return (
-    <div className="mt-4 px-4 lg:px-4 lg:mt-5 text-[#707070] overflow-auto">
-      <div className="bg-[#F1F1F1] rounded-[16px] gap-[30px] p-3 flex text-sm font-yekan-600 text-nowrap">
-        <p className=" w-[100px]">#</p>
-        <p className=" w-[90px]">نام</p>
-        <p className=" w-[100px]">مدرس</p>
-        <p className=" w-[120px]">تاریخ برگزاری</p>
-        <p className=" w-[40px]"></p>
+    <div className="mt-4 px-4 lg:px-4 lg:mt-5  overflow-auto">
+      <div className="bg-[#F1F1F1] text-[#707070] rounded-[16px] gap-[30px] p-3 flex text-sm font-yekan-600 text-nowrap">
+        <p className=" w-[10%]">#</p>
+        <p className=" w-[20%]">نام</p>
+        <p className=" w-[20%]">مدرس</p>
+        <p className=" w-[20%]">تاریخ برگزاری</p>
+        <p className=" w-[10%]"></p>
       </div>
 
       <div className=" overflow-y-auto">
@@ -29,7 +30,7 @@ const ReservedCoursesTable = () => {
           courseReserved?.map((item) => (
             <div
               key={item.courseId}
-              className="flex items-center gap-[30px] py-[22px] text-nowrap text-sm"
+              className="flex items-center gap-[30px] py-[22px] text-nowrap text-sm text-black"
             >
               <div>
                 <img
@@ -37,11 +38,18 @@ const ReservedCoursesTable = () => {
                   className="min-w-[83px] h-[52px] border rounded-[12px] object-cover"
                 />
               </div>
-              <p className="w-[100px] truncate font-yekan-600">{item.courseName}</p>
-              <p className="w-[110px]  font-yekan-600">{item.studentName}</p>
-              <p className="w-[90px] font-yekan-600">{dateModifier(item.reserverDate)}</p>
-              <div className="w-[50px] pl-4">
+              <p className="w-[20%] truncate font-yekan-600">
+                {item.courseName}
+              </p>
+              <p className="w-[25%] truncate  font-yekan-600">
+                {item.studentName}
+              </p>
+              <p className="w-[30%] font-yekan-600">
+                {dateModifier(item.reserverDate)}
+              </p>
+              <div className="gap-2  flex flex-row">
                 <ViewIcon width={24} height={24} />
+                <Cancel01Icon color={"#FF5353"} />
               </div>
             </div>
           ))

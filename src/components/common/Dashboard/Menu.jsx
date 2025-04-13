@@ -37,9 +37,9 @@ const DashboardMenu = () => {
             [
               "دوره های موردعلاقه",
               <Books02Icon />,
-              "/dashboard/reserved-courses",
+              "/dashboard/course-fav",
             ],
-            ["بلاگ های موردعلاقه", <LibraryIcon />, "/dashboard/favorites"],
+            ["بلاگ های موردعلاقه", <LibraryIcon />, "/dashboard/blog-fav"],
             ["پروفایل", <UserSquareIcon />, "/dashboard/my-comments"],
             ["پرداخت ها", <MoneySend02Icon />, "/dashboard/change-password"],
           ].map((item, key) => (
