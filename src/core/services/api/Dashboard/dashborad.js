@@ -27,6 +27,15 @@ export const getReservedCourses = async () => {
     }
 }
 
+export const deleteCourseReserve = async (reservedCourse) => {
+    try {
+        const response = await http.delete("/CourseReserve", {data : reservedCourse})
+        return response
+    } catch (error) {
+        throw false
+    }
+} 
+
 export const getFavoriteCourses = async () => {
     try {
         const response = await http.get("/SharePanel/GetMyFavoriteCourses")
@@ -44,3 +53,4 @@ export const getFavoriteArticles = async () => {
         throw error
     }
 }
+

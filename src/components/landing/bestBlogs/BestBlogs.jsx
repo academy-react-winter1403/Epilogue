@@ -41,7 +41,7 @@ const BestBlogs = ({ data }) => {
               <p class="mb-3 flex flex-row gap-1 text-nowrap text-[14px] font-yekan-500 text-[#707070] ">
                 {currentView}
                 <div className="m-auto">
-                  <ViewIcon />
+                <ViewIcon width={24} height={24} cursor={"pointer"} />
                 </div>
               </p>
             </div>

@@ -47,7 +47,7 @@ const DashboardTable = ({ showIcon }) => {
               </div>
               <div className="mr-[20px] flex px-2 gap-2">
                 {showIcon && <Invoice03Icon color={"#29CC7A"} />}
-                <ViewIcon width={24} height={24} />
+                <ViewIcon width={24} height={24} cursor={"pointer"} />
               </div>
             </div>
           ))

@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import WelcomeUser from "./WelcomeUser";
 import DashboardTable from "../../common/Dashboard/Table/DashboardTable";
-import { ViewIcon } from "../../common/Icons/ViewIcon";
 import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
 import ReservedCoursesTable from "../../common/Dashboard/Table/ReserveCourseTable";
 import { Link } from "react-router-dom";

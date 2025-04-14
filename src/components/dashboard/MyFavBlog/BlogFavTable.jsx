@@ -48,8 +48,8 @@ const BlogFavTable = () => {
                 {dateModifier(item.updateDate)}
               </p>
               <div className="gap-2 pl-4 flex flex-row">
-                <ViewIcon width={24} height={24} />
-                <Cancel01Icon color={"#FF5353"} />
+              <ViewIcon width={24} height={24} cursor={"pointer"} />
+              <Cancel01Icon color={"#FF5353"} />
               </div>
             </div>
           ))

@@ -1,9 +1,12 @@
 import React from "react";
 import { ViewIcon } from "../../Icons/ViewIcon";
 import dateModifier from "../../../../core/utils/dateModifier";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { Cancel01Icon } from "../../Icons/Cancel";
-import { getReservedCourses } from "../../../../core/services/api/Dashboard/dashborad";
+import {
+  deleteCourseReserve,
+  getReservedCourses,
+} from "../../../../core/services/api/Dashboard/dashborad";
 
 const ReservedCoursesTable = ({ showAccept }) => {
   const { data: courseReserved } = useQuery({
@@ -11,6 +14,21 @@ const ReservedCoursesTable = ({ showAccept }) => {
     queryFn: getReservedCourses,
   });
   console.log(courseReserved, "courseReserved : ");
+
+  const deleteReservedCourse = (courseId) => {
+    const deletedCourse = { id: courseId };
+    mutation.mutate(deletedCourse);
+  };
+
+  const mutation = useMutation({
+    mutationFn: deleteCourseReserve,
+    onSuccess: () => {
+      toast.success("دوره حذف شد");
+    },
+    onError: () => {
+      toast.error("خطا");
+    },
+  });
   return (
     <div className="mt-4 px-4 lg:px-4 lg:mt-5  overflow-auto">
       <div className="bg-[#F1F1F1] text-[#707070] rounded-[16px] gap-[30px] p-3 flex text-sm font-yekan-600 text-nowrap">
@@ -60,8 +78,12 @@ const ReservedCoursesTable = ({ showAccept }) => {
                 </div>
               )}
               <div className="mr-[20px] flex px-2 gap-2">
-                <ViewIcon width={24} height={24} />
-                <Cancel01Icon color={"#FF5353"} />
+                <ViewIcon width={24} height={24} cursor={"pointer"} />
+                <Cancel01Icon
+                  onClick={() => deleteReservedCourse(item.courseId)}
+                  color={"#FF5353"}
+                  cursor={"pointer"}
+                />
               </div>
             </div>
           ))
