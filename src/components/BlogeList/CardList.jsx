@@ -5,10 +5,10 @@ import React from "react";
 
 const CardList = ({ sortedCards, currentCards }) => {
   return (
-    <div className="w-screen h-auto flex-col md:grid grid-cols-2 gap-[32px] w-[971px]">
+    <div className="w-screen h-auto flex-col  md:grid grid-cols-2 gap-[32px] w-[971px]">
       {sortedCards.length > 0 ? (
         sortedCards.map((card, index) => (
-          <div key={index} className="card w-[462px] h-[365px] flex flex-col">
+          <div key={index} className="card w-[322px] ml-auto mr-auto h-[365px] flex flex-col mt-5 md:mt-0 md:w-[462px]">
             <div className="w-full h-[293px] rounded-[32px] bg-[#87DFFF] flex flex-col relative text-[#FCFCFC]">
               <img
                 src={card.addUserProfileImage || "path/to/default/image.jpg"}

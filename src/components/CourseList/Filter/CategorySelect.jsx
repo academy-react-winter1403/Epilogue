@@ -7,8 +7,8 @@ export const CategorySelect = ({
   setTechCount,
 }) => {
   return (
-    <div className="mb-6">
-      <div className="flex gap-2 mr-3">
+    <div className="pb-4">
+      <div className="flex gap-2 px-5">
         <div className="w-[24px] h-[24px]">
           <img src={layersIcon} alt="Category Icon" />
         </div>
@@ -28,16 +28,15 @@ export const CategorySelect = ({
           setTechCount(1);
         }}
         placeholder="دسته مورد نظر را انتخاب کنید"
-        className="react-select-container ml-auto mr-auto"
+        className="react-select-container px-5 w-[450px] md:w-[298px]"
         classNamePrefix="react-select"
         styles={{
           control: (base) => ({
             ...base,
             backgroundColor: "#F1F1F1",
-            borderRadius: "0.5rem",
+            borderRadius: "16px",
             border: "1px solid #D1D5DB",
-            width:"258px",
-              height:"48px",
+            height: "48px",
           }),
         }}
       />

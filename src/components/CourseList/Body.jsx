@@ -23,8 +23,8 @@ const fetchCourses = async (
     ListTech: technologies,
     TechCount: techCount,
     courseLevelId: levelName,
-    SortingCol: SortCol, // اضافه کردن ستون مرتب‌سازی
-    SortType: SortType, // اضافه کردن نوع مرتب‌سازی
+    SortingCol: SortCol,
+    SortType: SortType,
   };
   console.log(params)
   try {
@@ -54,8 +54,8 @@ export function Body() {
     techCount,
     levelName,
     priceRange,
-    SortCol, // گرفتن ستون مرتب‌سازی از Zustand
-    SortType, // گرفتن نوع مرتب‌سازی از Zustand
+    SortCol,
+    SortType,
   } = useStore((state) => state);
 
   const { data, isLoading, error } = useQuery({
@@ -134,6 +134,15 @@ export function Body() {
           یک شروع قوی برای یادگیری یک مسئله جدید میتونه تو پیشرفت کمکت کنه
         </h2>
       </div>
+
+            <div className="block md:hidden mt-10 gap-10 flex">
+              <Sorting />
+              <Filter
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+                selectedCategory={selectedCategory}
+              />
+            </div>
 
       <Sorting />
 

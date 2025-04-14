@@ -10,9 +10,11 @@ export const PriceSlider = () => {
     setPriceRange(range);
   };
 
+  const wrapperStyle = {paddingRight : 30,paddingLeft : 30};
+
   return (
-    <div className="mb-6">
-      <div className="flex gap-2 mr-3">
+    <div className="pb-6">
+      <div className="flex gap-2 px-5">
         <div className="w-[24px] h-[24px]">
           <img src={moneyIcon} alt="Money Icon" />
         </div>
@@ -20,15 +22,18 @@ export const PriceSlider = () => {
           قیمت
         </label>
       </div>
-      <Slider
-        range
-        min={0}
-        max={100000000}
-        value={priceRange}
-        onChange={handlePriceChange}
-        className="mt-2"
-      />
-      <div className="flex justify-between">
+      <div style={wrapperStyle}>
+        <Slider
+          range
+          min={0}
+          max={100000000}
+          value={priceRange}
+          onChange={handlePriceChange}
+          className="pt-2 px-5 w-[450px] md:w-[300px] "
+        />
+      </div>
+
+      <div className="flex justify-between px-5 pt-3">
         <span>{priceRange[0]} از</span>
         <span>{priceRange[1]} تا</span>
       </div>
