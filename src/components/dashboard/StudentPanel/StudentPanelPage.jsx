@@ -25,7 +25,7 @@ const StudentPanelPage = () => {
             <ArrowLeft01Icon color={"#3772FF"}/>
           </Link>
         </div>
-        <DashboardTable/>
+        <DashboardTable showIcon={false}/>
       </div>
 
       <div className="md:col-span-3 rounded-3xl md:flex md:flex-col bg-[#F6F6F6]">
@@ -65,7 +65,7 @@ const StudentPanelPage = () => {
 
           </Link>
         </div>
-        <ReservedCoursesTable />
+        <ReservedCoursesTable showAccept={false} />
       </div>
 
       <div className="md:col-span-5  h-[487px] rounded-3xl bg-[#F6F6F6]">

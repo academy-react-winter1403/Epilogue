@@ -38,7 +38,7 @@ const MyCoursePage = () => {
         </div>
       </div>
       <div className="md:col-span-full  min-h-full bg-[#F6F6F6] rounded-3xl">
-        <DashboardTable />
+        <DashboardTable showIcon={true} />
       </div>
     </div>
   );
