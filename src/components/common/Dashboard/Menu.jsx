@@ -31,7 +31,7 @@ const DashboardMenu = () => {
         </div> */}
         <div className=" space-y-1 flex flex-col ">
           {[
-            ["داشبرد", <Activity01Icon />, "/dashboard/student-panel"],
+            ["داشبورد", <Activity01Icon />, "/dashboard/student-panel"],
             ["دوره من", <CourseIcon />, "/dashboard/my-courses"],
             ["رزرو من", <Book02Icon />, "/dashboard/my-reserve"],
             [
