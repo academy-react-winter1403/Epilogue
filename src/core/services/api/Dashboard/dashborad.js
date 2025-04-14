@@ -27,14 +27,15 @@ export const getReservedCourses = async () => {
     }
 }
 
+// Delete //
 export const deleteCourseReserve = async (reservedCourse) => {
     try {
-        const response = await http.delete("/CourseReserve", {data : reservedCourse})
+        const response = await http.delete("/CourseReserve", { data: reservedCourse })
         return response
     } catch (error) {
         throw false
     }
-} 
+}
 
 export const getFavoriteCourses = async () => {
     try {
@@ -45,12 +46,35 @@ export const getFavoriteCourses = async () => {
     }
 }
 
+// Delete //
+export const deleteCourseFav = async (formdata) => {
+    console.log(formdata);
+    try {
+        const result = await http.delete("/Course/DeleteCourseFavorite", { data: formdata });
+
+        return result
+    } catch (error) {
+        throw false;
+    }
+}
+
 export const getFavoriteArticles = async () => {
     try {
         const response = await http.get("/SharePanel/GetMyFavoriteNews")
         return response
     } catch (error) {
         throw error
+    }
+}
+
+// Delete //
+export const deletenewseFav = async (RemoveFavNews) => {
+    try {
+        const result = await http.delete("/News/DeleteFavoriteNews", { data: RemoveFavNews });
+
+        return result
+    } catch (error) {
+        throw false;
     }
 }
 

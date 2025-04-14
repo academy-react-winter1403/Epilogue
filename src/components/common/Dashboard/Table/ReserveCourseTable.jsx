@@ -7,13 +7,13 @@ import {
   deleteCourseReserve,
   getReservedCourses,
 } from "../../../../core/services/api/Dashboard/dashborad";
+import toast from "react-hot-toast";
 
 const ReservedCoursesTable = ({ showAccept }) => {
   const { data: courseReserved } = useQuery({
     queryKey: ["courseReserved"],
     queryFn: getReservedCourses,
   });
-  console.log(courseReserved, "courseReserved : ");
 
   const deleteReservedCourse = (courseId) => {
     const deletedCourse = { id: courseId };
