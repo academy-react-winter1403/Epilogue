@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Time02Icon } from "../../common/Icons/TimeIcon";
 import { Calendar03Icon } from "../../common/Icons/Calender";
+import { getUserInfo } from "../../../core/services/api/Dashboard/dashborad";
+import { useQuery } from "@tanstack/react-query";
 
 const WelcomeUser = () => {
   const [dateTime, setDateTime] = useState({
@@ -31,6 +33,14 @@ const WelcomeUser = () => {
     });
     setDateTime({ time, date, greeting });
   }, []);
+
+  const { data: userInfo } = useQuery({
+    queryKey: ["userInfo"],
+    queryFn: getUserInfo
+})
+
+console.log(userInfo , "userInfo")
+
   return (
     <div className="flex flex-row gap-10">
       <div>

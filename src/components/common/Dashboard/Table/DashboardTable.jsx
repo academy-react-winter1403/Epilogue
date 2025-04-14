@@ -3,6 +3,7 @@ import { ViewIcon } from "../../Icons/ViewIcon";
 import dateModifier from "../../../../core/utils/dateModifier";
 import { getMyCourses } from "../../../../core/services/api/Dashboard/dashborad";
 import { useQuery } from "@tanstack/react-query";
+import { Invoice03Icon } from "../../Icons/PaymentIcon";
 
 const DashboardTable = () => {
   const { data: myCourses } = useQuery({
@@ -42,7 +43,8 @@ const DashboardTable = () => {
               <div className="w-[20%]  px-2 py-1 flex items-center justify-center bg-[#FF37F5] rounded-3xl text-white text-[14px]">
                 {item.levelName}
               </div>
-              <div className="mr-[20px] flex px-2">
+              <div className="mr-[20px] flex px-2 gap-2">
+              <Invoice03Icon color={"#29CC7A"}/>
                 <ViewIcon width={24} height={24} />
               </div>
             </div>
