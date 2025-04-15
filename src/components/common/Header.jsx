@@ -86,7 +86,7 @@ const Header = () => {
               درباره ما
             </NavLink>
             {isLoggedIn ? (
-              <Link to={"/dashboard/student-panel"}>
+              <Link to={"/StudentPanel/dashboard"}>
                 <img
                   className="size-full rounded-full  w-12 border h-12"
                   src={setUserInfo?.currentPictureAddress}

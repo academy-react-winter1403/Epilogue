@@ -21,8 +21,7 @@ const ReservedCoursesTable = ({ showAccept,searchTerm }) => {
     if (courseReserved) {
       const term = searchTerm.toLowerCase();
       const newFilteredCourses = courseReserved.filter(course =>
-        course.courseName.toLowerCase().includes(term) ||
-        course.studentName.toLowerCase().includes(term)
+        course.courseName.toLowerCase().includes(term)
       );
       setfilteredReservedCourses(newFilteredCourses);
     }

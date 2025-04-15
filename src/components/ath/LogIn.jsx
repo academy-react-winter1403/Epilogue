@@ -24,7 +24,7 @@ export function LogIn() {
       toast.success(data.message);
       if (data?.token) {
         setItem("token", data?.token);
-        navigate("/dashboard/student-panel");
+        navigate("/StudentPanel/dashboard");
       } else {
         navigate("/auth/login2");
       }

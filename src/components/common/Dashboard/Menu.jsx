@@ -31,15 +31,15 @@ const DashboardMenu = () => {
         </div> */}
         <div className=" space-y-1 flex flex-col ">
           {[
-            ["داشبورد", <Activity01Icon />, "/dashboard/student-panel"],
-            ["دوره من", <CourseIcon />, "/dashboard/my-courses"],
-            ["رزرو من", <Book02Icon />, "/dashboard/my-reserve"],
+            ["داشبورد", <Activity01Icon />, "/StudentPanel/dashboard"],
+            ["دوره من", <CourseIcon />, "/StudentPanel/my-courses"],
+            ["رزرو من", <Book02Icon />, "/StudentPanel/my-reserve"],
             [
               "دوره های موردعلاقه",
               <Books02Icon />,
-              "/dashboard/course-fav",
+              "/StudentPanel/course-fav",
             ],
-            ["بلاگ های موردعلاقه", <LibraryIcon />, "/dashboard/blog-fav"],
+            ["بلاگ های موردعلاقه", <LibraryIcon />, "/StudentPanel/blog-fav"],
             ["پروفایل", <UserSquareIcon />, "/dashboard/my-comments"],
             ["پرداخت ها", <MoneySend02Icon />, "/dashboard/change-password"],
           ].map((item, key) => (

@@ -6,27 +6,27 @@ import MyReservePage from "../../../pages/Dashboard/MyReservePage";
 import StudentPanel from "../../../pages/Dashboard/StudentPanel";
 
 export const dashboard = {
-  path: "/dashboard",
+  path: "/StudentPanel",
   element: <DashboardLayout />,
   children: [
     {
-      path: "/dashboard/student-panel",
+      path: "/StudentPanel/dashboard",
       element: <StudentPanel />,
     },
     {
-      path: "/dashboard/my-courses",
+      path: "/StudentPanel/my-courses",
       element: <MyCoursePage />,
     },
     {
-      path: "/dashboard/my-reserve",
+      path: "/StudentPanel/my-reserve",
       element: <MyReservePage />,
     },
     {
-      path: "/dashboard/course-fav",
+      path: "/StudentPanel/course-fav",
       element: <CourseFavPage />,
     },
     {
-      path: "/dashboard/blog-fav",
+      path: "/StudentPanel/blog-fav",
       element: <BlogFavPage />,
     },
   ],
