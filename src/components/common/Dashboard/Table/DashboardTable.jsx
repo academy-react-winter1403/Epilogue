@@ -15,7 +15,7 @@ const DashboardTable = ({ showIcon,searchTerm }) => {
   
     useEffect(() => {
       if (myCourses?.listOfMyCourses) {
-        const term = searchTerm.toLowerCase();
+        const term = searchTerm?.toLowerCase();
         const newFilteredCourses = myCourses.listOfMyCourses.filter(course =>
           course.termName.toLowerCase().includes(term) 
         );

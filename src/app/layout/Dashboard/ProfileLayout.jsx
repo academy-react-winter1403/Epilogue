@@ -5,10 +5,9 @@ import { Outlet } from "react-router-dom";
 
 const ProfileLayout = () => {
   return (
-    <div className="flex flex-row flex-grow px-6 py-3">
+    <div className="flex flex-row flex-grow px-6 ">
         <ProfileMenu />
-
-      <div className="flex-grow  mt-[90px] w-full  overflow-x-auto overflow-hidden">
+      <div className="flex-grow  mt-[90px] w-full pr-6 pb-6 overflow-x-auto overflow-hidden">
         <Outlet />
       </div>
     </div>

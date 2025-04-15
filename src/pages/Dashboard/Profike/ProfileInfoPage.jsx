@@ -1,11 +1,12 @@
-import React from 'react'
+import React from "react";
+import UserInfo from "../../../components/dashboard/Profile/UserInfo";
 
 const ProfileInfoPage = () => {
   return (
     <div>
-      سللمملمقمنثقبخ
+      <UserInfo />
     </div>
-  )
-}
+  );
+};
 
-export default ProfileInfoPage
+export default ProfileInfoPage;

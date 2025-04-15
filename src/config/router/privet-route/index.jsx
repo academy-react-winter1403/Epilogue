@@ -7,7 +7,6 @@ import MyReservePage from "../../../pages/Dashboard/MyReservePage";
 import LinksPage from "../../../pages/Dashboard/Profike/LinksPage";
 import LocationPage from "../../../pages/Dashboard/Profike/LocationPage";
 import ProfileInfoPage from "../../../pages/Dashboard/Profike/ProfileInfoPage";
-import ProfilePage from "../../../pages/Dashboard/Profike/ProfilePage";
 import ProfilePicPage from "../../../pages/Dashboard/Profike/ProfilePicPage";
 import StudentPanel from "../../../pages/Dashboard/StudentPanel";
 

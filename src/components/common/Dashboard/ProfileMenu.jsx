@@ -5,7 +5,7 @@ const ProfileMenu = () => {
   return (
       <div className="flex flex-col text-[18px] font-yekan-600 text-[#707070]">
         <p className="py-8 text-black text-2xl ">پروفایل من </p>
-        <div className=" space-y-1 flex flex-col  w-[250px] h-[400px] border-l border-[#DCDCDC]">
+        <div className=" space-y-1 flex flex-col  w-[250px] h-[798px] border-l border-[#DCDCDC]">
           {[
             ["اطلاعات حساب کاربری", "/StudentPanel/edite-profile/profile-info"],
             ["عکس ها", "/StudentPanel/edite-profile/profile-pic"],

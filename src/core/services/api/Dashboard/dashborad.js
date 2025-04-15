@@ -78,3 +78,11 @@ export const deletenewseFav = async (RemoveFavNews) => {
     }
 }
 
+export const editProfile = async (userInfo) => {
+    try {
+        const response = await http.put("/SharePanel/UpdateProfileInfo", userInfo)
+        return response
+    } catch (error) {
+        throw error
+    }
+}
