@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ViewIcon } from "../../common/Icons/ViewIcon";
 import dateModifier from "../../../core/utils/dateModifier";
 import { useQuery } from "@tanstack/react-query";
@@ -9,13 +9,23 @@ import {
 } from "../../../core/services/api/Dashboard/dashborad";
 import toast from "react-hot-toast";
 
-const BlogFavTable = () => {
+const BlogFavTable = ({searchTerm}) => {
   const { data: favoriteArticles } = useQuery({
     queryKey: ["favoriteArticles"],
     queryFn: getFavoriteArticles,
   });
 
-  console.log(favoriteArticles, "favoriteArticles");
+  const [filteredBlogFav, setfilteredBlogFav] = useState([]);
+  
+    useEffect(() => {
+      if (favoriteArticles?.myFavoriteNews) {
+        const term = searchTerm.toLowerCase();
+        const newfilteredBlogFav = favoriteArticles.myFavoriteNews.filter(blog =>
+          blog.title.toLowerCase().includes(term) 
+        );
+        setfilteredBlogFav(newfilteredBlogFav);
+      }
+    }, [favoriteArticles, searchTerm]);
 
   const handleDeleteFav = async (favoriteId) => {
     const RemoveFavNews = {
@@ -39,12 +49,12 @@ const BlogFavTable = () => {
       </div>
 
       <div className=" overflow-y-auto">
-        {favoriteArticles?.myFavoriteNews.length === 0 ? (
+        {filteredBlogFav.length === 0 ? (
           <p className="flex items-center justify-center py-16">
             دوره ای وجود ندارد
           </p>
         ) : (
-          favoriteArticles?.myFavoriteNews.map((item) => (
+          filteredBlogFav.map((item) => (
             <div
               key={item.newsId}
               className="flex items-center gap-[30px] py-[22px] text-nowrap text-sm text-black"

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ViewIcon } from "../../Icons/ViewIcon";
 import dateModifier from "../../../../core/utils/dateModifier";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -9,11 +9,25 @@ import {
 } from "../../../../core/services/api/Dashboard/dashborad";
 import toast from "react-hot-toast";
 
-const ReservedCoursesTable = ({ showAccept }) => {
-  const { data: courseReserved } = useQuery({
-    queryKey: ["courseReserved"],
-    queryFn: getReservedCourses,
+const ReservedCoursesTable = ({ showAccept,searchTerm }) => {
+  const { data: courseReserved} = useQuery({
+    queryKey: ["courseReserved"], 
+    queryFn: () => getReservedCourses(), 
   });
+
+  const [filteredReservedCourses, setfilteredReservedCourses] = useState([]);
+
+  useEffect(() => {
+    if (courseReserved) {
+      const term = searchTerm.toLowerCase();
+      const newFilteredCourses = courseReserved.filter(course =>
+        course.courseName.toLowerCase().includes(term) ||
+        course.studentName.toLowerCase().includes(term)
+      );
+      setfilteredReservedCourses(newFilteredCourses);
+    }
+  }, [courseReserved, searchTerm]);
+
 
   const deleteReservedCourse = (courseId) => {
     const deletedCourse = { id: courseId };
@@ -24,6 +38,7 @@ const ReservedCoursesTable = ({ showAccept }) => {
     mutationFn: deleteCourseReserve,
     onSuccess: () => {
       toast.success("دوره حذف شد");
+      refetch();
     },
     onError: () => {
       toast.error("خطا");
@@ -40,12 +55,12 @@ const ReservedCoursesTable = ({ showAccept }) => {
       </div>
 
       <div className=" overflow-y-auto">
-        {courseReserved?.length === 0 ? (
+        {filteredReservedCourses?.length === 0 ? (
           <p className="flex items-center justify-center py-16">
             دوره ای وجود ندارد
           </p>
         ) : (
-          courseReserved?.map((item) => (
+          filteredReservedCourses?.map((item) => (
             <div
               key={item.courseId}
               className="flex items-center gap-[30px] py-[22px] text-nowrap text-sm text-black"

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ViewIcon } from "../../common/Icons/ViewIcon";
 import dateModifier from "../../../core/utils/dateModifier";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -10,12 +10,23 @@ import {
 } from "../../../core/services/api/Dashboard/dashborad";
 import toast from "react-hot-toast";
 
-const CourseFavTable = () => {
+const CourseFavTable = ({ searchTerm }) => {
   const { data: favoriteCourses } = useQuery({
     queryKey: ["favoriteCourses"],
     queryFn: getFavoriteCourses,
   });
-  console.log(favoriteCourses, "favoriteCourses : ");
+
+  const [filteredCoursesFav, setfilteredCoursesFav] = useState([]);
+
+  useEffect(() => {
+    if (favoriteCourses?.favoriteCourseDto) {
+      const term = searchTerm.toLowerCase();
+      const newfilteredCoursesFav = favoriteCourses?.favoriteCourseDto.filter(
+        (course) => course.courseTitle.toLowerCase().includes(term)
+      );
+      setfilteredCoursesFav(newfilteredCoursesFav);
+    }
+  }, [favoriteCourses, searchTerm]);
 
   const deleteCourseFavMutation = useMutation({
     mutationFn: deleteCourseFav,
@@ -46,12 +57,12 @@ const CourseFavTable = () => {
       </div>
 
       <div className=" overflow-y-auto">
-        {favoriteCourses?.favoriteCourseDto.length === 0 ? (
+        {filteredCoursesFav.length === 0 ? (
           <p className="flex items-center justify-center py-16">
             دوره ای وجود ندارد
           </p>
         ) : (
-          favoriteCourses?.favoriteCourseDto.map((item) => (
+          filteredCoursesFav.map((item) => (
             <div
               key={item.courseId}
               className="flex items-center gap-[30px] py-[22px] text-nowrap text-sm text-black"

@@ -1,15 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { ViewIcon } from "../../Icons/ViewIcon";
 import dateModifier from "../../../../core/utils/dateModifier";
 import { getMyCourses } from "../../../../core/services/api/Dashboard/dashborad";
 import { useQuery } from "@tanstack/react-query";
 import { Invoice03Icon } from "../../Icons/PaymentIcon";
 
-const DashboardTable = ({ showIcon }) => {
+const DashboardTable = ({ showIcon,searchTerm }) => {
   const { data: myCourses } = useQuery({
     queryKey: ["myCourses"],
     queryFn: getMyCourses,
   });
+
+  const [filteredCourses, setfilteredCourses] = useState([]);
+  
+    useEffect(() => {
+      if (myCourses?.listOfMyCourses) {
+        const term = searchTerm.toLowerCase();
+        const newFilteredCourses = myCourses.listOfMyCourses.filter(course =>
+          course.termName.toLowerCase().includes(term) 
+        );
+        setfilteredCourses(newFilteredCourses);
+      }
+    }, [myCourses, searchTerm]);
+  
   return (
     <div className="mt-4 px-4 lg:px-4 lg:mt-5  overflow-auto">
       <div className="bg-[#F1F1F1] text-[#707070] rounded-[16px] gap-[30px] p-3 flex text-sm font-yekan-600 text-nowrap">
@@ -21,12 +34,12 @@ const DashboardTable = ({ showIcon }) => {
       </div>
 
       <div className="overflow-y-auto">
-        {myCourses?.listOfMyCourses.length === 0 ? (
+        {filteredCourses?.length === 0 ? (
           <p className="flex items-center justify-center py-16">
             دوره ای وجود ندارد
           </p>
         ) : (
-          myCourses?.listOfMyCourses.map((item) => (
+          filteredCourses?.map((item) => (
             <div
               key={item.courseId}
               className="flex items-center gap-[30px] py-[22px] text-nowrap text-sm text-black"
