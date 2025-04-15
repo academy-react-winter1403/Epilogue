@@ -2,10 +2,12 @@ import React from "react";
 import Header from "../../../components/common/Dashboard/Header";
 import DashboardMenu from "../../../components/common/Dashboard/Menu";
 import { Outlet } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 const DashboardLayout = () => {
   return (
     <div className="w-full h-screen bg-[#242424] flex flex-col">
+      <Toaster/>
       <div className=" bg-[#242424]">
           <Header />
       </div>

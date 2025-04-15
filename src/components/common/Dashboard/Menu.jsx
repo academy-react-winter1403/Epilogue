@@ -25,10 +25,6 @@ const DashboardMenu = () => {
   return (
     <div>
       <div className="flex flex-col w-[250px] h-full bg-[#242424] text-white">
-        {/* <div className=" items-center gap-1 hidden lg:flex">
-          <img src={h1} className="pl-1 w-[42px] h-[40px]" />
-          <img src={bahr} className="pt-1 w-[138px] h-[38px]" />
-        </div> */}
         <div className=" space-y-1 flex flex-col ">
           {[
             ["داشبورد", <Activity01Icon />, "/StudentPanel/dashboard"],
@@ -40,7 +36,7 @@ const DashboardMenu = () => {
               "/StudentPanel/course-fav",
             ],
             ["بلاگ های موردعلاقه", <LibraryIcon />, "/StudentPanel/blog-fav"],
-            ["پروفایل", <UserSquareIcon />, "/dashboard/my-comments"],
+            ["پروفایل", <UserSquareIcon />, "/StudentPanel/edite-profile/profile-info"],
             ["پرداخت ها", <MoneySend02Icon />, "/dashboard/change-password"],
           ].map((item, key) => (
             <MenuOption

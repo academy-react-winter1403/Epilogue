@@ -19,7 +19,7 @@ const ReservedCoursesTable = ({ showAccept,searchTerm }) => {
 
   useEffect(() => {
     if (courseReserved) {
-      const term = searchTerm.toLowerCase();
+      const term = searchTerm?.toLowerCase();
       const newFilteredCourses = courseReserved.filter(course =>
         course.courseName.toLowerCase().includes(term)
       );
