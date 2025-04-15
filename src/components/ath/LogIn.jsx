@@ -8,8 +8,10 @@ import { loginStep1 } from "../../core/services/api/auth/login.api";
 import { loginValidation } from "../../core/validations/auth.validation";
 import { setItem } from "../../core/utils/storage.services";
 import toast, { Toaster } from "react-hot-toast";
+import useStore from "../../core/constant/store/zustand-store";
 
 export function LogIn() {
+  const setLoginInfo = useStore((state) => state.setLoginInfo);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
@@ -23,6 +25,7 @@ export function LogIn() {
     if (data.success) {
       setItem("token", data.token);
       toast.success("خوش آمدید");
+      setLoginInfo(value)
       navigate("/dashboard/student-panel");
     } else if (!data.success) {
       toast.error("خطا");
@@ -186,14 +189,14 @@ export function LogIn() {
                           </Link>
                         </div>
                       </div>
-
+                      <Link to="/auth/loginStep2">
                       <button
                         type="submit"
                         className="w-[398px] cursor-pointer bg-blue-500 text-white p-2 rounded-[40px] hover:bg-blue-600 mt-[31px]"
                       >
                         ورود به حساب
                       </button>
-
+</Link>
                       <div className="flex w-[276px] h-[23px] relative right-14 top-[16px]">
                         <div className="w-2.75/5">
                           <h3 className="font-semibold text-base">
