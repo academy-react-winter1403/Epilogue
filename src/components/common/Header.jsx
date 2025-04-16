@@ -72,7 +72,7 @@ const Header = () => {
             </NavLink>
 
             <NavLink
-              to="/CourseList"
+              to="/auth/RegisterPage"
               className="text-sm/6 text-[#FCFCFC] bg-[#3772FF] rounded-[56px] px-5 py-[8px]"
             >
               ثبت نام یا ورود

@@ -1,25 +1,35 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { DetailCourse } from './DetailCourse.jsx'
 import { CommentSection } from '../comment/CommentSection.jsx'
+import { useParams } from 'react-router-dom'
+import { getCourseDetails } from "../../core/services/api/courseDetail/getCourseDetails.js"
+import { QueryClient, useQuery } from '@tanstack/react-query'
+import { RelatedCourses } from './RelatedCourses.jsx'
 
 const DetailPage = () => {
+  const {CourseId} = useParams();
+        
+  const { data: course, isLoading, isError, error} = useQuery({
+    queryKey: ['courseDetails', CourseId],
+    queryFn: () => getCourseDetails(CourseId),
+    enabled: !!CourseId 
+  });
+  if (isLoading) return <div>در حال بارگذاری...</div>;
+  if (isError) return <div>خطا در دریافت اطلاعات دوره : خطا :{error.message}</div>;
+
+      
   return (
     <div className='w-auto bg-white'>
-        <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center items-center">
 
             {/* detail */}
-            <DetailCourse/>
-              
-
+            <DetailCourse CourseId={CourseId} course={course}/>
+          
             {/* comments */}
-            <CommentSection/>
+            <CommentSection CourseId={CourseId} course={course}/>
 
-            {/* courses */}
-            <section className="border border-red-500 min-h-[500px] w-full py-6">
-            <div className="w-full lg:w-[125px] h-[29px] font-dana font-bold text-[20px] leading-[100%] tracking-[0%] text-right text-gray-800 whitespace-nowrap">دوره های مرتبط </div>
-            <div className="w-full h-auto md:h-[366px] flex flex-col lg:flex-row gap-6 overflow-x-auto pb-4 lg:overflow-visible border border-gray-400">
-            </div>
-            </section>  
+            {/* related-courses */}
+             <RelatedCourses CourseId={CourseId} course={course}/>
         </div>
     </div>
   )

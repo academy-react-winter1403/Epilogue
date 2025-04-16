@@ -15,17 +15,15 @@ const onSuccess = (response) => {
 const onError = (err) => {
   console.log(err);
 
-  if (err.response.status >= 400 && err.response.status < 500) {
-    alert("Client error: " + err.response.status);
-  }
-
+ 
   return Promise.reject(err);
 };
 
 instance.interceptors.response.use(onSuccess, onError);
 
 instance.interceptors.request.use((opt) => {
-  opt.headers["MessageTest"] = "Hello world!";
+  const token =  localStorage.getItem('token')
+  opt.headers.Authorization = "bearer " + token
   return opt;
 });
 

@@ -1,9 +1,9 @@
+import { toast } from 'react-hot-toast';
 import { createContext, useContext, useState} from 'react'
-import axios from 'axios'
-
+import { postCourseRating } from '../../core/services/api/courseDetail/postCourseRating'
 
 const RatingsContext = createContext()
-export const RatingContext = (children, courseId) => {
+export const RatingsProvider  = ({children}) => {
 
     const [ratings, setRatings] = useState({
         average: 0,
@@ -11,40 +11,29 @@ export const RatingContext = (children, courseId) => {
         totalRatings: 0,
     })
 
-    const submitRating = async (userId, newRating) => {
+    const postRating = async (CourseId, newRating) => {
+      console.log(CourseId,newRating)
         // new average
-        try {
+        const newTotalRatings = ratings.userRating ? ratings.totalRatings : ratings.totalRatings + 1;
+        const sum = ratings.average * ratings.totalRatings - (ratings.userRating || 0) + newRating;
+        const newAverage = sum / newTotalRatings;
 
-            const newTotalRatings = ratings.userRating ? ratings.totalRatings : ratings.totalRatings + 1
-            
-            const sum = ratings.average * ratings.totalRatings - (ratings.userRating || 0) + newRating
+        // update
+        setRatings ({
+        average: newAverage,
+        userRating: newRating,
+        totalRatings: newTotalRatings,
+        })
 
-            const newAverage = sum / newTotalRatings
-
-            // update
-            setRatings ({
-                average: newAverage,
-                userRating: newRating,
-                totalRatings: newTotalRatings,
-            })
-
-            await axios.post('', {
-                courseId,
-                userId,
-                ratings: newRating,
-            })
-
-        } catch (error) {
-            console.error('Error submitting rating', error)
-
-            setRatings(prev => ({...prev}))
-        }
-    }
-
+        const courseData = await postCourseRating(CourseId, newRating);
+        setRatings(courseData);
+        console.log(postCourseRating)
+    };
+    
   return (
-    <RatingContext.Provider value={{ ratings, submitRating}}>
+    <RatingsContext.Provider value={{ ratings, postRating}}>
         {children}
-    </RatingContext.Provider>
+    </RatingsContext.Provider>
   )
 }
 
