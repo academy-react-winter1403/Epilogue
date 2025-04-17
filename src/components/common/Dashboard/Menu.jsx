@@ -1,8 +1,5 @@
 // import { Button } from "@heroui/button";
 import React, { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { Cancel01Icon } from "../Icons/Cancel";
 import { Activity01Icon } from "../Icons/ActivityIcon";
 
 import { MenuOption } from "./MenuOption";
@@ -13,8 +10,6 @@ import { Books02Icon } from "../Icons/BookIcon2";
 import { LibraryIcon } from "../Icons/LibraryIcon";
 import { UserSquareIcon } from "../Icons/UserSquerIcon";
 import { MoneySend02Icon } from "../Icons/MoneyIcon";
-// import h1 from "../../../assets/img/h1.svg";
-// import bahr from "../../../assets/img/bahr.svg";
 
 const DashboardMenu = () => {
   const [isOpen, setIsOpen] = useState(false);

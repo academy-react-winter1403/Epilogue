@@ -7,6 +7,7 @@ import bahr from "../../../assets/img/bahr.svg";
 import { Moon02Icon } from "../Icons/MoonIcon";
 import { Notification02Icon } from "../Icons/NotificationIcon";
 import useUserStore from "../../../core/constant/user-info";
+import ResponsiveMenu from "./ResponsiveMenu";
 
 const Header = () => {
   const setUserInfo = useUserStore((state) => state.setUserInfo);
@@ -79,8 +80,8 @@ const Header = () => {
         </div>
       </div>
 
-      <div className="fixed  left-0 top-4 flex gap-2 lg:pl-6">
-        <button className="rounded-full w-[48px] h-[48px] bg-[#2F2F2F] text-black">
+      <div className="fixed  left-0 top-4 flex gap-2 lg:pl-6 hidden lg:flex">
+        <button className="rounded-full w-[48px] h-[48px] bg-[#2F2F2F] text-black ">
           <div className="flex items-center justify-center">
             <Notification02Icon color={"#ffff"} />
           </div>
@@ -89,6 +90,7 @@ const Header = () => {
           <Moon02Icon />
         </button>
       </div>
+      <ResponsiveMenu/>
     </div>
   );
 };

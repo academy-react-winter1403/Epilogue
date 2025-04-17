@@ -24,7 +24,7 @@ const Links = () => {
                 id="telegram"
                 name="telegram"
                 placeholder="لینک تلگرام خود را وارد کنید"
-                className="border border-[#DCDCDC] rounded-3xl h-[48px] w-[576px] px-4 py-2 text-[12px]"
+                className="border border-[#DCDCDC] rounded-3xl h-[48px] w-6/6 px-4 py-2 text-[12px]"
               />
             </div>
 
@@ -41,7 +41,7 @@ const Links = () => {
                 id="linkedin"
                 name="linkedin"
                 placeholder="لینک لینکدین خود را وارد کنید"
-                className="border border-[#DCDCDC] rounded-3xl h-[48px] w-[576px] px-4 py-2 text-[12px]"
+                className="border border-[#DCDCDC] rounded-3xl h-[48px] w-6/6 px-4 py-2 text-[12px]"
               />
             </div>
           </Form>

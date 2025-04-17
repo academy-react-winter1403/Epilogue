@@ -6,7 +6,7 @@ import { Field, Formik } from "formik";
 import useSearchStore from "../../core/constant/search";
 
 const CourseFavPage = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value.toLowerCase());
@@ -16,7 +16,7 @@ const CourseFavPage = () => {
       <p className="text-[24px] text-nowrap font-yekan-600 py-2">
         دوره های موردعلاقه
       </p>
-      <div className="flex flex-row gap-[56px]">
+      <div className="flex flex-col md:flex-row">
         <div className="flex flex-col  gap-2  p-2">
           <div className=" flex flex-row gap-2">
             <Search01Icon color={"00000"} />
@@ -26,13 +26,13 @@ const CourseFavPage = () => {
             <input
               type="search"
               placeholder="دوره مورد نظر را جست‌جو کنید..."
-              className=" w-[248px] h-[48px] text-[12px] px-3.5 rounded-2xl bg-[#F1F1F1]"
+              className="w-full md:w-[248px] h-[48px] text-[12px] px-3.5 rounded-2xl bg-[#F1F1F1]"
               value={searchTerm}
               onChange={handleSearch}
             />
             <button
               type="submit"
-              className="bg-blue-500 relative pt-1.5 left-[47px] hover:bg-blue-700 text-white font-bold  w-[48px] rounded-2xl h-[48px]"
+              className="bg-blue-500 relative pt-1.5 left-[40px] hover:bg-blue-700 text-white font-bold  w-[48px] rounded-2xl h-[48px]"
             >
               <div className="flex items-center justify-center mb-2">
                 <Search01Icon />
@@ -41,22 +41,16 @@ const CourseFavPage = () => {
           </form>
         </div>
 
-        <div className="w-[174px] h-[43px] flex flex-row gap-2 ">
-          <div className="flex items-center gap-2 justify-center p-2">
+        <div className="flex flex-col  gap-2  p-2">
+          <div className=" flex flex-row gap-2">
             <Calendar02Icon color={"00000"} />
-            <p className="text-[14px] flex items-center justify-center text-black">
-              تاریخ برگزاری - اتمام
-            </p>
+            <p className="text-[14px]  text-black">تاریخ برگزاری - اتمام</p>
           </div>
-          <div className="flex flex-col">
-            <p className="text-[14px] font-yekan-600 text-nowrap">
-              {/* {dateTime.date} */}
-            </p>
-          </div>
+          <div className="w-full md:w-[248px] h-[48px] rounded-2xl bg-[#F1F1F1]"></div>
         </div>
       </div>
       <div className="md:col-span-full  min-h-full bg-[#F6F6F6] rounded-3xl">
-        <CourseFavTable searchTerm={searchTerm}/>
+        <CourseFavTable searchTerm={searchTerm} />
       </div>
     </div>
   );

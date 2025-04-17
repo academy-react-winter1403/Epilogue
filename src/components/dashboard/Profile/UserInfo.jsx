@@ -250,7 +250,7 @@ const UserInfo = () => {
                 <Field
                   type="email"
                   name="email"
-                  className="border border-[#DCDCDC] rounded-3xl w-4/5 py-3 px-3 text-black text-[12px] "
+                  className="border border-[#DCDCDC] rounded-3xl w-full py-3 px-3 text-black text-[12px] "
                   placeholder="ایمیل خود را وارد کنید"
                   value={form.values.email}
                 />
@@ -268,7 +268,7 @@ const UserInfo = () => {
                 <Field
                   type="text"
                   name="homeAddress"
-                  className="border border-[#DCDCDC] rounded-3xl w-4/5 py-3 px-3 text-black text-[12px] "
+                  className="border border-[#DCDCDC] rounded-3xl w-full py-3 px-3 text-black text-[12px] "
                   placeholder="آدرس محل سکونت خود را وارد کنید"
                   value={form.values.homeAddress}
                 />
