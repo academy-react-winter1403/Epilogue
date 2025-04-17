@@ -6,7 +6,7 @@ import { MoreVerticalCircle01Icon } from "../../../components/common/Icons/More-
 const ProfilePicPage = () => {
   return (
     <div>
-      <button className="bg-blue-500 text-white rounded-full py-2 px-4 flex gap-2 items-center text-[16px]">
+      <button className="bg-blue-500 text-white rounded-full  py-2 px-4 flex gap-2 items-center text-[16px]">
         <ImageAdd02Icon />
         <span>افزودن عکس</span>
       </button>

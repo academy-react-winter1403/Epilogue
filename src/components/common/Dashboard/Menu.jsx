@@ -39,6 +39,7 @@ const DashboardMenu = () => {
               title={item[0]}
               icon={item[1]}
               url={item[2]}
+
             />
           ))}
           <div className="pt-7 pl-[20px]">
