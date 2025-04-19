@@ -3,14 +3,19 @@ import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import h1 from "../../assets/img/h1.svg";
 import bahr from "../../assets/img/bahr.svg";
-import Pappe from "../../assets/img/Peppe.png";
 import Menu from "./Menu";
 import { Moon02Icon } from "./Icons/MoonIcon";
 import { Notification02Icon } from "./Icons/NotificationIcon";
 import useUserStore from "../../core/constant/user-info";
+import { getUserInfo } from "../../core/services/api/Dashboard/dashborad";
+import { useQuery } from "@tanstack/react-query";
 
 const Header = () => {
   const setUserInfo = useUserStore((state) => state.setUserInfo);
+  const { data: userInfo } = useQuery({
+    queryKey: ["userInfo"],
+    queryFn: getUserInfo
+})
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
@@ -89,7 +94,7 @@ const Header = () => {
               <Link to={"/StudentPanel/dashboard"}>
                 <img
                   className="size-full rounded-full  w-12 border h-12"
-                  src={setUserInfo?.currentPictureAddress}
+                  src={userInfo?.currentPictureAddress}
                 ></img>
               </Link>
             ) : (

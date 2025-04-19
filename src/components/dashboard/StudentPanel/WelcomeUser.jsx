@@ -3,50 +3,64 @@ import { Time02Icon } from "../../common/Icons/TimeIcon";
 import { Calendar03Icon } from "../../common/Icons/Calender";
 import { getUserInfo } from "../../../core/services/api/Dashboard/dashborad";
 import { useQuery } from "@tanstack/react-query";
+import useUserStore from "../../../core/constant/user-info";
 
 const WelcomeUser = () => {
-  const [dateTime, setDateTime] = useState({
-    time: "",
-    date: "",
-    greeting: "",
-  });
-  const now = new Date();
 
-  const hour = now.getHours();
-
-  let greeting = "";
-  if (hour >= 5 && hour < 12) greeting = "صبح بخیر";
-  else if (hour >= 12 && hour < 16) greeting = "ظهر بخیر";
-  else if (hour >= 16 && hour < 20) greeting = "عصر بخیر";
-  else greeting = "شب بخیر";
-
-  useEffect(() => {
-    const now = new Date();
-    const time = now.toLocaleTimeString("fa-IR", {
-      hour: "2-digit",
-      minute: "2-digit",
+    const [dateTime, setDateTime] = useState({
+      time: "",
+      date: "",
+      greeting: "",
     });
-    const date = now.toLocaleDateString("fa-IR", {
-      month: "long",
-      day: "numeric",
-      year: "numeric",
-    });
-    setDateTime({ time, date, greeting });
-  }, []);
+  
+    const getGreeting = (hour) => {
+      if (hour >= 5 && hour < 12) return "صبح بخیر";
+      else if (hour >= 12 && hour < 16) return "ظهر بخیر";
+      else if (hour >= 16 && hour < 20) return "عصر بخیر";
+      else return "شب بخیر";
+    };
+  
+    useEffect(() => {
+      const updateDateTime = () => {
+        const now = new Date();
+        const time = now.toLocaleTimeString("fa-IR", {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+        const date = now.toLocaleDateString("fa-IR", {
+          month: "long",
+          day: "numeric",
+          year: "numeric",
+        });
+        const greeting = getGreeting(now.getHours());
+  
+        setDateTime({ time, date, greeting });
+      };
+  
+      // اولین بار اجرا کن
+      updateDateTime();
+  
+      // هر 1 ثانیه زمان رو آپدیت کن
+      const interval = setInterval(updateDateTime, 1000);
+  
+      // پاک‌سازی وقتی کامپوننت unmount میشه
+      return () => clearInterval(interval);
+    }, []);
 
   const { data: userInfo } = useQuery({
     queryKey: ["userInfo"],
     queryFn: getUserInfo
 })
 
-console.log(userInfo , "userInfo")
+
+// console.log(userInfo , "userInfo")
 
   return (
     <div className="flex flex-row gap-10">
       <div>
         <div className="flex flex-row gap-4 pb-[22px]">
           <p className="text-2xl text-nowrap font-yekan-700">
-            سلام پارسا , {dateTime.greeting}👋
+            سلام {userInfo?.fName} , {dateTime.greeting}👋
           </p>
           <p className="text-[14px] text-nowrap text-[#707070] font-yekan-500 pt-2">
             امیدوارم امروز روز خوبی رو داشته باشید
@@ -80,9 +94,7 @@ console.log(userInfo , "userInfo")
         </div>
       </div>
       <div className="flex flex-col item-end text-[16px] text-nowrap font-yekan-500 pt-[25px] pr-[150px]">
-        <p>سلام ، من پارسام</p>
-        <p> بنویسم خودتون بیایید منو </p>
-        <p>بشناسید حال ندارم بخدا خستم</p>
+        {userInfo?.userAbout}
       </div>
     </div>
   );

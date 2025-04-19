@@ -4,17 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { Logout03Icon } from "../Icons/LogoutIcon";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 20,
-  bgcolor: "background.paper",
-  p: 1,
-  borderRadius: "15px",
-};
-
 const LogoutButton = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -36,17 +25,17 @@ const LogoutButton = () => {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={{ opacity: 1 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            exit={{ opacity: 1 }}
             transition={{ type: "spring", mass: 1, stiffness: 80, damping: 20 }}
             className=" fixed w-full h-full top-0 left-0 bg-black/40 z-40 md:backdrop-blur transition-all"
             onClick={handleClose}
           >
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 1, scale: 0.6 }}
+              animate={{ opacity: 1, scale: 1.3 }}
+              exit={{ opacity: 0, scale: 0.6 }}
               transition={{
                 type: "spring",
                 mass: 1,

@@ -46,7 +46,7 @@ const UserInfo = () => {
     userProfileInfo.append("PhoneNumber", values.phoneNumber);
     userProfileInfo.append("NationalCode", values.nationalCode);
     userProfileInfo.append("BirthDay", values.birthday);
-    userProfileInfo.append("gender", values.gender);
+    userProfileInfo.append("gender", values.gender === "male");
     userProfileInfo.append("Email", values.email);
     userProfileInfo.append("HomeAdderess", values.homeAddress);
     mutation.mutate(userProfileInfo);
@@ -75,12 +75,12 @@ const UserInfo = () => {
             phoneNumber: userProfile?.phoneNumber || "",
             nationalCode: userProfile?.nationalCode || "",
             birthday: userProfile?.birthDay || "",
-            gender: userProfile?.gender || "" ,
+            gender: userProfile?.gender || "",
             email: userProfile?.email || "",
             homeAddress: userProfile?.homeAdderess || "",
           }}
           validationSchema={validationSchema}
-          onSubmit={(values) => editUserProfile(values)}
+          onSubmit={editUserProfile}
         >
           {(form) => (
             <Form>
@@ -208,24 +208,10 @@ const UserInfo = () => {
                     جنسیت
                   </label>
                   <div className="flex items-center space-x-4">
-                    <div>
-                      <label className="text-gray-700 text-sm">مرد</label>
-                      <Field
-                        type="radio"
-                        name="gender"
-                        value="male"
-                        className="mr-2"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-gray-700 text-sm">زن</label>
-                      <Field
-                        type="radio"
-                        name="gender"
-                        value="female"
-                        className="mr-2"
-                      />
-                    </div>
+                    <label className="text-gray-700 text-sm">مرد</label>
+                    <Field type="radio" name="gender" value="male" />
+                    <label className="text-gray-700 text-sm">زن</label>
+                    <Field type="radio" name="gender" value="female" />
                     <div>
                       <button
                         type="button"

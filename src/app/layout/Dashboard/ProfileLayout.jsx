@@ -15,7 +15,7 @@ const ProfileLayout = () => {
         <div className="px-6 pb-6 mt-[90px]">
           <Outlet />
         </div>
-        <div className="md:hidden flex ">
+        <div className="md:hidden flex items-center justify-center ">
           <NavMenu />
         </div>
       </div>

@@ -1,7 +1,10 @@
 import React from "react";
 import WelcomeUser from "./WelcomeUser";
 import DashboardTable from "../../common/Dashboard/Table/DashboardTable";
-import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
+import {
+  buildStyles,
+  CircularProgressbarWithChildren,
+} from "react-circular-progressbar";
 import ReservedCoursesTable from "../../common/Dashboard/Table/ReserveCourseTable";
 import { Link } from "react-router-dom";
 import YourComment from "./YourComment";
@@ -19,12 +22,15 @@ const StudentPanelPage = () => {
       <div className="md:col-span-9 bg-[#F6F6F6]  rounded-3xl">
         <div className="flex flex-row justify-between items-center">
           <p className="text-[14px] font-yekan-600 px-4 py-2">دوره من</p>
-          <Link to={"/dashboard/my-courses"} className="text-[14px] text-[#3772FF] flex flex-row gap-1 font-yekan-600 px-4 py-2">
+          <Link
+            to={"/StudentPanel/my-courses"}
+            className="text-[14px] text-[#3772FF] flex flex-row gap-1 font-yekan-600 px-4 py-2"
+          >
             مشاهده بیشتر
-            <ArrowLeft01Icon color={"#3772FF"}/>
+            <ArrowLeft01Icon color={"#3772FF"} />
           </Link>
         </div>
-        <DashboardTable showIcon={false}/>
+        <DashboardTable showIcon={false} />
       </div>
 
       <div className="md:col-span-3 rounded-3xl md:flex md:flex-col bg-[#F6F6F6]">
@@ -37,18 +43,18 @@ const StudentPanelPage = () => {
           </div>
         </div>
         <div className="mt-[22px] m-auto w-[136px] ">
-          <CircularProgressbar
-            value={percentage ? percentage : 0}
-            circleRatio={1}
-            strokeWidth={10}
-            text={`${percentage ? percentage : 0}%`}
+          <CircularProgressbarWithChildren
+            value={percentage}
             styles={buildStyles({
-              rotation: 1,
               trailColor: "#DCDCDC",
               pathColor: "#FFDE37",
-              textColor: "black",
             })}
-          />
+          >
+            <div className="flex items-center justify-center w-full h-full">
+              <strong>{percentage}%</strong>
+            </div>
+          </CircularProgressbarWithChildren>
+          
         </div>
         <p className="py-5 flex items-center justify-center text-[12px] text-nowrap font-yekan-600">
           اطلاعات حساب کاربری شما کامل نیست
@@ -58,10 +64,12 @@ const StudentPanelPage = () => {
       <div className="md:col-span-7 bg-[#F6F6F6] flex flex-col rounded-3xl">
         <div className="flex flex-row justify-between items-center">
           <p className="text-[14px] font-yekan-600 px-4  py-2">رزرو من</p>
-          <Link to={"/dashboard/my-reserve"} className="text-[14px] text-[#3772FF] px-4 flex flex-row gap-1 font-yekan-600 py-2">
+          <Link
+            to={"/StudentPanel/my-reserve"}
+            className="text-[14px] text-[#3772FF] px-4 flex flex-row gap-1 font-yekan-600 py-2"
+          >
             مشاهده بیشتر
-            <ArrowLeft01Icon color={"#3772FF"}/>
-
+            <ArrowLeft01Icon color={"#3772FF"} />
           </Link>
         </div>
         <ReservedCoursesTable showAccept={false} />
@@ -70,10 +78,10 @@ const StudentPanelPage = () => {
       <div className="md:col-span-5  h-[487px] rounded-3xl bg-[#F6F6F6]">
         <div className="justify-between items-center flex flex-row text-nowrap text-[14px] font-yekan-600 px-4 py-2">
           <p>نظرات شما</p>
-          <YourComment/>
-          <p className="text-[#3772FF] flex flex-row gap-1 ">مشاهده بیشتر
-          <ArrowLeft01Icon color={"#3772FF"}/>
-
+          <YourComment />
+          <p className="text-[#3772FF] flex flex-row gap-1 ">
+            مشاهده بیشتر
+            <ArrowLeft01Icon color={"#3772FF"} />
           </p>
         </div>
       </div>

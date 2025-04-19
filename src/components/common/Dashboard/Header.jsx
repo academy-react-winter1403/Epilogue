@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 import Pappe from "../../../assets/img/Peppe.png";
@@ -8,10 +8,16 @@ import { Moon02Icon } from "../Icons/MoonIcon";
 import { Notification02Icon } from "../Icons/NotificationIcon";
 import useUserStore from "../../../core/constant/user-info";
 import ResponsiveMenu from "./ResponsiveMenu";
+import { getUserInfo } from "../../../core/services/api/Dashboard/dashborad";
+import { useQuery } from "@tanstack/react-query";
 
 const Header = () => {
-  const setUserInfo = useUserStore((state) => state.setUserInfo);
+  const { data: userInfo } = useQuery({
+    queryKey: ["userInfo"],
+    queryFn: getUserInfo,
+  });
 
+  
   return (
     <div className="flex flex-wrap items-center max-w-7xl justify-between p-2 px-5">
       <div className=" flex items-center gap-[39px] ">
@@ -23,10 +29,13 @@ const Header = () => {
           </div>
 
           <div className="flex flex-row gap-2">
-            <img className="rounded-full w-[48px] h-[48px] " src={setUserInfo?.currentPictureAddress} />
+            <img
+              className="rounded-full w-[48px] h-[48px] "
+              src={userInfo?.currentPictureAddress}
+            />
             <div className=" flex flex-col">
               <p className="font-yekan-700 text-[16px] text-nowrap text-[#FCFCFC]">
-                پارسا اقایی
+                {userInfo?.fName} {userInfo?.lName}
               </p>
               <p className="font-yekan-500 text-[14px] text-nowrap text-[#FCFCFC]">
                 دانشجو
@@ -90,7 +99,7 @@ const Header = () => {
           <Moon02Icon />
         </button>
       </div>
-      <ResponsiveMenu/>
+      <ResponsiveMenu />
     </div>
   );
 };
