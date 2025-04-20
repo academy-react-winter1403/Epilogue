@@ -2,42 +2,71 @@ import React from "react";
 import Header from "../../../components/common/Dashboard/Header";
 import DashboardMenu from "../../../components/common/Dashboard/Menu";
 import { Outlet } from "react-router-dom";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import Joyride from "react-joyride";
+import Cookies from "js-cookie";
 
-const steps = [
-  {
-    target: "#mycourse",
-    content: "This is my awesome feature!",
-  },
-  {
-    target: "#reserve",
-    content: "This another awesome feature!",
-  },
-  {
-  target: "#myfavcourse",
-  content: "This another awesome feature!",
-},
-{
-  target: "#myfavblog",
-  content: "This another awesome feature!",
-},
-{
-  target: "#editprofile",
-  content: "This another awesome feature!",
-},
-{
-  target: "#payment",
-  content: "This another awesome feature!",
-},
-
-];
+const JOYRIDE_COOKIE_NAME = "joyrideCompleted";
 const DashboardLayout = () => {
-
+  const steps = [
+    {
+      placement: "center",
+      target: "body",
+      content:
+        "سلام تازه وارد. ورودت رو تبریک میگم. بریم یه تور اموزشی داشته باشیم!",
+    },
+    {
+      target: "#mycourse",
+      content: "اینجا صفحه‌ی دوره های شماست.",
+    },
+    {
+      target: "#reserve",
+      content: "و این هم صفحه‌ی رزرو های شماست.",
+    },
+    {
+      target: "#editprofile",
+      content: "و از این صفحه میتونی پروفایل خودت رو پرداخت کنی",
+    },
+    {
+      placement: "center",
+      target: "body",
+      content: "امیدوارم که توضیحات کاملی داده باشم . موفق باشی",
+    },
+  ];
+  const [run, setRun] = useState(false);
+  useEffect(() => {
+    setRun(true);
+  }, []);
+  const handleJoyrideCallback = (data) => {
+    const { status } = data;
+    if (status === "finished" || status === "skipped") {
+      setRun(false);
+    }
+    if (status === "finished") {
+      Cookies.set(JOYRIDE_COOKIE_NAME, "true", { expires: 30 });
+    }
+  };
   return (
     <>
-      <Joyride steps={steps} continuous run={run}  hideCloseButton={true} />
+      <Joyride
+        callback={handleJoyrideCallback}
+        steps={steps}
+        continuous
+        run={!Cookies.get(JOYRIDE_COOKIE_NAME) && run}
+        showProgress
+        showSkipButton
+        hideCloseButton
+        scrollToFirstStep
+        locale={{
+          back: "قبلی",
+          close: "بستن",
+          last: "بدرود",
+          next: "بعدی",
+          skip: "خودم بلدم",
+        }}
+        styles={{ options: { primaryColor: "#3772FF" } }}
+      />
       <div className="w-full h-screen bg-[#242424] flex flex-col">
         <Toaster />
         <div className=" bg-[#242424]">
