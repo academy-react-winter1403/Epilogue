@@ -20,6 +20,7 @@
     "formik": "^2.4.6",
     "gsap": "^3.12.7",
     "jalali-moment": "^3.3.11",
+    "lodash": "^4.17.21",
     "rc-slider": "^11.1.8",
     "react": "^19.0.0",
     "react-datepicker": "^8.2.1",

@@ -1,6 +1,7 @@
 import { Formik, Form } from "formik";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { debounce } from "lodash";
 import axios from "axios";
 import useStore from "../../../core/Store/Zustand-Store";
 import { SearchFilter } from "./Search";
@@ -82,13 +83,18 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
     label: e?.levelName,
   }));
 
+  const debouncedSearch = useCallback(
+    debounce((value) => {
+      console.log("✅ جستجو انجام شد برای:", value);
+      setSearchTerm(value);
+    }, 500),
+    []
+  );
+
   return (
     <div>
-      {/* حالت عادی */}
       <div className="hidden md:block">
-        <div
-          className={`w-[278px] h-[665px] border border-[#DCDCDC] rounded-3xl`}
-        >
+        <div className="w-[278px] h-[665px] border border-[#DCDCDC] rounded-3xl">
           <h1 className="font-bold text-2xl mt-4 mr-5">فیلتر</h1>
           <Formik
             initialValues={{
@@ -106,11 +112,11 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
               );
             }}
           >
-            {({ setFieldValue, values }) => (
+            {({ setFieldValue }) => (
               <Form className="mt-4">
                 <SearchFilter
                   searchTerm={searchTerm}
-                  setSearchTerm={setSearchTerm}
+                  setSearchTerm={(value) => debouncedSearch(value)}
                   setFieldValue={setFieldValue}
                 />
                 <InstructorSelect
@@ -141,8 +147,6 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
           </Formik>
         </div>
       </div>
-
-      {/* حالت md */}
       <div className="block md:hidden">
         <div
           className={`${
@@ -155,7 +159,6 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
           {!isFormOpen && <span>فیلتر</span>}
           {isFormOpen && (
             <div>
-              {/* دایوی برای بستن فرم */}
               <div
                 style={{
                   width: "101px",
@@ -176,7 +179,6 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
                 بستن فرم
               </div>
 
-              {/* فرم اصلی */}
               <Formik
                 initialValues={{
                   search: "",
@@ -193,11 +195,11 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
                   );
                 }}
               >
-                {({ setFieldValue, values }) => (
+                {({ setFieldValue }) => (
                   <Form>
                     <SearchFilter
                       searchTerm={searchTerm}
-                      setSearchTerm={setSearchTerm}
+                      setSearchTerm={(value) => debouncedSearch(value)}
                       setFieldValue={setFieldValue}
                     />
                     <InstructorSelect
