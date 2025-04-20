@@ -37,7 +37,7 @@ const DashboardLayout = () => {
 
   return (
     <>
-      <Joyride steps={steps} continuous run={run}  hideCloseButton={true} />
+      <Joyride steps={steps} continuous hideCloseButton={true} />
       <div className="w-full h-screen bg-[#242424] flex flex-col">
         <Toaster />
         <div className=" bg-[#242424]">

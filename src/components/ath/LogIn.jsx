@@ -8,6 +8,7 @@ import { loginStep1 } from "../../core/services/api/auth/login.api";
 import { loginValidation } from "../../core/validations/auth.validation";
 import { setItem } from "../../core/utils/storage.services";
 import toast, { Toaster } from "react-hot-toast";
+import ReCAPTCHA from "react-google-recaptcha";
 
 export function LogIn() {
   const [showPassword, setShowPassword] = useState(false);
@@ -16,6 +17,8 @@ export function LogIn() {
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);
   };
+
+  const [capVal,setCapVal] = useState(null)
 
   const handleSubmit = async (value) => {
     const data = await loginStep1(value);
@@ -191,8 +194,14 @@ export function LogIn() {
                         </div>
                       </div>
 
+                      <ReCAPTCHA
+                      className="mt-4 ml4"
+                      sitekey="6LedyxwrAAAAAOi0djfPgX1O4PdzquEjpIiW5z6U"
+                      onChange={vall => setCapVal(vall)}/>
+
                       <button
                         type="submit"
+                        disabled={!capVal}
                         className="w-[398px] cursor-pointer bg-blue-500 text-white p-2 rounded-[40px] hover:bg-blue-600 mt-[31px]"
                       >
                         ورود به حساب
