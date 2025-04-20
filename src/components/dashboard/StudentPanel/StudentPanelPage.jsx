@@ -54,7 +54,6 @@ const StudentPanelPage = () => {
               <strong>{percentage}%</strong>
             </div>
           </CircularProgressbarWithChildren>
-          
         </div>
         <p className="py-5 flex items-center justify-center text-[12px] text-nowrap font-yekan-600">
           اطلاعات حساب کاربری شما کامل نیست
@@ -78,7 +77,7 @@ const StudentPanelPage = () => {
       <div className="md:col-span-5  h-[487px] rounded-3xl bg-[#F6F6F6]">
         <div className="justify-between items-center flex flex-row text-nowrap text-[14px] font-yekan-600 px-4 py-2">
           <p>نظرات شما</p>
-          <YourComment />
+          <YourComment/>
           <p className="text-[#3772FF] flex flex-row gap-1 ">
             مشاهده بیشتر
             <ArrowLeft01Icon color={"#3772FF"} />

@@ -14,7 +14,6 @@ const ImageModal = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const navigate = useNavigate();
 
   const onDrop = useCallback((acceptedFiles) => {
     console.log("فایل‌های انتخاب‌شده:", acceptedFiles);

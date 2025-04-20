@@ -2,6 +2,7 @@ import http from "../../interceptor"; //axios//
 
 export const getUserInfo = async () => {
     try {
+        console.log("fetch")
         const response = await http.get("/SharePanel/GetProfileInfo")
         return response
     } catch (error) {
@@ -71,7 +72,6 @@ export const getFavoriteArticles = async () => {
 export const deletenewseFav = async (RemoveFavNews) => {
     try {
         const result = await http.delete("/News/DeleteFavoriteNews", { data: RemoveFavNews });
-
         return result
     } catch (error) {
         throw false;
@@ -110,6 +110,6 @@ export const deleteProfileImage = async (profile) => {
         const response = await http.delete("/SharePanel/DeleteProfileImage",profile)
         return response
     } catch (error) {
-        throw error
+        throw false
     }
 }

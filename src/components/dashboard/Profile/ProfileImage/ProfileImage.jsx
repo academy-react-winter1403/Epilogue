@@ -12,15 +12,16 @@ import toast from "react-hot-toast";
 import { motion, AnimatePresence } from "framer-motion";
 
 const ProfileImage = () => {
+  const client = useQueryClient();
+
   const [dropdownOpenId, setDropdownOpenId] = useState(null);
   const [imageIndex, setImageIndex] = useState();
-
-  const client = useQueryClient();
 
   const { data: userInfo } = useQuery({
     queryKey: ["userInfo"],
     queryFn: getUserInfo,
   });
+  
 
   const mutationSelect = useMutation({
     mutationFn: selectProfileImage,
@@ -28,6 +29,10 @@ const ProfileImage = () => {
       toast.success("عملیات با موفقیت انجام شد");
       client.invalidateQueries({ queryKey: ["userInfo"] });
     },
+    onError: (error) => {
+      console.error("select error", error);
+      toast.error("خطا در انتخاب");
+    }
   });
 
   const mutationDelete = useMutation({
@@ -36,15 +41,13 @@ const ProfileImage = () => {
       toast.success("پروفایل شما حذف شد");
       client.invalidateQueries({ queryKey: ["userInfo"] });
     },
+    onError: (error) => {
+      console.error("select error", error);
+      toast.error("خطا در حذف");
+    }
   });
 
-  const getProileImageIndex = () => {
-    setImageIndex(
-      userInfo?.userImage.findIndex((item) => {
-        return item.puctureAddress == userInfo?.currentPictureAddress;
-      })
-    );
-  };
+
 
   const handleSelectProfileImage = (id) => {
     const selectedImage = new FormData();
@@ -58,17 +61,18 @@ const ProfileImage = () => {
     mutationDelete.mutate(deletedImage);
   };
 
-  useEffect(() => {
-    getProileImageIndex();
-  }, [imageIndex]);
-  return (
-    <div>
-{dropdownOpenId && (
-  <div
-    className="fixed inset-0 z-10"
-    onClick={() => setDropdownOpenId(null)}
-  ></div>
 
+  
+  console.log(userInfo?.userImage)
+
+
+  return (
+    <>
+      {dropdownOpenId && (
+        <div
+          className="fixed inset-0 z-10"
+          onClick={() => setDropdownOpenId(null)}
+        ></div>
       )}
       <ImageModal />
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 py-6">
@@ -79,7 +83,6 @@ const ProfileImage = () => {
           >
             <img
               src={item.puctureAddress}
-              alt=""
               className="w-full h-full object-cover rounded-[16px]"
             />
 
@@ -100,7 +103,7 @@ const ProfileImage = () => {
                       exit={{ y: -150 }}
                       className="bg-white px-4 py-2 absolute top-0 left-0 flex flex-col gap-3 rounded-md shadow-md"
                     >
-                      <div  onClick={() => handleSelectProfileImage(item.id)}>
+                      <div onClick={() => handleSelectProfileImage(item.id)}>
                         انتخاب
                       </div>
                       <div onClick={() => handleDeleteProfile(item.id)}>
@@ -118,9 +121,9 @@ const ProfileImage = () => {
               )}
             </div>
           </div>
-        ))}{" "}
+        ))}
       </div>
-    </div>
+    </>
   );
 };
 
