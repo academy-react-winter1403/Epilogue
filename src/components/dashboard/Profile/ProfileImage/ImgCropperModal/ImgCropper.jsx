@@ -64,7 +64,7 @@ const ImgCropper = ({
             onLoad={onImageLoad}
           />
         </ReactCrop>
-        <div className="flex items-center bg-gray-800 px-5 py-3 text-2xl rounded-3xl justify-between w-[300px] gap-5">
+        <div className="flex items-center bg-blue-400 px-5 py-3 text-2xl rounded-3xl justify-between w-[300px] gap-5">
           <div
             onClick={() => {
               setLoading(true);
@@ -79,15 +79,15 @@ const ImgCropper = ({
               );
               setDataUrl(canvasRef.current.toDataURL());
             }}
-            className="p-4 rounded-full bg-metricGray4 text-metricBlack font-bold cursor-pointer"
+            className="p-4 rounded-full bg-gray-600 text-[#010101] text-sm  cursor-pointer"
           >
-            {loading ? "loading" : "apply"}
+            تایید
           </div>
           <div
             onClick={() => {
               setOpen(false);
             }}
-            className="p-4 rounded-full bg-transparent border-2 border-metricGray4 text-metricGray4 font-bold cursor-pointer"
+            className="p-4 rounded-full bg-transparent text-sm border-2 border-gray-600 text-gray-600 font-bold cursor-pointer"
           >
             "X"
           </div>

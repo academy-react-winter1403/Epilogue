@@ -33,12 +33,15 @@ const ImageModal = () => {
 
   const handleCrop = async (data) => {
     const file = convertDataUrlToFile(data);
-    mutation.mutate(file);
+    let formData = new FormData();
+    formData.append("formFile", file);
+    mutation.mutate(formData);
     setCropperOpen(false);
+    setOpen(false);
   };
 
   const handleUploadImage = (e) => {
-    console.log(e.target.files);
+    console.log(e, "dropppp");
     const img = e.target.files?.[0];
     if (!img) return;
 
@@ -53,8 +56,6 @@ const ImageModal = () => {
         if (naturalHeight < 250 && naturalWidth < 250) {
           toast.error("عکس شما نباید کمتر از 250 پیکسل باشد");
           return setImgSrc("");
-        } else {
-          toast("ok");
         }
       });
       setImgSrc(imgURL);
@@ -94,7 +95,6 @@ const ImageModal = () => {
           <span>افزودن عکس</span>
         </button>
 
-        {/* modal */}
         <AnimatePresence>
           {open && (
             <motion.div
@@ -133,7 +133,7 @@ const ImageModal = () => {
                   <div
                     {...getRootProps()}
                     onChange={handleUploadImage}
-                    className={`flex flex-col h-full min-h-[240px] items-center justify-center border-2 border-dashed rounded-2xl p-8 transition-all cursor-pointer ${
+                    className={`flex flex-col h-full min-h-[200px] items-center justify-center border-2 border-dashed rounded-2xl p-8 transition-all cursor-pointer ${
                       isDragActive
                         ? "border-blue-500 bg-blue-50"
                         : "border-gray-300 hover:border-blue-400 hover:bg-blue-50"
@@ -147,21 +147,20 @@ const ImageModal = () => {
                       فایلت فقط میتونه عکس باشه، حداکثر ۵ فایل
                     </p>
                   </div>
-
-                  {acceptedFiles.length > 0 && (
-                    <div className="mt-4 space-y-1 text-sm text-gray-700">
-                      <p className="font-yekan-600">فایل‌های انتخاب‌شده:</p>
-                      <ul className="list-disc list-inside">
-                        {acceptedFiles.map((file, index) => (
-                          <li key={index}>
-                            {file.name} - {(file.size / 1024 / 1024).toFixed(2)}{" "}
-                            MB
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
                 </div>
+                {acceptedFiles.length > 0 && (
+                  <div className="mt-4 space-y-1 text-sm text-gray-700">
+                    <p className="font-yekan-600">فایل‌های انتخاب‌شده:</p>
+                    <ul className="list-disc list-inside">
+                      {acceptedFiles.map((file, index) => (
+                        <li key={index}>
+                          {file.name} - {(file.size / 1024 / 1024).toFixed(2)}{" "}
+                          MB
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
                 <div className="flex justify-end mt-2">
                   <button
                     onClick={() => {
