@@ -19,7 +19,7 @@ const StudentPanelPage = () => {
         <WelcomeUser />
       </div>
 
-      <div className="md:col-span-9 bg-[#F6F6F6]  rounded-3xl">
+      <div className="md:col-span-9 themed-dashTable bg-[#F6F6F6]  rounded-3xl">
         <div className="flex flex-row justify-between items-center">
           <p className="text-[14px] font-yekan-600 px-4 py-2">دوره من</p>
           <Link
@@ -33,7 +33,7 @@ const StudentPanelPage = () => {
         <DashboardTable showIcon={false} />
       </div>
 
-      <div className="md:col-span-3 rounded-3xl md:flex md:flex-col bg-[#F6F6F6]">
+      <div className="md:col-span-3 rounded-3xl md:flex md:flex-col themed-dashTable bg-[#F6F6F6]">
         <div className="justify-between items-center px-4 py-2 flex flex-row ">
           <p className="text-[12px] text-nowrap font-yekan-600">
             وضعیت اطلاعات حساب کاربری
@@ -60,7 +60,7 @@ const StudentPanelPage = () => {
         </p>
       </div>
 
-      <div className="md:col-span-7 bg-[#F6F6F6] flex flex-col rounded-3xl">
+      <div className="md:col-span-7 themed-dashTable bg-[#F6F6F6] flex flex-col rounded-3xl">
         <div className="flex flex-row justify-between items-center">
           <p className="text-[14px] font-yekan-600 px-4  py-2">رزرو من</p>
           <Link
@@ -74,7 +74,7 @@ const StudentPanelPage = () => {
         <ReservedCoursesTable showAccept={false} />
       </div>
 
-      <div className="md:col-span-5  h-[487px] rounded-3xl bg-[#F6F6F6]">
+      <div className="md:col-span-5  h-[487px] rounded-3xl themed-dashTable bg-[#F6F6F6]">
         <div className="justify-between items-center flex flex-row text-nowrap text-[14px] font-yekan-600 px-4 py-2">
           <p>نظرات شما</p>
           <YourComment/>

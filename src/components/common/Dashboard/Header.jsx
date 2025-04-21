@@ -10,6 +10,8 @@ import useUserStore from "../../../core/constant/user-info";
 import ResponsiveMenu from "./ResponsiveMenu";
 import { getUserInfo } from "../../../core/services/api/Dashboard/dashborad";
 import { useQuery } from "@tanstack/react-query";
+import AnimatedThemeSwitcher from "../AnimatedThemeSwitcher";
+import ThemeToggle from "../AnimatedThemeSwitcher";
 
 const Header = () => {
   const { data: userInfo } = useQuery({
@@ -96,7 +98,7 @@ const Header = () => {
           </div>
         </button>
         <button className="rounded-full p-3 bg-[#2F2F2F]">
-          <Moon02Icon />
+          <ThemeToggle />
         </button>
       </div>
       <ResponsiveMenu />

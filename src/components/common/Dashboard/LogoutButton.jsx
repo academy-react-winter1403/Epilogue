@@ -12,11 +12,10 @@ const LogoutButton = () => {
 
   return (
     <div className="w-full">
-      <button onClick={handleOpen} style={{ width: "100%" }}>
+      <button className=" rounded-[45px]" onClick={handleOpen} style={{ width: "100%" }}>
         <div className=" flex items-center py-[10px] px-2 rounded-[45px] border border-[#FF5353] duration-200 w-full cursor-pointer">
           <Logout03Icon size={"24px"} />
           <p className="text-[16px] font-yekan-500 text-[#FF5353] flex items-center justify-center m-auto">
-            {" "}
             خروج از حساب کاربری{" "}
           </p>
         </div>

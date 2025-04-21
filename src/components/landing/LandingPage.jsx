@@ -7,8 +7,7 @@ import { getSameNews } from "../../core/services/api/LandingApi/getSameNews";
 import BestCourseWrapper from "./bestCourse/CardWrapper";
 import BestBlogWrapper from "./bestBlogs/CardWrapper";
 import Line from "./line/Line";
-import { getTeacher } from "../../core/services/api/LandingApi/getTeacher";
-
+import { motion } from "framer-motion";
 const LandingPage = () => {
   const [course, setcourse] = useState();
 
@@ -37,9 +36,11 @@ const LandingPage = () => {
         <FirstSection />
       </div>
 
-      <div className="border-b-4 relative flex items-center justify-evenly h-1 pt-[140px] border-[#00000014] w-full">
+      <div className="border-b-4 themed-border relative flex items-center justify-evenly h-1 pt-[140px] border-[#D9D9D9] w-full">
+        
         <Line/>
       </div>
+      
 
       <div className="flex flex-col">
         <MiddleSection />

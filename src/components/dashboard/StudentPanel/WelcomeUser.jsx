@@ -68,22 +68,22 @@ const WelcomeUser = () => {
         </div>
         <div className="flex flex-row gap-[56px]">
           <div className="w-[86px] h-[43px] flex flex-row gap-2 ">
-            <div className="rounded-full w-[40px] h-[40px]  bg-[#F1F1F1] ">
+            <button className="rounded-full w-[40px] h-[40px]  bg-[#F1F1F1] ">
               <div className="flex items-center justify-center p-2">
                 <Time02Icon color={"00000"} />
               </div>
-            </div>
+            </button>
             <div className="flex flex-col">
               <p className="text-[14px] text-[#707070]">ساعت</p>
               <p className="font-yekan-600">{dateTime.time}</p>
             </div>
           </div>
           <div className="w-[174px] h-[43px] flex flex-row gap-2 ">
-            <div className="rounded-full w-[40px] h-[40px]  bg-[#F1F1F1] ">
+            <button className="rounded-full w-[40px] h-[40px]  bg-[#F1F1F1] ">
               <div className="flex items-center justify-center p-2">
                 <Calendar03Icon color={"00000"} />
               </div>
-            </div>
+            </button>
             <div className="flex flex-col">
               <p className="text-[14px]  text-[#707070]">تاریخ</p>
               <p className="text-[14px] font-yekan-600 text-nowrap">

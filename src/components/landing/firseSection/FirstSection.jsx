@@ -62,22 +62,28 @@ const FirstSection = () => {
         <h1 className="m-auto font-bold font-yekan-700 text-nowrap text-[40px]">
           پیشرفت سریع
         </h1>
-        <h1 className=" pt-6 lg:pt-6 text-nowrap font-yekan-500 text-[#707070] text-[18px]">
+        <p className=" pt-6 lg:pt-6 text-nowrap font-yekan-500 text-[#707070] text-[18px]">
           آکادمی آموزش تخصصی برنامه نویسی بحر
-        </h1>
-        <h1 className="m-auto text-nowrap font-yekan-500 text-[#707070] text-[18px]">
+        </p>
+        <p className="m-auto text-nowrap font-yekan-500 text-[#707070] text-[18px]">
           از کودکان تا بزرگسال
-        </h1>
+        </p>
       </div>
       <div className="w-[150px] h-[111px] flex flex-col order-3 lg:order-3">
         <h1 className="  text-nowrap font-yekan-500 text-[18px]">همین حالا</h1>
         <h1 className=" text-nowrap text-[18px] pb-3"> شروع کن به یادگیری!</h1>
         <NavLink
           to=""
-          className="flex flex-col items-center justify-center text-[16px] font-yekan-500 h-[47px] w-[150px] text-[#FCFCFC] bg-[#2F2F2F] rounded-[56px]"
         >
+        <button 
+          className="flex flex-col items-center justify-center text-[16px] font-yekan-500 h-[47px] w-[150px] text-[#FCFCFC] bg-[#2F2F2F] rounded-[56px]"
+        
+        >
+
           جدیدترین دوره ها
+        </button>
         </NavLink>
+
       </div>
     </div>
   );

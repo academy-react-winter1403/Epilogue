@@ -9,6 +9,7 @@ import { Notification02Icon } from "./Icons/NotificationIcon";
 import useUserStore from "../../core/constant/user-info";
 import { getUserInfo } from "../../core/services/api/Dashboard/dashborad";
 import { useQuery } from "@tanstack/react-query";
+import ThemeToggle from "./AnimatedThemeSwitcher";
 
 const Header = () => {
   const setUserInfo = useUserStore((state) => state.setUserInfo);
@@ -109,14 +110,14 @@ const Header = () => {
         </div>
 
         <div className=" gap-[8px] hidden lg:flex">
-          <button className="rounded-full w-[48px] h-[48px] bg-[#FCFCFC] border border-[#DCDCDC] text-black">
+          <button className="rounded-full w-[48px] h-[48px]  border border-[#DCDCDC] text-black">
             <div className="flex items-center justify-center">
               <Notification02Icon />
             </div>
           </button>
           <button className="rounded-full p-3 bg-[#2F2F2F]">
-            <Moon02Icon />
-          </button>
+          <ThemeToggle />
+        </button>
         </div>
         <Menu />
       </div>

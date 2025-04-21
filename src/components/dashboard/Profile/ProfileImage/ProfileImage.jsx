@@ -79,7 +79,7 @@ const ProfileImage = () => {
         {userInfo?.userImage.map((item, key) => (
           <div
             key={key}
-            className="border w-[189px] h-[189px] rounded-[16px] relative overflow-hidden"
+            className=" w-[189px] h-[189px] rounded-[16px] relative overflow-hidden"
           >
             <img
               src={item.puctureAddress}

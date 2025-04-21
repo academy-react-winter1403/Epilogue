@@ -50,7 +50,7 @@ const ImageModal = () => {
     <div>
       <button
         onClick={handleOpen}
-        className="bg-blue-500 text-white rounded-full py-2 px-4 flex gap-2 items-center text-[16px]  max-w-xs md:max-w-none"
+        className="bg-blue-500 themed-dash-but text-white rounded-full py-2 px-4 flex gap-2 items-center text-[16px]  max-w-xs md:max-w-none"
       >
         <ImageAdd02Icon />
         <span>افزودن عکس</span>
@@ -76,7 +76,7 @@ const ImageModal = () => {
                 stiffness: 80,
                 damping: 20,
               }}
-              className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] md:w-[50%] h-[60%] bg-white rounded-[32px] shadow-lg z-50 p-6 overflow-y-auto"
+              className="fixed top-1/2 left-1/2 themed-dashModal transform -translate-x-1/2 -translate-y-1/2 w-[90%] md:w-[50%] h-[60%] bg-white rounded-[32px] shadow-lg z-50 p-6 overflow-y-auto"
             >
               <button
                 className="border mb-4 p-2 rounded-full"
@@ -97,7 +97,7 @@ const ImageModal = () => {
                   }`}
                 >
                   <input {...getInputProps()} />
-                  <p className="text-gray-700 font-yekan text-sm text-center">
+                  <p className="text-gray-700 font-yekan text-sm  text-center">
                     فایلت رو بکش اینجا یا کلیک کن برای انتخاب
                   </p>
                   <p className="text-gray-400 text-xs mt-1">
