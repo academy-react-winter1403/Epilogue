@@ -8,9 +8,8 @@ const Sorting = () => {
   const [activeSort, setActiveSort] = useState(null); // ذخیره گزینه مرتب‌سازی فعال
 
   const sortOptions = [
-    { type: "cheap", label: "ارزان‌ترین", col: "Cost", order: "ASC" },
-    { type: "expensive", label: "گران‌ترین", col: "Cost", order: "DESC" },
-    { type: "newest", label: "جدیدترین", col: "lastUpdate", order: "DESC" },
+
+    { type: "newest", label: "جدیدترین", col: "insertDate", order: "Asc" },
     { type: "popular", label: "محبوب‌ترین", col: "currentLikeCount", order: "DESC" },
   ];
 

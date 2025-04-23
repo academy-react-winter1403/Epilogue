@@ -1,9 +1,9 @@
 
 import React from "react";
  const CardList = ({sortedCards,currentCards}) => {
-  
+
   return (
-    <div className="w-[971px] h-auto grid grid-cols-3 gap-[32px]">
+    <div className="w-screen h-auto flex-col   md:grid grid-cols-3 gap-[32px] w-[971px]">
       {sortedCards.length > 0 ? (
         sortedCards.map((card, index) => (
           <div key={index} className="card w-[322px] h-[366px] flex flex-col">
@@ -19,7 +19,7 @@ import React from "react";
               <img
                 src={card.tumbImageAddress || "path/to/default/image.jpg"}
                 alt={card.title}
-                className="w-full h-[293px] rounded-t-lg"
+                className="w-full h-full rounded-t-lg"
                 onError={(e) => {
                   e.target.onerror = null;
                   e.target.src = "path/to/default/image.jpg"; 

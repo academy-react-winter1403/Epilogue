@@ -5,7 +5,7 @@ import teacherIcon from "../../../assets/teacher.png";
 export const InstructorSelect = ({ isLoading, error, uniqueTeachers, setTeacherId }) => {
   return (
     <div className="mb-6">
-      <div className="flex gap-2">
+      <div className="flex gap-2 mr-3">
         <div className="w-[24px] h-[24px]">
           <img src={teacherIcon} alt="Teacher Icon" />
         </div>
@@ -25,7 +25,7 @@ export const InstructorSelect = ({ isLoading, error, uniqueTeachers, setTeacherI
           onChange={(option) => {
             setTeacherId(option.value);
           }}
-          className="react-select-container"
+          className="react-select-container w-[258px] h-[48px] rounded-lg mr-auto ml-auto"
           classNamePrefix="react-select"
           styles={{
             control: (base) => ({
@@ -33,6 +33,8 @@ export const InstructorSelect = ({ isLoading, error, uniqueTeachers, setTeacherI
               backgroundColor: "#F1F1F1",
               borderRadius: "0.5rem",
               border: "1px solid #D1D5DB",
+              width:"258px",
+              height:"48px"
             }),
           }}
         />

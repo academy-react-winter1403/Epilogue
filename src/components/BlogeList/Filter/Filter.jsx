@@ -1,15 +1,11 @@
 import { Formik, Form } from "formik";
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { debounce } from "lodash";
 import axios from "axios";
 import useStore from "../../../core/Store/Zustand-Store";
 import { SearchFilter } from "./Search";
-import { InstructorSelect } from "./Teachers";
 import { CategorySelect } from "./CategorySelect";
-import { EducationLevelSelect } from "./EducationLevelSelect";
 import { DateRangePicker } from "./DateRangePicker";
-import { PriceSlider } from "./PriceSlider";
 
 function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
   const [priceRangeState, setPriceRangeState] = useState([0, 100000000]);
@@ -83,18 +79,13 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
     label: e?.levelName,
   }));
 
-  const debouncedSearch = useCallback(
-    debounce((value) => {
-      console.log("✅ جستجو انجام شد برای:", value);
-      setSearchTerm(value);
-    }, 500),
-    []
-  );
-
   return (
     <div>
+      {/* حالت عادی */}
       <div className="hidden md:block">
-        <div className="w-[278px] h-[665px] border border-[#DCDCDC] rounded-3xl">
+        <div
+          className={`w-[278px] h-[665px] border border-[#DCDCDC] rounded-3xl`}
+        >
           <h1 className="font-bold text-2xl mt-4 mr-5">فیلتر</h1>
           <Formik
             initialValues={{
@@ -112,41 +103,29 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
               );
             }}
           >
-            {({ setFieldValue }) => (
+            {({ setFieldValue, values }) => (
               <Form className="mt-4">
                 <SearchFilter
                   searchTerm={searchTerm}
-                  setSearchTerm={(value) => debouncedSearch(value)}
+                  setSearchTerm={setSearchTerm}
                   setFieldValue={setFieldValue}
-                />
-                <InstructorSelect
-                  isLoading={isLoading}
-                  error={error}
-                  uniqueTeachers={uniqueTeachers}
-                  setTeacherId={setTeacherId}
                 />
                 <CategorySelect
                   technologyOptions={technologyOptions}
                   setTechnologies={setTechnologies}
                   setTechCount={setTechCount}
                 />
-                <EducationLevelSelect
-                  LevelOptions={LevelOptions}
-                  setLevelName={setLevelName}
-                />
                 <DateRangePicker
                   dateRange={dateRange}
                   setDateRange={setDateRange}
-                />
-                <PriceSlider
-                  priceRange={priceRangeState}
-                  setPriceRange={setPriceRangeState}
                 />
               </Form>
             )}
           </Formik>
         </div>
       </div>
+
+      {/* حالت md */}
       <div className="block md:hidden">
         <div
           className={`${
@@ -159,6 +138,7 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
           {!isFormOpen && <span>فیلتر</span>}
           {isFormOpen && (
             <div>
+              {/* دایوی برای بستن فرم */}
               <div
                 style={{
                   width: "101px",
@@ -179,6 +159,7 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
                 بستن فرم
               </div>
 
+              {/* فرم اصلی */}
               <Formik
                 initialValues={{
                   search: "",
@@ -195,35 +176,21 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
                   );
                 }}
               >
-                {({ setFieldValue }) => (
+                {({ setFieldValue, values }) => (
                   <Form>
                     <SearchFilter
                       searchTerm={searchTerm}
-                      setSearchTerm={(value) => debouncedSearch(value)}
+                      setSearchTerm={setSearchTerm}
                       setFieldValue={setFieldValue}
-                    />
-                    <InstructorSelect
-                      isLoading={isLoading}
-                      error={error}
-                      uniqueTeachers={uniqueTeachers}
-                      setTeacherId={setTeacherId}
                     />
                     <CategorySelect
                       technologyOptions={technologyOptions}
                       setTechnologies={setTechnologies}
                       setTechCount={setTechCount}
                     />
-                    <EducationLevelSelect
-                      LevelOptions={LevelOptions}
-                      setLevelName={setLevelName}
-                    />
                     <DateRangePicker
                       dateRange={dateRange}
                       setDateRange={setDateRange}
-                    />
-                    <PriceSlider
-                      priceRange={priceRangeState}
-                      setPriceRange={setPriceRangeState}
                     />
                   </Form>
                 )}
