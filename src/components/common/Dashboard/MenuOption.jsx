@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const MenuOption = ({ title, icon, url }) => {
+const MenuOption = ({ title, icon, url, id }) => {
   return (
-    <a className="pt-[30px]">
+    <a id={id} className="pt-[30px]">
       <Link to={url} className="font-bold flex flex-row gap-2">
         {icon}
         {title}
@@ -12,4 +12,4 @@ const MenuOption = ({ title, icon, url }) => {
   );
 };
 
-export {MenuOption};
+export { MenuOption };

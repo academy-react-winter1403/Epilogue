@@ -1,6 +1,8 @@
 import { Formik, Form } from "formik";
-import { useState, useRef } from "react";
+
+import { useState, useRef,useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
+import { debounce } from "lodash";
 import axios from "axios";
 import gsap from "gsap";
 import useStore from "../../../core/Store/Zustand-Store";
@@ -81,7 +83,6 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
     value: e?.id,
     label: e?.levelName,
   }));
-
   const openForm = () => {
     setFormOpen(true);
     gsap.fromTo(
@@ -100,6 +101,13 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
       onComplete: () => setFormOpen(false),
     });
   };
+    const debouncedSearch = useCallback(
+    debounce((value) => {
+      console.log("✅ جستجو انجام شد برای:", value);
+      setSearchTerm(value);
+    }, 500),
+    []
+  );
 
   return (
     <div>
@@ -108,6 +116,7 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
         <div
           className={`w-[298px] h-[665px] border border-[#DCDCDC] rounded-3xl`}
         >
+
           <h1 className="font-bold text-2xl mt-4 mr-5">فیلتر</h1>
           <Formik
             initialValues={{
@@ -129,7 +138,7 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
               <Form className="pt-6">
                 <SearchFilter
                   searchTerm={searchTerm}
-                  setSearchTerm={setSearchTerm}
+                  setSearchTerm={(value) => debouncedSearch(value)}
                   setFieldValue={setFieldValue}
                 />
                 <InstructorSelect
@@ -203,11 +212,11 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
                   );
                 }}
               >
-                {({ setFieldValue, values }) => (
+                {({ setFieldValue }) => (
                   <Form>
                     <SearchFilter
                       searchTerm={searchTerm}
-                      setSearchTerm={setSearchTerm}
+                      setSearchTerm={(value) => debouncedSearch(value)}
                       setFieldValue={setFieldValue}
                     />
                     <InstructorSelect
