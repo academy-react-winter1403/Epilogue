@@ -1,30 +1,36 @@
 import { Formik, Form } from "formik";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
+import gsap from "gsap";
 import axios from "axios";
 import useStore from "../../../core/Store/Zustand-Store";
 import { SearchFilter } from "./Search";
 import { CategorySelect } from "./CategorySelect";
 import { DateRangePicker } from "./DateRangePicker";
+import cancel from '../../../assets/cancel.png'
+import filter from '../../../assets/filter.png'
 
 function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
   const [priceRangeState, setPriceRangeState] = useState([0, 100000000]);
   const [dateRange, setDateRange] = useState([null, null]);
   const [isFormOpen, setFormOpen] = useState(false);
+  const modalRef = useRef(null);
+  const startPosition = useRef(0);
+  const isDragging = useRef(false);
 
   const { setTeacherId, setTechnologies, setTechCount, setLevelName } =
     useStore((state) => state);
 
   const {
-    data: teachers,
+    data: categorys,
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["teachers"],
+    queryKey: ["categorys"],
     queryFn: async () => {
       try {
         const response = await axios.get(
-          "https://classapi.sepehracademy.ir/api/Home/GetTeachers"
+          "https://classapi.sepehracademy.ir/api/News/GetListNewsCategory"
         );
         return response.data;
       } catch (error) {
@@ -34,54 +40,58 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
     },
   });
 
-  const { data: technologieses } = useQuery({
-    queryKey: ["technologies"],
-    queryFn: async () => {
-      try {
-        const response = await axios.get(
-          "https://classapi.sepehracademy.ir/api/Home/GetTechnologies"
-        );
-        return response.data;
-      } catch (error) {
-        console.error("خطا در بارگذاری تکنولوژی‌ها:", error);
-        throw error;
-      }
-    },
-  });
-
-  const { data: levelName } = useQuery({
-    queryKey: ["levelName"],
-    queryFn: async () => {
-      try {
-        const response = await axios.get(
-          "https://classapi.sepehracademy.ir/api/CourseLevel/GetAllCourseLevel"
-        );
-        return response.data;
-      } catch (error) {
-        console.error("خطا در بارگذاری دسته بندی:", error);
-        throw error;
-      }
-    },
-  });
-
-  const technologyOptions = technologieses?.map((e) => ({
-    value: e?.id,
-    label: e?.techName,
+  const categorysOption = categorys?.map((teacher) => ({
+    value: teacher?.id,
+    label: teacher?.categoryName,
   }));
 
-  const uniqueTeachers = teachers?.map((teacher) => ({
-    value: teacher?.teacherId,
-    label: teacher?.fullName,
-  }));
+  useEffect(() => {
+    if (isFormOpen) {
+      gsap.fromTo(
+        modalRef.current,
+        { y: "100%", opacity: 0 },
+        { y: "0%", opacity: 1, duration: 0.6, ease: "power3.out" }
+      );
+    }
+  }, [isFormOpen]);
 
-  const LevelOptions = levelName?.map((e) => ({
-    value: e?.id,
-    label: e?.levelName,
-  }));
+  const openForm = () => {
+    setFormOpen(true);
+  };
+
+  const closeForm = () => {
+    gsap.to(modalRef.current, {
+      y: "100%",
+      opacity: 0,
+      duration: 0.6,
+      ease: "power3.in",
+      onComplete: () => setFormOpen(false),
+    });
+  };
+
+  const handleMouseDown = (e) => {
+    isDragging.current = true;
+    startPosition.current = e.clientY;
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging.current) return;
+
+    const delta = startPosition.current - e.clientY;
+    startPosition.current = e.clientY;
+
+    const newHeight = Math.max(300, modalRef.current.offsetHeight - delta);
+    modalRef.current.style.height = `${newHeight}px`;
+  };
+
+  const handleMouseUp = () => {
+    if (!isDragging.current) return;
+
+    isDragging.current = false;
+  };
 
   return (
     <div>
-      {/* حالت عادی */}
       <div className="hidden md:block">
         <div
           className={`w-[278px] h-[665px] border border-[#DCDCDC] rounded-3xl`}
@@ -98,9 +108,6 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
             }}
             onSubmit={(values) => {
               console.log(values);
-              console.log(
-                `Selected Price Range: ${values.price[0]} - ${values.price[1]}`
-              );
             }}
           >
             {({ setFieldValue, values }) => (
@@ -111,7 +118,6 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
                   setFieldValue={setFieldValue}
                 />
                 <CategorySelect
-                  technologyOptions={technologyOptions}
                   setTechnologies={setTechnologies}
                   setTechCount={setTechCount}
                 />
@@ -125,41 +131,44 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
         </div>
       </div>
 
-      {/* حالت md */}
       <div className="block md:hidden">
         <div
-          className={`${
-            isFormOpen
-              ? "w-[258px] h-[625px] animate-slide-up border border-[#DCDCDC] rounded-3xl"
-              : "w-[95px] h-[48px] rounded-[40px] bg-gray-200 cursor-pointer flex items-center justify-center"
-          }`}
-          onClick={() => !isFormOpen && setFormOpen(true)}
+          className="w-[95px] h-[48px] rounded-[40px] bg-[#2F2F2F] flex text-[#FCFCFC] cursor-pointer flex items-center justify-center"
+          onClick={openForm}
         >
-          {!isFormOpen && <span>فیلتر</span>}
-          {isFormOpen && (
-            <div>
-              {/* دایوی برای بستن فرم */}
-              <div
-                style={{
-                  width: "101px",
-                  height: "40px",
-                  borderRadius: "34px",
-                  border: "1px solid",
-                  padding: "7px 16px",
-                  gap: "8px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  backgroundColor: "#f0f0f0",
-                  cursor: "pointer",
-                  marginBottom: "10px",
-                }}
-                onClick={() => setFormOpen(false)}
-              >
-                بستن فرم
-              </div>
+          <img src={filter}/>
+          <span>فیلتر</span>
+        </div>
 
-              {/* فرم اصلی */}
+        {isFormOpen && (
+          <div
+            ref={modalRef}
+            className="fixed bottom-0 left-0 w-full bg-transparent z-50 flex justify-center items-end"
+          >
+            <div
+              className="bg-white p-4 rounded-t-xl relative shadow-lg"
+              style={{
+                width: "100%",
+                border: "1px solid #ccc",
+                maxHeight: "90%",
+              }}
+            >
+              <div
+                className="w-[80px] h-[4px] bg-gray-500 mx-auto mt-2 cursor-grab"
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+              ></div>
+<div className="flex">
+<h1 className="font-bold text-2xl mb-5 mr-5">فیلتر</h1>
+              <div
+                className="absolute top-8 left-8 cursor-pointer border border-red-500 text-red-500 p-1 rounded-md flex"
+                onClick={closeForm}
+              >
+                <img src={cancel}/>
+                بستن
+              </div></div>
+
               <Formik
                 initialValues={{
                   search: "",
@@ -171,9 +180,6 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
                 }}
                 onSubmit={(values) => {
                   console.log(values);
-                  console.log(
-                    `Selected Price Range: ${values.price[0]} - ${values.price[1]}`
-                  );
                 }}
               >
                 {({ setFieldValue, values }) => (
@@ -184,7 +190,7 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
                       setFieldValue={setFieldValue}
                     />
                     <CategorySelect
-                      technologyOptions={technologyOptions}
+                      technologyOptions={categorysOption}
                       setTechnologies={setTechnologies}
                       setTechCount={setTechCount}
                     />
@@ -196,8 +202,8 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
                 )}
               </Formik>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     </div>
   );

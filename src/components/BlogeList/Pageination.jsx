@@ -3,13 +3,13 @@ import React from "react";
 const Pagination = ({ totalPages, currentPage, setPageNumber }) => {
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
-      setPageNumber(page); // مطمئن شوید که این تابع به درستی مقدار را ذخیره می‌کند.
+      setPageNumber(page);
     }
   };
 
   return (
     <div className="flex justify-center mt-10">
-      {/* Previous Button */}
+
       <button
         onClick={() => handlePageChange(currentPage - 1)}
         className={`mx-1 px-3 py-2 rounded ${
@@ -20,7 +20,6 @@ const Pagination = ({ totalPages, currentPage, setPageNumber }) => {
         &lt;
       </button>
 
-      {/* Page Numbers */}
       {Array.from({ length: totalPages }, (_, index) => (
         <button
           key={index}
@@ -35,7 +34,6 @@ const Pagination = ({ totalPages, currentPage, setPageNumber }) => {
         </button>
       ))}
 
-      {/* Next Button */}
       <button
         onClick={() => handlePageChange(currentPage + 1)}
         className={`mx-1 px-3 py-2 rounded ${

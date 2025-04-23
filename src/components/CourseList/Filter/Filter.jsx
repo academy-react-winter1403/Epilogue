@@ -1,29 +1,30 @@
 import { Formik, Form } from "formik";
-import { useState, useCallback } from "react";
+
+import { useState, useRef,useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { debounce } from "lodash";
 import axios from "axios";
+import gsap from "gsap";
 import useStore from "../../../core/Store/Zustand-Store";
+import cancel from '../../../assets/cancel.png'
 import { SearchFilter } from "./Search";
 import { InstructorSelect } from "./Teachers";
 import { CategorySelect } from "./CategorySelect";
 import { EducationLevelSelect } from "./EducationLevelSelect";
 import { DateRangePicker } from "./DateRangePicker";
 import { PriceSlider } from "./PriceSlider";
+import filter from '../../../assets/filter.png'
 
 function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
   const [priceRangeState, setPriceRangeState] = useState([0, 100000000]);
   const [dateRange, setDateRange] = useState([null, null]);
   const [isFormOpen, setFormOpen] = useState(false);
+  const modalRef = useRef(null);
 
   const { setTeacherId, setTechnologies, setTechCount, setLevelName } =
     useStore((state) => state);
 
-  const {
-    data: teachers,
-    isLoading,
-    error,
-  } = useQuery({
+  const { data: teachers, isLoading, error } = useQuery({
     queryKey: ["teachers"],
     queryFn: async () => {
       try {
@@ -82,8 +83,25 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
     value: e?.id,
     label: e?.levelName,
   }));
+  const openForm = () => {
+    setFormOpen(true);
+    gsap.fromTo(
+      modalRef.current,
+      { y: "100%", opacity: 0 },
+      { y: "0%", opacity: 1, duration: 0.6, ease: "power3.out" }
+    );
+  };
 
-  const debouncedSearch = useCallback(
+  const closeForm = () => {
+    gsap.to(modalRef.current, {
+      y: "100%",
+      opacity: 0,
+      duration: 0.6,
+      ease: "power3.in",
+      onComplete: () => setFormOpen(false),
+    });
+  };
+    const debouncedSearch = useCallback(
     debounce((value) => {
       console.log("✅ جستجو انجام شد برای:", value);
       setSearchTerm(value);
@@ -93,8 +111,12 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
 
   return (
     <div>
+
       <div className="hidden md:block">
-        <div className="w-[278px] h-[665px] border border-[#DCDCDC] rounded-3xl">
+        <div
+          className={`w-[298px] h-[665px] border border-[#DCDCDC] rounded-3xl`}
+        >
+
           <h1 className="font-bold text-2xl mt-4 mr-5">فیلتر</h1>
           <Formik
             initialValues={{
@@ -112,8 +134,8 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
               );
             }}
           >
-            {({ setFieldValue }) => (
-              <Form className="mt-4">
+            {({ setFieldValue, values }) => (
+              <Form className="pt-6">
                 <SearchFilter
                   searchTerm={searchTerm}
                   setSearchTerm={(value) => debouncedSearch(value)}
@@ -134,49 +156,44 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
                   LevelOptions={LevelOptions}
                   setLevelName={setLevelName}
                 />
-                <DateRangePicker
-                  dateRange={dateRange}
-                  setDateRange={setDateRange}
-                />
+
                 <PriceSlider
                   priceRange={priceRangeState}
                   setPriceRange={setPriceRangeState}
+                />
+                <DateRangePicker
+                  dateRange={dateRange}
+                  setDateRange={setDateRange}
                 />
               </Form>
             )}
           </Formik>
         </div>
       </div>
+
       <div className="block md:hidden">
         <div
-          className={`${
-            isFormOpen
-              ? "w-[258px] h-[625px] animate-slide-up border border-[#DCDCDC] rounded-3xl"
-              : "w-[95px] h-[48px] rounded-[40px] bg-gray-200 cursor-pointer flex items-center justify-center"
-          }`}
-          onClick={() => !isFormOpen && setFormOpen(true)}
+          ref={modalRef}
+          className={`fixed bottom-0 left-0 w-full bg-transparent z-50 flex justify-center items-end`}
         >
-          {!isFormOpen && <span>فیلتر</span>}
           {isFormOpen && (
-            <div>
+            <div
+              className="bg-white p-4 rounded-xl relative shadow-lg"
+              style={{
+                width: "100%",
+                border: "1px solid #ccc",
+                maxHeight: "90%",
+              }}
+            >
+
+              <div className="w-[80px] h-[4px] bg-gray-500 mx-auto mt-2 cursor-grab"></div>
+
               <div
-                style={{
-                  width: "101px",
-                  height: "40px",
-                  borderRadius: "34px",
-                  border: "1px solid",
-                  padding: "7px 16px",
-                  gap: "8px",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  backgroundColor: "#f0f0f0",
-                  cursor: "pointer",
-                  marginBottom: "10px",
-                }}
-                onClick={() => setFormOpen(false)}
+                className="absolute top-8 left-8 cursor-pointer border border-red-500 p-1 rounded-md flex text-red-500"
+                onClick={closeForm}
               >
-                بستن فرم
+                <img src={cancel} alt="بستن" />
+                بستن
               </div>
 
               <Formik
@@ -231,6 +248,15 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
             </div>
           )}
         </div>
+        {!isFormOpen && (
+                  <div
+                    className="w-[95px] h-[48px] rounded-[40px] bg-[#2F2F2F] flex text-[#FCFCFC] cursor-pointer flex items-center justify-center"
+                    onClick={openForm}
+                  >
+                    <img src={filter}/>
+                    <span>فیلتر</span>
+                  </div>
+        )}
       </div>
     </div>
   );

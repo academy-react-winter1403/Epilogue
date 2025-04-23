@@ -11,8 +11,8 @@ const fetchNews = async (pageNumber, SortCol, SortType) => {
   const params = {
     PageNumber: pageNumber,
     RowsOFPage: 10,
-    SortingCol: SortCol, // ستون مرتب‌سازی
-    SortType: SortType, // نوع مرتب‌سازی
+    SortingCol: SortCol,
+    SortType: SortType,
   };
 
   try {
@@ -29,18 +29,18 @@ const fetchNews = async (pageNumber, SortCol, SortType) => {
 
 export function BlogeList() {
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
   const {
-    pageNumber, // این مقدار از Zustand است
-    setPageNumber, // به‌روزرسانی مقدار pageNumber
+    pageNumber,
+    setPageNumber,
     SortCol,
     SortType,
   } = useStore((state) => state);
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["news", pageNumber, SortCol, SortType],
-    queryFn: () =>
-      fetchNews(pageNumber, SortCol, SortType),
+    queryFn: () => fetchNews(pageNumber, SortCol, SortType),
   });
 
   const totalCount = data?.totalCount;
@@ -64,7 +64,12 @@ export function BlogeList() {
       (card.title &&
         card.title.toLowerCase().includes(searchTerm.toLowerCase()));
 
-    return matchesSearch;
+    const matchesCategory =
+      !selectedCategory ||
+      (card.technologyList &&
+        card.technologyList.split(",").includes(selectedCategory.value));
+
+    return matchesCategory && matchesSearch;
   });
 
   const totalPages = Math.ceil(totalCount / 9);
@@ -74,23 +79,35 @@ export function BlogeList() {
       <div className="text-center mt-10">
         <h1 className="text-4xl font-bold">اطلاعات بیشتر، درک بهتر</h1>
         <h2 className="text-lg font-medium text-gray-700 mt-4">
-          ما در بلاگ‌ها اطلاعات شما را نسبت به<br />تکنولوژی‌هایی که یاد می‌گیرید بیشتر می‌کنیم.
+          ما در بلاگ‌ها اطلاعات شما را نسبت به
+          <br />
+          تکنولوژی‌هایی که یاد می‌گیرید بیشتر می‌کنیم.
         </h2>
       </div>
 
-      <Sorting />
+      <div className="block md:hidden mt-10 gap-10 flex">
+        <Sorting />
+        <Filter
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          selectedCategory={selectedCategory}
+        />
+      </div>
+
+      <Sorting/>
 
       <div className="mt-10 gap-10 md:flex">
         <Filter
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
+          selectedCategory={selectedCategory}
         />
         <CardList sortedCards={filteredCards} currentCards={News} />
       </div>
 
       <Pagination
         totalPages={totalPages}
-        currentPage={pageNumber} // استفاده از مقدار pageNumber
+        currentPage={pageNumber}
         setPageNumber={setPageNumber}
       />
     </div>

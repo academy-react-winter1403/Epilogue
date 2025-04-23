@@ -9,7 +9,8 @@ const useStore = create((set) => ({
   priceRange: [0, 100000000],
   SortCol: null,
   SortType: null,
-
+    theme: "default",
+  setTheme: (newTheme) => set({ theme: newTheme }),
   setPageNumber: (pageNumber) => set({ pageNumber }),
   setTeacherId: (teacherId) => set({ teacherId }),
   setTechnologies: (technologies) => set((prev) => ({ ...prev, technologies })),
