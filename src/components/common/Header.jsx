@@ -61,7 +61,7 @@ const Header = () => {
             </NavLink>
 
             <NavLink
-              to="/NewsList"
+              to="/BlogeList"
               className={({ isActive }) =>
                 `relative py-2 text-white ${
                   isActive

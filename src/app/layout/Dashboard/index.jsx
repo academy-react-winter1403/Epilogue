@@ -67,6 +67,7 @@ const DashboardLayout = () => {
         }}
         styles={{ options: { primaryColor: "#3772FF" } }}
       />
+
       <div className="w-full h-screen bg-[#242424] flex flex-col">
         <Toaster />
         <div className=" bg-[#242424]">
