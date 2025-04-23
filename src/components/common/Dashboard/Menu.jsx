@@ -13,6 +13,8 @@ import { Books02Icon } from "../Icons/BookIcon2";
 import { LibraryIcon } from "../Icons/LibraryIcon";
 import { UserSquareIcon } from "../Icons/UserSquerIcon";
 import { MoneySend02Icon } from "../Icons/MoneyIcon";
+// import h1 from "../../../assets/img/h1.svg";
+// import bahr from "../../../assets/img/bahr.svg";
 
 const DashboardMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,28 +25,29 @@ const DashboardMenu = () => {
   return (
     <div>
       <div className="flex flex-col w-[250px] h-full bg-[#242424] text-white">
-        <div className="px-[24px] space-y-1 flex flex-col ">
+        <div className=" space-y-1 flex flex-col ">
           {[
-            ["داشبرد", <Activity01Icon />, "/dashboard/student-panel"],
-            ["دوره من", <CourseIcon />, "/dashboard/edit-profile"],
-            ["رزرو من", <Book02Icon />, "/dashboard/my-courses"],
+            ["داشبورد", <Activity01Icon />, "/StudentPanel/dashboard",'dashboard'],
+            ["دوره من", <CourseIcon />, "/StudentPanel/my-courses","mycourse"],
+            ["رزرو من", <Book02Icon />, "/StudentPanel/my-reserve","reserve"],
+            ["دوره های موردعلاقه", <Books02Icon />, "/StudentPanel/course-fav","myfavcourse"],
+            ["بلاگ های موردعلاقه", <LibraryIcon />, "/StudentPanel/blog-fav","myfavblog"],
             [
-              "دوره های موردعلاقه",
-              <Books02Icon />,
-              "/dashboard/reserved-courses",
+              "پروفایل",
+              <UserSquareIcon />,
+              "/StudentPanel/edite-profile/profile-info","editprofile"
             ],
-            ["بلاگ های موردعلاقه", <LibraryIcon />, "/dashboard/favorites"],
-            ["پروفایل", <UserSquareIcon />, "/dashboard/my-comments"],
-            ["پرداخت ها", <MoneySend02Icon />, "/dashboard/change-password"],
+            ["پرداخت ها", <MoneySend02Icon />, "/dashboard/change-password","payment"],
           ].map((item, key) => (
             <MenuOption
               key={key}
               title={item[0]}
               icon={item[1]}
               url={item[2]}
+              id={item[3]}
             />
           ))}
-          <div className="pt-11">
+          <div className="pt-7 pl-[20px]">
             <LogoutButton />
           </div>
         </div>
