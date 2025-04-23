@@ -13,6 +13,7 @@ const LazyWrapper = ({ children }) => (
   <Suspense fallback={<Spinner />}>{children}</Suspense>
 ); 
 
+
 export const mainPages = {
   path: "/",
   element: <LazyWrapper><Root /></LazyWrapper>,
@@ -25,6 +26,14 @@ export const mainPages = {
     {
       path: "/course-detail",
       element: <LazyWrapper><CourseDetail /></LazyWrapper>,
+    },
+    {
+      path: "/CourseList",
+      element: <Body />,
+    },
+    {
+      path: "/BlogeList",
+      element: <BlogeList />,
     },
   ],
 };
