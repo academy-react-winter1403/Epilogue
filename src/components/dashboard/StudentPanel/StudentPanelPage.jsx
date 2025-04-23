@@ -1,36 +1,81 @@
 import React from "react";
 import WelcomeUser from "./WelcomeUser";
 import DashboardTable from "../../common/Dashboard/Table/DashboardTable";
-import { Progress } from "@heroui/react";
-// import DashboardTable from "../../common/Dashboard/Table/DashboardTable";
-// import Table, { DashboardTable } from '../../common/Dashboard/Table/DashboardTable'
-const courses = [
-  {
-    id: 1,
-    image: "https://via.placeholder.com/100",
-    title: "دوره فیگما",
-    instructor: "علی احمدی",
-    date: "۱۴۰۳/۰۲/۱۵",
-    level: "پیشرفته",
-  },
-  {
-    id: 2,
-    image: "https://via.placeholder.com/100",
-    title: " جاوا اسکریپت",
-    instructor: "زهرا محمدی",
-    date: "۱۴۰۳/۰۳/۱۰",
-    level: "مقدماتی",
-  },
-];
+import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
+import ReservedCoursesTable from "../../common/Dashboard/Table/ReserveCourseTable";
+import { Link } from "react-router-dom";
+import YourComment from "./YourComment";
+import { PencilEdit01Icon } from "../../common/Icons/PencelIcon";
+import { ArrowLeft01Icon } from "../../common/Icons/ArrowLeftIcon";
 const StudentPanelPage = () => {
+  const percentage = 66;
+
   return (
-    <div>
-      <div className=" py-6 px-6">
+    <div className="py-6 px-6 grid grid-cols-1 gap-6 md:grid-cols-12">
+      <div className="md:col-span-12">
         <WelcomeUser />
       </div>
-      <div className="flex flex-row gap-6 p-6 px-6">
-        <DashboardTable courses={courses} />
-        <div className="w-[253px] h-[246px] rounded-3xl bg-[#F6F6F6]"></div>
+
+      <div className="md:col-span-9 bg-[#F6F6F6]  rounded-3xl">
+        <div className="flex flex-row justify-between items-center">
+          <p className="text-[14px] font-yekan-600 px-4 py-2">دوره من</p>
+          <Link to={"/dashboard/my-courses"} className="text-[14px] text-[#3772FF] flex flex-row gap-1 font-yekan-600 px-4 py-2">
+            مشاهده بیشتر
+            <ArrowLeft01Icon color={"#3772FF"}/>
+          </Link>
+        </div>
+        <DashboardTable showIcon={false}/>
+      </div>
+
+      <div className="md:col-span-3 rounded-3xl md:flex md:flex-col bg-[#F6F6F6]">
+        <div className="justify-between items-center px-4 py-2 flex flex-row ">
+          <p className="text-[12px] text-nowrap font-yekan-600">
+            وضعیت اطلاعات حساب کاربری
+          </p>
+          <div className="flex items-center">
+            <PencilEdit01Icon width={20} height={20} color={"#3772FF"} />
+          </div>
+        </div>
+        <div className="mt-[22px] m-auto w-[136px] ">
+          <CircularProgressbar
+            value={percentage ? percentage : 0}
+            circleRatio={1}
+            strokeWidth={10}
+            text={`${percentage ? percentage : 0}%`}
+            styles={buildStyles({
+              rotation: 1,
+              trailColor: "#DCDCDC",
+              pathColor: "#FFDE37",
+              textColor: "black",
+            })}
+          />
+        </div>
+        <p className="py-5 flex items-center justify-center text-[12px] text-nowrap font-yekan-600">
+          اطلاعات حساب کاربری شما کامل نیست
+        </p>
+      </div>
+
+      <div className="md:col-span-7 bg-[#F6F6F6] flex flex-col rounded-3xl">
+        <div className="flex flex-row justify-between items-center">
+          <p className="text-[14px] font-yekan-600 px-4  py-2">رزرو من</p>
+          <Link to={"/dashboard/my-reserve"} className="text-[14px] text-[#3772FF] px-4 flex flex-row gap-1 font-yekan-600 py-2">
+            مشاهده بیشتر
+            <ArrowLeft01Icon color={"#3772FF"}/>
+
+          </Link>
+        </div>
+        <ReservedCoursesTable showAccept={false} />
+      </div>
+
+      <div className="md:col-span-5  h-[487px] rounded-3xl bg-[#F6F6F6]">
+        <div className="justify-between items-center flex flex-row text-nowrap text-[14px] font-yekan-600 px-4 py-2">
+          <p>نظرات شما</p>
+          <YourComment/>
+          <p className="text-[#3772FF] flex flex-row gap-1 ">مشاهده بیشتر
+          <ArrowLeft01Icon color={"#3772FF"}/>
+
+          </p>
+        </div>
       </div>
     </div>
   );

@@ -21,9 +21,13 @@ export function LogIn() {
     const data = await loginStep1(value);
 
     if (data.success) {
-      setItem("token", data.token);
-      toast.success("خوش آمدید");
-      navigate("/dashboard/student-panel");
+      toast.success(data.message);
+      if (data?.token) {
+        setItem("token", data?.token);
+        navigate("/StudentPanel/dashboard");
+      } else {
+        navigate("/auth/login2");
+      }
     } else if (!data.success) {
       toast.error("خطا");
     }
