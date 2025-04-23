@@ -8,7 +8,10 @@ import { loginStep1 } from "../../core/services/api/auth/login.api";
 import { loginValidation } from "../../core/validations/auth.validation";
 import { setItem } from "../../core/utils/storage.services";
 import toast, { Toaster } from "react-hot-toast";
+
 import useStore from "../../core/constant/store/zustand-store";
+
+import ReCAPTCHA from "react-google-recaptcha";
 
 export function LogIn() {
   const setLoginInfo = useStore((state) => state.setLoginInfo);
@@ -19,14 +22,20 @@ export function LogIn() {
     setShowPassword((prevState) => !prevState);
   };
 
+  const [capVal,setCapVal] = useState(null)
+
   const handleSubmit = async (value) => {
     const data = await loginStep1(value);
 
     if (data.success) {
-      setItem("token", data.token);
-      toast.success("خوش آمدید");
-      setLoginInfo(value)
-      navigate("/dashboard/student-panel");
+
+      toast.success(data.message);
+      if (data?.token) {
+        setItem("token", data?.token);
+        navigate("/StudentPanel/dashboard");
+      } else {
+        navigate("/auth/login2");
+      }
     } else if (!data.success) {
       toast.error("خطا");
     }
@@ -189,9 +198,14 @@ export function LogIn() {
                           </Link>
                         </div>
                       </div>
-                      <Link to="/auth/loginStep2">
+
+                      <ReCAPTCHA
+                      className="mt-4 ml4"
+                      sitekey="6LedyxwrAAAAAOi0djfPgX1O4PdzquEjpIiW5z6U"
+                      onChange={vall => setCapVal(vall)}/>
                       <button
                         type="submit"
+                        disabled={!capVal}
                         className="w-[398px] cursor-pointer bg-blue-500 text-white p-2 rounded-[40px] hover:bg-blue-600 mt-[31px]"
                       >
                         ورود به حساب
@@ -203,7 +217,6 @@ export function LogIn() {
                             حساب کاربری ندارید؟
                           </h3>
                         </div>
-
                         <div className="w-2.25/5 text-center relative right-[8px]">
                           <Link
                             to={"/auth/RegisterPage"}

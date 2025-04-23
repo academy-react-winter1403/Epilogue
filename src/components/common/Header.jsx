@@ -78,25 +78,34 @@ const Header = () => {
           <NavLink to="/BlogeList" className="relative py-2 text-white">
             بلاگ ها
           </NavLink>
-          <NavLink to="/AboutUs" className="relative py-2 text-white">
-            درباره ما
-          </NavLink>
-          {isLoggedIn ? (
-            <Link to={"/dashboard/student-panel"}>
-              <img
-                className="size-full rounded-full w-12 border h-12"
-                src=""
-                alt="User"
-              />
-            </Link>
-          ) : (
-            <Link
-              to="/auth/RegisterPage"
-              className="text-sm/6 text-[#FCFCFC] bg-[#3772FF] rounded-[56px] px-5 py-[8px]"
+           <NavLink
+              to="/AboutUs"
+              className={({ isActive }) =>
+                `relative py-2 text-white ${
+                  isActive
+                    ? "before:content-['•'] before:absolute before:-bottom-1 before:left-1/2 before:-translate-x-1/2"
+                    : ""
+                }`
+              }
             >
-              ثبت نام یا ورود
-            </Link>
-          )}
+              درباره ما
+            </NavLink>
+            {isLoggedIn ? (
+              <Link to={"/StudentPanel/dashboard"}>
+                <img
+                  className="size-full rounded-full  w-12 border h-12"
+                  src={setUserInfo?.currentPictureAddress}
+                ></img>
+              </Link>
+            ) : (
+              <Link
+                to="/auth/RegisterPage"
+                className="text-sm/6 text-[#FCFCFC] bg-[#3772FF] rounded-[56px] px-5 py-[8px]"
+              >
+                ثبت نام یا ورود
+              </Link>
+            )}
+          </div>
         </div>
       </div>
 
@@ -137,9 +146,18 @@ const Header = () => {
             </ul>
           </div>
         )}
-        <button className="rounded-full p-3 bg-[#2F2F2F]">
-          <Moon02Icon />
-        </button>
+       
+        <div className=" gap-[8px] hidden lg:flex">
+          <button className="rounded-full w-[48px] h-[48px] bg-[#FCFCFC] border border-[#DCDCDC] text-black">
+            <div className="flex items-center justify-center">
+              <Notification02Icon />
+            </div>
+          </button>
+          <button className="rounded-full p-3 bg-[#2F2F2F]">
+            <Moon02Icon />
+          </button>
+        </div>
+        <Menu />
       </div>
       <Menu />
     </div>
