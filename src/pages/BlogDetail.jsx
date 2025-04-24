@@ -1,17 +1,15 @@
 import React from 'react'
-import { DetailPage } from '../components/courseDetail/DetailPage'
+import { BlogPage } from '../components/blogDetail/BlogPage'
 import { QueryClient, QueryClientProvider} from '@tanstack/react-query'
 
 const queryClient = new QueryClient();
-const CourseDetail = () => {
-  
+const BlogDetail = () => {
   return (
 
     <QueryClientProvider client={queryClient}>
-      <DetailPage/>
+      <BlogPage/>
     </QueryClientProvider>
-    
   )
 }
 
-export{ CourseDetail}
+export{ BlogDetail }
