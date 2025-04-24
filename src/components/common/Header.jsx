@@ -4,12 +4,12 @@ import { Link, NavLink } from "react-router-dom";
 import h1 from "../../assets/img/h1.svg";
 import bahr from "../../assets/img/bahr.svg";
 import Menu from "./Menu";
-import { Moon02Icon } from "./Icons/MoonIcon";
-import { Notification02Icon } from "./Icons/NotificationIcon";
 import useUserStore from "../../core/constant/user-info";
 import { getUserInfo } from "../../core/services/api/Dashboard/dashborad";
 import { useQuery } from "@tanstack/react-query";
 import ThemeToggle from "./AnimatedThemeSwitcher";
+import { ColorPickerIcon } from "./Icons/ThemeIcon";
+import ColorThemeModal from "./ThemeModal/ThemeModal";
 
 const Header = () => {
   const setUserInfo = useUserStore((state) => state.setUserInfo);
@@ -17,7 +17,7 @@ const Header = () => {
     queryKey: ["userInfo"],
     queryFn: getUserInfo
 })
-
+const [isColorModalOpen, setIsColorModalOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -110,11 +110,22 @@ const Header = () => {
         </div>
 
         <div className=" gap-[8px] hidden lg:flex">
-          <button className="rounded-full w-[48px] h-[48px]  border border-[#DCDCDC] text-black">
-            <div className="flex items-center justify-center">
-              <Notification02Icon />
-            </div>
-          </button>
+        <button
+  className="rounded-full w-[48px] h-[48px] border border-[#DCDCDC] text-black"
+  onClick={() => setIsColorModalOpen((prev) => !prev)}
+>
+  <div className="flex items-center justify-center">
+    <ColorPickerIcon color={"#000"} />
+  </div>
+</button>
+<ColorThemeModal
+  isOpen={isColorModalOpen}
+  onClose={() => setIsColorModalOpen(false)}
+  onSelect={(color) => {
+    setThemeColor(color); // رنگ رو تنظیم کن
+    setIsColorModalOpen(false); // مودال رو ببند
+  }}
+/>
           <button className="rounded-full p-3 bg-[#2F2F2F]">
           <ThemeToggle />
         </button>

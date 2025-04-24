@@ -7,7 +7,6 @@ import { getSameNews } from "../../core/services/api/LandingApi/getSameNews";
 import BestCourseWrapper from "./bestCourse/CardWrapper";
 import BestBlogWrapper from "./bestBlogs/CardWrapper";
 import Line from "./line/Line";
-import { motion } from "framer-motion";
 const LandingPage = () => {
   const [course, setcourse] = useState();
 

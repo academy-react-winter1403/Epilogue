@@ -32,7 +32,7 @@ const DashboardMenu = () => {
             ],
             ["بلاگ های موردعلاقه", <LibraryIcon />, "/StudentPanel/blog-fav"],
             ["پروفایل", <UserSquareIcon />, "/StudentPanel/edite-profile/profile-info"],
-            ["پرداخت ها", <MoneySend02Icon />, "/dashboard/change-password"],
+            ["تنظیمات", <MoneySend02Icon />, "/StudentPanel/Setting"],
           ].map((item, key) => (
             <MenuOption
               key={key}

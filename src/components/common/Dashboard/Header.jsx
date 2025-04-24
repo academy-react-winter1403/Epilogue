@@ -5,13 +5,13 @@ import Pappe from "../../../assets/img/Peppe.png";
 import h1 from "../../../assets/img/h1.svg";
 import bahr from "../../../assets/img/bahr.svg";
 import { Moon02Icon } from "../Icons/MoonIcon";
-import { Notification02Icon } from "../Icons/NotificationIcon";
 import useUserStore from "../../../core/constant/user-info";
 import ResponsiveMenu from "./ResponsiveMenu";
 import { getUserInfo } from "../../../core/services/api/Dashboard/dashborad";
 import { useQuery } from "@tanstack/react-query";
 import AnimatedThemeSwitcher from "../AnimatedThemeSwitcher";
 import ThemeToggle from "../AnimatedThemeSwitcher";
+import { ColorPickerIcon } from "../Icons/ThemeIcon";
 
 const Header = () => {
   const { data: userInfo } = useQuery({
@@ -94,7 +94,7 @@ const Header = () => {
       <div className="fixed  left-0 top-4 flex gap-2 lg:pl-6 hidden lg:flex">
         <button className="rounded-full w-[48px] h-[48px] bg-[#2F2F2F] text-black ">
           <div className="flex items-center justify-center">
-            <Notification02Icon color={"#ffff"} />
+            <ColorPickerIcon color={"#ffff"} />
           </div>
         </button>
         <button className="rounded-full p-3 bg-[#2F2F2F]">

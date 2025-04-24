@@ -1,5 +1,6 @@
 import DashboardLayout from "../../../app/layout/Dashboard";
 import ProfileLayout from "../../../app/layout/Dashboard/ProfileLayout";
+import SettingLayout from "../../../app/layout/Dashboard/SettingLayOut";
 import BlogFavPage from "../../../pages/Dashboard/BlogFavPage";
 import CourseFavPage from "../../../pages/Dashboard/CourseFavPage";
 import MyCoursePage from "../../../pages/Dashboard/MyCoursePage";
@@ -33,6 +34,20 @@ export const dashboard = {
     {
       path: "/StudentPanel/blog-fav",
       element: <BlogFavPage />,
+    },
+    {
+      path: "/StudentPanel/Setting",
+      element: <SettingLayout/>,
+      children:[
+        {
+          path: "/StudentPanel/Setting/Two-Step-Password",
+          element: <ProfileInfoPage />,
+        },
+        {
+          path: "/StudentPanel/edite-profile/profile-info",
+          element: <ProfileInfoPage />,
+        },
+      ]
     },
     {
       path: "/StudentPanel/edite-profile",
