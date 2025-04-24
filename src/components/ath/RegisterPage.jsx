@@ -111,30 +111,30 @@ export function RegisterPage() {
                       </div>
                       <button
                         type="submit"
-                        className="w-[398px] bg-blue-500 text-white p-2 rounded-[40px] hover:bg-blue-600 mt-[31px]"
+                        className="w-[398px] bg-blue-500 cursor-pointer text-white p-2 rounded-[40px] hover:bg-blue-600 mt-[31px]"
                       >
                         ارسال کد تایید
                       </button>
                       <div className="flex w-[276px] h-[23px] relative right-14 top-[16px]">
                         <div className="w-2.75/5">
-                          <h3 className="font-semibold text-base">
-                            حساب کاربری ندارید؟
+                          <h3 className="font-semibold text-base text-nowrap">
+                            حساب کاربری دارید؟
                           </h3>
                         </div>
 
                         <div className="w-2.25/5 text-center relative right-[8px]">
-                          <h3 className="font-semibold text-base text-[#3772FF] underline">
-                            ایجاد حساب کاربری
-                          </h3>
+                          <Link to={"/auth/login"} className="font-semibold text-base text-nowrap text-[#3772FF] underline">
+                            ورود به حساب کاربری
+                          </Link>
                         </div>
                       </div>
                       <div className="border border-[#DCDCDC] w-[141px] h-[40px] rounded-[34px] relative top-[32px] right-[120px] hidden md:block">
                         <div className="w-[24px] h-[24px] relative top-[8px] right-[105px]">
                           <img src={Vector} alt="Vector" />
                         </div>
-                        <h3 className="text-base font-medium text-[#3772FF] relative right-[16px] bottom-[18px]">
+                        <Link to={"/"} className="text-base font-medium text-[#3772FF] relative right-[16px] bottom-[18px]">
                           صفحه اصلی
-                        </h3>
+                        </Link>
                       </div>
                     </Form>
                   )}

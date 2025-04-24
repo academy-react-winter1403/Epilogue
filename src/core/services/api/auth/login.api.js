@@ -12,3 +12,15 @@ export const loginStep1 = async (credintials) => {
     return [];
   }
 };
+
+export const loginStep2 = async ({VerifyCode,Body}) => {
+  try {
+    const params ={VerifyCode}
+    console.log("Fetching started...");
+    const result = await http.post("/Sign/LoginTwoStep",Body,{params});
+    return result;
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};

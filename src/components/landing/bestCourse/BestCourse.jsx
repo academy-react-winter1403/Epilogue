@@ -35,10 +35,10 @@ const BestCourse = ({ data }) => {
             <p class=" text-[14px] font-yekan-500 text-[#707070] ">
               {teacherName}
             </p>
-            <p class="  flex flex-row gap-1 text-gray-700 ">
+            <div class="  flex flex-row gap-1 text-gray-700 ">
               <p className="text-[16px] font-yekan-700 font-bold">{cost}</p>
               <p className="text-[14px] font-yekan-500">تومان</p>
-            </p>
+            </div>
           </div>
         </div>
       </div>
