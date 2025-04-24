@@ -1,16 +1,25 @@
 import React from "react";
 import { Calendar03Icon } from "../../common/Icons/Calender";
 import { ViewIcon } from "../../common/Icons/ViewIcon";
-import dateModifier from "../../../core/utils/dateModifier"
+import dateModifier from "../../../core/utils/dateModifier";
 
-const BestBlogs = ({data}) => {
-  const {title,addUserFullName,insertDate,currentView,addUserProfileImage}=data
+const BestBlogs = ({ data }) => {
+  const {
+    title,
+    addUserFullName,
+    insertDate,
+    currentView,
+    addUserProfileImage,
+  } = data;
   return (
     <div>
-
       <div class="max-w-[431px] text-black bg-white rounded-lg ">
         <div class=" h-[293px]">
-          <img className="rounded-[32px] w-full h-full" src={addUserProfileImage} alt="" />
+          <img
+            className="rounded-[32px] w-full h-full"
+            src={addUserProfileImage}
+            alt=""
+          />
         </div>
 
         <div class="p-5">
@@ -24,15 +33,15 @@ const BestBlogs = ({data}) => {
 
             <div className="flex flex-row gap-4">
               <p class="mb-3 flex flex-row gap-1 text-nowrap text-[14px] font-yekan-500 text-[#707070] ">
-              {dateModifier(insertDate)}
-              <div className="m-auto">
+                {dateModifier(insertDate)}
+                <div className="m-auto">
                   <Calendar03Icon />
                 </div>
               </p>
               <p class="mb-3 flex flex-row gap-1 text-nowrap text-[14px] font-yekan-500 text-[#707070] ">
                 {currentView}
                 <div className="m-auto">
-                  <ViewIcon />
+                <ViewIcon width={24} height={24} cursor={"pointer"} />
                 </div>
               </p>
             </div>

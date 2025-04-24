@@ -53,7 +53,7 @@ const Menu = () => {
             >
               <div className="flex flex-row gap-[107px] p-1">
                 <div className="flex flex-row">
-                  <img src={h1} className="w-[42px]"/>
+                  <img src={h1} className="w-[42px]" />
                   <img src={bahr} className="w-[159px] pt-[10px]" />
                 </div>
                 <div className="p-4">

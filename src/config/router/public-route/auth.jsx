@@ -6,12 +6,14 @@ import { NewPassword } from "../../../components/ath/NewPassword";
 import { RegisterPage } from "../../../components/ath/RegisterPage";
 import { RegisterPage2 } from "../../../components/ath/RegisterPage2";
 import { RegisterPage3 } from "../../../components/ath/RegisterPage3";
+import { LogInStep2 } from "../../../components/ath/LoginStep2";
 
 export const authRoute = {
   path: "/auth",
   element: <LayOut />,
   children: [
     { path: "/auth/login", element: <LogIn /> },
+    { path: "/auth/loginStep2", element: <LogInStep2 /> },
     { path: "/auth/login2", element: <Register /> },
     { path: "/auth/forgetPassword", element: <ForgetPassword /> },
     { path: "/auth/forgetPassword/NewPassword", element: <NewPassword /> },
