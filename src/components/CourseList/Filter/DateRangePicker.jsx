@@ -1,6 +1,6 @@
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Calendar03Icon } from "../../common/Icons/CalenderIcon";
+import { Calendar03Icon } from "../../common/Icons/Calender";
 
 export const DateRangePicker = ({ dateRange, setDateRange }) => {
   return (

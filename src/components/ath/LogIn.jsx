@@ -210,7 +210,6 @@ export function LogIn() {
                       >
                         ورود به حساب
                       </button>
-</Link>
                       <div className="flex w-[276px] h-[23px] relative right-14 top-[16px]">
                         <div className="w-2.75/5">
                           <h3 className="font-semibold text-base">

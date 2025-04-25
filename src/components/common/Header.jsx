@@ -60,6 +60,7 @@ const Header = () => {
   };
 
   return (
+    <div>
     <div className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-10 bg-background text-text">
       <div className="flex flex-row-reverse">
         <span className="pr-2 text-[18px] text-[#22445D] hidden lg:flex">
@@ -92,10 +93,10 @@ const Header = () => {
             </NavLink>
             {isLoggedIn ? (
               <Link to={"/StudentPanel/dashboard"}>
-                <img
+                {/* <img
                   className="size-full rounded-full  w-12 border h-12"
-                  src={setUserInfo?.currentPictureAddress}
-                ></img>
+                  src={currentPictureAddress}
+                ></img> */}
               </Link>
             ) : (
               <Link
@@ -150,7 +151,7 @@ const Header = () => {
         <div className=" gap-[8px] hidden lg:flex">
           <button className="rounded-full w-[48px] h-[48px] bg-[#FCFCFC] border border-[#DCDCDC] text-black">
             <div className="flex items-center justify-center">
-              <Notification02Icon />
+              {/* <Notification02Icon /> */}
             </div>
           </button>
           <button className="rounded-full p-3 bg-[#2F2F2F]">
@@ -159,7 +160,6 @@ const Header = () => {
         </div>
         <Menu />
       </div>
-      <Menu />
     </div>
   );
 };

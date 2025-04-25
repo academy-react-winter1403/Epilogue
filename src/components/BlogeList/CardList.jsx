@@ -1,7 +1,7 @@
 import { ViewIcon } from "../common/Icons/ViewIcon";
-import { Calendar03Icon } from "../common/Icons/Calender";
 import dateModifier from "../../core/utils/dateModifier"
 import React from "react";
+import { Calendar03Icon } from "../common/Icons/Calender";
 
 const CardList = ({ sortedCards, currentCards }) => {
   return (
