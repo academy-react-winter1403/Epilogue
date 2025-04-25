@@ -22,7 +22,7 @@ const DetailBox = ({course, CourseId}) => {
 
   return (
     <div className='w-[50%] max-w-2xl xl:max-w-4xl h-auto p-4 sm:p-6 flex flex-col justify-between items-center gap-4'>
-        <div className="w-[183px] md:w-[244px] h-[34px] md:h-[46px] font-bold text-2xl sm:text-3xl lg:text-4xl text-black mr-[-40px] md:mr-[10px] lg:mr-[0] self-start md:self-start lg:self-start whitespace-nowrap"><h2>{course?.title}</h2></div>
+        <div className=" w-[183px] md:w-[244px] h-[34px] md:h-[46px] font-bold text-2xl sm:text-3xl lg:text-4xl text-black mr-[-40px] md:mr-[10px] lg:mr-[-30px] self-start md:self-start lg:self-start whitespace-nowrap"><h2>{course?.title}</h2></div>
     
             <div className="lg:w-[660px] md:w-[630px] border-2 border-transparent rounded-[16px] flex flex-col gap-5 md:flex-row lg:flex-row md:border-gray-400 md:border-gray-400 lg:border-gray-400 md:gap-0 lg:gap-0">
                 
@@ -31,7 +31,7 @@ const DetailBox = ({course, CourseId}) => {
                     <div>
                         <div className='flex flex-col gap-4'>
                             <div className='w-[45px] h-[20px] font-medium text-[14px] leading-[100%] text-gray-800 pr-3 pt-2'> وضعیت</div>
-                            <div className=" h-[27px] rounded-[32px] pt-[2px] pr-[8px] pb-[2px] pl-[8px] gap-[8px] bg-red-500 mr-5 mt-1 text-white whitespace-nowrap">{course?.courseStatusName}</div>
+                            <div className=" h-[27px] rounded-[32px] pt-[2px] pr-[8px] pb-[2px] pl-[8px] gap-[8px] bg-red-500 mr-5 mt-1 flex justify-center items-center text-white whitespace-nowrap">{course?.courseStatusName}</div>
                         </div>
                         <div className="w-[80px] h-0 border-2 -rotate-90 border-gray-400 relative left-[-120px] top-[-31px] md:top-[-30.5px] md:left-[-110px]"></div>
                     </div>
@@ -39,7 +39,7 @@ const DetailBox = ({course, CourseId}) => {
                     <div>
                     <div className='flex flex-col gap-4'>
                         <div className="md:pr-0 pr-6 pt-2 w-[58px] h-[20px] font-dana font-medium text-[14px] leading-[100%] tracking-[0%] text-right text-gray-800">دسته‌بندی</div>
-                        <div className=" whitespace-nowrap w-[99px] h-[27px] rounded-[32px] pt-[2px] pr-[8px] pb-[2px] pl-[8px] gap-[8px] bg-blue-500 mr-7 md:mr-2 mt-1 text-white">
+                        <div className="flex justify-center items-center whitespace-nowrap w-[99px] h-[27px] rounded-[32px] pt-[2px] pr-[8px] pb-[2px] pl-[8px] gap-[8px] bg-blue-500 mr-7 md:mr-2 mt-1 text-white">
                         {course?.techs[0]}
                         </div>
                     </div>
@@ -74,7 +74,7 @@ const DetailBox = ({course, CourseId}) => {
                     <div>
                         <div className='flex flex-col gap-4'> 
                             <div className='pr-3 pt-2 w-[45px] h-[20px] font-medium text-[14px] leading-[100%] text-gray-800 whitespace-nowrap'>تاریخ برگزاری</div>
-                            <div className="pr-3 pt-2 w-[124px] h-[23px] font-dana font-medium text-[16px] leading-[100%] tracking-[0%] text-right text-black whitespace-nowrap">{formatDate(course?.startTime)}</div>
+                            <div className="pr-3 pt-2 w-[124px] h-[23px] font-dana font-medium text-[16px] leading-[100%] tracking-[0%]  text-right text-black whitespace-nowrap">{formatDate(course?.startTime)}</div>
                         </div>
                         <div className="w-[80px] h-0 border-2 -rotate-90 border-gray-400 relative top-[-23px] left-[-120px] md:top-[-22.5px] md:left-[-130px]"></div>
                     </div>

@@ -14,7 +14,7 @@ const NewCommentForm = ({
   CloseIcon
 }) => {
   return (
-    <form onSubmit={onSubmit} className="w-full bg-[#FCFCFC] border border-[#3772FF] rounded-[24px] flex items-center relative">
+    <form onSubmit={onSubmit} className="w-[350px] md:w-full md:w-fullbg-[#FCFCFC] border border-[#3772FF] rounded-[24px] flex items-center relative">
       {onClose && (
         <button 
           type="button" 
@@ -34,7 +34,7 @@ const NewCommentForm = ({
         >
           <img src={SendIcon} alt="ارسال"/>
         </motion.button>
-        <img src={EmojiIcon} alt="ایموجی"/>
+        <img src={EmojiIcon} alt=""/>
       </div>
       
       <div className="w-[490px] h-[100px] flex-1 flex flex-col">

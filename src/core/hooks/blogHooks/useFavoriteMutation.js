@@ -13,8 +13,8 @@ export const useFavoriteMutation = (blogId, isFav) => {
           }
         },
         onSuccess: (data) => {
-          queryClient.invalidateQueries(['blogDetails', blogId]);
-          toast.success(data.message,'با موفقیت انجام شد!');
+          queryClient.invalidateQueries(['blogDetails-fav', blogId]);
+          toast.success('با موفقیت انجام شد!');
         },
         onError: (error) => {
           toast.error('خطا در انجام عملیات');

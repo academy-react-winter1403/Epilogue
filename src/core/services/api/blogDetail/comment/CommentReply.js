@@ -2,7 +2,7 @@ import http from "../../../interceptor"; //axios//
 
 export const getCommentsReply = async (newsId) => {
     try {
-        const result = await http.get(`/News/GetRepliesComments?Id=${newsId}}`);
+        const result = await http.get(`/News/GetRepliesComments?Id=${newsId}`);
         return result;
 
     } catch (error) {   

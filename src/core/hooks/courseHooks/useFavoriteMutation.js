@@ -15,7 +15,7 @@ export const useFavoriteMutation = (CourseId, isFav) => {
         },
         onSuccess: (data) => {
           queryClient.invalidateQueries(['courseDetails', CourseId]);
-          toast.success(data.message,'با موفقیت انجام شد');
+          toast.success('با موفقیت انجام شد');
         },
         onError: (error) => {
           toast.error('خطا در انجام عملیات');

@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { postCourseRating } from '../../../core/services/api/courseDetail/postCourseRating';
 import { postBlogRating } from '../../../core/services/api/blogDetail/posrBlogRating';
 
-const StarRating = ({ itemId, type = 'course', initialRating = 0, size = 'md' }) => {
+const StarRating = ({ itemId, type , initialRating , size }) => {
   const [rating, setRating] = useState(initialRating);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
@@ -20,13 +20,13 @@ const StarRating = ({ itemId, type = 'course', initialRating = 0, size = 'md' })
   };
 
   const handleRatingChange = async (newRating) => {
-    if (!itemId) {
+    if (itemId) {
       toast.custom((t) => (
         <div className="bg-white p-4 rounded-lg shadow-lg border border-gray-200">
           <p className="text-sm text-gray-700 mb-2">برای امتیاز دادن وارد شوید</p>
           <div className='flex gap-2'>
             <button 
-              onClick={() => navigate('/auth/RegisterPage')} 
+              onClick={() => navigate('/auth/login')} 
               className="px-3 py-1 bg-blue-500 text-white rounded text-sm hover:bg-blue-600"
             >
               ورود
@@ -42,7 +42,6 @@ const StarRating = ({ itemId, type = 'course', initialRating = 0, size = 'md' })
       ));
       return;
     }
-
     try {
       setIsSubmitting(true);
       await (type === 'course' 

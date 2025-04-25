@@ -9,8 +9,9 @@ const CommentBlog = ({newsId, blog}) => {
     
   return (
     <CommentSection
-      CourseId={newsId}
-      course={blog} 
+      id={newsId}
+      isBlog={newsId}
+      contentId={blog} 
       getComment={getComment} 
       postComment={postComment} 
       postReply={postReply} 

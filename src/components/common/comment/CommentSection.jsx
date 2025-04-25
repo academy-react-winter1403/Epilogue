@@ -9,7 +9,7 @@ import  sendIcon  from '../../../assets/icons/sendCommentIcon.svg';
 import  emojiIcon from '../../../assets/icons/emojiIcon.svg';
 import closeIcon from '../../../assets/icons/closeIcon.svg';
 
-const CommentSection = ({ course, CourseId, getComment, postComment, postReply, getReplies }) => {
+const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postReply, getReplies }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
   const [showNewCommentForm, setShowNewCommentForm] = useState(false);
@@ -26,8 +26,14 @@ const CommentSection = ({ course, CourseId, getComment, postComment, postReply, 
   const { mutate: addReply, isPending: isReplyPending } = postReply || {};
 
   const toggleCommentExpansion = (commentId) => {
-    setExpandedCommentId(prev => prev === commentId ? null : commentId);
-  };
+    setExpandedCommentId(prev => {
+      if (prev === commentId) {
+        setReplyingTo(null); 
+        return null;
+      }
+      return commentId;
+    });
+  }
 
   const startReply = (commentId) => {
     if (showNewCommentForm) closeNewCommentForm();
@@ -48,7 +54,7 @@ const CommentSection = ({ course, CourseId, getComment, postComment, postReply, 
     if (!replyingTo || !addReply) return;
     
     addReply({ 
-      CourseId,
+      id,
       parentId: replyingTo, 
       title: replyTitle, 
       content: replyContent 
@@ -66,7 +72,7 @@ const CommentSection = ({ course, CourseId, getComment, postComment, postReply, 
     if (!addComment) return;
     
     addComment({ 
-      CourseId,
+      id,
       title: commentTitle, 
       content: commentContent 
     }, {
@@ -93,6 +99,7 @@ const CommentSection = ({ course, CourseId, getComment, postComment, postReply, 
     setIsModalOpen(false);
     cancelReply();
     setExpandedCommentId(null);
+    closeNewCommentForm(); 
   };
 
   const closeCommentModal = () => {
@@ -105,6 +112,7 @@ const CommentSection = ({ course, CourseId, getComment, postComment, postReply, 
     setShowNewCommentForm(false);
     setCommentTitle('');
     setCommentContent('');
+    cancelReply();
   };
 
   const displayedComments = comments?.slice(0, 3) || [];
@@ -114,7 +122,7 @@ const CommentSection = ({ course, CourseId, getComment, postComment, postReply, 
 
   return (
     <section className="w-full flex flex-col gap-5 mt-[50px] justify-center items-center">
-      <div className="md:self-start w-[219px] h-[29px] font-dana font-bold text-[20px] leading-[100%] tracking-[0%] text-gray-800 whitespace-nowrap">
+      <div className="pl-90 md:self-start w-[219px] h-[29px] font-dana font-bold text-[20px] leading-[100%] tracking-[0%] text-gray-800 whitespace-nowrap">
         نظرات دانشجوها و اساتید
       </div>
 
@@ -136,7 +144,8 @@ const CommentSection = ({ course, CourseId, getComment, postComment, postReply, 
           <CommentCard 
             key={comment.id}
             comment={comment} 
-            CourseId={CourseId}
+            id={id}
+            isBlog={isBlog}
           />
         ))}
       </div>
@@ -155,7 +164,9 @@ const CommentSection = ({ course, CourseId, getComment, postComment, postReply, 
       <Modal isOpen={isModalOpen} onClose={closeModal} title="نظرات دانشجوها و اساتید">
         <motion.button
           onClick={openNewCommentForm}
-          className="fixed bottom-24 left-1/2 w-[345px] h-[56px] md:w-[107px] md:h-[40px] md:static md:transform-none flex items-center justify-center gap-2 bg-[#3772FF] text-white rounded-[40px] px-4 py-2 mb-4 "
+          className={`fixed bottom-60 left-35 w-[345px] h-[56px] md:w-[107px] md:h-[40px] md:static md:transform-none flex items-center justify-center gap-2 bg-[#3772FF] text-white rounded-[40px] px-4 py-2 mb-4 ${
+            showNewCommentForm ? 'hidden md:flex' : 'flex'
+          }`}
           whileTap={{ scale: 0.95 }}
           whileHover={{ y: -2 }}
         >
@@ -165,8 +176,9 @@ const CommentSection = ({ course, CourseId, getComment, postComment, postReply, 
 
         <CommentList
           comments={comments}
-          CourseId={CourseId}
-          course={course}
+          id={id}
+          isBlog={isBlog}
+          contentId={contentId}
           replyingTo={replyingTo}
           startReply={startReply}
           handleReplySubmit={handleReplySubmit}
@@ -183,7 +195,8 @@ const CommentSection = ({ course, CourseId, getComment, postComment, postReply, 
         />
 
         {showNewCommentForm && (
-          <NewCommentForm
+          <div className='mr-5 mb-0 md:mb-20'>
+             <NewCommentForm
             onSubmit={handleCommentSubmit}
             onClose={closeNewCommentForm}
             title={commentTitle}
@@ -193,6 +206,8 @@ const CommentSection = ({ course, CourseId, getComment, postComment, postReply, 
             CloseIcon={closeIcon}
             isPending={isCommentPending}
           />
+          </div>
+         
         )}
       </Modal>
 

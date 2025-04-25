@@ -3,10 +3,205 @@ import {NewCommentForm} from './NewComponentForm';
 import { formatDate } from '../../common/formatDate/formatDate';
 import { CommentLikeDislikeCourse } from '../../courseDetail/commentCourse/CommentLikeDislikeCourse';
 
+// const CommentList = ({
+//   comments,
+//   id,
+//   contentId,
+//   isBlog,
+//   replyingTo,
+//   startReply,
+//   handleReplySubmit,
+//   replyTitle,
+//   setReplyTitle,
+//   replyContent,
+//   setReplyContent,
+//   SendIcon,
+//   EmojiIcon,
+//   isPending,
+//   getReplies,
+//   expandedCommentId,
+//   toggleCommentExpansion
+// }) => {
+//   const CommentHeader = ({ 
+//     author, 
+//     pictureAddress, 
+//     inserDate,
+//     insertDate, 
+//     title, 
+//     describe,
+//     commentId 
+//   }) => (
+//     <div 
+//       className="flex flex-col gap-3 pb-4 w-full cursor-pointer"
+//       onClick={() => toggleCommentExpansion(commentId)}
+//     >
+//       <div className="flex gap-4 items-center">
+//         {pictureAddress ?( 
+//         <img 
+//           src={pictureAddress} 
+//           alt="پروفایل" 
+//           className="w-10 h-10 rounded-full"
+//         />
+//         ):(
+//           <div className='w-10 h-10 rounded-full bg-gray-300'></div>
+//         )}
+//         <div className="flex flex-col gap-1">
+//           <span className="font-DanaFaNum font-medium">{author}</span>
+//           <span className="text-xs text-gray-500"> {isBlog
+//               ? formatDate(inserDate)
+//               : formatDate(insertDate)}</span>
+//         </div>
+//       </div>
+//       <h3 className="font-DanaFaNum font-bold text-lg text-right">{title}</h3>
+//       <p className="break-words font-DanaFaNum text-right text-gray-700">{describe}</p>
+//     </div>
+//   );
+
+//   const CommentActions = ({
+//     commentId,
+//     replyingTo,
+//     startReply,
+//     handleReplySubmit,
+//     replyTitle,
+//     setReplyTitle,
+//     replyContent,
+//     setReplyContent,
+//     isPending
+//   }) => (
+//     <div className="flex flex-col md:flex-row items-start md:items-center gap-2 mt-2 w-full">
+//      <CommentLikeDislikeCourse
+//       CourseId={id}
+//       likeCount={contentId?.likeCount || 0}
+//       dissLikeCount={contentId?.dissLikeCount || 0}
+//     />
+
+//       {replyingTo === commentId ? (
+//         <div className="w-full">
+//           <NewCommentForm
+//             onSubmit={handleReplySubmit}
+//             title={replyTitle}
+//             setTitle={setReplyTitle}
+//             content={replyContent}
+//             setContent={setReplyContent}
+//             SendIcon={SendIcon}
+//             EmojiIcon={EmojiIcon}
+//             isPending={isPending}
+//             isReply
+//             compact
+//           />
+//         </div>
+//       ) : (
+//         <motion.button
+//           onClick={() => startReply(commentId)}
+//           className="w-[99px] h-[40px] text-[#3772FF] cursor-pointer px-3 py-1 rounded-full border border-[#3772FF] bg-white text-sm"
+//           whileTap={{ scale: 0.95 }}
+//           disabled={isPending}
+//         >
+//           جواب دادن
+//         </motion.button>
+//       )}
+//     </div>
+//   );
+
+//   const CommentReplies = ({ commentId }) => {
+//     const isCourse = comments?.some(c => c && 'courseId' in c);
+//     const replyParams = isCourse ? [id, commentId] : [id];
+//     const { data: replies = [], isLoading: isRepliesLoading } = getReplies(...replyParams);
+    
+//     if (isRepliesLoading) return <div className="text-center py-4">در حال بارگیری پاسخ‌ها...</div>;
+//     if (!replies.length) return null;
+
+//     return (
+//       <div className="mt-4 pl-6 border-l-2 border-gray-200 space-y-4">
+//         {replies.map(reply => (
+//           <div key={reply.id} className="bg-gray-50 p-3 rounded-lg">
+//             <div className="flex justify-between items-start">
+//               <div className="flex gap-3 items-center">
+//               {reply?.pictureAddress ?( 
+//               <img 
+//                 src={reply?.pictureAddress} 
+//                 alt="پروفایل" 
+//                 className="w-10 h-10 rounded-full"
+//               />
+//               ):(
+//                 <div className='w-10 h-10 rounded-full bg-gray-300'></div>
+//               )}
+//                 <div>
+//                   <span className="font-DanaFaNum font-medium text-sm">{reply.author}</span>
+//                   <span className="block text-[#707070] font-DanaFaNum text-xs">
+//                      {isBlog
+//                       ? formatDate(reply?.inserDate)
+//                       : formatDate(reply?.insertDate)}
+//                   </span>
+//                 </div>
+//               </div>
+           
+//                 <CommentLikeDislikeCourse
+//                   CourseId={id}
+//                   likeCount={reply?.likeCount || 0}
+//                   dissLikeCount={reply?.dissLikeCount || 0}
+//                   userId={reply?.userId}
+//                   compact
+//                 />
+//             </div>
+//             <p className="font-DanaFaNum text-sm text-right mt-2 pr-2">
+//               {reply.describe}
+//             </p>
+//           </div>
+//         ))}
+//       </div>
+//     );
+//   };
+
+//   return (
+//     <div className="w-[393px] md:w-full max-h-[55vh] overflow-y-auto mb-4 space-y-6">
+//       {comments?.map((comment) => (
+//         <div key={comment.id} className="p-4 bg-white rounded-lg shadow-sm">
+//           <div className={`relative ${replyingTo === comment.id ? "pr-4" : ""}`}>
+//             {expandedCommentId === comment.id && (
+//               <div className="absolute right-[-15px] top-0 h-[195px] w-1 bg-[#3772FF] rounded-full" />
+//             )}
+            
+//             <div className={`flex flex-col ${replyingTo === comment.id ? "border-b border-[#DCDCDC] pb-4" : ""}`}>
+//               <CommentHeader 
+//                 author={comment.author}
+//                 pictureAddress={comment.pictureAddress}
+//                 insertDate={comment.insertDate}
+//                 inserDate={comment.inserDate}
+//                 title={comment.title}
+//                 describe={comment.describe}
+//                 commentId={comment.id}
+//               />
+              
+//               {expandedCommentId === comment.id && (
+//                 <>
+//                   <CommentActions
+//                     commentId={comment.id}
+//                     replyingTo={replyingTo}
+//                     startReply={startReply}
+//                     handleReplySubmit={handleReplySubmit}
+//                     replyTitle={replyTitle}
+//                     setReplyTitle={setReplyTitle}
+//                     replyContent={replyContent}
+//                     setReplyContent={setReplyContent}
+//                     isPending={isPending}
+//                   />
+//                   <CommentReplies commentId={comment.id} />
+//                 </>
+//               )}
+//             </div>
+//           </div>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// };
+
 const CommentList = ({
   comments,
-  CourseId,
-  course,
+  id,
+  contentId,
+  isBlog,
   replyingTo,
   startReply,
   handleReplySubmit,
@@ -24,6 +219,7 @@ const CommentList = ({
   const CommentHeader = ({ 
     author, 
     pictureAddress, 
+    inserDate,
     insertDate, 
     title, 
     describe,
@@ -34,18 +230,24 @@ const CommentList = ({
       onClick={() => toggleCommentExpansion(commentId)}
     >
       <div className="flex gap-4 items-center">
+        {pictureAddress ?( 
         <img 
           src={pictureAddress} 
           alt="پروفایل" 
-          className="w-10 h-10 rounded-full" 
+          className="w-10 h-10 rounded-full"
         />
+        ):(
+          <div className='w-10 h-10 rounded-full bg-gray-300'></div>
+        )}
         <div className="flex flex-col gap-1">
           <span className="font-DanaFaNum font-medium">{author}</span>
-          <span className="text-xs text-gray-500">{formatDate(insertDate)}</span>
+          <span className="text-xs text-gray-500"> {isBlog
+              ? formatDate(inserDate)
+              : formatDate(insertDate)}</span>
         </div>
       </div>
       <h3 className="font-DanaFaNum font-bold text-lg text-right">{title}</h3>
-      <p className="font-DanaFaNum text-right text-gray-700">{describe}</p>
+      <p className="break-words font-DanaFaNum text-right text-gray-700">{describe}</p>
     </div>
   );
 
@@ -60,15 +262,15 @@ const CommentList = ({
     setReplyContent,
     isPending
   }) => (
-    <div className="flex flex-col md:flex-row items-start md:items-center gap-2 mt-2">
-      <CommentLikeDislikeCourse
-        CourseId={CourseId}
-        likeCount={course?.likeCount}
-        dissLikeCount={course?.dissLikeCount}
-      />
+    <div className="flex flex-col md:flex-row items-start md:items-center gap-2 mt-2 w-full">
+     <CommentLikeDislikeCourse
+      CourseId={id}
+      likeCount={contentId?.likeCount || 0}
+      dissLikeCount={contentId?.dissLikeCount || 0}
+    />
 
       {replyingTo === commentId ? (
-        <div className="w-full">
+        <div className="w-full mt-2">
           <NewCommentForm
             onSubmit={handleReplySubmit}
             title={replyTitle}
@@ -96,15 +298,12 @@ const CommentList = ({
   );
 
   const CommentReplies = ({ commentId }) => {
-    const { data: replies = [], isLoading: isRepliesLoading } = getReplies(CourseId, commentId);
+    const isCourse = comments?.some(c => c && 'courseId' in c);
+    const replyParams = isCourse ? [id, commentId] : [id];
+    const { data: replies = [], isLoading: isRepliesLoading } = getReplies(...replyParams);
     
-    if (isRepliesLoading) {
-      return <div className="text-center py-4">در حال بارگیری پاسخ‌ها...</div>;
-    }
-
-    if (replies.length === 0) {
-      return null;
-    }
+    if (isRepliesLoading) return <div className="text-center py-4">در حال بارگیری پاسخ‌ها...</div>;
+    if (!replies.length) return null;
 
     return (
       <div className="mt-4 pl-6 border-l-2 border-gray-200 space-y-4">
@@ -112,26 +311,32 @@ const CommentList = ({
           <div key={reply.id} className="bg-gray-50 p-3 rounded-lg">
             <div className="flex justify-between items-start">
               <div className="flex gap-3 items-center">
-                <img 
-                  src={reply.pictureAddress} 
-                  alt="پروفایل" 
-                  className="w-8 h-8 rounded-full"
-                />
+              {reply?.pictureAddress ?( 
+              <img 
+                src={reply?.pictureAddress} 
+                alt="پروفایل" 
+                className="w-10 h-10 rounded-full"
+              />
+              ):(
+                <div className='w-10 h-10 rounded-full bg-gray-300'></div>
+              )}
                 <div>
-                  <span className="font-DanaFaNum font-medium text-sm">
-                    {reply.author}
-                  </span>
+                  <span className="font-DanaFaNum font-medium text-sm">{reply.author}</span>
                   <span className="block text-[#707070] font-DanaFaNum text-xs">
-                    {formatDate(reply.insertDate)}
+                     {isBlog
+                      ? formatDate(reply?.inserDate)
+                      : formatDate(reply?.insertDate)}
                   </span>
                 </div>
               </div>
-              <CommentLikeDislikeCourse
-                CourseId={CourseId}
-                likeCount={reply?.likeCount || 0}
-                dissLikeCount={reply?.dissLikeCount || 0}
-                compact
-              />
+           
+                <CommentLikeDislikeCourse
+                  CourseId={id}
+                  likeCount={reply?.likeCount || 0}
+                  dissLikeCount={reply?.dissLikeCount || 0}
+                  userId={reply?.userId}
+                  compact
+                />
             </div>
             <p className="font-DanaFaNum text-sm text-right mt-2 pr-2">
               {reply.describe}
@@ -147,7 +352,7 @@ const CommentList = ({
       {comments?.map((comment) => (
         <div key={comment.id} className="p-4 bg-white rounded-lg shadow-sm">
           <div className={`relative ${replyingTo === comment.id ? "pr-4" : ""}`}>
-            {expandedCommentId === comment.id &&  (
+            {expandedCommentId === comment.id && (
               <div className="absolute right-[-15px] top-0 h-[195px] w-1 bg-[#3772FF] rounded-full" />
             )}
             
@@ -156,27 +361,26 @@ const CommentList = ({
                 author={comment.author}
                 pictureAddress={comment.pictureAddress}
                 insertDate={comment.insertDate}
+                inserDate={comment.inserDate}
                 title={comment.title}
                 describe={comment.describe}
                 commentId={comment.id}
               />
               
+              <CommentActions
+                commentId={comment.id}
+                replyingTo={replyingTo}
+                startReply={startReply}
+                handleReplySubmit={handleReplySubmit}
+                replyTitle={replyTitle}
+                setReplyTitle={setReplyTitle}
+                replyContent={replyContent}
+                setReplyContent={setReplyContent}
+                isPending={isPending}
+              />
+              
               {expandedCommentId === comment.id && (
-                <>
-                  <CommentActions
-                    commentId={comment.id}
-                    replyingTo={replyingTo}
-                    startReply={startReply}
-                    handleReplySubmit={handleReplySubmit}
-                    replyTitle={replyTitle}
-                    setReplyTitle={setReplyTitle}
-                    replyContent={replyContent}
-                    setReplyContent={setReplyContent}
-                    isPending={isPending}
-                  />
-                  
-                  <CommentReplies commentId={comment.id} />
-                </>
+                <CommentReplies commentId={comment.id} />
               )}
             </div>
           </div>

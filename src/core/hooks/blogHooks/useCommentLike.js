@@ -18,7 +18,7 @@ export const useCommentLike = (CourseId) => {
       }
     },
     onSuccess: () => {
-      queryClient.invalidateQueries(['blogDetails', CourseId]);
+      queryClient.invalidateQueries(['blogDetails-like', CourseId]);
     }
   });
 };

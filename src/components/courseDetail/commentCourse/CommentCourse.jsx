@@ -12,8 +12,8 @@ const CommentCourse = ({CourseId, course}) => {
   return (
     <div>
       <CommentSection
-        CourseId={CourseId}
-        course={course} 
+        id={CourseId}
+        contentId={course} 
         getComment={getComment} 
         postComment={postComment} 
         getReplies={getReplies} 

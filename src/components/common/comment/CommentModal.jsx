@@ -12,9 +12,9 @@ class Modal extends Component {
       <div className="fixed inset-0 bg-black/40 z-40 md:backdrop-blur flex items-center justify-center">
         <div className="flex flex-col items-center min-h-[400px] md:block relative bg-[#FCFCFC] pb-17 md:pb-0 md:rounded-[32px] p-6 w-[393px] md:w-[851px] lg:w-[851px] rounded-tl-[32px] rounded-tr-[32px]">
           <div className="w-14 h-2 absolute top-[5px] left-[170px] rounded bg-gray-400 md:hidden sm:block"></div>
-          <div className="flex justify-between items-center">
+          <div className="flex justify-between items-center gap-20">
             <div className='flex flex-col md:flex-row gap-2 md:gap-5 justify-center items-center'>
-                <h2 className="mt-5 md:mt-0 mr-4  h-[34px] font-dana font-bold text[20px] md:text-[24px] leading-[100%] tracking-[0%] text-right whitespace-nowrap">{title}</h2>
+                <h2 className="mt-5 md:mt-0 mr-4 h-[34px] font-dana font-bold text[20px] md:text-[24px] leading-[100%] tracking-[0%] text-right whitespace-nowrap">{title}</h2>
                 <span className='w-[160px] h-[26px] ont-dana font-bold text-[18px] leading-[100%] tracking-[0%] text-right text-[#2F2F2F]'>()</span>
             </div>
           

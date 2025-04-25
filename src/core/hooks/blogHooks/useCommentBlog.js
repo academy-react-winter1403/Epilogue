@@ -3,16 +3,10 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { postAddComment } from '../../services/api/blogDetail/comment/postAddComment';
 import { postCommentsReply, getCommentsReply } from '../../services/api/blogDetail/comment/CommentReply';
 
-// export const useGetCommentBlog = (newsId) => {
-//   return useQuery({
-//     queryKey: ['blogDetails', newsId],
-//     queryFn: () => getBlogComment(newsId),
-//     initialData: [],
-//   });
-// };
 export const useGetCommentBlog = (newsId) => {
+  console.log(newsId, 'parsa pastil')
     return useQuery({
-      queryKey: ['blogDetails', newsId],
+      queryKey: ['blogDetails-comment', newsId],
       queryFn: () => getBlogComment(newsId),
       initialData: [],
       select: (data) => Array.isArray(data) ? data : []
@@ -35,14 +29,14 @@ export const usePostCommentReply = () => {
   return useMutation({
     mutationFn: ({newsId, ...replyData}) => postCommentsReply(newsId, replyData),
     onSuccess: (_, variables) => {
-      queryClient.invalidateQueries(['blogDetails', variables.newsId]);
+      queryClient.invalidateQueries(['blogDetails-reply', variables.newsId]);
     },
   });
 }
 
 export const useGetCommentReplies = (newsId) => {
   return useQuery({
-    queryKey: ['blogDetails', newsId],
+    queryKey: ['blogDetails-reply', newsId],
     queryFn: () => getCommentsReply(newsId)
   });
 };

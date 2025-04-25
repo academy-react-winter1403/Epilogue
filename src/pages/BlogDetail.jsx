@@ -12,4 +12,4 @@ const BlogDetail = () => {
   )
 }
 
-export{ BlogDetail }
+export default BlogDetail

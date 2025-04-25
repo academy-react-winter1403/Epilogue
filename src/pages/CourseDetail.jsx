@@ -14,4 +14,4 @@ const CourseDetail = () => {
   )
 }
 
-export{ CourseDetail}
+export default CourseDetail
