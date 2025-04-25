@@ -7,9 +7,9 @@ import React from "react";
       {sortedCards.length > 0 ? (
         sortedCards.map((card, index) => (
           <div key={index} className="card w-[322px] h-[366px] flex flex-col">
-            <div className="w-[302px] h-[293px] rounded-[32px] bg-[#87DFFF] flex flex-col p-4 relative text-[#FCFCFC]">
-              <div className="absolute top-4 right-4 flex">
-                <div className="w-[65px] h-[24px] bg-[#FF37F5] text-center font-medium text-sm rounded-[32px] text-[#FCFCFC]">
+            <div className="w-[322px] h-[293px] rounded-[32px]  flex flex-col p-4 relative text-[#FCFCFC]">
+              <div className="absolute top-6 right-7 flex gap-2">
+                <div className="w-[89px] h-[24px] bg-[#FF37F5] text-nowrap text-center font-medium text-sm rounded-[32px] text-[#FCFCFC]">
                   <h3>{card.levelName}</h3>
                 </div>
                 <div className="w-[89px] h-[24px] bg-[#3772FF] text-center font-medium text-sm rounded-[32px] ml-2">
@@ -17,16 +17,16 @@ import React from "react";
                 </div>
               </div>
               <img
-                src={card.tumbImageAddress || "path/to/default/image.jpg"}
+                src={card.tumbImageAddress || "https://img.freepik.com/free-vector/404-error-template-flat-style_23-2147757271.jpg"}
                 alt={card.title}
-                className="w-full h-full rounded-t-lg"
+                className="w-full h-full rounded-[32px]"
                 onError={(e) => {
                   e.target.onerror = null;
                   e.target.src = "path/to/default/image.jpg"; 
                 }}
               />
             </div>
-            <div className="w-[302px] bg-white p-4 flex flex-col">
+            <div className="w-[302px] bg-white pr-5 flex flex-col">
               <h1 className="text-2xl font-bold">{card.title || "بدون عنوان"}</h1>
               <div className="flex justify-between items-center mt-2">
                 <h2 className="font-medium text-[#707070]">{card.teacherName || "ناشناس"}</h2>

@@ -248,15 +248,7 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
             </div>
           )}
         </div>
-        {!isFormOpen && (
-                  <div
-                    className="w-[95px] h-[48px] rounded-[40px] bg-[#2F2F2F] flex text-[#FCFCFC] cursor-pointer flex items-center justify-center"
-                    onClick={openForm}
-                  >
-                    <img src={filter}/>
-                    <span>فیلتر</span>
-                  </div>
-        )}
+
       </div>
     </div>
   );

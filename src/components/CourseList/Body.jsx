@@ -26,7 +26,7 @@ const fetchCourses = async (
     SortingCol: SortCol,
     SortType: SortType,
   };
-  console.log(params)
+  console.log(params);
   try {
     const response = await axios.get(
       `https://classapi.sepehracademy.ir/api/Home/GetCoursesWithPagination`,
@@ -80,7 +80,7 @@ export function Body() {
         SortType
       ),
   });
-  console.log(SortCol,SortType)
+  console.log(SortCol, SortType);
 
   const totalCount = data?.totalCount;
   const courses = data?.courseFilterDtos || [];
@@ -127,26 +127,20 @@ export function Body() {
   const totalPages = Math.ceil(totalCount / 9);
 
   return (
-    <div className="container mx-auto px-4">
-      <div className="text-center mt-10">
+    <div className="px-4">
+      <div className="text-center flex flex-col">
         <h1 className="text-4xl font-bold">شروع ماجراجویی جدید</h1>
-        <h2 className="text-lg font-medium text-gray-700 mt-4">
-          یک شروع قوی برای یادگیری یک مسئله جدید میتونه تو پیشرفت کمکت کنه
+        <h2 className="text-lg font-medium text-gray-700 mt-6">
+          یک شروع قوی برای یادگیری یک مسئله
         </h2>
+        <h1>جدید میتونه تو پیشرفت کمکت کنه</h1>
       </div>
 
-            <div className="block md:hidden mt-10 gap-10 flex">
-              <Sorting />
-              <Filter
-                searchTerm={searchTerm}
-                setSearchTerm={setSearchTerm}
-                selectedCategory={selectedCategory}
-              />
-            </div>
+
 
       <Sorting />
 
-      <div className="mt-10 gap-10 md:flex">
+      <div className="py-4 gap-10 md:flex">
         <Filter
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
@@ -164,7 +158,7 @@ export function Body() {
       <Pagination
         totalPages={totalPages}
         currentPage={currentPage}
-        setPageNumber={setPageNumber} 
+        setPageNumber={setPageNumber}
       />
     </div>
   );
