@@ -1,35 +1,25 @@
-import React, { useEffect, useState } from 'react'
 import { DetailCourse } from './DetailCourse.jsx'
-import { CommentSection } from '../comment/CommentSection.jsx'
-import { useParams } from 'react-router-dom'
-import { getCourseDetails } from "../../core/services/api/courseDetail/getCourseDetails.js"
-import { QueryClient, useQuery } from '@tanstack/react-query'
-import { RelatedCourses } from './RelatedCourses.jsx'
+import { RelatedCourses } from './RelatedList.jsx'
+import { useCourseDetails } from '../../core/hooks/courseHooks/useCourseDetails.js'
+import { CommentCourse } from './commentCourse/CommentCourse.jsx'
 
 const DetailPage = () => {
-  const {CourseId} = useParams();
-        
-  const { data: course, isLoading, isError, error} = useQuery({
-    queryKey: ['courseDetails', CourseId],
-    queryFn: () => getCourseDetails(CourseId),
-    enabled: !!CourseId 
-  });
+  const {  data: course, isLoading,  error } = useCourseDetails();
   if (isLoading) return <div>در حال بارگذاری...</div>;
-  if (isError) return <div>خطا در دریافت اطلاعات دوره : خطا :{error.message}</div>;
-
-      
+  if (error) return <div>خطا در دریافت اطلاعات دوره : خطا :{error.message}</div>;
+  
   return (
     <div className='w-auto bg-white'>
         <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center items-center">
 
             {/* detail */}
-            <DetailCourse CourseId={CourseId} course={course}/>
+            <DetailCourse CourseId={course.courseId} course={course}/>
           
             {/* comments */}
-            <CommentSection CourseId={CourseId} course={course}/>
+            <CommentCourse CourseId={course.courseId} course={course}/>
 
             {/* related-courses */}
-             <RelatedCourses CourseId={CourseId} course={course}/>
+            <RelatedCourses CourseId={course.courseId} course={course}/>
         </div>
     </div>
   )

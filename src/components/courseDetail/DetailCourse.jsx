@@ -1,19 +1,23 @@
 import { DetailBox } from './DetailBox'
-import { CopyUrlButton } from '../copyUrl/CopyUrlButton'
-import courseImage from '../../assets/img/course.svg'
-import { StarRating } from '../starRating/StarRating.jsx'
-import { RatingsProvider } from '../starRating/RatingContext.jsx'
+import { CopyUrlButton } from '../common/copyUrl/CopyUrlButton'
+import { StarRating } from '../common/starRating/StarRating.jsx'
+import { div } from 'framer-motion/client'
 
 const DetailCourse = ({course, CourseId}) => {
    
   return (
-
     <section className="w-full flex flex-col gap-6 lg:gap-8 px-4 sm:px-6 lg:px-8 justify-center items-center">
 
         <div className='w-[110%] flex flex-col lg:flex-row gap-6 lg:gap-10 justify-between items-center mb-6'>
             
             <div className="w-[361px] md:w-[50%] lg:w-[50%] h-[424px] md:h-[400px] lg:h-[424px] order-2 md:order-2 lg:order-0">
-                <img src={course?.imageAddress ?? courseImage} alt="عکس دوره" className="w-full h-full object-cover rounded-[20px]"/>
+                {course?.imageAddress ? (
+                    <img src={course?.imageAddress} alt="عکس دوره" className="w-full h-full object-cover rounded-[20px]"/>
+                ):(
+                    <div className='w-full h-full rounded-[20px] flex justify-center items-center bg-gray-200'>
+                            <span className="text-gray-500">تصویری موجود نیست</span>
+                    </div>
+                )}
             </div>
 
         <DetailBox course={course} CourseId={CourseId}/>
@@ -28,20 +32,19 @@ const DetailCourse = ({course, CourseId}) => {
                 <div className='flex gap-5 items-center'>
                     <div className="w-[71px] h-[23px] font-dana font-semibold text-[16px] leading-[100%] tracking-[0%] text-right text-blue-500 whitespace-nowrap">امتیاز بدید</div>
                     <div className=" w-[140px] h-[28px] rotate-180">
-                        <RatingsProvider>
-                        <StarRating CourseId={CourseId}/> 
-                        </RatingsProvider>
-                        
+                    <StarRating 
+                    itemId={CourseId}
+                    type="course" 
+                    size="md" 
+                    />
                     </div>
                 </div>
-        
             <div >
                 <CopyUrlButton/>
             </div>
             </div>
         </div>
     </section> 
-   
   )
 }
 

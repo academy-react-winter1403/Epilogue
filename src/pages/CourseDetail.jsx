@@ -6,12 +6,12 @@ const queryClient = new QueryClient();
 const CourseDetail = () => {
   
   return (
-    <div>
-      <QueryClientProvider client={queryClient}>
-        <DetailPage/>
-      </QueryClientProvider>
-    </div>
+
+    <QueryClientProvider client={queryClient}>
+      <DetailPage/>
+    </QueryClientProvider>
+    
   )
 }
 
-export{ CourseDetail}
+export default CourseDetail
