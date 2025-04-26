@@ -1,8 +1,9 @@
 import React from 'react'
 import { motion, AnimatePresence } from "framer-motion"
+import { useNavigate } from 'react-router-dom'
 
 const DetailModal = ({isModalOpen, closeOverlay}) => {
-     
+    const navigate = useNavigate();
   return (
      <AnimatePresence mode='waite'>
         {isModalOpen && (
@@ -37,7 +38,9 @@ const DetailModal = ({isModalOpen, closeOverlay}) => {
                 </div>
                 <div className='font-[DanaFaNum] font-[500] text-[16px] leading-[100%] tracking-[0%] text-right absolute md:top-[180px] md:left-[50px] top-[210px] left-[50px] w-[245px] h-[46px] '>بعد از تایید ادمین ، دوره مورد نظر به لیست دوره من شما اضافه خواهد شد</div>
                 <div className="flex items-center gap-4 absolute md:top-[300px] md:left-[30px] top-[320px] left-[30px]">
+               
                 <motion.button
+                     onClick={() => navigate('/StudentPanel/my-reserve')} 
                     className="whitespace-nowrap cursor-pointer w-[184px] md:w-[212px] h-[47px] gap-[8px] rounded-[40px] pt-[9px] pr-[75px] pb-[9px] pl-[75px] bg-blue-500 text-white font-dana font-bold"
                     whileTap={{ scale: 0.95 }}
                     animate={{ 

@@ -1,11 +1,10 @@
 import React from 'react'
-import { LikeDislikeComment } from '../../common/comment/LikeDislikeComment'
-import { postAddComment, postAddDislikeComment, deleteLikeComment } from '../../../core/services/api/blogDetail/comment/postAddComment';
+import { postAddLikeComment, postAddDislikeComment, deleteLikeComment } from '../../../core/services/api/blogDetail/comment/postAddLikeDislikeComment';
 import { useMutation } from '@tanstack/react-query';
 
 const CommentLikeDislikeCourse = ({newsId, likeCount, dissLikeCount}) => {
     const liked = useMutation({
-      mutationFn: () => postAddComment(newsId)
+      mutationFn: () => postAddLikeComment(newsId)
     });
     
     const disliked = useMutation({

@@ -20,7 +20,7 @@ const StarRating = ({ itemId, type , initialRating , size }) => {
   };
 
   const handleRatingChange = async (newRating) => {
-    if (itemId) {
+    if (!itemId) {
       toast.custom((t) => (
         <div className="bg-white p-4 rounded-lg shadow-lg border border-gray-200">
           <p className="text-sm text-gray-700 mb-2">برای امتیاز دادن وارد شوید</p>

@@ -6,7 +6,7 @@ import { getCourseCommentsReply } from '../../services/api/courseDetail/comment/
 
 export const useGetCommentCourse = (CourseId) => {
   return useQuery({
-    queryKey: ['courseComments', CourseId],
+    queryKey: ['CommentReplies', CourseId],
     queryFn: () => getCourseComments(CourseId),
     initialData: [],
   });
@@ -18,7 +18,7 @@ export const usePostCommentCourse = () => {
   return useMutation({
     mutationFn: ({CourseId, ...commentData}) => postAddComment(CourseId, commentData),
     onSuccess: (_, variables) => {
-      queryClient.invalidateQueries(['courseComments', variables.CourseId]);
+      queryClient.invalidateQueries(['CommentReplies', variables.CourseId]);
     },
   });
 };
@@ -29,14 +29,14 @@ export const usePostCommentReply = () => {
   return useMutation({
     mutationFn: ({CourseId, ...replyData}) => postCourseCommentsReply(CourseId, replyData),
     onSuccess: (_, variables) => {
-      queryClient.invalidateQueries(['courseComments', variables.CourseId]);
+      queryClient.invalidateQueries(['CommentReplies', variables.CourseId]);
     },
   });
 }
 
 export const useGetCommentReplies = (CourseId, commentId) => {
   return useQuery({
-    queryKey: ['courseCommentReplies', CourseId, commentId],
+    queryKey: ['CommentReplies', CourseId, commentId],
     queryFn: () => getCourseCommentsReply(CourseId, commentId),
     enabled: !!commentId,
   });

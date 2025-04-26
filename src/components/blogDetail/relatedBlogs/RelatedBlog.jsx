@@ -16,7 +16,7 @@ const RelatedBlogs = ({ newsId }) => {
   if (blogsArray.length === 0) return null;
 
   return (
-    <section className='w-auto md:mt-10 md:mr-0 mr-130 mb-15'>
+    <section className='w-auto md:mt-10 md:mr-10 mr-130 mb-15'>
       <div className="font-yekan-700 font-bold flex flex-col items-center justify-center text-nowrap text-[32px]">
         <h3 className="self-start">بلاگ های مرتبط</h3>
       </div>

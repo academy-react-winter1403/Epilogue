@@ -81,7 +81,7 @@ const DetailBlogBox = ({newsId , blog}) => {
             <div className='w-full flex gap-2 items-center justify-center'>
                 <div className='hidden md:block'> <CopyUrlButton/> </div>
                 <BlogFavorite newsId={newsId} isFav={blog?.detailsNewsDto?.isCurrentUserFavorite}/>
-                <LikeDislikeBlog newsId={newsId} currentLikeCount={blog?.detailsNewsDto?.currentLikeCount} currentDissLikeCount={blog?.detailsNewsDto?.currentDissLikeCount } />
+                <LikeDislikeBlog likeId={blog?.detailsNewsDto?.likeId	} newsId={newsId} currentLikeCount={blog?.detailsNewsDto?.currentUserIsLike} currentDissLikeCount={blog?.detailsNewsDto?.currentUserIsDissLike } />
             </div>
     </div>
   )

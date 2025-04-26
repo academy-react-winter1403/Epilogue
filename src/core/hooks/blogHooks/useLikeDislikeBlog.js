@@ -1,13 +1,13 @@
-import { postLikeBlog, postDislikeBlog, deletelikeBlog } from '../../services/api/blogDetail/likeDislikeBlog.js'
-import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-export const useLikeBlog = (blogId) => {
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { postAddDislikeComment,deleteLikeComment, postAddLikeComment } from '../../services/api/blogDetail/comment/postAddLikeDislikeComment.js';
+export const useLikeBlog = (newsId) => {
     const queryClient = useQueryClient();
 
      const likeMutation  = useMutation({
-        mutationFn: () => postLikeBlog(blogId),
+        mutationFn: () => postAddLikeComment(newsId),
         onSuccess: () => {
-          queryClient.invalidateQueries(['blogDetails']);
+          queryClient.invalidateQueries(['blogDetails-likee']);
         },
         onError: (error) => {
           console.error('Error in like:', error);
@@ -18,13 +18,13 @@ export const useLikeBlog = (blogId) => {
   return likeMutation
 }
 
-export const useDisLikeBlog = (blogId) => {
+export const useDisLikeBlog = (newsId) => {
     const queryClient = useQueryClient();
 
     const dislikeMutation  = useMutation({
-        mutationFn: () => postDislikeBlog(blogId),
+        mutationFn: () => postAddDislikeComment(newsId),
         onSuccess: () => {
-          queryClient.invalidateQueries(['blogDetails']);
+          queryClient.invalidateQueries(['blogDetails-dis']);
         },
         onError: (error) => {
           console.error('Error in dislike:', error);
@@ -35,11 +35,11 @@ export const useDisLikeBlog = (blogId) => {
   return dislikeMutation
 }
 
-export const useDelLikeBlog = (blogId) => {
+export const useDelLikeBlog = (newsId) => {
   const queryClient = useQueryClient();
 
   const dislikeMutation  = useMutation({
-      mutationFn: () => deletelikeBlog(blogId),
+      mutationFn: () => deleteLikeComment(newsId),
       onSuccess: () => {
         queryClient.invalidateQueries(['blogDetails']);
       },
