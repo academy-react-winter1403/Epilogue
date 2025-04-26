@@ -5,7 +5,7 @@ const BestCourse = ({ data }) => {
     data;
   return (
     <>
-      <div class=" max-w-[322px] md:col-span-1 col-span-4 text-black bg-white rounded-lg ">
+      <div class=" max-w-[322px] md:col-span-1 col-span-4 text-black  rounded-lg ">
         <div class="relative h-[293px]">
           <img
             className=" rounded-[32px] h-full"

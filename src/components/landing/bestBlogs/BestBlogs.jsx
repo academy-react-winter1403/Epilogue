@@ -13,7 +13,7 @@ const BestBlogs = ({ data }) => {
   } = data;
   return (
     <div>
-      <div class="max-w-[431px] text-black bg-white rounded-lg ">
+      <div class="max-w-[431px] text-black rounded-lg ">
         <div class=" h-[293px]">
           <img
             className="rounded-[32px] w-full h-full"

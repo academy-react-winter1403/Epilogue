@@ -3,12 +3,22 @@ import { gsap } from "gsap";
 import h1 from "../../assets/img/h1.svg";
 import bahr from "../../assets/img/bahr.svg";
 import Menu from "./Menu";
-import { Moon02Icon } from "./Icons/MoonIcon";
-import { PaintBoardIcon } from "./Icons/paintIcon";
-import useStore from "../../core/Store/Zustand-Store";
-import { NavLink, Link } from "react-router-dom";
+
+import useUserStore from "../../core/constant/user-info";
+import { getUserInfo } from "../../core/services/api/Dashboard/dashborad";
+import { useQuery } from "@tanstack/react-query";
+import ThemeToggle from "./AnimatedThemeSwitcher";
+import { ColorPickerIcon } from "./Icons/ThemeIcon";
+import ColorThemeModal from "./ThemeModal/ThemeModal";
 
 const Header = () => {
+  const setUserInfo = useUserStore((state) => state.setUserInfo);
+  const { data: userInfo } = useQuery({
+    queryKey: ["userInfo"],
+    queryFn: getUserInfo
+})
+const [isColorModalOpen, setIsColorModalOpen] = useState(false);
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
@@ -92,11 +102,13 @@ const Header = () => {
               درباره ما
             </NavLink>
             {isLoggedIn ? (
-              <Link to={"/StudentPanel/dashboard"}>
-                {/* <img
+
+              <Link to={"/StudentPanel/edite-profile/profile-info"}>
+                <img
                   className="size-full rounded-full  w-12 border h-12"
-                  src={currentPictureAddress}
-                ></img> */}
+                  src={userInfo?.currentPictureAddress}
+                ></img>
+
               </Link>
             ) : (
               <Link
@@ -149,14 +161,27 @@ const Header = () => {
         )}
        
         <div className=" gap-[8px] hidden lg:flex">
-          <button className="rounded-full w-[48px] h-[48px] bg-[#FCFCFC] border border-[#DCDCDC] text-black">
-            <div className="flex items-center justify-center">
-              {/* <Notification02Icon /> */}
-            </div>
-          </button>
+
+        <button
+  className="rounded-full w-[48px] h-[48px] border border-[#DCDCDC] text-black"
+  onClick={() => setIsColorModalOpen((prev) => !prev)}
+>
+  <div className="flex items-center justify-center">
+    <ColorPickerIcon color={"#000"} />
+  </div>
+</button>
+<ColorThemeModal
+  isOpen={isColorModalOpen}
+  onClose={() => setIsColorModalOpen(false)}
+  onSelect={(color) => {
+    setThemeColor(color); 
+    setIsColorModalOpen(false); 
+  }}
+/>
+
           <button className="rounded-full p-3 bg-[#2F2F2F]">
-            <Moon02Icon />
-          </button>
+          <ThemeToggle />
+        </button>
         </div>
         <Menu />
       </div>

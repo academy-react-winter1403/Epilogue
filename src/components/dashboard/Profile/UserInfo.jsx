@@ -46,7 +46,7 @@ const UserInfo = () => {
     userProfileInfo.append("PhoneNumber", values.phoneNumber);
     userProfileInfo.append("NationalCode", values.nationalCode);
     userProfileInfo.append("BirthDay", values.birthday);
-    userProfileInfo.append("gender", values.gender);
+    userProfileInfo.append("gender", values.gender === "male");
     userProfileInfo.append("Email", values.email);
     userProfileInfo.append("HomeAdderess", values.homeAddress);
     mutation.mutate(userProfileInfo);
@@ -69,13 +69,13 @@ const UserInfo = () => {
       {setUserProfile && (
         <Formik
           initialValues={{
-            firstName: userProfile?.fName || "",
+            firstName: userProfile?.fName,
             lastName: userProfile?.lName || "",
             userAbout: userProfile?.userAbout || "",
             phoneNumber: userProfile?.phoneNumber || "",
             nationalCode: userProfile?.nationalCode || "",
             birthday: userProfile?.birthDay || "",
-            gender: userProfile?.gender || "" ,
+            gender: userProfile?.gender || "",
             email: userProfile?.email || "",
             homeAddress: userProfile?.homeAdderess || "",
           }}
@@ -87,15 +87,14 @@ const UserInfo = () => {
               <div className="mb-6">
                 <div className="flex space-x-4">
                   <div className="w-1/2">
-                    <label className="block font-yekan-600  text-black text-sm  mb-2">
+                    <p className="block font-yekan-600  text-black text-sm  mb-2">
                       نام
-                    </label>
+                    </p>
                     <Field
                       type="text"
                       name="firstName"
-                      className=" border border-[#DCDCDC] rounded-3xl w-full py-3 px-3 text-black text-[12px] "
+                      className=" border themed-dash-input border-[#DCDCDC] rounded-3xl w-full py-3 px-3 text-black text-[12px] "
                       placeholder="نام خود را وارد کنید"
-                      value={form.values.firstName}
                     />
                     <ErrorMessage
                       name="firstName"
@@ -104,15 +103,14 @@ const UserInfo = () => {
                     />
                   </div>
                   <div className="w-1/2">
-                    <label className="block font-yekan-600  text-black text-sm  mb-2">
+                    <p className="block font-yekan-600  text-black text-sm  mb-2">
                       نام خانوادگی
-                    </label>
+                    </p>
                     <Field
                       type="text"
                       name="lastName"
-                      className="border border-[#DCDCDC] rounded-3xl w-full py-3 px-3 text-black text-[12px] "
+                      className="border themed-dash-input border-[#DCDCDC] rounded-3xl w-full py-3 px-3 text-black text-[12px] "
                       placeholder="نام خانوادگی خود را وارد کنید"
-                      value={form.values.lastName}
                     />
                     <ErrorMessage
                       name="lastName"
@@ -124,15 +122,14 @@ const UserInfo = () => {
               </div>
 
               <div className="mb-6">
-                <label className="block font-yekan-600  text-black text-sm  mb-2">
+                <p className="block font-yekan-600  text-black text-sm  mb-2">
                   درباره من
-                </label>
+                </p>
                 <Field
                   as="textarea"
                   name="userAbout"
-                  className="border border-[#DCDCDC] rounded-3xl w-full h-[123px] py-3 px-3 text-black text-[12px] "
+                  className="border themed-dash-input border-[#DCDCDC] rounded-3xl w-full h-[123px] py-3 px-3 text-black text-[12px] "
                   placeholder="متنی درباره خود را وارد کنید"
-                  value={form.values.userAbout}
                 />
                 <ErrorMessage
                   name="userAbout"
@@ -144,15 +141,14 @@ const UserInfo = () => {
               <div className="mb-6">
                 <div className="flex space-x-4">
                   <div className="w-1/2">
-                    <label className="block font-yekan-600  text-black text-sm  mb-2">
+                    <p className="block font-yekan-600  text-black text-sm  mb-2">
                       شماره همراه
-                    </label>
+                    </p>
                     <Field
                       type="tel"
                       name="phoneNumber"
-                      className="border border-[#DCDCDC] rounded-3xl w-full py-3 px-3 text-black text-[12px] "
+                      className="border themed-dash-input border-[#DCDCDC] rounded-3xl w-full py-3 px-3 text-black text-[12px] "
                       placeholder="شماره همراه خود را وارد کنید"
-                      value={form.values.phoneNumber}
                     />
                     <ErrorMessage
                       name="phoneNumber"
@@ -161,15 +157,14 @@ const UserInfo = () => {
                     />
                   </div>
                   <div className="w-1/2">
-                    <label className="block font-yekan-600  text-black text-sm  mb-2">
+                    <p className="block font-yekan-600  text-black text-sm  mb-2">
                       کد ملی
-                    </label>
+                    </p>
                     <Field
                       type="text"
                       name="nationalCode"
-                      className="border border-[#DCDCDC] rounded-3xl w-full py-3 px-3 text-black text-[12px]"
+                      className="border themed-dash-input border-[#DCDCDC] rounded-3xl w-full py-3 px-3 text-black text-[12px]"
                       placeholder="کد ملی خود را وارد کنید"
-                      value={form.values.nationalCode}
                     />
                     <ErrorMessage
                       name="nationalCode"
@@ -182,14 +177,14 @@ const UserInfo = () => {
 
               <div className="mb-6 flex flex-row gap-4">
                 <div className="w-1/2">
-                  <label className="block font-yekan-600  text-black text-sm  mb-2">
+                  <p className="block font-yekan-600  text-black text-sm  mb-2">
                     تاریخ تولد
-                  </label>
+                  </p>
                   <div className="relative">
                     <Field
                       type="date"
                       name="birthday"
-                      className="border border-[#DCDCDC] rounded-3xl w-full py-3 px-3 text-black text-[12px] "
+                      className="border themed-dash-input border-[#DCDCDC] rounded-3xl w-full py-3 px-3 text-black text-[12px] "
                       placeholder="تاریخ تولد خود را وارد کنید"
                     />
                     <div className="absolute  pl-3 ">
@@ -204,28 +199,14 @@ const UserInfo = () => {
                 </div>
 
                 <div className="w-1/2">
-                  <label className="block font-yekan-600  text-black text-sm  mb-2">
+                  <p className="block font-yekan-600  text-black text-sm  mb-2">
                     جنسیت
-                  </label>
+                  </p>
                   <div className="flex items-center space-x-4">
-                    <div>
-                      <label className="text-gray-700 text-sm">مرد</label>
-                      <Field
-                        type="radio"
-                        name="gender"
-                        value="male"
-                        className="mr-2"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-gray-700 text-sm">زن</label>
-                      <Field
-                        type="radio"
-                        name="gender"
-                        value="female"
-                        className="mr-2"
-                      />
-                    </div>
+                    <p className="text-gray-700 text-sm">مرد</p>
+                    <Field type="radio" name="gender" value="male" />
+                    <p className="text-gray-700 text-sm">زن</p>
+                    <Field type="radio" name="gender" value="female" />
                     <div>
                       <button
                         type="button"
@@ -244,15 +225,14 @@ const UserInfo = () => {
               </div>
 
               <div className="mb-6">
-                <label className="block font-yekan-600  text-black text-sm  mb-2">
+                <p className="block font-yekan-600  text-black text-sm  mb-2">
                   ایمیل
-                </label>
+                </p>
                 <Field
                   type="email"
                   name="email"
-                  className="border border-[#DCDCDC] rounded-3xl w-4/5 py-3 px-3 text-black text-[12px] "
+                  className="border themed-dash-input border-[#DCDCDC] rounded-3xl w-full py-3 px-3 text-black text-[12px] "
                   placeholder="ایمیل خود را وارد کنید"
-                  value={form.values.email}
                 />
                 <ErrorMessage
                   name="email"
@@ -262,15 +242,14 @@ const UserInfo = () => {
               </div>
 
               <div className="mb-6">
-                <label className="block font-yekan-600  text-black text-sm  mb-2">
+                <p className="block font-yekan-600  text-black text-sm  mb-2">
                   آدرس سکونت
-                </label>
+                </p>
                 <Field
                   type="text"
                   name="homeAddress"
-                  className="border border-[#DCDCDC] rounded-3xl w-4/5 py-3 px-3 text-black text-[12px] "
+                  className="border themed-dash-input border-[#DCDCDC]  rounded-3xl w-full py-3 px-3 text-black text-[12px] "
                   placeholder="آدرس محل سکونت خود را وارد کنید"
-                  value={form.values.homeAddress}
                 />
                 <ErrorMessage
                   name="homeAddress"

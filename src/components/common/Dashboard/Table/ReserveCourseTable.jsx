@@ -20,8 +20,8 @@ const ReservedCoursesTable = ({ showAccept,searchTerm }) => {
   useEffect(() => {
     if (courseReserved) {
       const term = searchTerm?.toLowerCase();
-      const newFilteredCourses = courseReserved.filter(course =>
-        course.courseName.toLowerCase().includes(term)
+      const newFilteredCourses = courseReserved?.filter(course =>
+        course?.courseName.toLowerCase().includes(term)
       );
       setfilteredReservedCourses(newFilteredCourses);
     }
@@ -45,7 +45,7 @@ const ReservedCoursesTable = ({ showAccept,searchTerm }) => {
   });
   return (
     <div className="mt-4 px-4 lg:px-4 lg:mt-5  overflow-auto">
-      <div className="bg-[#F1F1F1] text-[#707070] rounded-[16px] gap-[30px] p-3 flex text-sm font-yekan-600 text-nowrap">
+      <div className="bg-[#F1F1F1] themed-dashTable-header text-[#707070] rounded-[16px] gap-[30px] p-3 flex text-sm font-yekan-600 text-nowrap">
         <p className=" w-[10%]">#</p>
         <p className=" w-[19%]">نام</p>
         <p className=" w-[19%]">مدرس</p>
@@ -54,12 +54,12 @@ const ReservedCoursesTable = ({ showAccept,searchTerm }) => {
       </div>
 
       <div className=" overflow-y-auto">
-        {filteredReservedCourses?.length === 0 ? (
+        {courseReserved?.length === 0 ? (
           <p className="flex items-center justify-center py-16">
             دوره ای وجود ندارد
           </p>
         ) : (
-          filteredReservedCourses?.map((item) => (
+          courseReserved?.map((item) => (
             <div
               key={item.courseId}
               className="flex items-center gap-[30px] py-[22px] text-nowrap text-sm text-black"

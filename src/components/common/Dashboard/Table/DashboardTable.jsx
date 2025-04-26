@@ -25,7 +25,7 @@ const DashboardTable = ({ showIcon,searchTerm }) => {
   
   return (
     <div className="mt-4 px-4 lg:px-4 lg:mt-5  overflow-auto">
-      <div className="bg-[#F1F1F1] text-[#707070] rounded-[16px] gap-[30px] p-3 flex text-sm font-yekan-600 text-nowrap">
+      <div className="bg-[#F1F1F1] themed-dashTable-header text-[#707070] rounded-[16px] gap-[30px] p-3 flex text-sm font-yekan-600 text-nowrap">
         <p className=" w-[10%]">#</p>
         <p className=" w-[19%]">نام</p>
         <p className=" w-[19%]">مدرس</p>
@@ -33,7 +33,7 @@ const DashboardTable = ({ showIcon,searchTerm }) => {
         <p className=" w-[19%]">سطح</p>
       </div>
 
-      <div className="overflow-y-auto">
+      <div className="overflow-y-auto ">
         {filteredCourses?.length === 0 ? (
           <p className="flex items-center justify-center py-16">
             دوره ای وجود ندارد

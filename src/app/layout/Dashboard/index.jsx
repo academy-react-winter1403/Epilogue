@@ -73,6 +73,7 @@ const DashboardLayout = () => {
         <div className=" bg-[#242424]">
           <Header />
         </div>
+
         <div className="flex flex-row flex-grow px-6 py-3 overflow-y-auto">
           <div className="bg-[#242424] hidden lg:flex text-white flex flex-col max-[1400px]:w-[300px]">
             <DashboardMenu />

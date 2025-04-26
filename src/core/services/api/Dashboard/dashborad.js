@@ -2,6 +2,7 @@ import http from "../../interceptor"; //axios//
 
 export const getUserInfo = async () => {
     try {
+        console.log("fetch")
         const response = await http.get("/SharePanel/GetProfileInfo")
         return response
     } catch (error) {
@@ -71,7 +72,6 @@ export const getFavoriteArticles = async () => {
 export const deletenewseFav = async (RemoveFavNews) => {
     try {
         const result = await http.delete("/News/DeleteFavoriteNews", { data: RemoveFavNews });
-
         return result
     } catch (error) {
         throw false;
@@ -81,6 +81,42 @@ export const deletenewseFav = async (RemoveFavNews) => {
 export const editProfile = async (userInfo) => {
     try {
         const response = await http.put("/SharePanel/UpdateProfileInfo", userInfo)
+        return response
+    } catch (error) {
+        throw error
+    }
+}
+
+export const addProfileImage = async (profile) => {
+    try {
+        const response = await http.post("/SharePanel/AddProfileImage", profile)
+        return response
+    } catch (error) {
+        throw error
+    }
+}
+
+export const selectProfileImage = async (profile) => {
+    try {
+        const response = await http.post("/SharePanel/SelectProfileImage", profile)
+        return response
+    } catch (error) {
+        throw error
+    }
+}
+
+export const deleteProfileImage = async (profile) => {
+    try {
+        const response = await http.delete("/SharePanel/DeleteProfileImage",profile)
+        return response
+    } catch (error) {
+        throw false
+    }
+}
+
+export const changePassword = async (newPassword) => {
+    try {
+        const response = await http.post("/SharePanel/ChangePassword", newPassword)
         return response
     } catch (error) {
         throw error

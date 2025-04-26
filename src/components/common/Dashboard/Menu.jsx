@@ -1,8 +1,5 @@
 // import { Button } from "@heroui/button";
 import React, { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { Cancel01Icon } from "../Icons/Cancel";
 import { Activity01Icon } from "../Icons/ActivityIcon";
 
 import { MenuOption } from "./MenuOption";
@@ -13,8 +10,7 @@ import { Books02Icon } from "../Icons/BookIcon2";
 import { LibraryIcon } from "../Icons/LibraryIcon";
 import { UserSquareIcon } from "../Icons/UserSquerIcon";
 import { MoneySend02Icon } from "../Icons/MoneyIcon";
-// import h1 from "../../../assets/img/h1.svg";
-// import bahr from "../../../assets/img/bahr.svg";
+import { AccountSetting02Icon } from "../Icons/SettingIcon";
 
 const DashboardMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -37,14 +33,20 @@ const DashboardMenu = () => {
               <UserSquareIcon />,
               "/StudentPanel/edite-profile/profile-info","editprofile"
             ],
+            ["تنظیمات", <AccountSetting02Icon />, "/StudentPanel/Setting/Two-Step-Password"],
+            
+
             ["پرداخت ها", <MoneySend02Icon />, "/dashboard/change-password","payment"],
+
           ].map((item, key) => (
             <MenuOption
               key={key}
               title={item[0]}
               icon={item[1]}
               url={item[2]}
+
               id={item[3]}
+
             />
           ))}
           <div className="pt-7 pl-[20px]">
