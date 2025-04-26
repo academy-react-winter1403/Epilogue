@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Time02Icon } from "../../common/Icons/TimeIcon";
-import { Calendar03Icon } from "../../common/Icons/Calender";
 import { getUserInfo } from "../../../core/services/api/Dashboard/dashborad";
 import { useQuery } from "@tanstack/react-query";
+
 import useUserStore from "../../../core/constant/user-info";
+
+import { Calendar03Icon } from "../../common/Icons/Calender";
+
 
 const WelcomeUser = () => {
 

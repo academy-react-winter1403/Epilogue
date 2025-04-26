@@ -9,7 +9,12 @@ import { loginValidation } from "../../core/validations/auth.validation";
 import { setItem } from "../../core/utils/storage.services";
 import toast, { Toaster } from "react-hot-toast";
 
+import useStore from "../../core/constant/store/zustand-store";
+
+import ReCAPTCHA from "react-google-recaptcha";
+
 export function LogIn() {
+  const setLoginInfo = useStore((state) => state.setLoginInfo);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
 
@@ -17,10 +22,13 @@ export function LogIn() {
     setShowPassword((prevState) => !prevState);
   };
 
+  const [capVal,setCapVal] = useState(null)
+
   const handleSubmit = async (value) => {
     const data = await loginStep1(value);
 
     if (data.success) {
+
       toast.success(data.message);
       if (data?.token) {
         setItem("token", data?.token);
@@ -191,20 +199,23 @@ export function LogIn() {
                         </div>
                       </div>
 
+                      <ReCAPTCHA
+                      className="mt-4 ml4"
+                      sitekey="6LedyxwrAAAAAOi0djfPgX1O4PdzquEjpIiW5z6U"
+                      onChange={vall => setCapVal(vall)}/>
                       <button
                         type="submit"
+                        disabled={!capVal}
                         className="w-[398px] cursor-pointer bg-blue-500 text-white p-2 rounded-[40px] hover:bg-blue-600 mt-[31px]"
                       >
                         ورود به حساب
                       </button>
-
                       <div className="flex w-[276px] h-[23px] relative right-14 top-[16px]">
                         <div className="w-2.75/5">
                           <h3 className="font-semibold text-base">
                             حساب کاربری ندارید؟
                           </h3>
                         </div>
-
                         <div className="w-2.25/5 text-center relative right-[8px]">
                           <Link
                             to={"/auth/RegisterPage"}

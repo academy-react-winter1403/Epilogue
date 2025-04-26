@@ -23,24 +23,29 @@ const DashboardMenu = () => {
       <div className="flex flex-col w-[250px] h-full bg-[#242424] text-white">
         <div className=" space-y-1 flex flex-col ">
           {[
-            ["داشبورد", <Activity01Icon />, "/StudentPanel/dashboard"],
-            ["دوره من", <CourseIcon />, "/StudentPanel/my-courses"],
-            ["رزرو من", <Book02Icon />, "/StudentPanel/my-reserve"],
+            ["داشبورد", <Activity01Icon />, "/StudentPanel/dashboard",'dashboard'],
+            ["دوره من", <CourseIcon />, "/StudentPanel/my-courses","mycourse"],
+            ["رزرو من", <Book02Icon />, "/StudentPanel/my-reserve","reserve"],
+            ["دوره های موردعلاقه", <Books02Icon />, "/StudentPanel/course-fav","myfavcourse"],
+            ["بلاگ های موردعلاقه", <LibraryIcon />, "/StudentPanel/blog-fav","myfavblog"],
             [
-              "دوره های موردعلاقه",
-              <Books02Icon />,
-              "/StudentPanel/course-fav",
+              "پروفایل",
+              <UserSquareIcon />,
+              "/StudentPanel/edite-profile/profile-info","editprofile"
             ],
-            ["بلاگ های موردعلاقه", <LibraryIcon />, "/StudentPanel/blog-fav"],
-            ["پروفایل", <UserSquareIcon />, "/StudentPanel/edite-profile/profile-info"],
             ["تنظیمات", <AccountSetting02Icon />, "/StudentPanel/Setting/Two-Step-Password"],
             
+
+            ["پرداخت ها", <MoneySend02Icon />, "/dashboard/change-password","payment"],
+
           ].map((item, key) => (
             <MenuOption
               key={key}
               title={item[0]}
               icon={item[1]}
               url={item[2]}
+
+              id={item[3]}
 
             />
           ))}

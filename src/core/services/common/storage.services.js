@@ -3,7 +3,13 @@ const setItem = (key, value) => {
 };
 
 const getItem = (key) => {
+<<<<<<< HEAD
+  if(localStorage.getItem(key)){
+    return JSON.parse(localstorage.getItem(key))
+  }return false
+=======
   if (localStorage.getItem(key)) return JSON.parse (localStorage.getItem(key));
+>>>>>>> a84d81b8f5eff428f8bb6dab8c8b69153ccfe8fc
 };
 
 
