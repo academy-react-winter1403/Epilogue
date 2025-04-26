@@ -190,6 +190,7 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
           EmojiIcon={emojiIcon}
           isPending={isReplyPending}
           getReplies={getReplies}
+          postReply={postReply}
           expandedCommentId={expandedCommentId}
           toggleCommentExpansion={toggleCommentExpansion}
         />
