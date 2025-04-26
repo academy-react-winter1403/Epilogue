@@ -1,16 +1,17 @@
 import http from "../../../interceptor"; //axios//
 
 export const postAddLikeComment = async (newsId) => {
-    try {
-        const result = await http.post(`/News/CommentLike/${newsId}?LikeType=true`);
-        console.log("likeeee shooddd",result);
-        return result;
+    console.log(newsId)
+    // try {
+    //     const result = await http.post(`/News/CommentLike/${newsId}?LikeType=true`);
+    //     console.log("likeeee",result);
+    //     return result;
       
-    } catch (error) {   
-        console.log(error,"no");
-        return error;
+    // } catch (error) {   
+    //     console.log(error,"no");
+    //     return error;
         
-    }
+    // }
 };
 
 export const postAddDislikeComment = async (newsId) => {

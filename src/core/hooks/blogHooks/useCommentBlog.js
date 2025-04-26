@@ -12,6 +12,7 @@ export const useGetCommentBlog = (newsId) => {
       select: (data) => Array.isArray(data) ? data : []
     });
   };
+  
 export const usePostCommentBlog = () => {
   const queryClient = useQueryClient();
   
@@ -19,8 +20,10 @@ export const usePostCommentBlog = () => {
     mutationFn: ({newsId, ...commentData}) => postAddComment(newsId, commentData),
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries(['blogDetails', variables.newsId]);
+     
     },
   });
+  
 };
 
 export const usePostCommentReply = () => { 
