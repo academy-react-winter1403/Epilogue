@@ -22,7 +22,7 @@ const DetailBlog = ({newsId, blog}) => {
         </div>
        
         <div className='w-full mr-50 md:mr-[-40px] md:self-start flex flex-col gap-4 lg:gap-6 justify-center items-start'>
-            <h2 className="w-[124px] h-[29px] font-dana font-bold text-xl lg:text-2xl leading-[100%] tracking-[0%] text-right text-gray-800 whitespace-nowrap">توضیحات دوره</h2>
+            <h2 className="w-[124px] h-[29px] font-dana font-bold text-xl lg:text-2xl leading-[100%] tracking-[0%] text-right text-gray-800 whitespace-nowrap"> </h2>
 
             <div className="w-[50%] md:w-full lg:w-full font-dana font-medium lg:text-lg  text-black font-medium text-base leading-none tracking-normal text-righ">{blog?.detailsNewsDto?.describe}</div>
 

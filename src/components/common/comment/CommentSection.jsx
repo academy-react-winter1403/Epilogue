@@ -21,7 +21,6 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
   const [expandedCommentId, setExpandedCommentId] = useState(null);
 
   const { data: comments = [], isLoading, isError } = getComment || {};
-  console.log(comments,'bkhtt bsoze asmon')
   const { mutate: addComment, isPending: isCommentPending } = postComment || {};
   const { mutate: addReply, isPending: isReplyPending } = postReply || {};
 
