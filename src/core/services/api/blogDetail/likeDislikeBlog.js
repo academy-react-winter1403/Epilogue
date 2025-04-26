@@ -1,6 +1,7 @@
 import http from "../../interceptor"; //axios//
 
 export const postLikeBlog = async (newsId) => {
+    console.log(newsId,'asuhashaviaspviavaopvja parsa')
     try {
         const result = await http.post(`/News/NewsLike/${newsId}`);
         return result;

@@ -1,11 +1,12 @@
 
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { postAddDislikeComment,deleteLikeComment, postAddLikeComment } from '../../services/api/blogDetail/comment/postAddLikeDislikeComment.js';
+import { postLikeBlog } from '../../services/api/blogDetail/likeDislikeBlog.js';
 export const useLikeBlog = (newsId) => {
     const queryClient = useQueryClient();
 
      const likeMutation  = useMutation({
-        mutationFn: () => postAddLikeComment(newsId),
+        mutationFn: () => postLikeBlog(newsId),
         onSuccess: () => {
           queryClient.invalidateQueries(['blogDetails-likee']);
         },
