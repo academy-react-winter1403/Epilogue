@@ -31,7 +31,7 @@ export function LogIn() {
 
       toast.success(data.message);
       if (data?.token) {
-        setItem("token", data?.token);
+        localStorage.setItem("token", data?.token);
         navigate("/StudentPanel/dashboard");
       } else {
         navigate("/auth/login2");

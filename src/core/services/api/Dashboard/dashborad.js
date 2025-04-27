@@ -1,9 +1,10 @@
-import http from "../../interceptor"; //axios//
+import http from "../../interceptor/index"; //axios//
 
 export const getUserInfo = async () => {
     try {
-        console.log("fetch")
+       
         const response = await http.get("/SharePanel/GetProfileInfo")
+        console.log(response)
         return response
     } catch (error) {
         throw error

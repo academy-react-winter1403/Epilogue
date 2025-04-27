@@ -1,5 +1,6 @@
 import React from "react";
 import BestCourse from "./BestCourse";
+import { Link } from "react-router-dom";
 
 const BestCourseWrapper = ({ course }) => {
   return (
@@ -14,9 +15,13 @@ const BestCourseWrapper = ({ course }) => {
             .map((item, index) => <BestCourse key={index} data={item} />)}
       </div>
       <div className="flex flex-row items-center justify-center pt-12">
+      <Link to={"/CourseList"}>
+
         <button className="w-[125px] font-yekan-500 cursor-pointer h-[39px] rounded-[40px] text-white bg-[#2F2F2F]">
           مشاهده بیشتر
         </button>
+      </Link>
+
       </div>
     </>
   );

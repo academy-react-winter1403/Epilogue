@@ -27,8 +27,6 @@ const Header = () => {
     setIsLoggedIn(!!token);
   }, []);
 
-
-
   return (
     <div>
       <div className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-10 bg-background text-text">
@@ -39,14 +37,40 @@ const Header = () => {
           <img src={h1} className="pr-2 sm:h-9" alt="Logo" />
         </div>
         <div className="flex lg:flex-1">
-          <div className="m-auto mx-[175px] items-center justify-center hidden lg:flex lg:gap-x-8 bg-[#2F2F2F] rounded-[56px] pl-1 pr-[24px] py-[5px]">
-            <NavLink to="/" className="relative py-2 text-[16px] text-white">
+          <div className="m-auto mx-[235px] items-center justify-center hidden lg:flex lg:gap-x-8 bg-[#2F2F2F] rounded-[56px] pl-1 pr-[24px] py-[5px]">
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                `relative py-2 text-[16px] text-white flex flex-col items-center ${
+                  isActive ? "after:block" : "after:hidden"
+                } 
+    after:content-[''] after:w-2 after:h-2 after:rounded-full after:bg-[#3772FF] after:mt-1`
+              }
+            >
               خانه
             </NavLink>
-            <NavLink to="/CourseList" className="relative py-2 text-white">
+
+            <NavLink
+              to="/CourseList"
+              className={({ isActive }) =>
+                `relative py-2 text-white flex flex-col items-center ${
+                  isActive ? "after:block" : "after:hidden"
+                } 
+    after:content-[''] after:w-2 after:h-2 after:rounded-full after:bg-[#3772FF] after:mt-1`
+              }
+            >
               دوره ها
             </NavLink>
-            <NavLink to="/BlogeList" className="relative py-2 text-white">
+
+            <NavLink
+              to="/BlogeList"
+              className={({ isActive }) =>
+                `relative py-2 text-white flex flex-col items-center ${
+                  isActive ? "after:block" : "after:hidden"
+                } 
+    after:content-[''] after:w-2 after:h-2 after:rounded-full after:bg-[#3772FF] after:mt-1`
+              }
+            >
               بلاگ ها
             </NavLink>
 

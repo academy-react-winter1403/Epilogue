@@ -1,5 +1,4 @@
 import React from "react";
-import { ProfileMenuOption } from "../../../components/common/Dashboard/ProfileMenuOption";
 import ProfileMenu from "../../../components/common/Dashboard/ProfileMenu";
 import { Outlet } from "react-router-dom";
 import NavMenu from "../../../components/common/Dashboard/NavMenu";
@@ -7,12 +6,12 @@ import NavMenu from "../../../components/common/Dashboard/NavMenu";
 const ProfileLayout = () => {
   return (
     <div className="flex flex-row flex-grow ">
-      <div className="px-6  md:flex hidden">
+      <div className="px-6 md:flex hidden">
         <ProfileMenu />
       </div>
 
-      <div className="flex-grow overflow-x-auto overflow-hidden">
-        <div className="px-6 pb-6 mt-[90px]">
+      <div className="flex-grow overflow-x-auto  overflow-hidden">
+        <div className="px-6 pb-6  mt-[90px]">
           <Outlet />
         </div>
         <div className="md:hidden flex items-center justify-center ">

@@ -76,12 +76,12 @@ const Sorting = () => {
       <div className="hidden md:block">
         <div className="flex items-center justify-center mt-[72px]">
           <span className="font-bold mt-1.5 ml-4 text-xl">ترتیب</span>
-          <div className="flex gap-2 items-center text-center justify-center">
+          <div className="flex gap-2  ">
             {sortOptions.map((option) => (
               <div
                 key={option.type}
                 onClick={() => handleSortClick(option)}
-                className={`border rounded-full h-10 flex items-center px-4 text-lg font-medium cursor-pointer ${
+                className={`border rounded-full h-10 w-[110px] themed-dash-input flex items-center px-4 text-lg font-medium cursor-pointer ${
                   activeSort === option.type
                     ? "border-[#FF5353] text-[#FF5353]"
                     : "border-gray-300 text-black"

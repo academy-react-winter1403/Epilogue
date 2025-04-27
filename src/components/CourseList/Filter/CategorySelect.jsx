@@ -12,12 +12,12 @@ export const CategorySelect = ({
         <div className="w-[24px] h-[24px]">
           <img src={layersIcon} alt="Category Icon" />
         </div>
-        <label
+        <p
           className="font-medium block mb-[9px] text-base"
           htmlFor="category"
         >
           دسته بندی
-        </label>
+        </p>
       </div>
       <Select
         name="category"
@@ -28,7 +28,7 @@ export const CategorySelect = ({
           setTechCount(1);
         }}
         placeholder="دسته مورد نظر را انتخاب کنید"
-        className="react-select-container px-5 w-[450px] md:w-[298px]"
+        className="react-select-container text-[14px] px-5 w-[450px] md:w-[298px]"
         classNamePrefix="react-select"
         styles={{
           control: (base) => ({

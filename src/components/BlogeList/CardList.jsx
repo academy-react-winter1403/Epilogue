@@ -2,6 +2,7 @@ import { ViewIcon } from "../common/Icons/ViewIcon";
 import dateModifier from "../../core/utils/dateModifier";
 import React from "react";
 import { Calendar03Icon } from "../common/Icons/Calender";
+import { Link } from "react-router-dom";
 
 const CardList = ({ sortedCards, currentCards }) => {
   return (
@@ -12,7 +13,7 @@ const CardList = ({ sortedCards, currentCards }) => {
             key={index}
             className="card w-[322px] ml-auto mr-auto h-[365px] flex flex-col mt-5 md:mt-0 md:w-[462px]"
           >
-            <div className="w-full h-[293px] rounded-[32px] flex flex-col relative text-[#FCFCFC]">
+            <div className="w-full h-[293px]  rounded-[32px] flex flex-col relative text-[#FCFCFC]">
               <img
                 src={
                   card.addUserProfileImage ||
@@ -26,34 +27,38 @@ const CardList = ({ sortedCards, currentCards }) => {
                 }}
               />
             </div>
-            <div className="w-[302px] bg-white p-4 flex flex-col">
-              <h1
-                className="text-2xl font-bold truncate"
-                style={{
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                }}
-              >
-                {card.title || "بدون عنوان"}
-              </h1>
-              <div className="flex justify-between items-center mt-2">
-                <h2 className="font-medium text-[#707070]">
+            <div className="w-[302px]  p-4 flex flex-col">
+              <Link to={"/news-details/" + card.id}>
+                <h1
+                  className="text-2xl font-bold truncate"
+                  style={{
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                  }}
+                >
+                  {card.title || "بدون عنوان"}
+                </h1>
+              </Link>
+
+              <div className="flex items-center justify-between flex-row gap-2 w-full">
+                {/* نام کاربر */}
+                <h2 className="text-[#707070] text-[14px] font-medium truncate  ">
                   {card.addUserFullName || "ناشناس"}
                 </h2>
-                <div className="flex flex-row gap-4">
-                  <p class="mb-3 flex flex-row gap-1 text-nowrap text-[14px] font-yekan-500 text-[#707070] ">
+
+                <div className="flex flex-row gap-3 ">
+                  {/* تاریخ */}
+                  <div className="flex items-center gap-1 text-[14px] text-[#707070] font-yekan-500">
                     {dateModifier(card.insertDate)}
-                    <div className="m-auto">
-                      <Calendar03Icon width={"20px"}height={"20px"} />
-                    </div>
-                  </p>
-                  <p class="mb-3 flex flex-row gap-1 text-nowrap text-[14px] font-yekan-500 text-[#707070] ">
+                    <Calendar03Icon width="18px" height="18px" />
+                  </div>
+
+                  {/* ویو */}
+                  <div className="flex items-center gap-1 text-[14px] text-[#707070] font-yekan-500">
                     {card.currentView}
-                    <div className="m-auto">
-                      <ViewIcon width={"20px"}height={"20px"} />
-                    </div>
-                  </p>
+                    <ViewIcon width="18px" height="18px" />
+                  </div>
                 </div>
               </div>
             </div>

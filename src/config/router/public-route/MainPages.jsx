@@ -29,9 +29,8 @@ export const mainPages = {
       element: <LazyWrapper><Landing /></LazyWrapper>,
     },
     {
-      path: "/course-detail/:CourseId",
+      path: "/course-detail/:courseId",
       element: <CourseDetail />,
-
     },
     {
       path: "/CourseList",

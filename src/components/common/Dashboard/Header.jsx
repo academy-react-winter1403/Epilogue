@@ -10,12 +10,14 @@ import { useQuery } from "@tanstack/react-query";
 import ThemeToggle from "../AnimatedThemeSwitcher";
 import { ColorPickerIcon } from "../Icons/ThemeIcon";
 import { Home04Icon } from "../Icons/HomeIcon";
-
+import http from '../../../core/services/interceptor/index'
 const Header = () => {
   const { data: userInfo } = useQuery({
-    queryKey: ["userInfo"],
-    queryFn: getUserInfo,
+    queryKey: ["userInfo2"],
+    queryFn: () => http.get("/SharePanel/GetProfileInfo"),
+    
   });
+  console.log(userInfo);
 
   return (
     <div className="flex flex-wrap items-center max-w-7xl justify-between p-2 px-5">
@@ -51,8 +53,7 @@ const Header = () => {
                 : ""
             }`
           }
-        >
-        </NavLink>
+        ></NavLink>
       </div>
 
       <div className="fixed  left-0 top-4 flex gap-2 lg:pl-6 hidden lg:flex">
@@ -64,12 +65,11 @@ const Header = () => {
         <button className="rounded-full cursor-pointer p-3 bg-[#2F2F2F]">
           <ThemeToggle />
         </button>
-        <Link  to={"/"}>
-        <button className="rounded-full cursor-pointer p-3 bg-[#2F2F2F]">
-        <Home04Icon />
-        </button>
+        <Link to={"/"}>
+          <button className="rounded-full cursor-pointer p-3 bg-[#2F2F2F]">
+            <Home04Icon />
+          </button>
         </Link>
-        
       </div>
       <ResponsiveMenu />
     </div>

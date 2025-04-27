@@ -68,17 +68,17 @@ const DashboardLayout = () => {
         styles={{ options: { primaryColor: "#3772FF" } }}
       />
 
-      <div className="w-full h-screen bg-[#242424] flex flex-col">
+      <div className="w-full h-screen  bg-[#242424] flex flex-col">
         <Toaster />
         <div className=" bg-[#242424]">
           <Header />
         </div>
 
         <div className="flex flex-row flex-grow px-6 py-3 overflow-y-auto">
-          <div className="bg-[#242424] hidden lg:flex text-white flex flex-col max-[1400px]:w-[300px]">
+          <div className="bg-[#242424] hidden lg:flex text-white flex flex-col">
             <DashboardMenu />
           </div>
-          <div className="flex-grow border w-full bg-white rounded-3xl  overflow-y-auto overflow-hidden">
+          <div className="flex-grow border themed-dashTable-header w-full bg-white rounded-3xl  overflow-y-auto overflow-hidden">
             <Outlet />
           </div>
         </div>
