@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import Pappe from "../../../assets/img/Peppe.png";
 import h1 from "../../../assets/img/h1.svg";
@@ -12,6 +12,7 @@ import { useQuery } from "@tanstack/react-query";
 import AnimatedThemeSwitcher from "../AnimatedThemeSwitcher";
 import ThemeToggle from "../AnimatedThemeSwitcher";
 import { ColorPickerIcon } from "../Icons/ThemeIcon";
+import { Home04Icon } from "../Icons/HomeIcon";
 
 const Header = () => {
   const { data: userInfo } = useQuery({
@@ -45,19 +46,17 @@ const Header = () => {
           </div>
         </div>
         <NavLink
-            to="/"
-            className={({ isActive }) =>
-              `relative py-2 font-yekan-500 text-[16px] text-white text-nowrap ${
-                isActive
-                  ? "before:content-['•'] before:absolute before:-bottom-1 before:left-1/2 before:-translate-x-1/2"
-                  : ""
-              }`
-            }
-          >
-            صفحه اصلی
-          </NavLink>
+          to="/"
+          className={({ isActive }) =>
+            `relative py-2 font-yekan-500 text-[16px] text-white text-nowrap ${
+              isActive
+                ? "before:content-['•'] before:absolute before:-bottom-1 before:left-1/2 before:-translate-x-1/2"
+                : ""
+            }`
+          }
+        >
+        </NavLink>
       </div>
-
 
       <div className="fixed  left-0 top-4 flex gap-2 lg:pl-6 hidden lg:flex">
         <button className="rounded-full w-[48px] h-[48px] bg-[#2F2F2F] text-black ">
@@ -65,9 +64,15 @@ const Header = () => {
             <ColorPickerIcon color={"#ffff"} />
           </div>
         </button>
-        <button className="rounded-full p-3 bg-[#2F2F2F]">
+        <button className="rounded-full cursor-pointer p-3 bg-[#2F2F2F]">
           <ThemeToggle />
         </button>
+        <Link  to={"/"}>
+        <button className="rounded-full cursor-pointer p-3 bg-[#2F2F2F]">
+        <Home04Icon />
+        </button>
+        </Link>
+        
       </div>
       <ResponsiveMenu />
     </div>
