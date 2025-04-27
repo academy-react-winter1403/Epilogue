@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
-import {CourseDetail} from "../../../pages/CourseDetail";
+// import {CourseDetail} from "../../../pages/CourseDetail";
 import { BlogeList } from "../../../components/BlogeList/BlogeList";
 import { Body } from "../../../components/CourseList/Body";
 
@@ -31,8 +31,7 @@ export const mainPages = {
     {
       path: "/course-detail/:CourseId",
       element: <CourseDetail />,
-      path: "/course-detail",
-      element: <LazyWrapper><CourseDetail /></LazyWrapper>,
+
     },
     {
       path: "/CourseList",
