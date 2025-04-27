@@ -13,12 +13,11 @@ const Links = () => {
           <Form className="flex flex-col gap-10 p-4 md:p-6 lg:p-8">
             {/* Telegram Section */}
             <div className="flex flex-col gap-2">
-              <label
-                htmlFor="telegram"
-                className="text-[16px] font-yekan-600  text-black"
+              <p
+                className="text-[16px] font-yekan-600   text-black"
               >
                 تلگرام
-              </label>
+              </p>
               <Field
                 type="text"
                 id="telegram"
@@ -30,12 +29,12 @@ const Links = () => {
 
             {/* LinkedIn Section */}
             <div className="flex flex-col gap-2">
-              <label
+              <p
                 htmlFor="linkedin"
                 className="text-[16px] font-yekan-600  text-black"
               >
                 لینکدین
-              </label>
+              </p>
               <Field
                 type="text"
                 id="linkedin"

@@ -9,6 +9,8 @@ import LinksPage from "../../../pages/Dashboard/Profike/LinksPage";
 import LocationPage from "../../../pages/Dashboard/Profike/LocationPage";
 import ProfileInfoPage from "../../../pages/Dashboard/Profike/ProfileInfoPage";
 import ProfilePicPage from "../../../pages/Dashboard/Profike/ProfilePicPage";
+import ChangePasswordPage from "../../../pages/Dashboard/Setting/ChangePasswordPage";
+import TwoStepPasswordPage from "../../../pages/Dashboard/Setting/TwoStepPasswordPage";
 import StudentPanel from "../../../pages/Dashboard/StudentPanel";
 
 export const dashboard = {
@@ -41,11 +43,11 @@ export const dashboard = {
       children:[
         {
           path: "/StudentPanel/Setting/Two-Step-Password",
-          element: <ProfileInfoPage />,
+          element: <TwoStepPasswordPage />,
         },
         {
-          path: "/StudentPanel/edite-profile/profile-info",
-          element: <ProfileInfoPage />,
+          path: "/StudentPanel/Setting/change-password",
+          element: <ChangePasswordPage />,
         },
       ]
     },

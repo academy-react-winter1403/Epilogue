@@ -2,6 +2,9 @@ import React from "react";
 import { UserSquareIcon } from "../Icons/UserSquerIcon";
 import { Link } from "react-router-dom";
 import { ImageAdd02Icon } from "../Icons/Image-addIcon";
+import { MapsLocation01Icon } from "../Icons/MapIcon";
+import { Link04Icon } from "../Icons/LinksIcon";
+
 
 const NavMenu = () => {
   return (
@@ -26,7 +29,7 @@ const NavMenu = () => {
         </Link>
 
         <Link to={"/StudentPanel/edite-profile/location"}>
-          <ImageAdd02Icon
+          <MapsLocation01Icon
             width={24}
             height={24}
             color={"00000"}
@@ -35,7 +38,7 @@ const NavMenu = () => {
         </Link>
 
         <Link to={"/StudentPanel/edite-profile/links"}>
-          <ImageAdd02Icon
+          <Link04Icon
             width={24}
             height={24}
             color={"00000"}

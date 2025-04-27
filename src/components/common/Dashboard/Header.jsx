@@ -19,7 +19,6 @@ const Header = () => {
     queryFn: getUserInfo,
   });
 
-  
   return (
     <div className="flex flex-wrap items-center max-w-7xl justify-between p-2 px-5">
       <div className=" flex items-center gap-[39px] ">
@@ -45,12 +44,7 @@ const Header = () => {
             </div>
           </div>
         </div>
-      </div>
-
-      {/* NavBar */}
-      <div className=" flex flex-1 pl-[100px] items-center justify-center">
-        <div className="flex gap-6 md:gap-9 lg:gap-16 items-center rounded-[56px] ">
-          <NavLink
+        <NavLink
             to="/"
             className={({ isActive }) =>
               `relative py-2 font-yekan-500 text-[16px] text-white text-nowrap ${
@@ -62,34 +56,8 @@ const Header = () => {
           >
             صفحه اصلی
           </NavLink>
-
-          <NavLink
-            to="/CourseList"
-            className={({ isActive }) =>
-              `relative py-2 font-yekan-500 text-[16px] text-white text-nowrap ${
-                isActive
-                  ? "before:content-['•'] before:absolute before:-bottom-1 before:left-1/2 before:-translate-x-1/2"
-                  : ""
-              }`
-            }
-          >
-            گزارش
-          </NavLink>
-
-          <NavLink
-            to="/NewsList"
-            className={({ isActive }) =>
-              `relative py-2 font-yekan-500 text-[16px] text-white text-nowrap ${
-                isActive
-                  ? "before:content-['•'] before:absolute before:-bottom-1 before:left-1/2 before:-translate-x-1/2"
-                  : ""
-              }`
-            }
-          >
-            ارتباط باما
-          </NavLink>
-        </div>
       </div>
+
 
       <div className="fixed  left-0 top-4 flex gap-2 lg:pl-6 hidden lg:flex">
         <button className="rounded-full w-[48px] h-[48px] bg-[#2F2F2F] text-black ">

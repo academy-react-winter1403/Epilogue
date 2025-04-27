@@ -93,8 +93,9 @@ const WelcomeUser = () => {
           </div>
         </div>
       </div>
-      <div className="flex flex-col item-end text-[16px] text-nowrap font-yekan-500 pt-[25px] pr-[150px]">
+      <div className="flex  text-[16px] font-yekan-500 pt-[25px] pr-[150px]">
         {userInfo?.userAbout}
+
       </div>
     </div>
   );

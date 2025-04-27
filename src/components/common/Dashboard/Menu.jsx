@@ -10,6 +10,7 @@ import { Books02Icon } from "../Icons/BookIcon2";
 import { LibraryIcon } from "../Icons/LibraryIcon";
 import { UserSquareIcon } from "../Icons/UserSquerIcon";
 import { MoneySend02Icon } from "../Icons/MoneyIcon";
+import { AccountSetting02Icon } from "../Icons/SettingIcon";
 
 const DashboardMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,7 +33,8 @@ const DashboardMenu = () => {
             ],
             ["بلاگ های موردعلاقه", <LibraryIcon />, "/StudentPanel/blog-fav"],
             ["پروفایل", <UserSquareIcon />, "/StudentPanel/edite-profile/profile-info"],
-            ["تنظیمات", <MoneySend02Icon />, "/StudentPanel/Setting"],
+            ["تنظیمات", <AccountSetting02Icon />, "/StudentPanel/Setting/Two-Step-Password"],
+            
           ].map((item, key) => (
             <MenuOption
               key={key}

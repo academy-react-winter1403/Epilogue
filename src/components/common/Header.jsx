@@ -92,7 +92,7 @@ const [isColorModalOpen, setIsColorModalOpen] = useState(false);
               درباره ما
             </NavLink>
             {isLoggedIn ? (
-              <Link to={"/StudentPanel/dashboard"}>
+              <Link to={"/StudentPanel/edite-profile/profile-info"}>
                 <img
                   className="size-full rounded-full  w-12 border h-12"
                   src={userInfo?.currentPictureAddress}
@@ -122,8 +122,8 @@ const [isColorModalOpen, setIsColorModalOpen] = useState(false);
   isOpen={isColorModalOpen}
   onClose={() => setIsColorModalOpen(false)}
   onSelect={(color) => {
-    setThemeColor(color); // رنگ رو تنظیم کن
-    setIsColorModalOpen(false); // مودال رو ببند
+    setThemeColor(color); 
+    setIsColorModalOpen(false); 
   }}
 />
           <button className="rounded-full p-3 bg-[#2F2F2F]">

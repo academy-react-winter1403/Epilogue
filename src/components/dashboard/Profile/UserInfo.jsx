@@ -69,7 +69,7 @@ const UserInfo = () => {
       {setUserProfile && (
         <Formik
           initialValues={{
-            firstName: userProfile?.fName || "",
+            firstName: userProfile?.fName,
             lastName: userProfile?.lName || "",
             userAbout: userProfile?.userAbout || "",
             phoneNumber: userProfile?.phoneNumber || "",
@@ -80,7 +80,7 @@ const UserInfo = () => {
             homeAddress: userProfile?.homeAdderess || "",
           }}
           validationSchema={validationSchema}
-          onSubmit={editUserProfile}
+          onSubmit={(values) => editUserProfile(values)}
         >
           {(form) => (
             <Form>
@@ -95,7 +95,6 @@ const UserInfo = () => {
                       name="firstName"
                       className=" border themed-dash-input border-[#DCDCDC] rounded-3xl w-full py-3 px-3 text-black text-[12px] "
                       placeholder="نام خود را وارد کنید"
-                      value={form.values.firstName}
                     />
                     <ErrorMessage
                       name="firstName"
@@ -112,7 +111,6 @@ const UserInfo = () => {
                       name="lastName"
                       className="border themed-dash-input border-[#DCDCDC] rounded-3xl w-full py-3 px-3 text-black text-[12px] "
                       placeholder="نام خانوادگی خود را وارد کنید"
-                      value={form.values.lastName}
                     />
                     <ErrorMessage
                       name="lastName"
@@ -132,7 +130,6 @@ const UserInfo = () => {
                   name="userAbout"
                   className="border themed-dash-input border-[#DCDCDC] rounded-3xl w-full h-[123px] py-3 px-3 text-black text-[12px] "
                   placeholder="متنی درباره خود را وارد کنید"
-                  value={form.values.userAbout}
                 />
                 <ErrorMessage
                   name="userAbout"
@@ -152,7 +149,6 @@ const UserInfo = () => {
                       name="phoneNumber"
                       className="border themed-dash-input border-[#DCDCDC] rounded-3xl w-full py-3 px-3 text-black text-[12px] "
                       placeholder="شماره همراه خود را وارد کنید"
-                      value={form.values.phoneNumber}
                     />
                     <ErrorMessage
                       name="phoneNumber"
@@ -169,7 +165,6 @@ const UserInfo = () => {
                       name="nationalCode"
                       className="border themed-dash-input border-[#DCDCDC] rounded-3xl w-full py-3 px-3 text-black text-[12px]"
                       placeholder="کد ملی خود را وارد کنید"
-                      value={form.values.nationalCode}
                     />
                     <ErrorMessage
                       name="nationalCode"
@@ -238,7 +233,6 @@ const UserInfo = () => {
                   name="email"
                   className="border themed-dash-input border-[#DCDCDC] rounded-3xl w-full py-3 px-3 text-black text-[12px] "
                   placeholder="ایمیل خود را وارد کنید"
-                  value={form.values.email}
                 />
                 <ErrorMessage
                   name="email"
@@ -256,7 +250,6 @@ const UserInfo = () => {
                   name="homeAddress"
                   className="border themed-dash-input border-[#DCDCDC]  rounded-3xl w-full py-3 px-3 text-black text-[12px] "
                   placeholder="آدرس محل سکونت خود را وارد کنید"
-                  value={form.values.homeAddress}
                 />
                 <ErrorMessage
                   name="homeAddress"

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ProfileMenuOption } from './ProfileMenuOption'
+import { SettingMenuOption } from './SettingMenuOption'
 
 const SettingMenu = () => {
   return (
@@ -7,10 +7,10 @@ const SettingMenu = () => {
         <p className=" text-black text-2xl ">تنظیمات </p>
         <div className=" space-y-1 flex flex-col  w-[210px] h-[798px] border-l border-[#DCDCDC]">
           {[
-            ["رمز عبور دو مرحله ای", "/StudentPanel/edite-profile/profile-info"],
-            ["تغیر رمز عبور", "/StudentPanel/edite-profile/profile-pic"]
+            ["رمز عبور دو مرحله ای", "/StudentPanel/Setting/Two-Step-Password"],
+            ["تغیر رمز عبور", "/StudentPanel/Setting/change-password"]
           ].map((item, key) => (
-            <ProfileMenuOption
+            <SettingMenuOption
               key={key}
               title={item[0]}
               url={item[1]}

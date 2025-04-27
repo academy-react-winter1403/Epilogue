@@ -54,12 +54,12 @@ const ReservedCoursesTable = ({ showAccept,searchTerm }) => {
       </div>
 
       <div className=" overflow-y-auto">
-        {filteredReservedCourses?.length === 0 ? (
+        {courseReserved?.length === 0 ? (
           <p className="flex items-center justify-center py-16">
             دوره ای وجود ندارد
           </p>
         ) : (
-          filteredReservedCourses?.map((item) => (
+          courseReserved?.map((item) => (
             <div
               key={item.courseId}
               className="flex items-center gap-[30px] py-[22px] text-nowrap text-sm text-black"

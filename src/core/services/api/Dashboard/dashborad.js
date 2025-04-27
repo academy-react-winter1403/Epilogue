@@ -113,3 +113,12 @@ export const deleteProfileImage = async (profile) => {
         throw false
     }
 }
+
+export const changePassword = async (newPassword) => {
+    try {
+        const response = await http.post("/SharePanel/ChangePassword", newPassword)
+        return response
+    } catch (error) {
+        throw error
+    }
+}

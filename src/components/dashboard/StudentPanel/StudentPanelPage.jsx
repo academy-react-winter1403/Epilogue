@@ -35,12 +35,16 @@ const StudentPanelPage = () => {
 
       <div className="md:col-span-3 rounded-3xl md:flex md:flex-col themed-dashTable bg-[#F6F6F6]">
         <div className="justify-between items-center px-4 py-2 flex flex-row ">
+
           <p className="text-[12px] text-nowrap font-yekan-600">
             وضعیت اطلاعات حساب کاربری
           </p>
+          <Link to={"/StudentPanel/edite-profile/profile-info"}>
           <div className="flex items-center">
             <PencilEdit01Icon width={20} height={20} color={"#3772FF"} />
           </div>
+          </Link>
+          
         </div>
         <div className="mt-[22px] m-auto w-[136px] ">
           <CircularProgressbarWithChildren
