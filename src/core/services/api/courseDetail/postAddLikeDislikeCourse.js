@@ -25,3 +25,15 @@ export const postAddDislikeCourse = async (CourseId) => {
         
     }
 };
+
+export const deleteLikeCourse = async (CourseId) => {
+    try {
+        const result = await http.delete(`/Course/DeleteCourseLike`,{CourseId});
+        return result;
+      
+    } catch (error) {   
+        console.log(error,'delete-like-course');
+        return error;
+        
+    }
+};

@@ -3,6 +3,7 @@ import { RouterProvider } from "react-router-dom";
 import { root } from "../config/router/router";
 import ErrorBoundary from "../components/common/Error/ErrorBoundaires";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "react-hot-toast";
 
 
 const queryClient = new QueryClient();
@@ -14,6 +15,7 @@ const App = () => {
       <ErrorBoundary>
       <RouterProvider router={root} />;
       </ErrorBoundary>
+      <Toaster/>
     </QueryClientProvider>
 
   );

@@ -7,6 +7,7 @@ import { Body } from "../../../components/CourseList/Body";
 const Landing = React.lazy(() => import("../../../pages/Landing"));
 const Root = React.lazy(() => import("../../../app/layout/Landing/Root"));
 const CourseDetail = React.lazy(() => import("../../../pages/CourseDetail"));
+const BlogDetail = React.lazy(() => import("../../../pages/BlogDetail"));
 // const Body = React.lazy(() => import("../../../components/CourseList/Body"));
 // const BlogeList = React(() => import("../../../components/BlogeList/BlogeList"));
 const Spinner = () => (
@@ -29,8 +30,8 @@ export const mainPages = {
       element: <LazyWrapper><Landing /></LazyWrapper>,
     },
     {
-      path: "/course-detail/:courseId",
-      element: <CourseDetail />,
+      path: "/course-detail/:CourseId",
+      element: <LazyWrapper><CourseDetail /></LazyWrapper>,
     },
     {
       path: "/CourseList",
@@ -39,6 +40,10 @@ export const mainPages = {
     {
       path: "/BlogeList",
       element: <BlogeList />,
+    },
+    {
+      path: "/blog-detail/:newsId",
+      element: <LazyWrapper><BlogDetail/></LazyWrapper>
     },
   ],
 };
