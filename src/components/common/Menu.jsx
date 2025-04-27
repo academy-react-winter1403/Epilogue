@@ -84,12 +84,7 @@ const Menu = () => {
                     <div className="border-b w-full px-[20px]"></div>
                   </Link>
                 </a>
-                <a className="py-2">
-                  <Link to="/AboutUs" className="font-bold">
-                    درباره ما
-                    <div className="border-b w-full px-[20px]"></div>
-                  </Link>
-                </a>
+
                 <a className="py-2">
                   <Link to="/AboutUs" className="font-bold">
                     ارتباط باما

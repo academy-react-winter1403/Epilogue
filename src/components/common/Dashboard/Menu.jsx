@@ -36,7 +36,6 @@ const DashboardMenu = () => {
             ["تنظیمات", <AccountSetting02Icon />, "/StudentPanel/Setting/Two-Step-Password"],
             
 
-            ["پرداخت ها", <MoneySend02Icon />, "/dashboard/change-password","payment"],
 
           ].map((item, key) => (
             <MenuOption

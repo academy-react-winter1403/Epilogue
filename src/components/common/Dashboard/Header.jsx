@@ -1,15 +1,12 @@
 import React, { useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 
-import Pappe from "../../../assets/img/Peppe.png";
 import h1 from "../../../assets/img/h1.svg";
 import bahr from "../../../assets/img/bahr.svg";
-import { Moon02Icon } from "../Icons/MoonIcon";
-import useUserStore from "../../../core/constant/user-info";
+
 import ResponsiveMenu from "./ResponsiveMenu";
 import { getUserInfo } from "../../../core/services/api/Dashboard/dashborad";
 import { useQuery } from "@tanstack/react-query";
-import AnimatedThemeSwitcher from "../AnimatedThemeSwitcher";
 import ThemeToggle from "../AnimatedThemeSwitcher";
 import { ColorPickerIcon } from "../Icons/ThemeIcon";
 import { Home04Icon } from "../Icons/HomeIcon";
