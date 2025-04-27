@@ -85,6 +85,14 @@ export function BlogeList() {
         </p>
       </div>
 
+      <div className="block md:hidden mt-10 gap-10 flex">
+        <Sorting />
+        <Filter
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          selectedCategory={selectedCategory}
+        />
+      </div>
 
       <Sorting/>
 
