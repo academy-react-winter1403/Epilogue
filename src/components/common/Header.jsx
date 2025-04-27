@@ -27,45 +27,7 @@ const Header = () => {
     setIsLoggedIn(!!token);
   }, []);
 
-  const toggleDropdown = () => {
-    if (isDropdownOpen) {
-      gsap.to(dropdownRef.current, {
-        y: "-20px",
-        opacity: 0,
-        duration: 0.5,
-        ease: "power2.out",
-        onComplete: () => setDropdownOpen(false),
-      });
-    } else {
-      setDropdownOpen(true);
-    }
-  };
 
-  useEffect(() => {
-    if (isDropdownOpen && dropdownRef.current) {
-      gsap.fromTo(
-        dropdownRef.current,
-        { y: "-20px", opacity: 0 },
-        { y: "0px", opacity: 1, duration: 0.5, ease: "power2.out" }
-      );
-    }
-  }, [isDropdownOpen]);
-
-  const changeTheme = (newTheme) => {
-    setTheme(newTheme);
-    document.documentElement.setAttribute("data-theme", newTheme);
-    console.log(`Theme changed to: ${newTheme}`);
-    console.log(
-      "Background Color:",
-      getComputedStyle(document.documentElement).getPropertyValue("--bg-color")
-    );
-    console.log(
-      "Text Color:",
-      getComputedStyle(document.documentElement).getPropertyValue(
-        "--text-color"
-      )
-    );
-  };
 
   return (
     <div>
@@ -105,10 +67,7 @@ const Header = () => {
             )}
           </div>
         </div>
-      </div>
-
-      <div className="gap-[8px] hidden lg:flex relative">
-        <div className=" gap-[8px] hidden lg:flex">
+        <div className="gap-[8px] hidden lg:flex relative">
           <button
             className="rounded-full w-[48px] h-[48px] border border-[#DCDCDC] text-black"
             onClick={() => setIsColorModalOpen((prev) => !prev)}
@@ -129,8 +88,9 @@ const Header = () => {
             <ThemeToggle />
           </button>
         </div>
-        <Menu />
       </div>
+
+      <Menu />
     </div>
   );
 };
