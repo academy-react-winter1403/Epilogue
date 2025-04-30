@@ -145,7 +145,7 @@ const DetailBox = ({course, CourseId}) => {
                     </motion.button>
                 </div>
                 <AddCourseFavorite CourseId={CourseId} isFav={course?.isUserFavorite}/>
-                <LikeDislikeCourse CourseId={CourseId} currentUserLike={course?.currentUserLike} currentUserDissLike={course?.currentUserDissLike}/>
+                <LikeDislikeCourse CourseId={CourseId}  userLikeId={course?.userLikeId} currentUserLike={course?.currentUserLike} currentUserDissLike={course?.currentUserDissLike}/>
             </div>
         <DetailModal isModalOpen={isModalOpen} closeOverlay={closeOverlay} />
     </div>

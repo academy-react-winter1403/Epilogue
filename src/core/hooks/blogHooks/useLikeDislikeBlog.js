@@ -1,11 +1,10 @@
-
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { postAddDislikeComment,deleteLikeComment, postAddLikeComment } from '../../services/api/blogDetail/comment/postAddLikeDislikeComment.js';
+import { deletelikeBlog, postLikeBlog, postDislikeBlog } from '../../services/api/blogDetail/likeDislikeBlog.js';
 export const useLikeBlog = (newsId) => {
     const queryClient = useQueryClient();
 
      const likeMutation  = useMutation({
-        mutationFn: () => postAddLikeComment(newsId),
+        mutationFn: () => postLikeBlog(newsId),
         onSuccess: () => {
           queryClient.invalidateQueries(['blogDetails-likee']);
         },
@@ -22,7 +21,7 @@ export const useDisLikeBlog = (newsId) => {
     const queryClient = useQueryClient();
 
     const dislikeMutation  = useMutation({
-        mutationFn: () => postAddDislikeComment(newsId),
+        mutationFn: () => postDislikeBlog(newsId),
         onSuccess: () => {
           queryClient.invalidateQueries(['blogDetails-dis']);
         },
@@ -35,11 +34,11 @@ export const useDisLikeBlog = (newsId) => {
   return dislikeMutation
 }
 
-export const useDelLikeBlog = (newsId) => {
+export const useDelLikeBlog = () => {
   const queryClient = useQueryClient();
 
-  const dislikeMutation  = useMutation({
-      mutationFn: () => deleteLikeComment(newsId),
+  const deletelikeMutation  = useMutation({
+      mutationFn: (likeId) => deletelikeBlog(likeId),
       onSuccess: () => {
         queryClient.invalidateQueries(['blogDetails']);
       },
@@ -49,5 +48,5 @@ export const useDelLikeBlog = (newsId) => {
     })
     
       
-return dislikeMutation
+return deletelikeMutation
 }

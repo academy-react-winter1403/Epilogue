@@ -4,7 +4,6 @@ import { StarRating } from '../common/starRating/StarRating.jsx'
 import { div } from 'framer-motion/client'
 
 const DetailCourse = ({course, CourseId}) => {
-   
   return (
     <section className="w-full flex flex-col gap-6 lg:gap-8 px-4 sm:px-6 lg:px-8 justify-center items-center">
 

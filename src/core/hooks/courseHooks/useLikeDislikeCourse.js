@@ -1,5 +1,4 @@
-import {postAddLikeCourse} from '../../services/api/courseDetail/postAddLikeDislikeCourse.js'
-import {postAddDislikeCourse , deleteLikeCourse} from '../../services/api/courseDetail/postAddLikeDislikeCourse.js'
+import {postAddLikeCourse, postAddDislikeCourse, deleteLikeCourse} from '../../services/api/courseDetail/postAddLikeDislikeCourse.js'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 export const useLikeCourse = (CourseId) => {
@@ -24,7 +23,7 @@ export const useDisLikeCourse = (CourseId) => {
     const dislikeMutation  = useMutation({
         mutationFn: () => postAddDislikeCourse(CourseId),
         onSuccess: () => {
-          queryClient.invalidateQueries(['courseDetails']);
+          queryClient.invalidateQueries(['courseDetails-dis']);
         },
         onError: (error) => {
           console.error('Error in dislike:', error);
@@ -34,19 +33,20 @@ export const useDisLikeCourse = (CourseId) => {
   return dislikeMutation
 }
 
-export const useDelLikeCourse = (CourseId) => {
+export const useDeleteLikeCourse = () => {
   const queryClient = useQueryClient();
 
-  const dislikeMutation  = useMutation({
-      mutationFn: () => deleteLikeCourse(CourseId),
+  const deleteikeMutation  = useMutation({
+      mutationFn: (userLikeId) => deleteLikeCourse(userLikeId),
       onSuccess: () => {
-        queryClient.invalidateQueries(['courseDetails']);
+        queryClient.invalidateQueries(['courseDetails-delete']);
       },
       onError: (error) => {
         console.error('Error in dislike:', error);
       }
     })
     
-      
-return dislikeMutation
+return deleteikeMutation
 }
+
+

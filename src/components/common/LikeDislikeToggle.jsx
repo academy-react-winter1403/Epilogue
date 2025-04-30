@@ -2,33 +2,30 @@ import likeIconeActive from "../../assets/icons/like.svg"
 import dislikeIcon from "../../assets/icons/dislike.svg"
 import likeIcone1 from '../../assets/icons/like1.svg'
 import dislikeIconActiv from '../../assets/icons/dislike2.svg'
-import React, {  useState } from 'react'
 
 const LikeDislikeToggle = ({
     currentUserLike,
     currentUserDissLike,
     liked,
     disliked,
-    delLike
+    delLike,
+    userLikeId
   }) => {
   
   
     const hasLiked = currentUserLike === true;
     const hasDisliked = currentUserDissLike === true;
-
-    console.log(delLike)
-    console.log(currentUserLike)
     
     const handleLike = () => {
       if (currentUserLike == true) {
-        delLike.mutate();
+        console.log("Attempting to delete like with ID:", userLikeId); 
+        delLike.mutate(userLikeId);
       } else {
         liked.mutate();
       }
     
     };
   
-
     return (
       <div className="flex gap-4">
         <button
@@ -47,7 +44,7 @@ const LikeDislikeToggle = ({
           className="w-[56px] h-[56px] flex items-center rounded cursor-pointer transition-all duration-200"
         >
           <img 
-            src={hasDisliked ? dislikeIconActiv : dislikeIcon} 
+            src={currentUserDissLike === true ? dislikeIconActiv : dislikeIcon} 
             alt={hasDisliked ? 'Remove dislike' : 'Dislike'} 
             className="cursor-pointer"
           />

@@ -4,6 +4,7 @@ import { LikeDislikeBlog } from './LikeDislikeBlog'
 import { AverageRating } from '../common/starRating/AverageRating'
 import { formatDate } from '../common/formatDate/formatDate'
 const DetailBlogBox = ({newsId , blog}) => {
+console.log(blog?.detailsNewsDto?.likeId, 'likeidddd')
   return (
     <div className='w-[50%] max-w-2xl xl:max-w-4xl h-auto p-4 sm:p-6 flex flex-col justify-between items-center gap-4'>
         <div className="w-[183px] md:w-[244px] h-[34px] md:h-[46px] font-bold text-2xl sm:text-3xl lg:text-4xl text-black mr-[-40px] md:mr-[10px] lg:mr-[0] self-start md:self-start lg:self-start whitespace-nowrap"><h2>{blog?.detailsNewsDto?.title}</h2></div>
@@ -81,7 +82,7 @@ const DetailBlogBox = ({newsId , blog}) => {
             <div className='w-full flex gap-2 items-center justify-center'>
                 <div className='hidden md:block'> <CopyUrlButton/> </div>
                 <BlogFavorite newsId={newsId} isFav={blog?.detailsNewsDto?.isCurrentUserFavorite}/>
-                <LikeDislikeBlog likeId={blog?.detailsNewsDto?.likeId	} newsId={newsId} currentLikeCount={blog?.detailsNewsDto?.currentUserIsLike} currentDissLikeCount={blog?.detailsNewsDto?.currentUserIsDissLike } />
+                <LikeDislikeBlog likeId={blog?.detailsNewsDto?.likeId} newsId={newsId} currentLikeCount={blog?.detailsNewsDto?.currentUserIsLike} currentDissLikeCount={blog?.detailsNewsDto?.currentUserIsDissLike } />
             </div>
     </div>
   )
