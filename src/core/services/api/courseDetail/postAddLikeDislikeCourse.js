@@ -30,7 +30,10 @@ export const deleteLikeCourse = async (userLikeId) => {
     try {
         console.log("Sending delete request for CourseLikeId:", userLikeId);
         const result = await http.delete(`/Course/DeleteCourseLike`, {
-            data: { CourseLikeId: userLikeId }
+            data: { CourseLikeId: userLikeId },
+            headers: {
+                "Content-Type": "application/json"
+            }
         });
         return result;
 

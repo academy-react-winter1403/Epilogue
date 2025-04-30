@@ -26,7 +26,7 @@ export const postDislikeBlog = async (newsId) => {
 };
 
 export const deletelikeBlog = async (newsId) => {
-    console.log(newsId)
+
     try {
         const result = await http.delete(`/News/DeleteLikeNews`, { data:{deleteEntityId: newsId} }, {
             headers: {
