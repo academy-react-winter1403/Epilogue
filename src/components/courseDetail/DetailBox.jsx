@@ -8,7 +8,7 @@ import  {formatDate}  from '../common/formatDate/formatDate'
 import { LikeDislikeCourse } from './likeDislike/LikeDislikeCourse'
 
 const DetailBox = ({course, CourseId}) => {
-    console.log('melikajoon', course?.userLikeId)
+    console.log('melikajoon', course?.userFavoriteId)
     const [isModalOpen, setIsModalOpen] = useState(false)
  
     const openOverlay = () => {
@@ -145,7 +145,7 @@ const DetailBox = ({course, CourseId}) => {
                         <span className='text-white whitespace-nowrap font-bold'>رزرو دوره</span>
                     </motion.button>
                 </div>
-                <AddCourseFavorite CourseId={CourseId} isFav={course?.isUserFavorite}/>
+                <AddCourseFavorite CourseId={CourseId} isFav={course?.isUserFavorite} userFavoriteId={course?.userFavoriteId} />
                 <LikeDislikeCourse CourseId={CourseId} userLikeId={course?.userLikeId} currentUserLike={course?.currentUserLike} currentUserDissLike={course?.currentUserDissLike}/>
             </div>
         <DetailModal isModalOpen={isModalOpen} closeOverlay={closeOverlay} />
