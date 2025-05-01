@@ -157,7 +157,7 @@ export function Body() {
 
       <Pagination
         totalPages={totalPages}
-        currentPage={currentPage}
+        currentPage={pageNumber}
         setPageNumber={setPageNumber}
       />
     </div>

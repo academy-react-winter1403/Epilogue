@@ -140,12 +140,12 @@ const Sorting = () => {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-2 mt-4">
+              <div className=" grid grid-cols-3 gap-5 mt-4">
                 {sortOptions.map((option) => (
                   <div
                     key={option.type}
                     onClick={() => handleSortClick(option)}
-                    className={`border rounded-full h-10 flex items-center px-4 text-lg font-medium cursor-pointer ${
+                    className={`border rounded-full h-10 flex items-center text-center px-4 text-lg font-medium cursor-pointer ${
                       activeSort === option.type
                         ? "border-[#FF5353] text-[#FF5353]"
                         : "border-gray-300 text-black"

@@ -8,7 +8,7 @@ const Pagination = ({ totalPages, currentPage, setPageNumber }) => {
   };
 
   return (
-    <div className="flex justify-center mt-10">
+    <div className="flex justify-center mb-10">
 
       <button
         onClick={() => handlePageChange(currentPage - 1)}

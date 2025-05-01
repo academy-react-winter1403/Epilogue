@@ -19,23 +19,37 @@ export const InstructorSelect = ({ isLoading, error, uniqueTeachers, setTeacherI
         <div>خطا در بارگذاری اساتید: {error.message}</div>
       ) : (
         <Select
-          name="instructor"
-          options={uniqueTeachers}
-          placeholder="استاد مورد نظر را انتخاب کنید"
-          onChange={(option) => {
-            setTeacherId(option.value);
-          }}
-          className="react-select-container text-[14px] px-5 w-[450px] md:w-[298px] h-[48px] rounded-lg "
-          classNamePrefix="react-select"
-          styles={{
-            control: (base) => ({
-              ...base,
-              backgroundColor: "#F1F1F1",
-              borderRadius: "16px",
-              height:"48px"
-            }),
-          }}
-        />
+  name="instructor"
+  options={uniqueTeachers}
+  placeholder="استاد مورد نظر را انتخاب کنید"
+  onChange={(option) => {
+    setTeacherId(option.value);
+  }}
+  className="react-select-container text-[14px] px-5 w-[450px] md:w-[298px] h-[48px] rounded-lg"
+  classNamePrefix="react-select"
+  styles={{
+    control: (base) => ({
+      ...base,
+      backgroundColor: "#F1F1F1",
+      borderRadius: "16px",
+      height: "48px",
+    }),
+    menu: (base) => ({
+      ...base,
+      fontSize: "16px",
+      width:"100%",
+      borderRadius: "12px",
+      overflow: "hidden", 
+    }),
+    option: (base) => ({
+      ...base,
+      fontSize: "16px",
+      width:"100%",
+      padding: "10px",
+      borderRadius: "8px",
+    }),
+  }}
+/>
       )}
     </div>
   );

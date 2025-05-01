@@ -38,6 +38,20 @@ export const CategorySelect = ({
             border: "1px solid #D1D5DB",
             height: "48px",
           }),
+              menu: (base) => ({
+                ...base,
+                fontSize: "16px",
+                width: "100%",
+                borderRadius: "12px", 
+                overflow: "hidden",
+              }),
+              option: (base) => ({
+                ...base,
+                fontSize: "16px",
+                padding: "10px",
+                width:"100%",
+                borderRadius: "8px",
+              }),
         }}
       />
     </div>
