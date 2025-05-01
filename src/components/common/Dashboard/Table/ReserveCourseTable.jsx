@@ -8,11 +8,12 @@ import {
   getReservedCourses,
 } from "../../../../core/services/api/Dashboard/dashborad";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
-const ReservedCoursesTable = ({ showAccept,searchTerm }) => {
-  const { data: courseReserved} = useQuery({
-    queryKey: ["courseReserved"], 
-    queryFn: () => getReservedCourses(), 
+const ReservedCoursesTable = ({ showAccept, searchTerm }) => {
+  const { data: courseReserved } = useQuery({
+    queryKey: ["courseReserved"],
+    queryFn: () => getReservedCourses(),
   });
 
   const [filteredReservedCourses, setfilteredReservedCourses] = useState([]);
@@ -20,13 +21,12 @@ const ReservedCoursesTable = ({ showAccept,searchTerm }) => {
   useEffect(() => {
     if (courseReserved) {
       const term = searchTerm?.toLowerCase();
-      const newFilteredCourses = courseReserved?.filter(course =>
+      const newFilteredCourses = courseReserved?.filter((course) =>
         course?.courseName.toLowerCase().includes(term)
       );
       setfilteredReservedCourses(newFilteredCourses);
     }
   }, [courseReserved, searchTerm]);
-
 
   const deleteReservedCourse = (courseId) => {
     const deletedCourse = { id: courseId };
@@ -92,7 +92,9 @@ const ReservedCoursesTable = ({ showAccept,searchTerm }) => {
                 </div>
               )}
               <div className="mr-[20px] flex px-2 gap-2">
-                <ViewIcon width={24} height={24} cursor={"pointer"} />
+                <Link to={"/course-details/"+item.courseId}>
+                  <ViewIcon width={24} height={24} cursor={"pointer"} />
+                </Link>
                 <Cancel01Icon
                   onClick={() => deleteReservedCourse(item.courseId)}
                   color={"#FF5353"}

@@ -27,46 +27,6 @@ const Header = () => {
     setIsLoggedIn(!!token);
   }, []);
 
-  const toggleDropdown = () => {
-    if (isDropdownOpen) {
-      gsap.to(dropdownRef.current, {
-        y: "-20px",
-        opacity: 0,
-        duration: 0.5,
-        ease: "power2.out",
-        onComplete: () => setDropdownOpen(false),
-      });
-    } else {
-      setDropdownOpen(true);
-    }
-  };
-
-  useEffect(() => {
-    if (isDropdownOpen && dropdownRef.current) {
-      gsap.fromTo(
-        dropdownRef.current,
-        { y: "-20px", opacity: 0 },
-        { y: "0px", opacity: 1, duration: 0.5, ease: "power2.out" }
-      );
-    }
-  }, [isDropdownOpen]);
-
-  const changeTheme = (newTheme) => {
-    setTheme(newTheme);
-    document.documentElement.setAttribute("data-theme", newTheme);
-    console.log(`Theme changed to: ${newTheme}`);
-    console.log(
-      "Background Color:",
-      getComputedStyle(document.documentElement).getPropertyValue("--bg-color")
-    );
-    console.log(
-      "Text Color:",
-      getComputedStyle(document.documentElement).getPropertyValue(
-        "--text-color"
-      )
-    );
-  };
-
   return (
     <div>
       <div className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-10 bg-background text-text">
@@ -77,14 +37,40 @@ const Header = () => {
           <img src={h1} className="pr-2 sm:h-9" alt="Logo" />
         </div>
         <div className="flex lg:flex-1">
-          <div className="m-auto mx-[175px] items-center justify-center hidden lg:flex lg:gap-x-8 bg-[#2F2F2F] rounded-[56px] pl-1 pr-[24px] py-[5px]">
-            <NavLink to="/" className="relative py-2 text-[16px] text-white">
+          <div className="m-auto mx-[235px] items-center justify-center hidden lg:flex lg:gap-x-8 bg-[#2F2F2F] rounded-[56px] pl-1 pr-[24px] py-[5px]">
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                `relative py-2 text-[16px] text-white flex flex-col items-center ${
+                  isActive ? "after:block" : "after:hidden"
+                } 
+    after:content-[''] after:w-2 after:h-2 after:rounded-full after:bg-[#3772FF] after:mt-1`
+              }
+            >
               خانه
             </NavLink>
-            <NavLink to="/CourseList" className="relative py-2 text-white">
+
+            <NavLink
+              to="/CourseList"
+              className={({ isActive }) =>
+                `relative py-2 text-white flex flex-col items-center ${
+                  isActive ? "after:block" : "after:hidden"
+                } 
+    after:content-[''] after:w-2 after:h-2 after:rounded-full after:bg-[#3772FF] after:mt-1`
+              }
+            >
               دوره ها
             </NavLink>
-            <NavLink to="/BlogeList" className="relative py-2 text-white">
+
+            <NavLink
+              to="/BlogeList"
+              className={({ isActive }) =>
+                `relative py-2 text-white flex flex-col items-center ${
+                  isActive ? "after:block" : "after:hidden"
+                } 
+    after:content-[''] after:w-2 after:h-2 after:rounded-full after:bg-[#3772FF] after:mt-1`
+              }
+            >
               بلاگ ها
             </NavLink>
 
@@ -105,10 +91,7 @@ const Header = () => {
             )}
           </div>
         </div>
-      </div>
-
-      <div className="gap-[8px] hidden lg:flex relative">
-        <div className=" gap-[8px] hidden lg:flex">
+        <div className="gap-[8px] hidden lg:flex relative">
           <button
             className="rounded-full w-[48px] h-[48px] border border-[#DCDCDC] text-black"
             onClick={() => setIsColorModalOpen((prev) => !prev)}
@@ -129,8 +112,9 @@ const Header = () => {
             <ThemeToggle />
           </button>
         </div>
-        <Menu />
       </div>
+
+      <Menu />
     </div>
   );
 };

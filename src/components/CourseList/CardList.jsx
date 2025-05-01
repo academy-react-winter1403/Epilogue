@@ -1,5 +1,6 @@
 
 import React from "react";
+import { Link } from "react-router-dom";
  const CardList = ({sortedCards,currentCards}) => {
 
   return (
@@ -26,8 +27,12 @@ import React from "react";
                 }}
               />
             </div>
-            <div className="w-[302px] bg-white pr-5 flex flex-col">
-              <h1 className="text-2xl font-bold">{card.title || "بدون عنوان"}</h1>
+            <div className="w-[302px]  pr-5 flex flex-col">
+          <Link to={"/course-details/" + card.courseId}>
+          <h1 className="text-2xl  cursor-pointer font-bold">{card.title || "بدون عنوان"}</h1>
+          
+          </Link>
+
               <div className="flex justify-between items-center mt-2">
                 <h2 className="font-medium text-[#707070]">{card.teacherName || "ناشناس"}</h2>
                 <div className="flex">

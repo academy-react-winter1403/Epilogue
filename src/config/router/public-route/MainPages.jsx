@@ -17,21 +17,32 @@ const Spinner = () => (
 );
 const LazyWrapper = ({ children }) => (
   <Suspense fallback={<Spinner />}>{children}</Suspense>
-); 
-
+);
 
 export const mainPages = {
   path: "/",
-  element: <LazyWrapper><Root /></LazyWrapper>,
+  element: (
+    <LazyWrapper>
+      <Root />
+    </LazyWrapper>
+  ),
   children: [
     {
       index: true,
       path: "/",
-      element: <LazyWrapper><Landing /></LazyWrapper>,
+      element: (
+        <LazyWrapper>
+          <Landing />
+        </LazyWrapper>
+      ),
     },
     {
-      path: "/course-detail/:CourseId",
-      element: <LazyWrapper><CourseDetail /></LazyWrapper>,
+      path: "/course-details/:CourseId",
+      element: (
+        <LazyWrapper>
+          <CourseDetail />
+        </LazyWrapper>
+      ),
     },
     {
       path: "/CourseList",
@@ -42,8 +53,12 @@ export const mainPages = {
       element: <BlogeList />,
     },
     {
-      path: "/blog-detail/:newsId",
-      element: <LazyWrapper><BlogDetail/></LazyWrapper>
+      path: "/news-details/:newsId",
+      element: (
+        <LazyWrapper>
+          <BlogDetail />
+        </LazyWrapper>
+      ),
     },
   ],
 };

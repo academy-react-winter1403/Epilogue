@@ -1,5 +1,6 @@
 import React from "react";
 import BestBlogs from "./BestBlogs";
+import { Link } from "react-router-dom";
 
 const BestBlogWrapper = ({news}) => {
   return (
@@ -13,9 +14,12 @@ const BestBlogWrapper = ({news}) => {
         })}
       </div>
       <div className="flex flex-row items-center justify-center pb-12">
-        <button className="w-[125px] cursor-pointer h-[39px] rounded-[40px] text-white bg-[#2F2F2F]">
+      <Link to={"/BlogeList"}>
+
+        <button className="w-[125px] font-yekan-500 cursor-pointer h-[39px] rounded-[40px] text-white bg-[#2F2F2F]">
           مشاهده بیشتر
         </button>
+      </Link>
       </div>
     </>
   );

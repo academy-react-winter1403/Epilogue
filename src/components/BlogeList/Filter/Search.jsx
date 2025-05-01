@@ -1,6 +1,7 @@
 import { Field } from "formik";
 import search from "../../../assets/search.png";
 import search2 from "../../../assets/search2.png";
+import { Search01Icon } from "../../common/Icons/SearchIcon";
 
 export const SearchFilter = ({ searchTerm, setSearchTerm, setFieldValue }) => {
   return (
@@ -18,7 +19,10 @@ export const SearchFilter = ({ searchTerm, setSearchTerm, setFieldValue }) => {
       </div>
       <div className="relative flex items-center px-5">
         <div className="absolute left-5 flex items-center justify-center bg-[#3772FF] w-12 h-12 rounded-[16px]">
-          <img src={search2} alt="Search Icon" className="w-6 h-6 text-white" />
+          <div alt="Search Icon" className="w-6 h-6 text-white" >
+          <Search01Icon/> 
+
+          </div >
         </div>
         <Field name="search">
           {({ field }) => (
@@ -26,7 +30,7 @@ export const SearchFilter = ({ searchTerm, setSearchTerm, setFieldValue }) => {
               {...field}
               type="text"
               placeholder="دوره مورد نظر را جست‌جو کنید..."
-              className="bg-[#F1F1F1] p-2 pl-12 focus:outline-none focus:ring-2 focus:ring-blue-400 font-medium text-xs w-[410px] h-[48px] rounded-2xl" // تغییر عرض به 410px
+              className="bg-[#F1F1F1]  themed-dash-input p-2 pl-12 focus:outline-none focus:ring-2 focus:ring-blue-400 font-medium text-xs w-[410px] h-[48px] rounded-2xl" // تغییر عرض به 410px
               value={searchTerm}
               onChange={(e) => {
                 const value = e.target.value;

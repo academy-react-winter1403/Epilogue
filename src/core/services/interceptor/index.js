@@ -30,8 +30,8 @@ instance.interceptors.response.use(onSuccess, onError);
 
 instance.interceptors.request.use((opt) => {
 
-  const token = getItem("token")
-  if (token) opt.headers.Authorization = "Bearer " + token;
+  const token = localStorage.getItem("token")
+  if (token) opt.headers.Authorization = `Bearer ${token}` ;
   return opt;
 });
 

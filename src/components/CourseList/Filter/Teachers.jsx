@@ -9,9 +9,9 @@ export const InstructorSelect = ({ isLoading, error, uniqueTeachers, setTeacherI
         <div className="w-[24px] h-[24px]">
           <img src={teacherIcon} alt="Teacher Icon" />
         </div>
-        <label className="font-medium block mb-[9px] text-base" htmlFor="instructor">
+        <p className="font-medium block mb-[9px] text-base" htmlFor="instructor">
           اساتید
-        </label>
+        </p>
       </div>
       {isLoading ? (
         <div>در حال بارگذاری...</div>
@@ -25,7 +25,7 @@ export const InstructorSelect = ({ isLoading, error, uniqueTeachers, setTeacherI
           onChange={(option) => {
             setTeacherId(option.value);
           }}
-          className="react-select-container px-5 w-[450px] md:w-[298px] h-[48px] rounded-lg "
+          className="react-select-container text-[14px] px-5 w-[450px] md:w-[298px] h-[48px] rounded-lg "
           classNamePrefix="react-select"
           styles={{
             control: (base) => ({

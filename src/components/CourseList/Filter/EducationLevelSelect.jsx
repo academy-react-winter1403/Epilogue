@@ -21,7 +21,7 @@ export const EducationLevelSelect = ({  LevelOptions,setLevelName,}) => {
           setLevelName(option.value);
         }}
         placeholder="سطح آموزشی را انتخاب کنید"
-        className="react-select-container rounded-2xl px-5 w-[450px] md:w-[298px]"
+        className="react-select-container text-[14px] rounded-2xl px-5 w-[450px] md:w-[298px]"
         classNamePrefix="react-select"
         styles={{
           control: (base) => ({

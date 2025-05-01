@@ -8,7 +8,7 @@ import { SearchFilter } from "./Search";
 import { CategorySelect } from "./CategorySelect";
 import { DateRangePicker } from "./DateRangePicker";
 import cancel from '../../../assets/cancel.png'
-import filter from '../../../assets/filter.png'
+
 
 function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
   const [priceRangeState, setPriceRangeState] = useState([0, 100000000]);
@@ -94,7 +94,7 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
     <div>
       <div className="hidden md:block">
         <div
-          className={`w-[278px] h-[665px] border border-[#DCDCDC] rounded-3xl`}
+          className={`w-[278px] h-[370px] border border-[#DCDCDC] rounded-3xl`}
         >
           <h1 className="font-bold text-2xl mt-4 mr-5">فیلتر</h1>
           <Formik
@@ -132,13 +132,7 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
       </div>
 
       <div className="block md:hidden">
-        <div
-          className="w-[95px] h-[48px] rounded-[40px] bg-[#2F2F2F] flex text-[#FCFCFC] cursor-pointer flex items-center justify-center"
-          onClick={openForm}
-        >
-          <img src={filter}/>
-          <span>فیلتر</span>
-        </div>
+
 
         {isFormOpen && (
           <div
