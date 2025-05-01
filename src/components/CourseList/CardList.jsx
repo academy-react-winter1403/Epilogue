@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
     <div className="w-screen h-auto flex-col   md:grid grid-cols-3 gap-[32px] w-[971px]">
       {sortedCards.length > 0 ? (
         sortedCards.map((card, index) => (
-          <div key={index} className="card w-[322px] h-[366px] flex flex-col">
+          <div key={index} className="card w-[322px] h-[366px] ml-30 flex flex-col md:ml-0">
             <div className="w-[322px] h-[293px] rounded-[32px]  flex flex-col p-4 relative text-[#FCFCFC]">
               <div className="absolute top-6 right-7 flex gap-2">
                 <div className="w-[89px] h-[24px] bg-[#FF37F5] text-nowrap text-center font-medium text-sm rounded-[32px] text-[#FCFCFC]">

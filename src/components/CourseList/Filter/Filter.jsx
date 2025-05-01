@@ -1,8 +1,6 @@
 import { Formik, Form } from "formik";
-
-import { useState, useRef,useCallback } from "react";
+import { useState, useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { debounce } from "lodash";
 import axios from "axios";
 import gsap from "gsap";
 import useStore from "../../../core/Store/Zustand-Store";
@@ -83,6 +81,7 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
     value: e?.id,
     label: e?.levelName,
   }));
+
   const openForm = () => {
     setFormOpen(true);
     gsap.fromTo(
@@ -101,13 +100,6 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
       onComplete: () => setFormOpen(false),
     });
   };
-    const debouncedSearch = useCallback(
-    debounce((value) => {
-      console.log("✅ جستجو انجام شد برای:", value);
-      setSearchTerm(value);
-    }, 500),
-    []
-  );
 
   return (
     <div>
@@ -116,7 +108,6 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
         <div
           className={`w-[298px] h-[665px] border border-[#DCDCDC] rounded-3xl`}
         >
-
           <h1 className="font-bold text-2xl mt-4 mr-5">فیلتر</h1>
           <Formik
             initialValues={{
@@ -138,7 +129,7 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
               <Form className="pt-6">
                 <SearchFilter
                   searchTerm={searchTerm}
-                  setSearchTerm={(value) => debouncedSearch(value)}
+                  setSearchTerm={setSearchTerm}
                   setFieldValue={setFieldValue}
                 />
                 <InstructorSelect
@@ -189,7 +180,7 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
               <div className="w-[80px] h-[4px] bg-gray-500 mx-auto mt-2 cursor-grab"></div>
 
               <div
-                className="absolute top-8 left-8 cursor-pointer border border-red-500 p-1 rounded-md flex text-red-500"
+                className="absolute top-5 left-8 cursor-pointer border border-red-500 p-1 rounded-md flex text-red-500"
                 onClick={closeForm}
               >
                 <img src={cancel} alt="بستن" />
@@ -212,11 +203,11 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
                   );
                 }}
               >
-                {({ setFieldValue }) => (
+                {({ setFieldValue, values }) => (
                   <Form>
                     <SearchFilter
                       searchTerm={searchTerm}
-                      setSearchTerm={(value) => debouncedSearch(value)}
+                      setSearchTerm={setSearchTerm}
                       setFieldValue={setFieldValue}
                     />
                     <InstructorSelect
@@ -248,7 +239,15 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
             </div>
           )}
         </div>
-
+        {!isFormOpen && (
+                  <div
+                    className="w-[95px] h-[48px] rounded-[40px] bg-[#2F2F2F] flex text-[#FCFCFC] cursor-pointer flex items-center justify-center"
+                    onClick={openForm}
+                  >
+                    <img src={filter}/>
+                    <span>فیلتر</span>
+                  </div>
+        )}
       </div>
     </div>
   );
