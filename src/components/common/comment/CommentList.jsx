@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import {NewCommentForm} from './NewComponentForm';
 import { formatDate } from '../../common/formatDate/formatDate';
 import { CommentLikeDislikeCourse } from '../../courseDetail/commentCourse/CommentLikeDislikeCourse';
-
+import { CommentLikeDislikeBlog } from '../../blogDetail/commentBlog/CommentLikeDislikeBlog';
 
 const CommentList = ({
   comments,
@@ -71,7 +71,7 @@ const CommentList = ({
     isPending
   }) => (
     <div className="flex flex-col md:flex-row items-start md:items-center gap-2 mt-2 w-full">
-     <CommentLikeDislikeCourse
+     <CommentLikeDislikeBlog
       CourseId={id}
       likeCount={contentId?.likeCount || 0}
       dissLikeCount={contentId?.dissLikeCount || 0}
@@ -138,7 +138,7 @@ const CommentList = ({
                 </div>
               </div>
            
-                <CommentLikeDislikeCourse
+                <CommentLikeDislikeBlog
                   CourseId={id}
                   likeCount={reply?.likeCount || 0}
                   dissLikeCount={reply?.dissLikeCount || 0}

@@ -1,5 +1,6 @@
 import { formatDate } from '../../common/formatDate/formatDate'
 import { CommentLikeDislikeCourse } from '../../courseDetail/commentCourse/CommentLikeDislikeCourse';
+import { CommentLikeDislikeBlog } from '../../blogDetail/commentBlog/CommentLikeDislikeBlog';
 import { motion } from 'framer-motion';
 
 const CommentCard = ({ 
@@ -42,7 +43,7 @@ const CommentCard = ({
           </div>
         </div>
 
-        <CommentLikeDislikeCourse
+        <CommentLikeDislikeBlog
           CourseId={id}
           likeCount={comment?.likeCount || 0}
           dissLikeCount={comment?.dissLikeCount || 0}

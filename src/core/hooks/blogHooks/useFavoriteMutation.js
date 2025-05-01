@@ -2,12 +2,12 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-hot-toast'
 import { postAddBlogFavorite, deleteBlogFavorite } from '../../services/api/blogDetail/favoriteBlog';
 
-export const useFavoriteMutation = (newsId, isFav) => {
+export const useFavoriteMutation = (newsId, isFav , currentUserFavoriteId) => {
     const queryClient = useQueryClient();
     const query = useMutation({
         mutationFn: async () => {
           if (isFav) {
-            return await deleteBlogFavorite(newsId);
+            return await deleteBlogFavorite(currentUserFavoriteId);
           } else {
             return await postAddBlogFavorite(newsId);
           }

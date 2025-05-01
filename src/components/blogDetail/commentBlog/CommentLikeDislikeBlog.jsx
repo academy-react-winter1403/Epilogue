@@ -1,8 +1,9 @@
 import React from 'react'
 import { postAddLikeComment, postAddDislikeComment, deleteLikeComment } from '../../../core/services/api/blogDetail/comment/postAddLikeDislikeComment';
 import { useMutation } from '@tanstack/react-query';
+import { LikeDislikeComment } from '../../common/comment/LikeDislikeComment';
 
-const CommentLikeDislikeCourse = ({newsId, likeCount, dissLikeCount}) => {
+const CommentLikeDislikeBlog = ({newsId, likeCount, dissLikeCount}) => {
     const liked = useMutation({
       mutationFn: () => postAddLikeComment(newsId)
     });
@@ -27,4 +28,4 @@ const CommentLikeDislikeCourse = ({newsId, likeCount, dissLikeCount}) => {
     )
   }
   
-export { CommentLikeDislikeCourse }
+export { CommentLikeDislikeBlog }
