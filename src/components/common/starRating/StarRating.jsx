@@ -6,9 +6,9 @@ import '@smastrom/react-rating/style.css';
 import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { postCourseRating } from '../../../core/services/api/courseDetail/postCourseRating';
-import { postBlogRating } from '../../../core/services/api/blogDetail/posrBlogRating';
+import { postBlogRating } from '../../../core/services/api/blogDetail/postBlogRating';
 
-const StarRating = ({ itemId, type , initialRating , size }) => {
+const StarRating = ({ itemId, type , initialRating , size , RateNumber, currentUserRateNumber}) => {
   const [rating, setRating] = useState(initialRating);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
@@ -45,8 +45,8 @@ const StarRating = ({ itemId, type , initialRating , size }) => {
     try {
       setIsSubmitting(true);
       await (type === 'course' 
-        ? postCourseRating(itemId, newRating) 
-        : postBlogRating(itemId, newRating));
+        ? postCourseRating(itemId, newRating, currentUserRateNumber) 
+        : postBlogRating(itemId, newRating, RateNumber));
       setRating(newRating);
       toast.success('امتیاز ثبت شد');
     } catch {

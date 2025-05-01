@@ -4,7 +4,6 @@ import { StarRating } from '../common/starRating/StarRating.jsx'
 import { div } from 'framer-motion/client'
 
 const DetailCourse = ({course, CourseId}) => {
-   
   return (
     <section className="w-full flex flex-col gap-6 lg:gap-8 px-4 sm:px-6 lg:px-8 justify-center items-center">
 
@@ -33,6 +32,7 @@ const DetailCourse = ({course, CourseId}) => {
                     <div className="w-[71px] h-[23px] font-dana font-semibold text-[16px] leading-[100%] tracking-[0%] text-right text-blue-500 whitespace-nowrap">امتیاز بدید</div>
                     <div className=" w-[140px] h-[28px] rotate-180">
                     <StarRating 
+                    currentUserRateNumber={course?.currentUserRateNumber}
                     itemId={CourseId}
                     type="course" 
                     size="md" 
