@@ -4,6 +4,7 @@ import { StarRating } from '../common/starRating/StarRating.jsx'
 import { div } from 'framer-motion/client'
 
 const DetailCourse = ({course, CourseId}) => {
+
   return (
     <section className="w-full flex flex-col gap-6 lg:gap-8 px-4 sm:px-6 lg:px-8 justify-center items-center">
 
@@ -14,7 +15,7 @@ const DetailCourse = ({course, CourseId}) => {
                     <img src={course?.imageAddress} alt="عکس دوره" className="w-full h-full object-cover rounded-[20px]"/>
                 ):(
                     <div className='w-full h-full rounded-[20px] flex justify-center items-center bg-gray-200'>
-                            <span className="text-gray-500">تصویری موجود نیست</span>
+                        <span className="text-gray-500">تصویری موجود نیست</span>
                     </div>
                 )}
             </div>
@@ -32,10 +33,11 @@ const DetailCourse = ({course, CourseId}) => {
                     <div className="w-[71px] h-[23px] font-dana font-semibold text-[16px] leading-[100%] tracking-[0%] text-right text-blue-500 whitespace-nowrap">امتیاز بدید</div>
                     <div className=" w-[140px] h-[28px] rotate-180">
                     <StarRating 
-                    currentUserRateNumber={course?.currentUserRateNumber}
-                    itemId={CourseId}
-                    type="course" 
-                    size="md" 
+                        RateNumber={course?.currentUserRateNumber}
+                        itemId={CourseId}
+                        userId={course?.isCourseUser}
+                        type="course" 
+                        size="md" 
                     />
                     </div>
                 </div>

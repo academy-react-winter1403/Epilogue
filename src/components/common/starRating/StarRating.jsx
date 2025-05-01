@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { postCourseRating } from '../../../core/services/api/courseDetail/postCourseRating';
 import { postBlogRating } from '../../../core/services/api/blogDetail/postBlogRating';
 
-const StarRating = ({ itemId, type , initialRating , size , RateNumber, currentUserRateNumber}) => {
+const StarRating = ({ itemId, type , initialRating , size , RateNumber, userId}) => {
   const [rating, setRating] = useState(initialRating);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const StarRating = ({ itemId, type , initialRating , size , RateNumber, currentU
   };
 
   const handleRatingChange = async (newRating) => {
-    if (!itemId) {
+    if (!userId || userId === 0 || userId === false) {
       toast.custom((t) => (
         <div className="bg-white p-4 rounded-lg shadow-lg border border-gray-200">
           <p className="text-sm text-gray-700 mb-2">برای امتیاز دادن وارد شوید</p>
@@ -45,7 +45,7 @@ const StarRating = ({ itemId, type , initialRating , size , RateNumber, currentU
     try {
       setIsSubmitting(true);
       await (type === 'course' 
-        ? postCourseRating(itemId, newRating, currentUserRateNumber) 
+        ? postCourseRating(itemId, newRating, RateNumber) 
         : postBlogRating(itemId, newRating, RateNumber));
       setRating(newRating);
       toast.success('امتیاز ثبت شد');
