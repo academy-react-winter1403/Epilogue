@@ -32,10 +32,9 @@ const DetailBlog = ({newsId, blog}) => {
                     <div className=" w-[140px] h-[28px] rotate-180">
                     <StarRating 
                         itemId={newsId}
+                        RateNumber={blog?.detailsNewsDto?.RateNumber}
                         type="blog" 
                         size="md" 
-                        userRateNumber={blog?.detailsNewsDto?.currentUserRateNumber}
-                        userSetRate={blog?.detailsNewsDto?.currentUserSetRate}
                     />
                     </div>
                 </div>

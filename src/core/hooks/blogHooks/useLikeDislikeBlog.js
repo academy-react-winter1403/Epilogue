@@ -39,7 +39,7 @@ export const useDisLikeBlog = (newsId) => {
 export const useDelLikeBlog = (newsId) => {
   const queryClient = useQueryClient();
 
-  const dislikeMutation  = useMutation({
+  const deletelikeMutation  = useMutation({
       mutationFn: () => deleteLikeComment(newsId),
       onSuccess: () => {
         queryClient.invalidateQueries(['blogDetails']);
@@ -50,5 +50,5 @@ export const useDelLikeBlog = (newsId) => {
     })
     
       
-return dislikeMutation
+return deletelikeMutation
 }

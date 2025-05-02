@@ -1,14 +1,20 @@
 import { LikeDislikeToggle } from "../../common/LikeDislikeToggle"
-import { useLikeCourse, useDisLikeCourse, useDelLikeCourse } from "../../../core/hooks/courseHooks/useLikeDislikeCourse"
+import { useLikeCourse, useDisLikeCourse, useDeleteLikeCourse } from "../../../core/hooks/courseHooks/useLikeDislikeCourse"
 
-const LikeDislikeCourse = ({CourseId, currentUserLike, currentUserDissLike}) => {
+const LikeDislikeCourse = ({CourseId, currentUserLike, currentUserDissLike, userLikeId}) => {
 
     const liked = useLikeCourse(CourseId)
     const disliked = useDisLikeCourse(CourseId)
-    const delLike = useDelLikeCourse(CourseId)
+    const delLike = useDeleteLikeCourse()
 
   return (
-    <LikeDislikeToggle CourseId={CourseId} currentUserLike={currentUserLike} currentUserDissLike={currentUserDissLike} liked={liked} disliked={disliked} delLike={delLike} />
+    <LikeDislikeToggle 
+    currentUserLike={currentUserLike} 
+    currentUserDissLike={currentUserDissLike} 
+    liked={liked} 
+    disliked={disliked} 
+    delLike={delLike}
+    userLikeId={userLikeId} />
   )
 }
 

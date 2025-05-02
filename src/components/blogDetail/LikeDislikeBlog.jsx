@@ -1,7 +1,7 @@
 import { LikeDislikeToggle } from "../common/LikeDislikeToggle"
 import { useLikeBlog, useDisLikeBlog, useDelLikeBlog } from "../../core/hooks/blogHooks/useLikeDislikeBlog"
 
-const LikeDislikeBlog = ({newsId,likeId, currentLikeCount, currentDissLikeCount}) => {
+const LikeDislikeBlog = ({newsId, currentLikeCount, currentDissLikeCount}) => {
 
     const liked = useLikeBlog(newsId)
     const disliked = useDisLikeBlog(newsId)
@@ -9,7 +9,12 @@ const LikeDislikeBlog = ({newsId,likeId, currentLikeCount, currentDissLikeCount}
     console.log(newsId)
 
   return (
-    <LikeDislikeToggle  CourseId={newsId} currentUserLike={currentLikeCount} currentUserDissLike={currentDissLikeCount} liked={liked} disliked={disliked} delLike={delLike} />
+    <LikeDislikeToggle 
+    currentUserLike={currentLikeCount} 
+    currentUserDissLike={currentDissLikeCount} 
+    liked={liked} 
+    disliked={disliked} 
+    delLike={delLike} />
   )
 }
 
