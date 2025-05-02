@@ -28,8 +28,8 @@ const Header = () => {
   }, []);
 
   return (
-    <div>
-      <div className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-10 bg-background text-text">
+    <div className="flex w-full justify-between">
+      <div className=" flex w-full items-center justify-between p-6 lg:px-10 bg-background text-text">
         <div className="flex flex-row-reverse">
           <span className="pr-2 text-[18px] text-[#22445D] hidden lg:flex">
             <img src={bahr} alt="Brand" />

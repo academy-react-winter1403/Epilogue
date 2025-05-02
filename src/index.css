@@ -8,61 +8,9 @@ body{
 html {
 	transition: background-color 0.5s ease, color 0.4s ease;
   }
-
-  html.light {
-	background-color: #ffffff;
-	color: #333333;
-  }
   
-  html.dark {
-	background-color: #242424;
-	color: #ffffff;
-  }
-  html.dark button {
-	background-color: #3a3a3a;
-	color: #ffffff;  }
 
-  html.dark .themed-box {
-	background-color: #2f2f2f;
-	color: #ffffff;
-	border: 1px solid #3a3a3a;
-  }
-  html.dark .themed-box:hover {
-	background-color: #373737;
-  }
-  html.dark .themed-dash {
-	background-color: #303030;
-	color: #ffffff;
-  }
-  html.dark .themed-dash-but {
-	background-color: blue;
-	color: #fffefe;
-  }
-  html.dark .themed-dash-input {
-	background-color: #3a3a3a;
-	color: #ffffff;
-  }
 
-  html.dark .themed-dashTable {
-	background-color: #2a2a2a;
-	color: #ffffff;
-
-  }
-  html.dark .themed-dashModal {
-	background-color: #5c5656;
-	color: #ffffff;
-  }
-
-  html.dark .themed-dashTable-header {
-	background-color: #333333 ;
-  }
-
-  html.dark h5 {
-	color: #ffffff;
-  }
-  html.dark p {
-	color: #ffffff;
-  }
     
 	@font-face {
 	   font-family: Iran YekanThin;
@@ -136,6 +84,14 @@ html {
 		url('assets/font/Woff2/IRANYekanXFaNum-Black.woff2') format('Woff2');		 
 	} 
 
+.light{
+		--bg-primary:#ffffff;
+	}
+.dark{
+	--bg-primary:#232323;
+}
+
+
 @theme{
 	--font-yekan-100 : Iran YekanThin;
 	--font-yekan-200 : Iran YekanUltraLight;
@@ -146,4 +102,5 @@ html {
 	--font-yekan-700 : Iran YekanBold;
 	--font-yekan-800 : Iran YekanExtraBold;
 	--font-yekan-900 : Iran YekanBlack;
+	--color-bg-primary : var(--bg-primary)
 }

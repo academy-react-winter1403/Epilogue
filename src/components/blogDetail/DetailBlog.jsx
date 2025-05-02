@@ -5,7 +5,7 @@ import { StarRating } from '../common/starRating/StarRating'
 const DetailBlog = ({newsId, blog}) => {
    
   return (
-    <section className="w-full flex flex-col gap-6 lg:gap-8 px-4 sm:px-6 lg:px-8 justify-center items-center">
+    <section className="w-full flex flex-col gap-6 lg:gap-8 px-4 sm:px-6 lg:px-8 justify-center items-center bg-bg-primary">
 
         <div className='w-[110%] flex flex-col lg:flex-row gap-6 lg:gap-10 justify-center items-center gap-4'>
             <div className="mr-[-30px] w-[361px] md:w-[50%] lg:w-[50%] h-[424px] md:h-[400px] lg:h-[424px] order-2 md:order-2 lg:order-0">

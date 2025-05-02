@@ -1,7 +1,7 @@
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
+import { FileUploader } from "react-drag-drop-files";
 import { ImageAdd02Icon } from "../../../common/Icons/Image-addIcon";
 import { AnimatePresence, motion } from "framer-motion";
-import { useDropzone } from "react-dropzone";
 import { Cancel01Icon } from "../../../common/Icons/Cancel";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
@@ -15,66 +15,48 @@ const ImageModal = () => {
   const [CropperOpen, setCropperOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  const onDrop = useCallback((acceptedFiles) => {
-    console.log("فایل‌های انتخاب‌شده:", acceptedFiles);
-  }, []);
 
   const mutation = useMutation({
     mutationFn: addProfileImage,
     onSuccess: () => {
       toast.success("پروفایل با موفقیت اضافه شد");
-      client.invalidateQueries({ queryKey: ["userInfo"] });
+      client.invalidateQueries({ queryKey: ["userInfo2"] });
     },
   });
 
   const handleCrop = async (data) => {
     const file = convertDataUrlToFile(data);
-    let formData = new FormData();
+    const formData = new FormData();
     formData.append("formFile", file);
     mutation.mutate(formData);
     setCropperOpen(false);
     setOpen(false);
   };
 
-  const handleUploadImage = (e) => {
-    console.log(e, "dropppp");
-    const img = e.target.files?.[0];
+  const handleUploadImage = (img) => {
     if (!img) return;
-
     const reader = new FileReader();
-    reader.addEventListener("load", () => {
-      const imgElement = new Image();
+    reader.onload = () => {
       const imgURL = reader.result?.toString() || "";
+      const imgElement = new Image();
       imgElement.src = imgURL;
-      imgElement.addEventListener("load", (e) => {
+      imgElement.onload = (e) => {
         const { naturalWidth, naturalHeight } = e.currentTarget;
-        console.log(naturalHeight, naturalWidth, "eLoad");
-        if (naturalHeight < 250 && naturalWidth < 250) {
-          toast.error("عکس شما نباید کمتر از 250 پیکسل باشد");
+        if (naturalHeight < 0 && naturalWidth < 0) {
+          toast.error("عکس شما نباید کمتر از ۲۵۰ پیکسل باشد");
           return setImgSrc("");
         }
-      });
-      setImgSrc(imgURL);
-      setCropperOpen(true);
-    });
+        setImgSrc(imgURL);
+        setCropperOpen(true);
+      };
+    };
     reader.readAsDataURL(img);
   };
 
-  const { getRootProps, getInputProps, isDragActive, acceptedFiles } =
-    useDropzone({
-      onDrop,
-      accept: {
-        "image/*": [],
-      },
-      maxFiles: 5,
-      maxSize: 5 * 1024 * 1024,
-    });
-
   return (
-
     <>
       {imgSrc && CropperOpen && (
         <ImgCropper
@@ -89,7 +71,7 @@ const ImageModal = () => {
       <div>
         <button
           onClick={handleOpen}
-          className="bg-blue-500 text-white rounded-full py-2 px-4 flex gap-2 items-center text-[16px]  max-w-xs md:max-w-none"
+          className="bg-blue-500 text-white rounded-full py-2 px-4 flex gap-2 items-center text-[16px] max-w-xs hover:bg-blue-600 transition-colors shadow-md"
         >
           <ImageAdd02Icon />
           <span>افزودن عکس</span>
@@ -98,80 +80,61 @@ const ImageModal = () => {
         <AnimatePresence>
           {open && (
             <motion.div
-              initial={{ opacity: 1 }}
+              initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{
-                type: "spring",
-                mass: 1,
-                stiffness: 80,
-                damping: 10,
-              }}
-              className="fixed w-full h-full top-0 left-0 bg-black/40 z-40 md:backdrop-blur transition-all"
+              className="fixed inset-0 bg-black/30 z-40 flex items-center justify-center"
             >
               <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{
-                  type: "spring",
-                  mass: 1,
-                  stiffness: 80,
-                  damping: 20,
-                }}
-                className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%] md:w-[50%] h-[60%] bg-white rounded-[32px] shadow-lg z-50 p-6 overflow-y-auto"
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.3 }}
+                className="w-[90%] md:w-[500px] bg-white rounded-3xl shadow-xl p-6 relative z-50 overflow-hidden"
               >
                 <button
-                  className="border mb-4 p-2 rounded-full"
                   onClick={handleClose}
+                  className="absolute top-4 left-4 w-10 h-10 rounded-full bg-gray-100 hover:bg-red-100 transition-all flex items-center justify-center shadow-sm z-50"
                 >
-
-                  <div className="flex items-center justify-center">
-                    <Cancel01Icon color={"#e30f0f"} />
-                  </div>
+                  <Cancel01Icon color="#e30f0f" />
                 </button>
-                <div className="w-full max-w-md mx-auto  ">
-                  <div
-                    {...getRootProps()}
-                    onChange={handleUploadImage}
-                    className={`flex flex-col h-full min-h-[200px] items-center justify-center border-2 border-dashed rounded-2xl p-8 transition-all cursor-pointer ${
-                      isDragActive
-                        ? "border-blue-500 bg-blue-50"
-                        : "border-gray-300 hover:border-blue-400 hover:bg-blue-50"
-                    }`}
+
+                <div className="w-full">
+                  <FileUploader
+                    handleChange={handleUploadImage}
+                    name="file"
+                    types={["JPG", "PNG", "JPEG"]}
+                    maxSize={5}
+                    multiple={false}
                   >
-                    <input {...getInputProps()} />
-                    <p className="text-gray-700 font-yekan text-sm text-center">
-                      فایلت رو بکش اینجا یا کلیک کن برای انتخاب
-                    </p>
-                    <p className="text-gray-400 text-xs mt-1">
-                      فایلت فقط میتونه عکس باشه، حداکثر ۵ فایل
-                    </p>
-                  </div>
-                </div>
-                {acceptedFiles.length > 0 && (
-                  <div className="mt-4 space-y-1 text-sm text-gray-700">
-                    <p className="font-yekan-600">فایل‌های انتخاب‌شده:</p>
-                    <ul className="list-disc list-inside">
-                      {acceptedFiles.map((file, index) => (
-                        <li key={index}>
-                          {file.name} - {(file.size / 1024 / 1024).toFixed(2)}{" "}
-                          MB
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-                <div className="flex justify-end mt-2">
-                  <button
-                    onClick={() => {
-                      console.log("فایل‌ها ثبت شدند:", acceptedFiles);
-                      handleClose();
-                    }}
-                    className="bg-green-500 text-white px-6 py-1 rounded-full hover:bg-green-600 transition-all"
-                  >
-                    ثبت
-                  </button>
+                    <div className="group flex flex-col items-center justify-center gap-3 min-h-[220px] w-full border-2 border-dashed border-gray-300 rounded-2xl p-8 cursor-pointer bg-white hover:border-blue-400 hover:bg-blue-50 transition-all text-center shadow-inner">
+                      <div className="flex items-center justify-center w-16 h-16 bg-blue-100 rounded-full">
+                        <svg
+                          className="w-8 h-8 text-blue-500"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M12 16v-8m0 0l-3 3m3-3l3 3m6 1v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5"
+                          />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="text-gray-800 font-semibold text-sm">
+                          عکس رو بنداز اینجا یا کلیک کن
+                        </p>
+                        <p className="text-gray-500 text-xs mt-1">
+                          فقط JPG / JPEG / PNG - حداکثر ۵ مگابایت
+                        </p>
+                      </div>
+                    </div>
+                    
+                  </FileUploader>
+                  
                 </div>
               </motion.div>
             </motion.div>

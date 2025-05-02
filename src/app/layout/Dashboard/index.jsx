@@ -78,7 +78,7 @@ const DashboardLayout = () => {
           <div className="bg-[#242424] hidden lg:flex text-white flex flex-col">
             <DashboardMenu />
           </div>
-          <div className="flex-grow border themed-dashTable-header w-full bg-white rounded-3xl  overflow-y-auto overflow-hidden">
+          <div className="flex-grow border themed-dashTable-header  bg-white rounded-3xl  overflow-y-auto overflow-hidden">
             <Outlet />
           </div>
         </div>

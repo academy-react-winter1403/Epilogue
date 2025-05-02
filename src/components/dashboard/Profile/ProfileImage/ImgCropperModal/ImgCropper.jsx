@@ -9,6 +9,7 @@ import setCanvasPreview from "./setCanvasPreview";
 
 const MIN_DIMENSION = 250;
 const ASPECT = 1;
+
 const ImgCropper = ({
   imgSrc,
   Open,
@@ -45,8 +46,8 @@ const ImgCropper = ({
   }, [Open]);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full z-[1000]  bg-black/50">
-      <div className="flex flex-col items-center justify-center  gap-10 max-h-lvh">
+    <div className="fixed top-0 left-0 w-full h-full z-[1000] bg-black/50 flex items-center justify-center">
+      <div className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl w-[90%] md:w-[60%] max-w-xl p-6 flex flex-col items-center gap-8 animate__animated animate__fadeIn">
         <ReactCrop
           crop={crop}
           circularCrop
@@ -60,12 +61,13 @@ const ImgCropper = ({
           <img
             ref={imgRef}
             src={imgSrc}
-            className="h-[80vh]"
+            className="rounded-lg shadow-md max-h-[80vh] w-auto transition-all"
             onLoad={onImageLoad}
           />
         </ReactCrop>
-        <div className="flex items-center bg-blue-400 px-5 py-3 text-2xl rounded-3xl justify-between w-[300px] gap-5">
-          <div
+
+        <div className="flex gap-6 w-full justify-center items-center mt-4">
+          <button
             onClick={() => {
               setLoading(true);
               setCanvasPreview(
@@ -79,23 +81,25 @@ const ImgCropper = ({
               );
               setDataUrl(canvasRef.current.toDataURL());
             }}
-            className="p-4 rounded-full bg-gray-600 text-[#010101] text-sm  cursor-pointer"
+            className="bg-blue-500 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:bg-blue-600 transition-all ease-in-out transform hover:scale-105"
           >
             تایید
-          </div>
-          <div
+          </button>
+
+          <button
             onClick={() => {
               setOpen(false);
             }}
-            className="p-4 rounded-full bg-transparent text-sm border-2 border-gray-600 text-gray-600 font-bold cursor-pointer"
+            className="bg-transparent text-gray-600 font-semibold py-3 px-6 rounded-lg border-2 border-gray-600 hover:border-red-500 hover:text-red-500 transition-all ease-in-out transform hover:scale-105"
           >
-            "X"
-          </div>
+            لغو
+          </button>
         </div>
+
         {crop && (
           <canvas
             ref={canvasRef}
-            className="hidden w-[250px] h-[250px] object-contain  absolute top-0 left-0"
+            className="hidden w-[250px] h-[250px] object-contain absolute top-0 left-0"
           />
         )}
       </div>

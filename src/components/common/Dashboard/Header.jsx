@@ -20,7 +20,7 @@ const Header = () => {
   console.log(userInfo);
 
   return (
-    <div className="flex flex-wrap items-center max-w-7xl justify-between p-2 px-5">
+    <div className="flex flex-wrap items-center max-w-7xl justify-between p-2 px-5 ">
       <div className=" flex items-center gap-[39px] ">
         {/* UserInfo */}
         <div className="flex items-center gap-[50px]">
@@ -56,7 +56,7 @@ const Header = () => {
         ></NavLink>
       </div>
 
-      <div className="fixed  left-0 top-4 flex gap-2 lg:pl-6 hidden lg:flex">
+      <div className=" absolute  left-0 top-4 flex gap-2 lg:pl-6 hidden lg:flex">
         <button className="rounded-full w-[48px] h-[48px] bg-[#2F2F2F] text-black ">
           <div className="flex items-center justify-center">
             <ColorPickerIcon color={"#ffff"} />

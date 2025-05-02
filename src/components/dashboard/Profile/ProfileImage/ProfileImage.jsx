@@ -21,18 +21,17 @@ const ProfileImage = () => {
     queryKey: ["userInfo"],
     queryFn: getUserInfo,
   });
-  
 
   const mutationSelect = useMutation({
     mutationFn: selectProfileImage,
     onSuccess: () => {
       toast.success("عملیات با موفقیت انجام شد");
-      client.invalidateQueries({ queryKey: ["userInfo"] });
+      client.invalidateQueries({ queryKey: ["userInfo2"] });
     },
     onError: (error) => {
       console.error("select error", error);
       toast.error("خطا در انتخاب");
-    }
+    },
   });
 
   const mutationDelete = useMutation({
@@ -44,12 +43,11 @@ const ProfileImage = () => {
     onError: (error) => {
       console.error("select error", error);
       toast.error("خطا در حذف");
-    }
+    },
   });
 
-
-
   const handleSelectProfileImage = (id) => {
+    console.log(id, "KJSDKJFBPIVSBIWRHB");
     const selectedImage = new FormData();
     selectedImage.append("ImageId", id);
     mutationSelect.mutate(selectedImage);
@@ -61,10 +59,7 @@ const ProfileImage = () => {
     mutationDelete.mutate(deletedImage);
   };
 
-
-  
-  console.log(userInfo?.userImage)
-
+  console.log(userInfo?.userImage);
 
   return (
     <>
@@ -101,12 +96,22 @@ const ProfileImage = () => {
                       initial={{ y: -150, x: -50 }}
                       animate={{ y: 32, x: -45 }}
                       exit={{ y: -150 }}
-                      className="bg-white px-4 py-2 absolute top-0 left-0 flex flex-col gap-3 rounded-md shadow-md"
+                      className="bg-white z-20 px-4 py-2 absolute top-0 left-0 flex flex-col gap-3 rounded-md shadow-md"
                     >
-                      <div onClick={() => handleSelectProfileImage(item.id)}>
+                      <div
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleSelectProfileImage(item.id);
+                        }}
+                      >
                         انتخاب
                       </div>
-                      <div onClick={() => handleDeleteProfile(item.id)}>
+                      <div
+                        onClick={() => {
+                          e.stopPropagation();
+                          handleDeleteProfile(item.id);
+                        }}
+                      >
                         حذف
                       </div>
                     </motion.div>
