@@ -37,14 +37,14 @@ export const InstructorSelect = ({ isLoading, error, uniqueTeachers, setTeacherI
     menu: (base) => ({
       ...base,
       fontSize: "16px",
-      width:"100%",
+      width:"87%",
       borderRadius: "12px",
       overflow: "hidden", 
     }),
     option: (base) => ({
       ...base,
       fontSize: "16px",
-      width:"100%",
+      width:"87%",
       padding: "10px",
       borderRadius: "8px",
     }),

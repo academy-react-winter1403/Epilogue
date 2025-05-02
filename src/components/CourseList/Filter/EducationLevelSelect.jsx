@@ -34,7 +34,7 @@ export const EducationLevelSelect = ({  LevelOptions,setLevelName,}) => {
     menu: (base) => ({
       ...base,
       fontSize: "16px",
-      width:"100%",
+      width:"87%",
       borderRadius: "12px", 
       overflow: "hidden",
     }),
@@ -42,7 +42,7 @@ export const EducationLevelSelect = ({  LevelOptions,setLevelName,}) => {
       ...base,
       fontSize: "16px",
       padding: "10px",
-      width:"100%",
+      width:"87%",
       borderRadius: "8px",
     }),
   }}

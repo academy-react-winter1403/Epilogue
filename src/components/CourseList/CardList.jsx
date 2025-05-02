@@ -1,13 +1,22 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
- const CardList = ({sortedCards,currentCards}) => {
+ const CardList = ({sortedCards,currentCards,isLoading}) => {
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <h1 className="text-xl">در حال بارگذاری کارت‌ها...</h1>
+      </div>
+    );
+  }
+
 
   return (
-    <div className="w-screen h-auto flex-col   md:grid grid-cols-3 gap-[32px] w-[971px]">
+    <div className="w-full h-auto grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-[24px] max-w-[960px] mx-auto px-4">
       {sortedCards.length > 0 ? (
         sortedCards.map((card, index) => (
-          <div key={index} className="card w-[322px] h-[366px] ml-30 flex flex-col md:ml-0">
+          <div key={index} className="card w-[322px] h-[366px] mr-16 flex flex-col md:mr-0">
             <div className="w-[322px] h-[293px] rounded-[32px]  flex flex-col p-4 relative text-[#FCFCFC]">
               <div className="absolute top-6 right-7 flex gap-2">
                 <div className="w-[89px] h-[24px] bg-[#FF37F5] text-nowrap text-center font-medium text-sm rounded-[32px] text-[#FCFCFC]">

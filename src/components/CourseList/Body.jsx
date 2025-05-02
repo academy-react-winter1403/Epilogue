@@ -85,13 +85,6 @@ export function Body() {
   const totalCount = data?.totalCount;
   const courses = data?.courseFilterDtos || [];
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <h1 className="text-xl">در حال بارگذاری...</h1>
-      </div>
-    );
-  }
 
   if (error) {
     return <div>خطا: {error.message}</div>;
@@ -152,7 +145,7 @@ export function Body() {
           setSelectedLevel={setSelectedLevel}
         />
 
-        <CardList sortedCards={filteredCards} currentCards={courses} />
+        <CardList sortedCards={filteredCards} currentCards={courses} isLoading={isLoading}/>
       </div>
 
       <Pagination

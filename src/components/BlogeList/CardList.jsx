@@ -4,7 +4,15 @@ import React from "react";
 import { Calendar03Icon } from "../common/Icons/Calender";
 import { Link } from "react-router-dom";
 
-const CardList = ({ sortedCards, currentCards }) => {
+const CardList = ({ sortedCards, currentCards,isLoading }) => {
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <h1 className="text-xl">در حال بارگذاری کارت‌ها...</h1>
+      </div>
+    );
+  }
+
   return (
     <div className="w-screen h-auto flex-col  md:grid grid-cols-2 gap-[32px] w-[971px]">
       {sortedCards.length > 0 ? (

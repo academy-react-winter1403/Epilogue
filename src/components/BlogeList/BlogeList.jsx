@@ -46,14 +46,6 @@ export function BlogeList() {
   const totalCount = data?.totalCount;
   const News = data?.news || [];
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center h-screen">
-        <h1 className="text-xl">در حال بارگذاری...</h1>
-      </div>
-    );
-  }
-
   if (error) {
     return <div>خطا: {error.message}</div>;
   }
@@ -102,7 +94,7 @@ export function BlogeList() {
           setSearchTerm={setSearchTerm}
           selectedCategory={selectedCategory}
         />
-        <CardList sortedCards={filteredCards} currentCards={News} />
+        <CardList sortedCards={filteredCards} currentCards={News}  isLoading={isLoading}/>
       </div>
 
       <Pagination
