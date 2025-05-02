@@ -3,22 +3,23 @@ import { postAddLikeComment, postAddDislikeComment, deleteLikeComment } from '..
 import { useMutation } from '@tanstack/react-query';
 import { LikeDislikeComment } from '../../common/comment/LikeDislikeComment';
 
-const CommentLikeDislikeBlog = ({newsId, likeCount, dissLikeCount}) => {
+const CommentLikeDislikeBlog = ({id, commentId, likeCount, dissLikeCount, currentUserLikeId}) => {
     const liked = useMutation({
-      mutationFn: () => postAddLikeComment(newsId)
+      mutationFn: () => postAddLikeComment(commentId)
     });
     
     const disliked = useMutation({
-      mutationFn: () => postAddDislikeComment(newsId)
+      mutationFn: () => postAddDislikeComment(id)
     });
     
     const delLike = useMutation({
-      mutationFn: () => deleteLikeComment(newsId)
+      mutationFn: () => deleteLikeComment(currentUserLikeId)
     });
   
     return (
       <LikeDislikeComment 
-        CourseId={newsId} 
+        id={id} 
+        commentId={commentId}
         likeCount={likeCount} 
         dissLikeCount={dissLikeCount} 
         liked={liked} 
@@ -26,6 +27,5 @@ const CommentLikeDislikeBlog = ({newsId, likeCount, dissLikeCount}) => {
         delLike={delLike} 
       />
     )
-  }
-  
+}
 export { CommentLikeDislikeBlog }

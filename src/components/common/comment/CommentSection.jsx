@@ -8,16 +8,26 @@ import  commentBtnIcon from '../../../assets/icons/commentBtnIcon.svg';
 import  sendIcon  from '../../../assets/icons/sendCommentIcon.svg';
 import  emojiIcon from '../../../assets/icons/emojiIcon.svg';
 import closeIcon from '../../../assets/icons/closeIcon.svg';
+import { useQueryClient } from '@tanstack/react-query';
 
-const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postReply, getReplies }) => {
+const CommentSection = ({ 
+  id,
+  isBlog,
+  contentId, 
+  getComment, 
+  postComment, 
+  postReply, 
+  getReplies,
+  userId,
+  title: initialTitle,
+  describe: initialDescribe,
+  parentId
+}) => {
+  const queryClient = useQueryClient();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
   const [showNewCommentForm, setShowNewCommentForm] = useState(false);
-  const [commentTitle, setCommentTitle] = useState('');
-  const [commentContent, setCommentContent] = useState('');
   const [replyingTo, setReplyingTo] = useState(null);
-  const [replyTitle, setReplyTitle] = useState('');
-  const [replyContent, setReplyContent] = useState('');
   const [expandedCommentId, setExpandedCommentId] = useState(null);
 
   const { data: comments = [], isLoading, isError } = getComment || {};
@@ -25,61 +35,51 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
   const { mutate: addReply, isPending: isReplyPending } = postReply || {};
 
   const toggleCommentExpansion = (commentId) => {
-    setExpandedCommentId(prev => {
-      if (prev === commentId) {
-        setReplyingTo(null); 
-        return null;
-      }
-      return commentId;
-    });
-  }
+    setExpandedCommentId(prev => prev === commentId ? null : commentId);
+  };
 
   const startReply = (commentId) => {
     if (showNewCommentForm) closeNewCommentForm();
     setReplyingTo(commentId);
-    setReplyTitle('');
-    setReplyContent('');
     setExpandedCommentId(commentId);
   };
 
   const cancelReply = () => {
     setReplyingTo(null);
-    setReplyTitle('');
-    setReplyContent('');
   };
 
-  const handleReplySubmit = (e) => {
-    e.preventDefault();
+  const handleReplySubmit = (formData) => {
     if (!replyingTo || !addReply) return;
     
     addReply({ 
-      id,
-      parentId: replyingTo, 
-      title: replyTitle, 
-      content: replyContent 
+      id: id,
+      userIpAddress: '', 
+      title: formData.title,
+      describe: formData.content,
+      userId: userId,
+      parentId: parentId
     }, {
       onSuccess: () => {
-        setReplyTitle('');
-        setReplyContent('');
         setReplyingTo(null);
+        queryClient.invalidateQueries(['commentReplies', replyingTo]);
       }
     });
   };
 
-  const handleCommentSubmit = (e) => {
-    e.preventDefault();
+  const handleCommentSubmit = (formData) => {
     if (!addComment) return;
     
     addComment({ 
-      id,
-      title: commentTitle, 
-      content: commentContent 
+      id: id,
+      userIpAddress: '', 
+      title: formData.title || initialTitle,
+      describe: formData.content || initialDescribe,
+      userId: userId
     }, {
       onSuccess: () => {
-        setCommentTitle('');
-        setCommentContent('');
         closeCommentModal();
         closeNewCommentForm();
+        queryClient.invalidateQueries(['blogDetails', id]);
       }
     });
   };
@@ -90,27 +90,21 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
   const openNewCommentForm = () => {
     if (replyingTo) cancelReply();
     setShowNewCommentForm(true);
-    setCommentTitle('');
-    setCommentContent('');
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
     cancelReply();
     setExpandedCommentId(null);
-    closeNewCommentForm(); 
+    closeNewCommentForm();
   };
 
   const closeCommentModal = () => {
     setIsCommentModalOpen(false);
-    setCommentTitle('');
-    setCommentContent('');
   };
 
   const closeNewCommentForm = () => {
     setShowNewCommentForm(false);
-    setCommentTitle('');
-    setCommentContent('');
     cancelReply();
   };
 
@@ -145,6 +139,9 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
             comment={comment} 
             id={id}
             isBlog={isBlog}
+            startReply={startReply}
+            expanded={expandedCommentId === comment.id}
+            toggleExpansion={toggleCommentExpansion}
           />
         ))}
       </div>
@@ -181,10 +178,6 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
           replyingTo={replyingTo}
           startReply={startReply}
           handleReplySubmit={handleReplySubmit}
-          replyTitle={replyTitle}
-          setReplyTitle={setReplyTitle}
-          replyContent={replyContent}
-          setReplyContent={setReplyContent}
           SendIcon={sendIcon}
           EmojiIcon={emojiIcon}
           isPending={isReplyPending}
@@ -196,38 +189,32 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
 
         {showNewCommentForm && (
           <div className='mr-5 mb-0 md:mb-20'>
-             <NewCommentForm
-            onSubmit={handleCommentSubmit}
-            onClose={closeNewCommentForm}
-            title={commentTitle}
-            setTitle={setCommentTitle}
-            content={commentContent}
-            setContent={setCommentContent}
-            CloseIcon={closeIcon}
-            isPending={isCommentPending}
-          />
+            <NewCommentForm
+              onSubmit={handleCommentSubmit}
+              onClose={closeNewCommentForm}
+              CloseIcon={closeIcon}
+              isPending={isCommentPending}
+            />
           </div>
-         
         )}
       </Modal>
 
       <Modal isOpen={isCommentModalOpen} onClose={closeCommentModal} title="ثبت نظر جدید">
         <div className='mt-30'>
-        <NewCommentForm
-          onSubmit={handleCommentSubmit}
-          onCancel={closeCommentModal}
-          title={commentTitle}
-          setTitle={setCommentTitle}
-          content={commentContent}
-          setContent={setCommentContent}
-          CloseIcon={closeIcon}
-          SendIcon={sendIcon}
-          isPending={isCommentPending}
-          EmojiIcon={emojiIcon}
-        />
+          <NewCommentForm
+            onSubmit={handleCommentSubmit}
+            onCancel={closeCommentModal}
+            CloseIcon={closeIcon}
+            SendIcon={sendIcon}
+            isPending={isCommentPending}
+            EmojiIcon={emojiIcon}
+          />
         </div>
       </Modal>
     </section>
   );
 };
+
+
+
 export { CommentSection };

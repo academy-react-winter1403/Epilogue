@@ -44,10 +44,12 @@ const CommentCard = ({
         </div>
 
         <CommentLikeDislikeBlog
-          CourseId={id}
+          id={id}
+          commentId={comment.id} 
           likeCount={comment?.likeCount || 0}
           dissLikeCount={comment?.dissLikeCount || 0}
           userId={comment?.userId}
+          currentUserLikeId={comment?.currentUserLikeId}
         />
       </div>
     </div>

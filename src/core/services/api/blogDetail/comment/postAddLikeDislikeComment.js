@@ -1,9 +1,8 @@
 import http from "../../../interceptor"; //axios//
 
-export const postAddLikeComment = async (newsId) => {
-    console.log(newsId)
+export const postAddLikeComment = async (commentId) => {
     try {
-        const result = await http.post(`/News/CommentLike/${newsId}?LikeType=true`);
+        const result = await http.post(`/News/CommentLike/${commentId}?LikeType=true`);
         console.log("likeeee",result);
         return result;
       
@@ -14,9 +13,9 @@ export const postAddLikeComment = async (newsId) => {
     }
 };
 
-export const postAddDislikeComment = async (newsId) => {
+export const postAddDislikeComment = async (id) => {
     try {
-        const result = await http.post(`/News/NewsDissLike/${newsId}`);
+        const result = await http.post(`/${id}`);
         console.log("dorosteee")
         return result;
       
@@ -27,9 +26,9 @@ export const postAddDislikeComment = async (newsId) => {
     }
 };
 
-export const deleteLikeComment = async (newsId) => {
+export const deleteLikeComment = async (currentUserLikeId) => {
     try {
-        const result = await http.delete(`/News/DeleteLikeNews`,{newsId});
+        const result = await http.delete(`/News/DeleteCommentLikeNews`,{data:{deleteEntityId:currentUserLikeId}});
         return result;
       
     } catch (error) {   

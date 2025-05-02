@@ -5,6 +5,7 @@ import { RelatedBlogs } from './relatedBlogs/RelatedBlog';
 
 const BlogPage = () => {
   const {  data: blog, isLoading,  error } = useBlogDetails();
+  console.log(blog, 'blogggggggggg')
   if (isLoading) return <div>در حال بارگذاری...</div>;
   if (error) return <div>خطا در دریافت اطلاعات دوره : خطا :{error.message}</div>;
 
@@ -16,7 +17,7 @@ const BlogPage = () => {
             <DetailBlog newsId={blog?.detailsNewsDto?.id} blog={blog} />
             
             {/* comments */}
-           <CommentBlog newsId={blog?.detailsNewsDto?.id} blog={blog}/>
+           <CommentBlog newsId={blog?.detailsNewsDto?.id} blog={blog} parentId={blog?.detailsNewsDto?.parentId} userId={blog?.detailsNewsDto?.userId} title={blog?.commentDtos?.title} describe={blog?.commentDtos?.describe}/>
 
             {/* {related-courses} */}
             <RelatedBlogs newsId={blog?.detailsNewsDto?.id} />

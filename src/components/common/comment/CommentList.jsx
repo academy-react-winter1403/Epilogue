@@ -7,20 +7,14 @@ import { CommentLikeDislikeBlog } from '../../blogDetail/commentBlog/CommentLike
 const CommentList = ({
   comments,
   id,
-  contentId,
   isBlog,
   replyingTo,
   startReply,
   handleReplySubmit,
-  replyTitle,
-  setReplyTitle,
-  replyContent,
-  setReplyContent,
   SendIcon,
   EmojiIcon,
   isPending,
   getReplies,
-  postReply,
   expandedCommentId,
   toggleCommentExpansion
 }) => {
@@ -61,30 +55,25 @@ const CommentList = ({
 
   const CommentActions = ({
     commentId,
+    comment,
     replyingTo,
     startReply,
     handleReplySubmit,
-    replyTitle,
-    setReplyTitle,
-    replyContent,
-    setReplyContent,
     isPending
   }) => (
     <div className="flex flex-col md:flex-row items-start md:items-center gap-2 mt-2 w-full">
      <CommentLikeDislikeBlog
-      CourseId={id}
-      likeCount={contentId?.likeCount || 0}
-      dissLikeCount={contentId?.dissLikeCount || 0}
+      id={id}
+      commentId={commentId}
+      likeCount={comment?.likeCount || 0}
+      dissLikeCount={comment?.dissLikeCount || 0}
+      currentUserLikeId={comment?.currentUserLikeId}
     />
 
       {replyingTo === commentId ? (
         <div className="w-full mt-2">
           <NewCommentForm
             onSubmit={handleReplySubmit}
-            title={replyTitle}
-            setTitle={setReplyTitle}
-            content={replyContent}
-            setContent={setReplyContent}
             SendIcon={SendIcon}
             EmojiIcon={EmojiIcon}
             isPending={isPending}
@@ -139,10 +128,12 @@ const CommentList = ({
               </div>
            
                 <CommentLikeDislikeBlog
-                  CourseId={id}
+                  id={id}
+                  commentId={reply.id}
                   likeCount={reply?.likeCount || 0}
                   dissLikeCount={reply?.dissLikeCount || 0}
                   userId={reply?.userId}
+                  currentUserLikeId={reply?.currentUserLikeId}
                   compact
                 />
             </div>
@@ -176,14 +167,11 @@ const CommentList = ({
               />
               
               <CommentActions
+                comment={comment}
                 commentId={comment.id}
                 replyingTo={replyingTo}
                 startReply={startReply}
                 handleReplySubmit={handleReplySubmit}
-                replyTitle={replyTitle}
-                setReplyTitle={setReplyTitle}
-                replyContent={replyContent}
-                setReplyContent={setReplyContent}
                 isPending={isPending}
               />
               
@@ -197,5 +185,6 @@ const CommentList = ({
     </div>
   );
 };
+
 
 export{ CommentList}

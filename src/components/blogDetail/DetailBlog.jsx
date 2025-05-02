@@ -35,7 +35,7 @@ const DetailBlog = ({newsId, blog}) => {
                         type="blog" 
                         size="md" 
                         userId={blog?.detailsNewsDto?.userId}
-                        RateNumber={blog?.detailsNewsDto?.currentUserRateNumber}
+                        RateNumber={blog?.detailsNewsDto?.RateNumber}
                         userRateNumber={blog?.detailsNewsDto?.currentUserRateNumber}
                         userSetRate={blog?.detailsNewsDto?.currentUserSetRate}
                     />

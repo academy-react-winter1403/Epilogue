@@ -13,33 +13,36 @@ export const useGetCommentBlog = (newsId) => {
     });
   };
   
+  //add comment
 export const usePostCommentBlog = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
-    mutationFn: ({newsId, ...commentData}) => postAddComment(newsId, commentData),
+    mutationFn: ({ id, userIpAddress, title, describe, userId }) =>
+      postAddComment(id, userIpAddress, title, describe, userId),
     onSuccess: (_, variables) => {
-      queryClient.invalidateQueries(['blogDetails', variables.newsId]);
-     
+      queryClient.invalidateQueries(['blogDetails', variables.id]);
     },
   });
-  
 };
 
-export const usePostCommentReply = () => { 
+// add reply
+
+export const usePostCommentReply = () => {
   const queryClient = useQueryClient();
-  
+
   return useMutation({
-    mutationFn: ({newsId, ...replyData}) => postCommentsReply(newsId, replyData),
+    mutationFn: ({ id, userIpAddress, title, describe, userId, ...replyData }) =>
+      postCommentsReply(id, userIpAddress, title, describe, userId , replyData),
     onSuccess: (_, variables) => {
-      queryClient.invalidateQueries(['blogDetails-reply', variables.newsId]);
+      queryClient.invalidateQueries(['blogDetails-reply', variables.id]);
     },
   });
-}
+};
 
-export const useGetCommentReplies = (newsId) => {
+export const useGetCommentReplies = (id) => {
   return useQuery({
-    queryKey: ['blogDetails-reply', newsId],
-    queryFn: () => getCommentsReply(newsId)
+    queryKey: ['blogDetails-reply'],
+    queryFn: () => getCommentsReply(id)
   });
 };

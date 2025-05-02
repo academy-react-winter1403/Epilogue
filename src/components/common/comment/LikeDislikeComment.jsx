@@ -5,7 +5,7 @@ import activelikeCommentIcon from '../../../assets/icons/activeLikeCommentIcone.
 import activeDislikeCommentIcon from '../../../assets/icons/activDislikeCommentIcon.svg'
 import { motion, AnimatePresence } from "framer-motion";
   
-const LikeDislikeComment = ({ likeCount, dissLikeCount, delLike, disliked, liked }) => {
+const LikeDislikeComment = ({ currentUserLikeId, likeCount, dissLikeCount, delLike, disliked, liked }) => {
   const [currentReaction, setCurrentReaction] = useState(null);
   const [counts, setCounts] = useState({ 
     like: likeCount, 
