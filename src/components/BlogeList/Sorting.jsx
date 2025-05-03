@@ -43,7 +43,7 @@ const Sorting = () => {
                 className={`border rounded-full h-10 w-[110px] themed-dash-input flex items-center px-4 text-lg font-medium cursor-pointer ${
                   activeSort === option.type
                     ? "border-[#FF5353] text-[#FF5353]"
-                    : "border-gray-300 text-black"
+                    : "border-gray-300 color-text-primary"
                 }`}
               >
                 {option.label}

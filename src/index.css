@@ -3,15 +3,13 @@ body{
   direction: rtl;
   overflow-x: hidden;
   font-family: IranYekan;
+  
 }
 
 html {
 	transition: background-color 0.5s ease, color 0.4s ease;
   }
   
-
-
-    
 	@font-face {
 	   font-family: Iran YekanThin;
 	   font-style: normal;
@@ -85,10 +83,22 @@ html {
 	} 
 
 .light{
-		--bg-primary:#ffffff;
+	--bg-primary:#ffffff;
+	--text-primary: #1a1a1a;
+	--text-grey: #707070;
+	--bg-table:#F6F6F6;
+	--bg-Dashtableِ: #F6F6F6;
+	--header-bg-table: #F1F1F1;
+
 	}
 .dark{
 	--bg-primary:#232323;
+	--text-primary: #f5f5f5;
+	--text-grey: #ffffff;
+	--bg-table:#232323;
+	--bg-Dashtableِ: #1f1f1f;
+	--header-bg-table: #333333;
+
 }
 
 
@@ -102,5 +112,9 @@ html {
 	--font-yekan-700 : Iran YekanBold;
 	--font-yekan-800 : Iran YekanExtraBold;
 	--font-yekan-900 : Iran YekanBlack;
-	--color-bg-primary : var(--bg-primary)
+	--color-bg-primary : var(--bg-primary);
+	--color-text-primary: var(--text-primary);
+	--color-text-grey: var(--text-grey);
+	--color-bg-table:var(--bg-table);
+
 }

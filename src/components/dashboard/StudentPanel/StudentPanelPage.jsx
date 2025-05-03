@@ -15,7 +15,7 @@ const StudentPanelPage = () => {
 
   return (
     <div className="py-6 px-6 grid grid-cols-1 gap-6 md:grid-cols-12">
-      <div className="md:col-span-12">
+      <div className="md:col-span-12 ">
         <WelcomeUser />
       </div>
 

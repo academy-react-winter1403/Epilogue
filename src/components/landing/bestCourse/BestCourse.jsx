@@ -5,7 +5,7 @@ const BestCourse = ({ data }) => {
     data;
   return (
     <>
-      <div class=" max-w-[322px] md:col-span-1 col-span-4 text-black  rounded-lg ">
+      <div class=" max-w-[322px] md:col-span-1 col-span-4   rounded-lg ">
         <div class="relative h-[293px]">
           <img
             className=" rounded-[32px] h-full"
@@ -27,15 +27,15 @@ const BestCourse = ({ data }) => {
         </div>
 
         <div class="p-5 px-[0px]">
-          <h5 class="mb-1 text-2xl text-nowrap font-yekan-700 font-bold tracking-tight text-gray-900">
+          <h5 class="mb-1 text-2xl text-nowrap font-yekan-700 font-bold tracking-tight color-text-primary">
             {title}
           </h5>
 
           <div className=" flex flex-row justify-between items-center">
-            <p class=" text-[14px] font-yekan-500 text-[#707070] ">
+            <p class=" text-[14px] font-yekan-500 text-[var(--text-grey)] ">
               {teacherName}
             </p>
-            <div class="  flex flex-row gap-1 text-gray-700 ">
+            <div class="  flex flex-row gap-1">
               <p className="text-[16px] font-yekan-700 font-bold">{cost}</p>
               <p className="text-[14px] font-yekan-500">تومان</p>
             </div>

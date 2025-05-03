@@ -78,7 +78,7 @@ export function BlogeList() {
     <div className="container mx-auto px-4">
       <div className="text-center mt-10">
         <p className="text-4xl font-bold">اطلاعات بیشتر، درک بهتر</p>
-        <p className="text-lg font-medium text-gray-700 mt-4">
+        <p className="text-lg font-medium text-[var(--text-grey)] mt-4">
           ما در بلاگ‌ها اطلاعات شما را نسبت به
           <br />
           تکنولوژی‌هایی که یاد می‌گیرید بیشتر می‌کنیم.

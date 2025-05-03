@@ -15,7 +15,7 @@ const TwoStepPasswordPage = () => {
               type="text"
               name="oldPassword"
               placeholder="کد تایید را وارد کنید"
-              className="border border-[#DCDCDC] rounded-3xl h-[48px] w-6/6 px-4 py-2 text-[12px]"
+              className="border border-[#DCDCDC] text-[var(--text-grey)] rounded-3xl h-[48px] w-6/6 px-4 py-2 text-[12px]"
             />
           </div>
 

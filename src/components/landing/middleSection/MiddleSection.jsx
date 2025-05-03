@@ -16,7 +16,7 @@ const MiddleSection = () => {
     once: false,
   });
   return (
-    <div className="w-auto px-[41px]">
+    <div className="w-auto px-[41px] ">
       <div className=" pt-[118px] font-yekan-700 flex flex-col font-bold items-center justify-center pb-[46px] text-nowrap text-[32px]">
         اهداف ما در آکادامی
       </div>
@@ -29,10 +29,10 @@ const MiddleSection = () => {
           animate={{ opacity: 1, x: -20 }}
           whileInView={{opacity:1 , x:-10}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="w-[100%] z-10 h-[434px] lg:max-w-[321px] themed-box bg-white border-2 cursor-pointer border-[#DCDCDC] rounded-[24px] hover:border-[#3772FF]"
+          className="w-[100%] z-10 h-[434px] lg:max-w-[321px]  bg-bg-primary border-2 cursor-pointer border-[#DCDCDC] rounded-[24px] hover:border-[#3772FF]"
         >
           <div className="p-5">
-            <h5 className="pb-[21px] text-[20px] font-yekan-700 font-bold tracking-tight text-gray-900">
+            <h5 className="pb-[21px] text-[20px] font-yekan-700 font-bold tracking-tight color-text-primary">
               استعدادیابی
             </h5>
             <p className="text-[16px] font-yekan-500 text-[#7E7E7E]">
@@ -49,10 +49,10 @@ const MiddleSection = () => {
           whileInView={{opacity:1 , x:-10}}
 
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="w-[100%] z-10 h-[434px] lg:max-w-[321px] themed-box bg-white border-2 cursor-pointer border-[#DCDCDC] rounded-[24px] hover:border-[#3772FF]"
+          className="w-[100%] z-10 h-[434px] lg:max-w-[321px] bg-bg-primary  border-2 cursor-pointer border-[#DCDCDC] rounded-[24px] hover:border-[#3772FF]"
         >
           <div className="p-5">
-            <h5 className="pb-[21px] text-[20px] font-yekan-700 font-bold tracking-tight text-gray-900">
+            <h5 className="pb-[21px] text-[20px] font-yekan-700 font-bold  tracking-tight color-text-primary">
               راهنمایی و ایجاد انگیزه
             </h5>
             <p className="text-[16px] font-yekan-500 text-[#7E7E7E]">
@@ -69,10 +69,10 @@ const MiddleSection = () => {
           whileInView={{opacity:1 , x:-10}}
 
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="w-[100%] z-10 h-[434px] lg:max-w-[321px] themed-box bg-white border-2 cursor-pointer border-[#DCDCDC] rounded-[24px] hover:border-[#3772FF]"
+          className="w-[100%] z-10 h-[434px] lg:max-w-[321px] bg-bg-primary border-2 cursor-pointer border-[#DCDCDC] rounded-[24px] hover:border-[#3772FF]"
         >
           <div className="p-5">
-            <h5 className="pb-[21px] text-[20px] font-yekan-700 font-bold tracking-tight text-gray-900">
+            <h5 className="pb-[21px] text-[20px] font-yekan-700 font-bold tracking-tight color-text-primary">
               آموزش‌های تخصصی
             </h5>
             <p className="text-[16px] font-yekan-500 text-[#7E7E7E]">
@@ -89,10 +89,10 @@ const MiddleSection = () => {
           whileInView={{opacity:1 , x:-10}}
 
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="w-[100%] z-10 h-[434px] lg:max-w-[321px] themed-box bg-white border-2 cursor-pointer border-[#DCDCDC] rounded-[24px] hover:border-[#3772FF]"
+          className="w-[100%] z-10 h-[434px] lg:max-w-[321px] bg-bg-primary border-2 cursor-pointer border-[#DCDCDC] rounded-[24px] hover:border-[#3772FF]"
         >
           <div className="p-5">
-            <h5 className="pb-[21px] text-[20px] font-yekan-700 font-bold tracking-tight text-gray-900">
+            <h5 className="pb-[21px] text-[20px] font-yekan-700 font-bold tracking-tight color-text-primary">
               آماده سازی برای بازار کار
             </h5>
             <p className="text-[16px] font-yekan-500 text-[#7E7E7E]">
@@ -119,7 +119,7 @@ const MiddleSection = () => {
            initial={{ opacity: 0, x: 0 }}
            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
             transition={{ duration: 0.9, delay: 0.2 }}
-            className="w-full group max-h-[361px] lg:max-w-[664px] lg:min-h-[144px] cursor-pointer themed-box bg-[#F6F6F6] border-2 border-[#DCDCDC] rounded-[24px] hover:border-2 hover:border-[#3772FF]"
+            className="w-full group max-h-[361px] lg:max-w-[664px] lg:min-h-[144px] cursor-pointer bg-bg-table border-2 border-[#DCDCDC] rounded-[24px] hover:border-2 hover:border-[#3772FF]"
           >
             <div className="p-5 flex flex-col lg:flex-row">
               <div className="max-w-[85px] h-[85px] bg-[#FCFCFC] rounded-full border-2 border-[#DCDCDC] hover:border-2 group-hover:border-[#4a6eec]">
@@ -128,7 +128,7 @@ const MiddleSection = () => {
                 </div>
               </div>
               <div className="flex flex-col overflow-hidden break-words whitespace-normal px-5 py-3">
-                <h5 className="mb-2 text-[20px] font-yekan-700 font-bold tracking-tight text-gray-900">
+                <h5 className="mb-2 text-[20px] font-yekan-700 font-bold tracking-tight color-text-primary">
                   مدرک معتبر
                 </h5>
                 <p className="mb-3 text-[16px] font-yekan-500 text-[#7E7E7E]">
@@ -143,7 +143,7 @@ const MiddleSection = () => {
            initial={{ opacity: 0, x: 0 }}
            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
             transition={{ duration: 0.9, delay: 0.4 }}
-            className="w-full group max-h-[361px] lg:max-w-[664px] lg:min-h-[144px] cursor-pointer themed-box bg-[#F6F6F6] border-2 border-[#DCDCDC] rounded-[24px] hover:border-2 hover:border-[#EC4D4A]"
+            className="w-full group max-h-[361px] lg:max-w-[664px] lg:min-h-[144px] cursor-pointer bg-bg-table border-2 border-[#DCDCDC] rounded-[24px] hover:border-2 hover:border-[#EC4D4A]"
           >
             <div className="p-5 flex flex-col lg:flex-row">
               <div className="max-w-[85px] h-[85px] bg-[#FCFCFC] rounded-full border-2 border-[#DCDCDC] hover:border-2 group-hover:border-[#EC4D4A]">
@@ -152,7 +152,7 @@ const MiddleSection = () => {
                 </div>
               </div>
               <div className="flex flex-col overflow-hidden break-words whitespace-normal px-5 py-3">
-                <h5 className="mb-2 text-[20px] font-yekan-700 font-bold tracking-tight text-gray-900">
+                <h5 className="mb-2 text-[20px] font-yekan-700 font-bold tracking-tight color-text-primary">
                   آزمون ها
                 </h5>
                 <p className="mb-3 text-[16px] font-yekan-500 text-[#7E7E7E]">
@@ -167,7 +167,7 @@ const MiddleSection = () => {
             initial={{ opacity: 0, x: 0 }}
             animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y:50 }}
             transition={{ duration: 0.9, delay: 0.6 }}
-            className="w-full group max-h-[361px] lg:max-w-[664px] lg:min-h-[144px] cursor-pointer themed-box bg-[#F6F6F6] border-2 border-[#DCDCDC] rounded-[24px] hover:border-2 hover:border-[#ECAC4A]"
+            className="w-full group max-h-[361px] lg:max-w-[664px] lg:min-h-[144px] cursor-pointer bg-bg-table border-2 border-[#DCDCDC] rounded-[24px] hover:border-2 hover:border-[#ECAC4A]"
           >
             <div className="p-5 flex flex-col lg:flex-row">
               <div className="max-w-[85px] h-[85px] bg-[#FCFCFC] rounded-full border-2 border-[#DCDCDC] hover:border-2 group-hover:border-[#ECAC4A]">
@@ -176,7 +176,7 @@ const MiddleSection = () => {
                 </div>
               </div>
               <div className="flex flex-col overflow-hidden break-words whitespace-normal px-5 py-3">
-                <h5 className="mb-2 text-[20px] font-yekan-700 font-bold tracking-tight text-gray-900">
+                <h5 className="mb-2 text-[20px] font-yekan-700 font-bold tracking-tight color-text-primary">
                   مشاوره 24 ساعته
                 </h5>
                 <p className="mb-3 text-[16px] font-yekan-500 text-[#7E7E7E]">
@@ -191,7 +191,7 @@ const MiddleSection = () => {
            initial={{ opacity: 0, x: 0 }}
            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
             transition={{ duration: 0.9, delay: 0.8 }}
-            className="w-full group max-h-[361px] lg:max-w-[664px] lg:min-h-[144px] cursor-pointer themed-box bg-[#F6F6F6] border-2 border-[#DCDCDC] rounded-[24px] hover:border-2 hover:border-[#EC4AC9]"
+            className="w-full group max-h-[361px] lg:max-w-[664px] lg:min-h-[144px] cursor-pointer bg-bg-table border-2 border-[#DCDCDC] rounded-[24px] hover:border-2 hover:border-[#EC4AC9]"
           >
             <div className="p-5 flex flex-col lg:flex-row">
               <div className="max-w-[85px] h-[85px] bg-[#FCFCFC] rounded-full border-2 border-[#DCDCDC] hover:border-2 group-hover:border-[#EC4AC9]">
@@ -200,7 +200,7 @@ const MiddleSection = () => {
                 </div>
               </div>
               <div className="flex flex-col w-[80%] overflow-hidden break-words whitespace-normal px-5 py-3">
-                <h5 className="mb-2 text-[20px] font-yekan-700 font-bold tracking-tight text-gray-900">
+                <h5 className="mb-2 text-[20px] font-yekan-700 font-bold tracking-tight color-text-primary">
                   فرصت‌های شغلی
                 </h5>
                 <p className="text-[16px] font-yekan-500 text-[#7E7E7E]">

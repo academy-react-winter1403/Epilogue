@@ -130,10 +130,10 @@ export function Body() {
     <div className="px-4">
       <div className="text-center flex flex-col">
         <h1 className="text-4xl font-bold">شروع ماجراجویی جدید</h1>
-        <p className="text-lg font-medium text-gray-700 mt-6">
+        <p className="text-lg font-medium text-[var(--text-grey)] mt-6">
           یک شروع قوی برای یادگیری یک مسئله
         </p>
-        <h1>جدید میتونه تو پیشرفت کمکت کنه</h1>
+        <h1 className="text-[var(--text-grey)]">جدید میتونه تو پیشرفت کمکت کنه</h1>
       </div>
 
 

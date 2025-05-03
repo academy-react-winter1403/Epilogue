@@ -62,10 +62,10 @@ const FirstSection = () => {
         <h1 className="m-auto font-bold font-yekan-700 text-nowrap text-[40px]">
           پیشرفت سریع
         </h1>
-        <p className=" pt-6 lg:pt-6 text-nowrap font-yekan-500 text-[#707070] text-[18px]">
+        <p className=" pt-6 lg:pt-6 text-nowrap font-yekan-500 text-[var(--text-grey)] text-[18px]">
           آکادمی آموزش تخصصی برنامه نویسی بحر
         </p>
-        <p className="m-auto text-nowrap font-yekan-500 text-[#707070] text-[18px]">
+        <p className="m-auto text-nowrap font-yekan-500 text-[var(--text-grey)] text-[18px]">
           از کودکان تا بزرگسال
         </p>
       </div>

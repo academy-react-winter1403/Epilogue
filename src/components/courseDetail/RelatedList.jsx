@@ -13,12 +13,12 @@ const RelatedCourses = ({ CourseId }) => {
 
   return (
     <section className="w-auto py-6">
-      <div className="mr-2 mb-5 w-full lg:w-[125px] h-[29px] font-dana font-bold text-[20px] leading-[100%] tracking-[0%] text-right text-gray-800 whitespace-nowrap">
+      <div className="mr-2 mb-5 w-full lg:w-[125px] h-[29px] font-dana font-bold text-[var(--text-grey)] text-[20px] leading-[100%] tracking-[0%] text-right  whitespace-nowrap">
         دوره های مرتبط
       </div>
       <div className="w-full h-auto md:h-[366px] flex gap-2 mb-4">
         {courses.map((course) => (
-          <div key={course.courseId} className="min-w-[324px] h-[366px] bg-white flex flex-col gap-[10px]">
+          <div key={course.courseId} className="min-w-[324px] h-[366px]  flex flex-col gap-[10px]">
             <Link to={`/course-detail/${course.courseId}`}>
               <div className='relative'>
                 <div className='absolute top-2 right-5 w-[65px] h-[24px] rounded-[32px] pt-[2px] pr-[8px] pb-[2px] pl-[8px] gap-[8px] bg-[#FF37F5] text-white whitespace-nowrap'>
@@ -33,7 +33,7 @@ const RelatedCourses = ({ CourseId }) => {
                     loading="lazy"
                   />
                 ) : (
-                  <div className="w-full h-[293px] rounded-[24px] flex items-center justify-center bg-gray-200 text-gray-500">
+                  <div className="w-full h-[293px] rounded-[24px] flex items-center justify-center bg-gray-200 text-[var(--text-grey)]">
                     تصویر دوره
                   </div>
                 )}
@@ -42,8 +42,8 @@ const RelatedCourses = ({ CourseId }) => {
                 <h3>{course.title}</h3>
               </div>
               <div className='flex items-center justify-between p-2'>
-                <p className="text-sm text-gray-500">{course.teacherName}</p>
-                <span className="text-gray-900 font-dana-bold">
+                <p className="text-sm text-[var(--text-grey)]">{course.teacherName}</p>
+                <span className=" font-dana-bold">
                   {course.cost.toLocaleString()} تومان
                 </span>
               </div>

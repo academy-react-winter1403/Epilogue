@@ -34,7 +34,7 @@ import { Link } from "react-router-dom";
           </Link>
 
               <div className="flex justify-between items-center mt-2">
-                <h2 className="font-medium text-[#707070]">{card.teacherName || "ناشناس"}</h2>
+                <h2 className="font-medium text-[var(--text-grey)]">{card.teacherName || "ناشناس"}</h2>
                 <div className="flex">
                   <h3 className="font-bold text-base">{card.cost ? `${card.cost.toLocaleString()}` : "رایگان"}</h3>
                   <span className="text-sm font-medium">{card.cost ? "تومان" : ""}</span>

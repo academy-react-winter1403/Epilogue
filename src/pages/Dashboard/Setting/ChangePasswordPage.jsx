@@ -36,7 +36,7 @@ const ChangePasswordPage = () => {
               type="text"
               name="oldPassword"
               placeholder="رمز فعلی خود را وارد کنید"
-              className="border border-[#DCDCDC] rounded-3xl h-[48px] w-6/6 px-4 py-2 text-[12px]"
+              className="border border-[#DCDCDC] text-[var(--text-grey)] rounded-3xl h-[48px] w-6/6 px-4 py-2 text-[12px]"
             />
           </div>
 
@@ -50,7 +50,7 @@ const ChangePasswordPage = () => {
               type="text"
               name="newPassword"
               placeholder="رمز جدید خود را وارد کنید"
-              className="border border-[#DCDCDC] rounded-3xl h-[48px] w-6/6 px-4 py-2 text-[12px]"
+              className="border border-[#DCDCDC] text-[var(--text-grey)] rounded-3xl h-[48px] w-6/6 px-4 py-2 text-[12px]"
             />
           </div>
 
@@ -64,7 +64,7 @@ const ChangePasswordPage = () => {
               type="text"
               name="repeatNewPassword"
               placeholder="رمز جدیدت رو تکرار کن"
-              className="border border-[#DCDCDC] rounded-3xl h-[48px] w-6/6 px-4 py-2 text-[12px]"
+              className="border border-[#DCDCDC] text-[var(--text-grey)] rounded-3xl h-[48px] w-6/6 px-4 py-2 text-[12px]"
             />
           </div>
           <button type="submit" className="w-[80px] h-[30px] rounded-[20px] text-white bg-[#3772FF]">ثبت</button>

@@ -87,7 +87,7 @@ const UserInfo = () => {
               <div className="mb-6">
                 <div className="flex space-x-4">
                   <div className="w-1/2">
-                    <p className="block font-yekan-600  text-black text-sm  mb-2">
+                    <p className="block font-yekan-600   text-sm  mb-2">
                       نام
                     </p>
                     <Field

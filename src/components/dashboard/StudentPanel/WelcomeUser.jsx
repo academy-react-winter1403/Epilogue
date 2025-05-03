@@ -40,13 +40,10 @@ const WelcomeUser = () => {
         setDateTime({ time, date, greeting });
       };
   
-      // اولین بار اجرا کن
       updateDateTime();
   
-      // هر 1 ثانیه زمان رو آپدیت کن
       const interval = setInterval(updateDateTime, 1000);
   
-      // پاک‌سازی وقتی کامپوننت unmount میشه
       return () => clearInterval(interval);
     }, []);
 
@@ -62,10 +59,10 @@ const WelcomeUser = () => {
     <div className="flex flex-row gap-10">
       <div>
         <div className="flex flex-row gap-4 pb-[22px]">
-          <p className="text-2xl text-nowrap font-yekan-700">
+          <p className="text-2xl color-text-primary text-nowrap font-yekan-700">
             سلام {userInfo?.fName} , {dateTime.greeting}👋
           </p>
-          <p className="text-[14px] text-nowrap text-[#707070] font-yekan-500 pt-2">
+          <p className="text-[14px] text-nowrap text-[var(--text-grey)] font-yekan-500 pt-2">
             امیدوارم امروز روز خوبی رو داشته باشید
           </p>
         </div>
@@ -77,8 +74,8 @@ const WelcomeUser = () => {
               </div>
             </button>
             <div className="flex flex-col">
-              <p className="text-[14px] text-[#707070]">ساعت</p>
-              <p className="font-yekan-600">{dateTime.time}</p>
+              <p className="text-[14px] text-[var(--text-grey)]">ساعت</p>
+              <p className="font-yekan-600 ">{dateTime.time}</p>
             </div>
           </div>
           <div className="w-[174px] h-[43px] flex flex-row gap-2 ">
@@ -88,7 +85,7 @@ const WelcomeUser = () => {
               </div>
             </button>
             <div className="flex flex-col">
-              <p className="text-[14px]  text-[#707070]">تاریخ</p>
+              <p className="text-[14px] text-[var(--text-grey)]">تاریخ</p>
               <p className="text-[14px] font-yekan-600 text-nowrap">
                 {dateTime.date}
               </p>

@@ -17,7 +17,7 @@ const RelatedBlogs = ({ newsId }) => {
 
   return (
     <section className='w-auto md:mt-10 md:mr-10 mr-130 mb-15'>
-      <div className="font-yekan-700 font-bold flex flex-col items-center justify-center text-nowrap text-[32px]">
+      <div className="font-yekan-700 font-bold flex flex-col text-[var(--text-grey)] items-center justify-center text-nowrap text-[32px]">
         <h3 className="self-start">بلاگ های مرتبط</h3>
       </div>
       <div className="flex justify-center items-center gap-2">
@@ -28,7 +28,7 @@ const RelatedBlogs = ({ newsId }) => {
             <Link 
               to={`/blog-detail/${blog.id}`} 
               key={blog.id} 
-              className="md:w-[431px] w-[322px] text-black bg-white rounded-lg"
+              className="md:w-[431px] w-[322px]   rounded-lg"
             >
               <div>
                 {blog.currentImageAddressTumb ? (
@@ -44,24 +44,24 @@ const RelatedBlogs = ({ newsId }) => {
                 )}
                 
                 <div className="p-5 w-[432px] h-[60px]">
-                  <h5 className="mb-1 font-yekan-700 text-[24px] font-bold tracking-tight text-nowrap text-gray-900">
+                  <h5 className="mb-1 font-yekan-700 text-[24px] font-bold tracking-tight text-nowrap ">
                     {blog.title}
                   </h5>
                   <div className="gap-[20px] lg:gap-[116px] flex flex-row">
-                    <p className="mb-3 text-nowrap text-[14px] font-yekan-500 text-[#707070]">
+                    <p className="mb-3 text-nowrap text-[14px] font-yekan-500 text-[var(--text-grey)]">
                       {blog.author || 'نویسنده ناشناس'}
                     </p>
 
                     <div className="flex flex-row gap-4">
                       {blog.insertDate && (
-                        <p className="mb-3 flex flex-row gap-1 text-nowrap text-[14px] font-yekan-500 text-[#707070]">
+                        <p className="mb-3 flex flex-row gap-1 text-nowrap text-[14px] font-yekan-500 text-[var(--text-grey)]">
                           {formatDate(blog.insertDate)}
                           <div className="m-auto">
                             <Calendar03Icon />
                           </div>
                         </p>
                       )}
-                      <p className="mb-3 flex flex-row gap-1 text-nowrap text-[14px] font-yekan-500 text-[#707070]">
+                      <p className="mb-3 flex flex-row gap-1 text-nowrap text-[14px] font-yekan-500 text-[var(--text-grey)]">
                         {blog.currentView || 0}
                         <div className="m-auto">
                           <ViewIcon width={24} height={24} cursor="pointer" />

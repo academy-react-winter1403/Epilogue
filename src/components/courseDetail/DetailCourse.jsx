@@ -24,7 +24,7 @@ const DetailCourse = ({course, CourseId}) => {
         </div>
 
         <div className='mr-[-40px] md:self-start flex flex-col gap-4 lg:gap-6  justify-center items-start'>
-            <h2 className="w-[124px] h-[29px] font-dana font-bold text-xl lg:text-2xl leading-[100%] tracking-[0%] text-right text-gray-800 whitespace-nowrap">توضیحات دوره</h2>
+            <h2 className="w-[124px] h-[29px] font-dana font-bold text-xl lg:text-2xl leading-[100%] tracking-[0%] text-right text-[var(--text-grey)] whitespace-nowrap">توضیحات دوره</h2>
 
             <div className="w-[50%] md:w-full lg:w-full font-dana font-medium text-base lg:text-lg leading-[100%] tracking-[0%] text-right text-black">{course?.describe}</div>
 
