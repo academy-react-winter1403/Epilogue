@@ -59,7 +59,8 @@ const CommentList = ({
     replyingTo,
     startReply,
     handleReplySubmit,
-    isPending
+    isPending,
+    isBlog 
   }) => (
     <div className="flex flex-col md:flex-row items-start md:items-center gap-2 mt-2 w-full">
         {isBlog ? (
@@ -108,7 +109,7 @@ const CommentList = ({
     </div>
   );
 
-  const CommentReplies = ({ commentId }) => {
+  const CommentReplies = ({ commentId, isBlog  }) => {
     const isCourse = comments?.some(c => c && 'courseId' in c);
     const replyParams = isCourse ? [id, commentId] : [id];
     const { data: replies = [], isLoading: isRepliesLoading } = getReplies(...replyParams);
@@ -201,10 +202,11 @@ const CommentList = ({
                 startReply={startReply}
                 handleReplySubmit={handleReplySubmit}
                 isPending={isPending}
+                isBlog={isBlog}
               />
               
               {expandedCommentId === comment.id && (
-                <CommentReplies commentId={comment.id} />
+                <CommentReplies commentId={comment.id} isBlog={isBlog } />
               )}
             </div>
           </div>
