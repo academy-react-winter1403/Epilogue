@@ -41,10 +41,10 @@ const Header = () => {
             <NavLink
               to="/"
               className={({ isActive }) =>
-                `relative py-2 text-[16px] text-white flex flex-col items-center ${
+                `relative  text-[16px] text-white flex flex-col items-center ${
                   isActive ? "after:block" : "after:hidden"
                 } 
-    after:content-[''] after:w-2 after:h-2 after:rounded-full after:bg-[#3772FF] after:mt-1`
+    after:content-[''] after:w-1 after:h-1 after:rounded-full after:bg-[#ffff] `
               }
             >
               خانه
@@ -53,10 +53,10 @@ const Header = () => {
             <NavLink
               to="/CourseList"
               className={({ isActive }) =>
-                `relative py-2 text-white flex flex-col items-center ${
+                `relative  text-white flex flex-col items-center ${
                   isActive ? "after:block" : "after:hidden"
                 } 
-    after:content-[''] after:w-2 after:h-2 after:rounded-full after:bg-[#3772FF] after:mt-1`
+    after:content-[''] after:w-1 after:h-1 after:rounded-full after:bg-[#FFFF]`
               }
             >
               دوره ها
@@ -65,10 +65,10 @@ const Header = () => {
             <NavLink
               to="/BlogeList"
               className={({ isActive }) =>
-                `relative py-2 text-white flex flex-col items-center ${
+                `relative  text-white flex flex-col items-center ${
                   isActive ? "after:block" : "after:hidden"
                 } 
-    after:content-[''] after:w-2 after:h-2 after:rounded-full after:bg-[#3772FF] after:mt-1`
+    after:content-[''] after:w-1 after:h-1 after:rounded-full after:bg-[#FFFF] `
               }
             >
               بلاگ ها

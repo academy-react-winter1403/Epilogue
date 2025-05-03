@@ -43,7 +43,7 @@ const LogoutButton = () => {
               }}
               className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[430px] h-[169px] bg-white rounded-[32px] shadow-lg z-50 p-6"
             >
-              <div className="absolute w-[330px] h-[29px] top-[24px] left-[50px] font-dana font-bold text-[20px] leading-[100%] tracking-[0%] text-right text-[#FF5353] whitespace-nowrap">
+              <div className="absolute w-[330px] h-[29px] top-[24px] left-[50px] font-dana font-bold text-[20px] leading-[100%] tracking-[0%] text-right text-[#000000] whitespace-nowrap">
                 <h2>آیا از خروج خود مطمئن هستید؟</h2>
               </div>
 
@@ -54,7 +54,7 @@ const LogoutButton = () => {
                 navigate("/")
               }
               }
-                className="cursor-pointer absolute w-[112px] h-[47px] top-[100px] left-[50px] gap-[8px] rounded-[40px] pt-[9px] pr-[75px] pb-[9px] pl-[75px] bg-blue-500 text-white font-dana font-bold"
+                className="cursor-pointer absolute w-[112px] h-[47px] top-[100px] left-[50px] gap-[8px] rounded-[40px] pt-[9px] pr-[75px] pb-[9px] pl-[75px] bg-[#ff4d4f] text-white font-dana font-bold"
                 whileTap={{ scale: 0.95 }}
                 animate={{
                   opacity: [0.8, 1],
@@ -72,7 +72,7 @@ const LogoutButton = () => {
 
               <motion.button
                 onClick={handleClose}
-                className="cursor-pointer absolute w-[112px] h-[47px] top-[100px] left-[250px] gap-[8px] rounded-[40px] pt-[9px] pr-[75px] pb-[9px] pl-[75px] bg-blue-500 text-white font-dana font-bold"
+                className="cursor-pointer absolute w-[112px] h-[47px] top-[100px] left-[250px] gap-[8px] rounded-[40px] pt-[9px] pr-[75px] pb-[9px] pl-[75px] bg-[#333] text-white font-dana font-bold"
                 whileTap={{ scale: 0.95 }}
                 animate={{
                   opacity: [0.8, 1],
