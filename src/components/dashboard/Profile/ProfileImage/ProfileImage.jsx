@@ -15,7 +15,6 @@ const ProfileImage = () => {
   const client = useQueryClient();
 
   const [dropdownOpenId, setDropdownOpenId] = useState(null);
-  const [imageIndex, setImageIndex] = useState();
 
   const { data: userInfo } = useQuery({
     queryKey: ["userInfo"],
@@ -54,6 +53,8 @@ const ProfileImage = () => {
   };
 
   const handleDeleteProfile = (id) => {
+    console.log(id, "نیتخبث");
+
     const deletedImage = new FormData();
     deletedImage.append("DeleteEntityId", id);
     mutationDelete.mutate(deletedImage);
@@ -107,7 +108,7 @@ const ProfileImage = () => {
                         انتخاب
                       </div>
                       <div
-                        onClick={() => {
+                         onClick={(e) => {
                           e.stopPropagation();
                           handleDeleteProfile(item.id);
                         }}

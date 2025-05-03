@@ -68,8 +68,9 @@ const UserInfo = () => {
     <div>
       {setUserProfile && (
         <Formik
+        enableReinitialize
           initialValues={{
-            firstName: userProfile?.fName,
+            firstName: userProfile?.fName || "",
             lastName: userProfile?.lName || "",
             userAbout: userProfile?.userAbout || "",
             phoneNumber: userProfile?.phoneNumber || "",
