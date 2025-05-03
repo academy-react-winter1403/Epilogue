@@ -1,3 +1,4 @@
+import { formDataModifire } from "../../../../utils/formDataModifire";
 import http from "../../../interceptor"; //axios//
 
 export const getCourseCommentsReply = async (CourseId,commentId) => {
@@ -13,8 +14,11 @@ export const getCourseCommentsReply = async (CourseId,commentId) => {
 };
 
 export const postCourseCommentsReply = async (CourseId) => {
+    const obj = {key: 'j',key2:'ll'}
+    const formData = formDataModifire(obj)
+
     try {
-        const result = await http.post(`/Course/AddReplyCourseComment`,{CourseId});
+        const result = await http.post(`/Course/AddReplyCourseComment`, formData);
         console.log('post shoodddd')
         return result;
 

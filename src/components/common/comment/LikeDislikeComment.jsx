@@ -1,99 +1,85 @@
-import React, { useState } from 'react'
 import likeCommentIcon from '../../../assets/icons/likeCommentIcone.svg'
 import dislikeCommentIcon from '../../../assets/icons/dislikeCommentIcon.svg'
 import activelikeCommentIcon from '../../../assets/icons/activeLikeCommentIcone.svg'
 import activeDislikeCommentIcon from '../../../assets/icons/activDislikeCommentIcon.svg'
 import { motion, AnimatePresence } from "framer-motion";
   
-const LikeDislikeComment = ({ currentUserLikeId, likeCount, dissLikeCount, delLike, disliked, liked }) => {
-  const [currentReaction, setCurrentReaction] = useState(null);
-  const [counts, setCounts] = useState({ 
-    like: likeCount, 
-    dislike: dissLikeCount 
-  });
-
-  const handleReaction = (type) => () => {
-    const newReaction = currentReaction === type ? null : type;
-    
-    setCounts(prev => ({
-      like: prev.like + (newReaction === 'like' ? 1 : 0) - (currentReaction === 'like' ? 1 : 0),
-      dislike: prev.dislike + (newReaction === 'dislike' ? 1 : 0) - (currentReaction === 'dislike' ? 1 : 0)
-    }));
-
-    const previousReaction = currentReaction;
-    setCurrentReaction(newReaction);
-
-    if (newReaction === 'like') {
-      if (previousReaction === 'dislike') {
-        disliked.mutate();
-      }
-      liked.mutate();
-    } 
-    else if (newReaction === 'dislike') {
-      if (previousReaction === 'like') {
-        liked.mutate();
-      }
-      disliked.mutate();
-    }
-    else {
+const LikeDislikeComment = ({
+  likeCount,
+  dissLikeCount,
+  delLike,
+  disliked,
+  liked,
+  currentUserIsLike,
+  currentUserIsDissLike,
+}) => {
+  const handleLike = () => {
+    if (currentUserIsLike) {
       delLike.mutate();
+    } else {
+      liked.mutate();
     }
   };
 
+  const handleDislike = () => {
+    disliked.mutate();
+  };
+
   return (
-    <div className="flex justify-center items-center w-[100px] h-full gap-1">
+    <div className="flex justify-center items-center w-[100px] h-full gap-2">
       <div className='flex justify-center items-center'>
         <button 
-          onClick={handleReaction('like')} 
+          onClick={handleLike}
           disabled={liked.isLoading || disliked.isLoading || delLike.isLoading}
           className='w-[56px] h-[56px]'
         >
           <img 
-            src={currentReaction === 'like' ? activelikeCommentIcon : likeCommentIcon} 
+            src={currentUserIsLike ? activelikeCommentIcon : likeCommentIcon} 
             className="cursor-pointer"
-            alt="Like"
+            alt={currentUserIsLike ? 'Remove like' : 'Like'}
           />
         </button>
         <AnimatePresence mode="wait">
           <motion.span
-            key={counts.like}
+            key={likeCount}
             initial={{ y: -10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 10, opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="text-gray-700 w-[16px] h-[16px] mr-[-30px]"
+            transition={{ duration: 0.1 }}
+            className="text-gray-700 h-[16px] mr-[-30px] mb-1"
           >
-            {counts.like}
+            {likeCount}
           </motion.span>
         </AnimatePresence>
       </div>
 
       <div className='flex items-center justify-center'>
         <button 
-          onClick={handleReaction('dislike')} 
+          onClick={handleDislike}
           disabled={liked.isLoading || disliked.isLoading || delLike.isLoading}
           className="w-[56px] h-[56px] mt-1.5"
         >
           <img 
-            src={currentReaction === 'dislike' ? activeDislikeCommentIcon : dislikeCommentIcon}
+            src={currentUserIsDissLike ? activeDislikeCommentIcon : dislikeCommentIcon}
             className="cursor-pointer"
-            alt="Dislike"
+            alt={currentUserIsDissLike ? 'Remove dislike' : 'Dislike'}
           />
         </button>
         <AnimatePresence mode="wait">
           <motion.span
-            key={counts.dislike}
+            key={dissLikeCount}
             initial={{ y: -10, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 10, opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="text-gray-700 mr-[-30px]"
+            transition={{ duration: 0.1 }}
+            className="text-gray-700 mr-[-30px] mb-1"
           >
-            {counts.dislike}
+            {dissLikeCount}
           </motion.span>
         </AnimatePresence>
       </div>
     </div>
   );
 };
+
 export { LikeDislikeComment }

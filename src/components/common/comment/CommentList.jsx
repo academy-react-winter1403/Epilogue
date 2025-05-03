@@ -62,13 +62,27 @@ const CommentList = ({
     isPending
   }) => (
     <div className="flex flex-col md:flex-row items-start md:items-center gap-2 mt-2 w-full">
-     <CommentLikeDislikeBlog
-      id={id}
-      commentId={commentId}
-      likeCount={comment?.likeCount || 0}
-      dissLikeCount={comment?.dissLikeCount || 0}
-      currentUserLikeId={comment?.currentUserLikeId}
-    />
+        {isBlog ? (
+          <CommentLikeDislikeBlog
+            id={id}
+            commentId={commentId}
+            likeCount={comment?.likeCount || 0}
+            dissLikeCount={comment?.dissLikeCount || 0}
+            currentUserLikeId={comment?.currentUserLikeId}
+            currentUserIsLike={comment?.currentUserIsLike}
+            currentUserIsDissLike={comment?.currentUserIsDissLike}
+          />
+        ) : (
+          <CommentLikeDislikeCourse
+            id={id}
+            commentId={commentId}
+            likeCount={comment?.likeCount || 0}
+            dissLikeCount={comment?.dissLikeCount || 0}
+            currentUserLikeId={comment?.currentUserLikeId}
+            currentUserIsLike={comment?.currentUserIsLike}
+            currentUserIsDissLike={comment?.currentUserIsDissLike}
+          />
+        )}
 
       {replyingTo === commentId ? (
         <div className="w-full mt-2">
@@ -127,15 +141,29 @@ const CommentList = ({
                 </div>
               </div>
            
-                <CommentLikeDislikeBlog
-                  id={id}
-                  commentId={reply.id}
-                  likeCount={reply?.likeCount || 0}
-                  dissLikeCount={reply?.dissLikeCount || 0}
-                  userId={reply?.userId}
-                  currentUserLikeId={reply?.currentUserLikeId}
-                  compact
-                />
+                {isBlog ? (
+                   <CommentLikeDislikeBlog
+                   id={id}
+                   commentId={reply.id}
+                   likeCount={reply?.likeCount || 0}
+                   dissLikeCount={reply?.dissLikeCount || 0}
+                   userId={reply?.userId}
+                   currentUserLikeId={reply?.currentUserLikeId}
+                   currentUserIsLike={reply?.currentUserIsLike}
+                   currentUserIsDissLike={reply?.currentUserIsDissLike}
+                   compact
+                 />
+                  ) : (
+                  <CommentLikeDislikeCourse
+                    id={id}
+                    commentId={commentId}
+                    likeCount={reply?.likeCount || 0}
+                    dissLikeCount={reply?.dissLikeCount || 0}
+                    currentUserLikeId={reply?.currentUserLikeId}
+                    currentUserIsLike={reply?.currentUserIsLike}
+                    currentUserIsDissLike={reply?.currentUserIsDissLike}
+                  />
+                  )}
             </div>
             <p className="font-DanaFaNum text-sm text-right mt-2 pr-2">
               {reply.describe}
@@ -147,7 +175,7 @@ const CommentList = ({
   };
 
   return (
-    <div className="w-[393px] md:w-full max-h-[55vh] overflow-y-auto mb-4 space-y-6">
+    <div className="border border-red-300 w-[393px] md:w-full max-h-[55vh] overflow-y-auto mb-4 space-y-6">
       {comments?.map((comment) => (
         <div key={comment.id} className="p-4 bg-white rounded-lg shadow-sm">
           <div className={`relative ${replyingTo === comment.id ? "pr-4" : ""}`}>
@@ -185,6 +213,5 @@ const CommentList = ({
     </div>
   );
 };
-
 
 export{ CommentList}

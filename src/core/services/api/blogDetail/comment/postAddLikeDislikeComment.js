@@ -13,9 +13,9 @@ export const postAddLikeComment = async (commentId) => {
     }
 };
 
-export const postAddDislikeComment = async (id) => {
+export const postAddDislikeComment = async (commentId) => {
     try {
-        const result = await http.post(`/${id}`);
+        const result = await http.post(`/News/CommentLike/${commentId}?LikeType=false`);
         console.log("dorosteee")
         return result;
       

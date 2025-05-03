@@ -18,7 +18,6 @@ const LikeDislikeToggle = ({
     
     const handleLike = () => {
       if (currentUserLike == true) {
-        console.log("Attempting to delete like with ID:", userLikeId); 
         delLike.mutate(userLikeId);
       } else {
         liked.mutate();

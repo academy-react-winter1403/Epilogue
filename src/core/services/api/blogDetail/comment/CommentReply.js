@@ -12,20 +12,17 @@ export const getCommentsReply = async (id) => {
 
 export const postCommentsReply = async (id, userIpAddress, title, describe, userId, parentId) => {
     try {
-        const result = await http.post(`/News/CreateNewsReplyComment`,{
+        const result = await http.post(`/News/CreateNewsReplyComment`, {
             newsId: id,
             userIpAddress: userIpAddress,
             title: title,
             describe: describe,
             userId: userId,
-            parentId: parentId,
+            parentId: parentId, 
         });
-        console.log('blog-post')
         return result;
-
     } catch (error) {   
-        console.log(error , 'postBlogComments-Reply');
-        return error;
-        
+        console.log(error, 'postBlogComments-Reply');
+        throw error; 
     }
 };

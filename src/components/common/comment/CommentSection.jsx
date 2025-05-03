@@ -54,8 +54,8 @@ const CommentSection = ({
     addReply({ 
       id: id,
       userIpAddress: '', 
-      title: formData.title,
-      describe: formData.content,
+      title: formData.title || initialTitle,
+      describe: formData.content || initialDescribe,
       userId: userId,
       parentId: parentId
     }, {
@@ -149,11 +149,11 @@ const CommentSection = ({
       {comments?.length > 3 && (
         <motion.button
           onClick={openModal}
-          className="flex items-center justify-center gap-2 text-white bg-[#2F2F2F] hover:bg-[#1f1f1f] rounded-[40px] px-4 py-2 transition-colors"
+          className="flex items-center justify-center text-white bg-[#2F2F2F] hover:bg-[#1f1f1f] rounded-[40px] px-4 py-2 transition-colors"
           whileTap={{ scale: 0.95 }}
           whileHover={{ y: -2 }}
         >
-          <span>مشاهده بیشتر</span>
+          <span className='mb-1'>مشاهده بیشتر</span>
         </motion.button>
       )}
 
@@ -214,7 +214,5 @@ const CommentSection = ({
     </section>
   );
 };
-
-
 
 export { CommentSection };
