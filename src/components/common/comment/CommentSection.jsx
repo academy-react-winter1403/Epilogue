@@ -64,7 +64,7 @@ const CommentSection = ({
           id: id,
           title: formData.title || initialTitle,
           describe: formData.content || initialDescribe,
-          
+          commentId:replyingTo
         };
   
     addReply(replyData, {

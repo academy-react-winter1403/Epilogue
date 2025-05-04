@@ -13,7 +13,6 @@ const CommentCourse = ({CourseId, course}) => {
     <div>
       <CommentSection
         id={CourseId}
-        
         contentId={course} 
         getComment={getComment} 
         postComment={postComment} 
