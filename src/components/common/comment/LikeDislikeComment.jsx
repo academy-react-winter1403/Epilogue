@@ -10,8 +10,8 @@ const LikeDislikeComment = ({
   delLike,
   disliked,
   liked,
-  currentUserIsLike,
-  currentUserIsDissLike,
+  currentUserIsLike = false,
+  currentUserIsDissLike =false,
 }) => {
   const handleLike = () => {
     if (currentUserIsLike) {

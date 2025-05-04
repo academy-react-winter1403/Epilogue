@@ -76,12 +76,10 @@ const CommentList = ({
         ) : (
           <CommentLikeDislikeCourse
             id={id}
-            commentId={commentId}
+            CourseCommandId={comment?.id}
             likeCount={comment?.likeCount || 0}
             dissLikeCount={comment?.dissLikeCount || 0}
             currentUserLikeId={comment?.currentUserLikeId}
-            currentUserIsLike={comment?.currentUserIsLike}
-            currentUserIsDissLike={comment?.currentUserIsDissLike}
           />
         )}
 
@@ -155,14 +153,12 @@ const CommentList = ({
                    compact
                  />
                   ) : (
-                  <CommentLikeDislikeCourse
+                    <CommentLikeDislikeCourse
                     id={id}
-                    commentId={commentId}
+                    CourseCommandId={reply?.id}
                     likeCount={reply?.likeCount || 0}
                     dissLikeCount={reply?.dissLikeCount || 0}
                     currentUserLikeId={reply?.currentUserLikeId}
-                    currentUserIsLike={reply?.currentUserIsLike}
-                    currentUserIsDissLike={reply?.currentUserIsDissLike}
                   />
                   )}
             </div>
