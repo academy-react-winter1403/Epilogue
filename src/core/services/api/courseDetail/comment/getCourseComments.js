@@ -1,11 +1,11 @@
 import http from "../../../interceptor"; //axios//
 
 export const getCourseComments = async (CourseId) => {
-    console.log('fetchStarted')
+   
     try {
         const result = await http.get(`/Course/GetCourseCommnets/${CourseId}`);
         console.log(result, 'res')
-
+        console.log('fetchStarted',result )
         return result;
 
     } catch (error) {   

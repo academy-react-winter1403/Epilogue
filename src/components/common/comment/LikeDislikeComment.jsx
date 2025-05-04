@@ -10,23 +10,34 @@ const LikeDislikeComment = ({
   delLike,
   disliked,
   liked,
-  currentUserIsLike = false,
-  currentUserIsDissLike =false,
+  currentUserIsLike, 
+  currentUserIsDissLike,
+  currentUserEmotion 
 }) => {
+
+  const hasLiked = currentUserEmotion 
+    ? currentUserEmotion === "LIKED" 
+    : currentUserIsLike;
+
+  const hasDisliked = currentUserEmotion 
+    ? currentUserEmotion === "DISSLIKED" 
+    : currentUserIsDissLike;
+
   const handleLike = () => {
-    if (currentUserIsLike) {
-      delLike.mutate();
+    if (hasLiked) {
+      delLike.mutate(); 
     } else {
-      liked.mutate();
+      liked.mutate(); 
     }
   };
 
   const handleDislike = () => {
-    disliked.mutate();
+    disliked.mutate(); 
   };
 
   return (
     <div className="flex justify-center items-center w-[100px] h-full gap-2">
+
       <div className='flex justify-center items-center'>
         <button 
           onClick={handleLike}
@@ -34,9 +45,9 @@ const LikeDislikeComment = ({
           className='w-[56px] h-[56px]'
         >
           <img 
-            src={currentUserIsLike ? activelikeCommentIcon : likeCommentIcon} 
+            src={hasLiked ? activelikeCommentIcon : likeCommentIcon} 
             className="cursor-pointer"
-            alt={currentUserIsLike ? 'Remove like' : 'Like'}
+            alt={hasLiked ? 'Remove like' : 'Like'}
           />
         </button>
         <AnimatePresence mode="wait">
@@ -60,9 +71,9 @@ const LikeDislikeComment = ({
           className="w-[56px] h-[56px] mt-1.5"
         >
           <img 
-            src={currentUserIsDissLike ? activeDislikeCommentIcon : dislikeCommentIcon}
+            src={hasDisliked ? activeDislikeCommentIcon : dislikeCommentIcon}
             className="cursor-pointer"
-            alt={currentUserIsDissLike ? 'Remove dislike' : 'Dislike'}
+            alt={hasDisliked ? 'Disliked' : 'Dislike'}
           />
         </button>
         <AnimatePresence mode="wait">

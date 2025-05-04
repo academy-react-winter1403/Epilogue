@@ -12,6 +12,7 @@ export const useGetCommentCourse = (CourseId) => {
   });
 };
 
+// add comment
 export const usePostCommentCourse = () => {
   const queryClient = useQueryClient();
   
@@ -23,6 +24,7 @@ export const usePostCommentCourse = () => {
   });
 };
 
+// add reply comment 
 export const usePostCommentReply = () => { 
   const queryClient = useQueryClient();
   

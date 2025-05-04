@@ -25,7 +25,8 @@ const CommentList = ({
     insertDate, 
     title, 
     describe,
-    commentId 
+    commentId ,
+    isBlog
   }) => (
     <div 
       className="flex flex-col gap-3 pb-4 w-full cursor-pointer"
@@ -76,9 +77,10 @@ const CommentList = ({
         ) : (
           <CommentLikeDislikeCourse
             id={id}
+            currentUserEmotion={comment?.currentUserEmotion}
             CourseCommandId={comment?.id}
             likeCount={comment?.likeCount || 0}
-            dissLikeCount={comment?.dissLikeCount || 0}
+            dissLikeCount={comment?.disslikeCount || 0}
             currentUserLikeId={comment?.currentUserLikeId}
           />
         )}
@@ -155,9 +157,10 @@ const CommentList = ({
                   ) : (
                     <CommentLikeDislikeCourse
                     id={id}
+                    currentUserEmotion={reply?.currentUserEmotion}
                     CourseCommandId={reply?.id}
                     likeCount={reply?.likeCount || 0}
-                    dissLikeCount={reply?.dissLikeCount || 0}
+                    dissLikeCount={reply?.disslikeCount || 0}
                     currentUserLikeId={reply?.currentUserLikeId}
                   />
                   )}
@@ -189,6 +192,7 @@ const CommentList = ({
                 title={comment.title}
                 describe={comment.describe}
                 commentId={comment.id}
+                isBlog={isBlog}
               />
               
               <CommentActions
