@@ -16,7 +16,7 @@ const DetailPage = () => {
             <DetailCourse CourseId={course.courseId} course={course}/>
           
             {/* comments */}
-            <CommentCourse CourseId={course.courseId} course={course}/>
+            <CommentCourse CourseId={course.courseId} course={course} />
 
             {/* related-courses */}
             <RelatedCourses CourseId={course.courseId} course={course}/>
