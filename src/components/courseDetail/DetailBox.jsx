@@ -109,10 +109,11 @@ const DetailBox = ({course, CourseId}) => {
             
             <div className="w-[311px] lg:w-[311px] lg:w-[660px] md:w-[630px] md:h-[34px] h-[29px] flex justify-between">
                 <div className='flex gap-2 justify-center items-center'>
-                    <div>( {course?.currentRate} )</div>
                     <AverageRating 
-                        value={course?.courseRate}
+                        value={course?.currentRate}
                         size="md" 
+                        count={course?.currentRate}
+                        currentUserRateNumber ={course?.currentUserRateNumber }
                     />
                     +
                     <div>( {course?.commentCount} )نظرات</div>
