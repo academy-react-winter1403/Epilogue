@@ -64,7 +64,7 @@ const NewCommentForm = ({
           className="p-2 px-4 focus:outline-none text-right"
           required
           disabled={isPending}
-          minLength={2}
+          minLength={5}
         />
         <div className="border-t border-[#DCDCDC] mx-2" />
         <textarea

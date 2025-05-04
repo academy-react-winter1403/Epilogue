@@ -17,21 +17,20 @@ export const usePostCommentCourse = () => {
   const queryClient = useQueryClient();
   
   return useMutation({
-    mutationFn: ({CourseId, ...commentData}) => postAddComment(CourseId, commentData),
+    mutationFn: ({id, title, describe}) => postAddComment(id, title, describe),
     onSuccess: (_, variables) => {
-      queryClient.invalidateQueries(['CommentReplies', variables.CourseId]);
+      queryClient.invalidateQueries(['CommentReplies', variables.id]);
     },
   });
 };
-
-// add reply comment 
+// add reply comment
 export const usePostCommentReply = () => { 
   const queryClient = useQueryClient();
   
   return useMutation({
-    mutationFn: ({CourseId, ...replyData}) => postCourseCommentsReply(CourseId, replyData),
+    mutationFn: ({commentId, id, title, describe}) => postCourseCommentsReply(commentId, id, title, describe),
     onSuccess: (_, variables) => {
-      queryClient.invalidateQueries(['CommentReplies', variables.CourseId]);
+      queryClient.invalidateQueries(['CommentReplies', variables.id]);
     },
   });
 }

@@ -26,25 +26,14 @@ export const postAddDislikeComment = async (CourseCommandId) => {
     }
 };
 
-// export const deleteLikeComment = async (CourseCommandId,currentUserLikeId) => {
-//     try {
-//         const result = await http.delete(`/Course/DeleteCourseCommentLike?CourseCommandId=${CourseCommandId}/${currentUserLikeId}`);
-//         return result;
-      
-//     } catch (error) {   
-//         console.log(error,'delete-like-comment');
-//         return error;
-        
-//     }
-// };
-export const deleteLikeComment = async (CourseCommandId, currentUserLikeId) => {
+export const deleteLikeComment = async (CourseCommandId,currentUserLikeId) => {
     try {
-        const result = await http.delete(`/Course/DeleteCourseCommentLike?CourseCommandId=${CourseCommandId}&currentUserLikeId=${currentUserLikeId}`);
+        const result = await http.delete(`/Course/DeleteCourseCommentLike?CourseCommandId=${CourseCommandId}`);
         return result;
-
-    } catch (error) {
+      
+    } catch (error) {   
         console.log(error,'delete-like-comment');
         return error;
-
-}
-}
+        
+    }
+};

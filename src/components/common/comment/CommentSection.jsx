@@ -51,14 +51,23 @@ const CommentSection = ({
   const handleReplySubmit = (formData) => {
     if (!replyingTo || !addReply) return;
     
-    addReply({ 
-      id: id,
-      userIpAddress: '', 
-      title: formData.title || initialTitle,
-      describe: formData.content || initialDescribe,
-      userId: userId,
-      parentId: parentId
-    }, {
+    const replyData = isBlog 
+      ? { 
+          id: id,
+          userIpAddress: '', 
+          title: formData.title || initialTitle,
+          describe: formData.content || initialDescribe,
+          userId: userId,
+          parentId: parentId
+        }
+      : {
+          id: id,
+          title: formData.title || initialTitle,
+          describe: formData.content || initialDescribe,
+          
+        };
+  
+    addReply(replyData, {
       onSuccess: () => {
         setReplyingTo(null);
         queryClient.invalidateQueries(['commentReplies', replyingTo]);
@@ -69,13 +78,21 @@ const CommentSection = ({
   const handleCommentSubmit = (formData) => {
     if (!addComment) return;
     
-    addComment({ 
-      id: id,
-      userIpAddress: '', 
-      title: formData.title || initialTitle,
-      describe: formData.content || initialDescribe,
-      userId: userId
-    }, {
+    const commentData = isBlog
+      ? {
+          id: id,
+          userIpAddress: '',
+          title: formData.title || initialTitle,
+          describe: formData.content || initialDescribe,
+          userId: userId
+        }
+      : {
+          id: id,
+          title: formData.title || initialTitle,
+          describe: formData.content || initialDescribe
+        };
+  
+    addComment(commentData, {
       onSuccess: () => {
         closeCommentModal();
         closeNewCommentForm();
