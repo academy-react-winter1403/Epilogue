@@ -2,9 +2,8 @@ import { motion } from 'framer-motion';
 import {NewCommentForm} from './NewComponentForm';
 import { formatDate } from '../../common/formatDate/formatDate';
 import { CommentLikeDislikeCourse } from '../../courseDetail/commentCourse/CommentLikeDislikeCourse';
-import { CommentLikeDislikeBlog
-  
- } from '../../blogDetail/commentBlog/CommentLikeDislikeBlog';
+import { CommentLikeDislikeBlog} from '../../blogDetail/commentBlog/CommentLikeDislikeBlog';
+
 const CommentList = ({
   comments,
   id,
@@ -180,12 +179,12 @@ const CommentList = ({
     <div className="border border-red-300 w-[393px] md:w-full max-h-[55vh] overflow-y-auto mb-4 space-y-6">
       {comments?.map((comment) => (
         <div key={comment.id} className="p-4 bg-white rounded-lg shadow-sm">
-          <div className={relative ${replyingTo === comment.id ? "pr-4" : ""}}>
+          <div className={`relative ${replyingTo === comment.id ? "pr-4" : ""}`}>
             {expandedCommentId === comment.id && (
               <div className="absolute right-[-15px] top-0 h-[195px] w-1 bg-[#3772FF] rounded-full" />
             )}
             
-            <div className={flex flex-col ${replyingTo === comment.id ? "border-b border-[#DCDCDC] pb-4" : ""}}>
+            <div className={`flex flex-col ${replyingTo === comment.id ? "border-b border-[#DCDCDC] pb-4" : ""}`}>
               <CommentHeader 
                 author={comment.author}
                 pictureAddress={comment.pictureAddress}
@@ -216,5 +215,6 @@ const CommentList = ({
     </div>
   );
 };
+
 
 export{ CommentList}
