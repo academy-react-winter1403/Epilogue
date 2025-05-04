@@ -8,17 +8,15 @@ import  {formatDate}  from '../common/formatDate/formatDate'
 import { LikeDislikeCourse } from './likeDislike/LikeDislikeCourse'
 
 const DetailBox = ({course, CourseId}) => {
-    console.log('melikajoon', course?.userFavoriteId)
+    console.log('melikajoon', course)
     const [isModalOpen, setIsModalOpen] = useState(false)
  
     const openOverlay = () => {
         setIsModalOpen(true);
-        console.log("opend")
     };
     
     const closeOverlay = () => {
         setIsModalOpen(false);
-        console.log("closed")
     };
 
   return (
@@ -123,7 +121,7 @@ const DetailBox = ({course, CourseId}) => {
             </div>
             
             <div className='flex gap-4'>
-                <div className='md:z-0 flex items-center justify-start w-[600px] h-[80px] md:h-auto md:w-auto lg:w-auto fixed top-[1410px] right-0 md:static lg:static bg-white md:bg-transparent shadow-[0_-5px_10px_-7px_rgba(0,0,0,0.2)] md:shadow-none'>
+                <div className='z-1 flex items-center justify-start w-[600px] h-[80px] md:h-auto md:w-auto lg:w-auto fixed top-[1410px] right-0 md:static lg:static bg-white md:bg-transparent shadow-[0_-5px_10px_-7px_rgba(0,0,0,0.2)] md:shadow-none'>
                     <motion.button
                         onClick={openOverlay}
                         className="flex gap-2 justify-center items-center cursor-pointer w-[194px] h-[56px] rounded-[40px] pt-[13.5px] pr-[44px] pb-[13.5px] pl-[44px] bg-[#3772FF]"

@@ -3,4 +3,5 @@ export const formDataModifire = (object) => {
     Object.entries(object).map(([key, value])=>{
         formData.append(key, value)
     })
+    return formData
 }

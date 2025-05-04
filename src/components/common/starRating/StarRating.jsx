@@ -8,8 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { postCourseRating } from '../../../core/services/api/courseDetail/postCourseRating';
 import { postBlogRating } from '../../../core/services/api/blogDetail/postBlogRating';
 
-const StarRating = ({ itemId, type , initialRating , size , RateNumber, userId}) => {
-  const [rating, setRating] = useState(initialRating);
+const StarRating = ({ itemId, type  , size , currentUserRateNumber, userId}) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
 
@@ -19,7 +18,7 @@ const StarRating = ({ itemId, type , initialRating , size , RateNumber, userId})
     lg: { maxWidth: 200 }
   };
 
-  const handleRatingChange = async (newRating) => {
+  const handleRatingChange = async (RateNumber) => {
     if (!userId || userId === 0 || userId === false) {
       toast.custom((t) => (
         <div className="bg-white p-4 rounded-lg shadow-lg border border-gray-200">
@@ -45,9 +44,8 @@ const StarRating = ({ itemId, type , initialRating , size , RateNumber, userId})
     try {
       setIsSubmitting(true);
       await (type === 'course' 
-        ? postCourseRating(itemId, newRating, RateNumber) 
-        : postBlogRating(itemId, newRating, RateNumber));
-      setRating(newRating);
+        ? postCourseRating(itemId, RateNumber) 
+        : postBlogRating(itemId, RateNumber));
       toast.success('امتیاز ثبت شد');
     } catch {
       toast.error('خطا در ثبت امتیاز');
@@ -58,7 +56,7 @@ const StarRating = ({ itemId, type , initialRating , size , RateNumber, userId})
 
   return (
     <Rating
-      value={rating}
+      value={currentUserRateNumber}
       onChange={handleRatingChange}
       items={5}
       radius="full"
@@ -72,5 +70,7 @@ const StarRating = ({ itemId, type , initialRating , size , RateNumber, userId})
     />
   );
 };
+
+
 
 export { StarRating }

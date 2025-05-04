@@ -12,11 +12,11 @@ const RelatedCourses = ({ CourseId }) => {
   const courses = data.courseFilterDtos.filter(course => course.courseId !== CourseId).slice(0, 4);
 
   return (
-    <section className="w-auto py-6">
+    <section className="w-auto py-6 ">
       <div className="mr-2 mb-5 w-full lg:w-[125px] h-[29px] font-dana font-bold text-[20px] leading-[100%] tracking-[0%] text-right text-gray-800 whitespace-nowrap">
         دوره های مرتبط
       </div>
-      <div className="w-full h-auto md:h-[366px] flex gap-2 mb-4">
+      <div className="overflow-x-auto overflow-y-hidden md:w-auto w-[400px] h-auto md:h-[366px] flex gap-2 mb-4  scrollbar scrollbar-track-white scrollbar-thumb-blue-500">
         {courses.map((course) => (
           <div key={course.courseId} className="min-w-[324px] h-[366px] bg-white flex flex-col gap-[10px]">
             <Link to={`/course-detail/${course.courseId}`}>

@@ -1,3 +1,4 @@
+import { formDataModifire } from "../../../utils/formDateModifier";
 import http from "../../interceptor"; //axios//
 
 export const postAddLikeCourse = async (CourseId) => {
@@ -27,18 +28,13 @@ export const postAddDislikeCourse = async (CourseId) => {
 };
 
 export const deleteLikeCourse = async (userLikeId) => {
+    const formData = formDataModifire({ CourseLikeId: userLikeId })
     try {
-        console.log("Sending delete request for CourseLikeId:", userLikeId);
-        const result = await http.delete(`/Course/DeleteCourseLike`, {
-            data: { CourseLikeId: userLikeId },
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
+        const result = await http.delete(`/Course/DeleteCourseLike`,{data:formData});
         return result;
 
     } catch (error) {
         console.log(error, 'delete-like-course');
         return error;
-}
+    }
 };
