@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Rating } from '@smastrom/react-rating';
 import { Star } from '@smastrom/react-rating';
@@ -70,7 +69,5 @@ const StarRating = ({ itemId, type  , size , currentUserRateNumber, userId}) => 
     />
   );
 };
-
-
 
 export { StarRating }
