@@ -17,7 +17,7 @@ export const postCourseCommentsReply = async (commentId, id, title, describe) =>
        const obj = {CommentId:commentId, CourseId:id, Title:title, Describe:describe}
         const formData = formDataModifire(obj)
     try {
-        const result = await http.post(`/Course/AddReplyCourseComment`,{formData});
+        const result = await http.post(`/Course/AddReplyCourseComment`, formData);
         console.log('post shoodddd')
         return result;
 

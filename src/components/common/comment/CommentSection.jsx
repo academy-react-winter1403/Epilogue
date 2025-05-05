@@ -70,7 +70,7 @@ const CommentSection = ({
     addReply(replyData, {
       onSuccess: () => {
         setReplyingTo(null);
-        queryClient.invalidateQueries(['commentReplies', replyingTo]);
+        queryClient.invalidateQueries(['commentReplies', id]);
       }
     });
   };
@@ -177,7 +177,7 @@ const CommentSection = ({
       <Modal isOpen={isModalOpen} onClose={closeModal} title="نظرات دانشجوها و اساتید">
         <motion.button
           onClick={openNewCommentForm}
-          className={`fixed bottom-60 left-35 w-[345px] h-[56px] md:w-[107px] md:h-[40px] md:static md:transform-none flex items-center justify-center gap-2 bg-[#3772FF] text-white rounded-[40px] px-4 py-2 mb-4 ${
+          className={`fixed bottom-60 left-45 w-[345px] h-[56px] md:w-[107px] md:h-[40px] md:static md:transform-none flex items-center justify-center gap-2 bg-[#3772FF] text-white rounded-[40px] px-4 py-2 mb-4 ${
             showNewCommentForm ? 'hidden md:flex' : 'flex'
           }`}
           whileTap={{ scale: 0.95 }}
