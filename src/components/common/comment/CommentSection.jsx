@@ -19,9 +19,6 @@ const CommentSection = ({
   postReply, 
   getReplies,
   userId,
-  title: initialTitle,
-  describe: initialDescribe,
-  parentId
 }) => {
   const queryClient = useQueryClient();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -53,11 +50,11 @@ const CommentSection = ({
     
     addReply({ 
       id: id,
-      userIpAddress: '', 
-      title: formData.title || initialTitle,
-      describe: formData.content || initialDescribe,
+      userIpAddress: '0.0.0.0', 
+      title: formData.title ,
+      describe: formData.content,
       userId: userId,
-      parentId: parentId
+      parentId: replyingTo
     }, {
       onSuccess: () => {
         setReplyingTo(null);
@@ -72,8 +69,8 @@ const CommentSection = ({
     addComment({ 
       id: id,
       userIpAddress: '', 
-      title: formData.title || initialTitle,
-      describe: formData.content || initialDescribe,
+      title: formData.title,
+      describe: formData.content,
       userId: userId
     }, {
       onSuccess: () => {

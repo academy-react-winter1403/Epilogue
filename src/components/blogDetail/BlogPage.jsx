@@ -17,7 +17,7 @@ const BlogPage = () => {
             <DetailBlog newsId={blog?.detailsNewsDto?.id} blog={blog} />
             
             {/* comments */}
-           <CommentBlog newsId={blog?.detailsNewsDto?.id} blog={blog} parentId={blog?.detailsNewsDto?.parentId} userId={blog?.detailsNewsDto?.userId} title={blog?.commentDtos?.title} describe={blog?.commentDtos?.describe}/>
+           <CommentBlog newsId={blog?.detailsNewsDto?.id} blog={blog} userId={blog?.detailsNewsDto?.userId} />
 
             {/* {related-courses} */}
             <RelatedBlogs newsId={blog?.detailsNewsDto?.id} />

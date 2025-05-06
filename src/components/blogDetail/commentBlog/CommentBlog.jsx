@@ -1,6 +1,6 @@
 import { CommentSection } from '../../common/comment/CommentSection.jsx'
 import { useGetCommentBlog, usePostCommentBlog,usePostCommentReply,useGetCommentReplies } from '../../../core/hooks/blogHooks/useCommentBlog.js'
-const CommentBlog = ({newsId, blog, userId, title, describe, parentId}) => {
+const CommentBlog = ({newsId, blog, userId, parentId}) => {
     const getComment = useGetCommentBlog(newsId) 
     const postComment = usePostCommentBlog()
     const postReply = usePostCommentReply()
@@ -16,8 +16,6 @@ const CommentBlog = ({newsId, blog, userId, title, describe, parentId}) => {
       postReply={postReply} 
       getReplies={getReplies}
       userId={userId}
-      title={title}
-      describe={describe}
       parentId={parentId}
     />
   )

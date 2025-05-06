@@ -176,7 +176,7 @@ const CommentList = ({
   };
 
   return (
-    <div className="border border-red-300 w-[393px] md:w-full max-h-[55vh] overflow-y-auto mb-4 space-y-6">
+    <div className="w-[393px] md:w-full max-h-[55vh] overflow-y-auto mb-4 space-y-6">
       {comments?.map((comment) => (
         <div key={comment.id} className="p-4 bg-white rounded-lg shadow-sm">
           <div className={`relative ${replyingTo === comment.id ? "pr-4" : ""}`}>
