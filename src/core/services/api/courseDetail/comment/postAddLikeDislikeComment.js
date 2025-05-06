@@ -1,8 +1,8 @@
 import http from "../../../interceptor"; //axios//
 
-export const postAddLikeComment = async (currentUserLikeId) => {
+export const postAddLikeComment = async (CourseCommandId) => {
     try {
-        const result = await http.post(`/Course/AddCourseCommentLike?CourseCommandId=${currentUserLikeId}`);
+        const result = await http.post(`/Course/AddCourseCommentLike?CourseCommandId=${CourseCommandId}`);
         console.log("likeeee shooddd",result);
         return result;
       

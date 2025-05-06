@@ -146,8 +146,8 @@ const CommentList = ({
                    <CommentLikeDislikeBlog
                    id={id}
                    commentId={reply.id}
-                   likeCount={reply?.likeCount || 0}
-                   dissLikeCount={reply?.dissLikeCount || 0}
+                   likeCount={ 0}
+                   dissLikeCount={ 0}
                    userId={reply?.userId}
                    currentUserLikeId={reply?.currentUserLikeId}
                    currentUserIsLike={reply?.currentUserIsLike}
@@ -159,8 +159,8 @@ const CommentList = ({
                     id={id}
                     currentUserEmotion={reply?.currentUserEmotion}
                     CourseCommandId={reply?.id}
-                    likeCount={reply?.likeCount || 0}
-                    dissLikeCount={reply?.disslikeCount || 0}
+                    likeCount={ 0}
+                    dissLikeCount={ 0}
                     currentUserLikeId={reply?.currentUserLikeId}
                   />
                   )}
