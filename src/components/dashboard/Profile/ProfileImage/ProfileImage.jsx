@@ -25,7 +25,7 @@ const ProfileImage = () => {
     mutationFn: selectProfileImage,
     onSuccess: () => {
       toast.success("عملیات با موفقیت انجام شد");
-      client.invalidateQueries({ queryKey: ["userInfo2"] });
+      client.invalidateQueries({ queryKey: ["userInfo"] });
     },
     onError: (error) => {
       console.error("select error", error);
@@ -46,15 +46,12 @@ const ProfileImage = () => {
   });
 
   const handleSelectProfileImage = (id) => {
-    console.log(id, "KJSDKJFBPIVSBIWRHB");
     const selectedImage = new FormData();
     selectedImage.append("ImageId", id);
     mutationSelect.mutate(selectedImage);
   };
 
   const handleDeleteProfile = (id) => {
-    console.log(id, "نیتخبث");
-
     const deletedImage = new FormData();
     deletedImage.append("DeleteEntityId", id);
     mutationDelete.mutate(deletedImage);
