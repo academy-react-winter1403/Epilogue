@@ -14,7 +14,7 @@ const Links = () => {
             {/* Telegram Section */}
             <div className="flex flex-col gap-2">
               <p
-                className="text-[16px] font-yekan-600   text-black"
+                className="text-[16px] font-yekan-600  setuserprofile"
               >
                 تلگرام
               </p>
@@ -31,7 +31,7 @@ const Links = () => {
             <div className="flex flex-col gap-2">
               <p
                 htmlFor="linkedin"
-                className="text-[16px] font-yekan-600  text-black"
+                className="text-[16px] font-yekan-600 setuserprofile"
               >
                 لینکدین
               </p>

@@ -17,13 +17,13 @@ const MyReservePage = () => {
         <div className="flex flex-col  gap-2  p-2">
           <div className=" flex flex-row gap-2">
             <Search01Icon color={"00000"} />
-            <p className="text-[14px]  text-black">جست‌جو</p>
+            <p className="text-[14px] setuserprofile">جست‌جو</p>
           </div>
           <form className="flex items-center">
             <input
               type="search"
               placeholder="دوره مورد نظر را جست‌جو کنید..."
-              className=" w-full themed-dash-input md:w-[248px] h-[48px] text-[12px] px-3.5 rounded-2xl bg-[#F1F1F1]"
+              className=" w-full themed-dash-input md:w-[248px] h-[48px] text-[12px] px-3.5 rounded-2xl bg-bg-HeaderDashtable"
               value={searchTerm}
               onChange={handleSearch}
             />
@@ -40,12 +40,12 @@ const MyReservePage = () => {
         {/* <div className="flex flex-col  gap-2  p-2">
           <div className=" flex flex-row gap-2">
             <Calendar02Icon color={"00000"} />
-            <p className="text-[14px]  text-black">تاریخ برگزاری - اتمام</p>
+            <p className="text-[14px] setuserprofile">تاریخ برگزاری - اتمام</p>
           </div>
           <div className=" w-full md:w-[248px] themed-dash-input h-[48px] rounded-2xl bg-[#F1F1F1]"></div>
         </div> */}
       </div>
-      <div className="md:col-span-full min-h-full themed-dashTable bg-[#F6F6F6] rounded-3xl">
+      <div className="md:col-span-full min-h-full bg-bg-Dashtable rounded-3xl">
         <ReservedCoursesTable searchTerm={searchTerm} showAccept={true} />
       </div>
     </div>

@@ -28,7 +28,7 @@ const ChangePasswordPage = () => {
         <Form className="flex flex-col gap-10 p-4 md:p-6 lg:p-8">
           <div className="flex flex-col gap-2">
             <label
-              className="text-[16px] font-yekan-600  text-black"
+              className="text-[16px] font-yekan-600 setuserprofile"
             >
               رمز عبور فعلی{" "}
             </label>
@@ -42,7 +42,7 @@ const ChangePasswordPage = () => {
 
           <div className="flex flex-col gap-2">
             <label
-              className="text-[16px] font-yekan-600  text-black"
+              className="text-[16px] font-yekan-600 setuserprofile"
             >
               رمز عبور جدید{" "}
             </label>
@@ -56,7 +56,7 @@ const ChangePasswordPage = () => {
 
           <div className="flex flex-col gap-2">
             <label
-              className="text-[16px] font-yekan-600  text-black"
+              className="text-[16px] font-yekan-600 setuserprofile"
             >
               تکرار رمز عبور جدید{" "}
             </label>

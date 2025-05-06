@@ -88,7 +88,7 @@ html {
 	--text-grey: #707070;
 	--bg-table:#F6F6F6;
 	--bg-Dashtableِ: #F6F6F6;
-	--header-bg-table: #F1F1F1;
+	--bg-HeaderDashtable: #F1F1F1;
 
 	}
 .dark{
@@ -97,7 +97,7 @@ html {
 	--text-grey: #ffffff;
 	--bg-table:#232323;
 	--bg-Dashtableِ: #1f1f1f;
-	--header-bg-table: #333333;
+	--bg-HeaderDashtable: #333333;
 
 }
 
@@ -116,5 +116,9 @@ html {
 	--color-text-primary: var(--text-primary);
 	--color-text-grey: var(--text-grey);
 	--color-bg-table:var(--bg-table);
+	--color-bg-Dashtable:var(--bg-Dashtableِ);
+	--color-bg-HeaderDashtable:var(--bg-HeaderDashtable);
+
+
 
 }
