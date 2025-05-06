@@ -13,9 +13,8 @@ import { Home04Icon } from "../Icons/HomeIcon";
 import http from '../../../core/services/interceptor/index'
 const Header = () => {
   const { data: userInfo } = useQuery({
-    queryKey: ["userInfo2"],
-    queryFn: () => http.get("/SharePanel/GetProfileInfo"),
-    
+    queryKey: ["userInfo"],
+    queryFn: getUserInfo,
   });
   console.log(userInfo);
 

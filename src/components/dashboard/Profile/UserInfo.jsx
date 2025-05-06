@@ -70,15 +70,15 @@ const UserInfo = () => {
         <Formik
         enableReinitialize
           initialValues={{
-            firstName: userProfile?.fName || "",
-            lastName: userProfile?.lName || "",
-            userAbout: userProfile?.userAbout || "",
-            phoneNumber: userProfile?.phoneNumber || "",
-            nationalCode: userProfile?.nationalCode || "",
-            birthday: userProfile?.birthDay || "",
-            gender: userProfile?.gender || "",
-            email: userProfile?.email || "",
-            homeAddress: userProfile?.homeAdderess || "",
+            firstName: userProfile?.fName,
+            lastName: userProfile?.lName ,
+            userAbout: userProfile?.userAbout ,
+            phoneNumber: userProfile?.phoneNumber ,
+            nationalCode: userProfile?.nationalCode ,
+            birthday: userProfile?.birthDay ,
+            gender: userProfile?.gender ,
+            email: userProfile?.email ,
+            homeAddress: userProfile?.homeAdderess ,
           }}
           validationSchema={validationSchema}
           onSubmit={(values) => editUserProfile(values)}

@@ -10,7 +10,10 @@ import { Link } from "react-router-dom";
 import YourComment from "./YourComment";
 import { PencilEdit01Icon } from "../../common/Icons/PencelIcon";
 import { ArrowLeft01Icon } from "../../common/Icons/ArrowLeftIcon";
+import { useCourseDetails } from "../../../core/hooks/courseHooks/useCourseDetails";
 const StudentPanelPage = () => {
+  const {  data: course, isLoading,  error } = useCourseDetails();
+
   const percentage = 66;
 
   return (
@@ -81,7 +84,8 @@ const StudentPanelPage = () => {
       <div className="md:col-span-5  h-[487px] rounded-3xl themed-dashTable bg-[#F6F6F6]">
         <div className="justify-between items-center flex flex-row text-nowrap text-[14px] font-yekan-600 px-4 py-2">
           <p>نظرات شما</p>
-          <YourComment/>
+          {/* <YourComment CourseId={course?.courseId} course={course}/> */}
+
           <p className="text-[#3772FF] flex flex-row gap-1 ">
             مشاهده بیشتر
             <ArrowLeft01Icon color={"#3772FF"} />

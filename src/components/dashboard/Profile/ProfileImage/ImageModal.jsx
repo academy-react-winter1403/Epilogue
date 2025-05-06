@@ -23,7 +23,7 @@ const ImageModal = () => {
     mutationFn: addProfileImage,
     onSuccess: () => {
       toast.success("پروفایل با موفقیت اضافه شد");
-      client.invalidateQueries({ queryKey: ["userInfo2"] });
+      client.invalidateQueries({ queryKey: ["userInfo"] });
     },
   });
 
