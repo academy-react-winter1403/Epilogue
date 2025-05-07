@@ -40,10 +40,10 @@ const LikeDislikeToggle = ({
   
         <button
           onClick={() => disliked.mutate()}
-          className="w-[56px] h-[56px] flex items-center rounded cursor-pointer transition-all duration-200"
+          className={`w-[56px] h-[56px] flex items-center rounded transition-all duration-200 ${hasDisliked ? 'opacity-50 cursor-not-allowed' : ''}`}
         >
           <img 
-            src={currentUserDissLike === true ? dislikeIconActiv : dislikeIcon} 
+            src={currentUserDissLike === true || currentUserDissLike === 1 ? dislikeIconActiv : dislikeIcon} 
             alt={hasDisliked ? 'Remove dislike' : 'Dislike'} 
             className="cursor-pointer"
           />

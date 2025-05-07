@@ -8,7 +8,7 @@ import  {formatDate}  from '../common/formatDate/formatDate'
 import { LikeDislikeCourse } from './likeDislike/LikeDislikeCourse'
 
 const DetailBox = ({course, CourseId}) => {
-    console.log('melikajoon', course)
+    console.log('melikajoon', course?.currentUserDissLike)
     const [isModalOpen, setIsModalOpen] = useState(false)
  
     const openOverlay = () => {
