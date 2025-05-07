@@ -1,37 +1,58 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { deletelikeBlog, postLikeBlog, postDislikeBlog } from '../../services/api/blogDetail/likeDislikeBlog.js';
-export const useLikeBlog = (newsId) => {
-    const queryClient = useQueryClient();
+import { checkAuth } from '../auth.js';
+import toast from 'react-hot-toast';
 
-     const likeMutation  = useMutation({
-        mutationFn: () => postLikeBlog(newsId),
-        onSuccess: () => {
-          queryClient.invalidateQueries(['blogDetails-likee']);
-        },
-        onError: (error) => {
-          console.error('Error in like:', error);
-        }
-      });
-      
-        
-  return likeMutation
+export const useLikeBlog = (newsId) => {
+  const queryClient = useQueryClient();
+
+  const likeMutation = useMutation({
+    mutationFn: async () => {
+      checkAuth();
+      return await postLikeBlog(newsId);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['blogDetails-like', newsId]);
+    },
+    onError: (error) => {
+      if (error.message === 'USER_NOT_LOGGED_IN') {
+        toast.error('لطفاً ابتدا وارد حساب کاربری خود شوید');
+      } else if (error.response?.status === 401) {
+        toast.error('احراز هویت ناموفق بود. لطفاً مجدداً وارد شوید');
+      } else {
+        toast.error('خطا در ثبت پسندیدن');
+      }
+      console.error('Error in like:', error);
+    }
+  });
+
+  return likeMutation;
 }
 
 export const useDisLikeBlog = (newsId) => {
-    const queryClient = useQueryClient();
+  const queryClient = useQueryClient();
 
-    const dislikeMutation  = useMutation({
-        mutationFn: () => postDislikeBlog(newsId),
-        onSuccess: () => {
-          queryClient.invalidateQueries(['blogDetails-dis']);
-        },
-        onError: (error) => {
-          console.error('Error in dislike:', error);
-        }
-      })
-      
-        
-  return dislikeMutation
+  const dislikeMutation = useMutation({
+    mutationFn: async () => {
+      checkAuth();
+      return await postDislikeBlog(newsId);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['blogDetails-dislike', newsId]);
+    },
+    onError: (error) => {
+      if (error.message === 'USER_NOT_LOGGED_IN') {
+        toast.error('لطفاً ابتدا وارد حساب کاربری خود شوید');
+      } else if (error.response?.status === 401) {
+        toast.error('احراز هویت ناموفق بود. لطفاً مجدداً وارد شوید');
+      } else {
+        toast.error('خطا در ثبت نپسندیدن');
+      }
+      console.error('Error in dislike:', error);
+    }
+  });
+
+  return dislikeMutation;
 }
 
 export const useDelLikeBlog = () => {

@@ -7,14 +7,7 @@ import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { postCourseRating } from '../../../core/services/api/courseDetail/postCourseRating';
 import { postBlogRating } from '../../../core/services/api/blogDetail/posrBlogRating';
-
-const checkAuth = () => {
-  const token = localStorage.getItem('token');
-  if (!token) {
-    throw new Error('USER_NOT_LOGGED_IN');
-  }
-  return true;
-};
+import { checkAuth } from '../../../core/hooks/auth';
 
 const StarRating = ({ itemId, type, currentUserRateNumber, size }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);

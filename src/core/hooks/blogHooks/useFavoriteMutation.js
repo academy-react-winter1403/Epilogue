@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-hot-toast'
 import { postAddBlogFavorite, deleteBlogFavorite } from '../../services/api/blogDetail/favoriteBlog';
+import { checkAuth } from '../auth';
 
 export const useFavoriteMutation = (newsId, isFav) => {
   const queryClient = useQueryClient();
@@ -8,11 +9,7 @@ export const useFavoriteMutation = (newsId, isFav) => {
   const query = useMutation({
       mutationFn: async () => {
         
-          const token = localStorage.getItem('token');
-          
-          if (!token) {
-              throw new Error('USER_NOT_LOGGED_IN');
-          }
+        checkAuth()
 
           if (isFav) {
               return await deleteBlogFavorite(newsId);
