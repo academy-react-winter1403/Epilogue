@@ -73,10 +73,9 @@ const StarRating = ({ itemId, type, currentUserRateNumber, size }) => {
         activeFillColor: '#fbbf24',
         inactiveFillColor: '#e5e7eb'
       }}
-      disabled={isSubmitting}
+      disabled={isSubmitting || currentUserRateNumber > 0}
     />
   );
 };
-
 
 export { StarRating }
