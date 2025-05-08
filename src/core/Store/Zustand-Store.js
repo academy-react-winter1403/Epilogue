@@ -10,6 +10,7 @@ const useStore = create((set) => ({
   SortCol: null,
   SortType: null,
     theme: "default",
+  isLoggedIn:false,
   setTheme: (newTheme) => set({ theme: newTheme }),
   setPageNumber: (pageNumber) => set({ pageNumber }),
   setTeacherId: (teacherId) => set({ teacherId }),
@@ -19,6 +20,7 @@ const useStore = create((set) => ({
   setPriceRange: (priceRange) => set({ priceRange }),
   setSortCol: (SortCol) => set({ SortCol }),
   setSortType: (SortType) => set({ SortType }),
+  setLoggedIn: (isLoggedIn)=> set(isLoggedIn)
 }));
 
 export default useStore;

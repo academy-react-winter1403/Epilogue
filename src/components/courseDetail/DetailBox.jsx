@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import reservIcon from "../../assets/icons/reservIcon.svg"
 import { motion } from "framer-motion"
 import { DetailModal } from './DetailModal'
@@ -6,14 +6,31 @@ import AddCourseFavorite from './AddCourseFavorite'
 import { AverageRating } from '../common/starRating/AverageRating'
 import  {formatDate}  from '../common/formatDate/formatDate'
 import { LikeDislikeCourse } from './likeDislike/LikeDislikeCourse'
+import { useReserveCourse } from '../../core/hooks/courseHooks/useReserveCourse '
+import useStore from '../../core/Store/Zustand-Store'
 
-const DetailBox = ({course, CourseId}) => {
-    console.log('melikajoon', course?.currentUserDissLike)
+const DetailBox = ({course, CourseId,}) => {
+    console.log('melikajoon', course)
     const [isModalOpen, setIsModalOpen] = useState(false)
- 
-    const openOverlay = () => {
-        setIsModalOpen(true);
-    };
+    const reserveMutation = useReserveCourse(CourseId);
+      const {isLoggedIn} = useStore(state=>state)
+    
+    useEffect(()=>{
+      console.log(isLoggedIn,'is logged in')
+        
+    },[isLoggedIn])
+  const handleReserveAction = () => {
+    reserveMutation.mutate({
+      isReserved: course?.isCourseReseve,
+      reserveId: course?.isCourseReseve
+    }, {
+      onSuccess: () => {
+        if (!course?.isCourseReseve) {
+          setIsModalOpen(true);
+        }
+      }
+    });
+  };
     
     const closeOverlay = () => {
         setIsModalOpen(false);
@@ -124,7 +141,7 @@ const DetailBox = ({course, CourseId}) => {
             <div className='flex gap-4'>
                 <div className='z-1 flex items-center justify-start w-[600px] h-[80px] md:h-auto md:w-auto lg:w-auto fixed top-[1410px] right-0 md:static lg:static bg-white md:bg-transparent shadow-[0_-5px_10px_-7px_rgba(0,0,0,0.2)] md:shadow-none'>
                     <motion.button
-                        onClick={openOverlay}
+                        onClick={handleReserveAction}
                         className="flex gap-2 justify-center items-center cursor-pointer w-[194px] h-[56px] rounded-[40px] pt-[13.5px] pr-[44px] pb-[13.5px] pl-[44px] bg-[#3772FF]"
                         whileHover={{ scale: 1.05 }} 
                         whileTap={{ scale: 0.95 }}
@@ -141,7 +158,7 @@ const DetailBox = ({course, CourseId}) => {
                         }}
                     >   
                         <img src={reservIcon} alt="reservation"/>
-                        <span className='text-white whitespace-nowrap font-bold'>رزرو دوره</span>
+                        <span className='text-white whitespace-nowrap font-bold'> {course?.isCourseReseve ? 'حذف رزرو دوره' : 'رزرو دوره'} </span>
                     </motion.button>
                 </div>
                 <AddCourseFavorite CourseId={CourseId} isFav={course?.isUserFavorite} userFavoriteId={course?.userFavoriteId} />

@@ -1,7 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-hot-toast'
 import { postAddCourseFavorite, deleteCourseFavorite } from '../../services/api/courseDetail/postAddCourseFavorite'
-import { checkAuth } from '../auth';
+import { checkAuth } from '../../services/interceptor';
+
 
 export const useFavoriteMutation = (CourseId, isFav, userFavoriteId) => {
   const queryClient = useQueryClient();
@@ -10,7 +11,7 @@ export const useFavoriteMutation = (CourseId, isFav, userFavoriteId) => {
       mutationFn: async () => {
 
         checkAuth()
-
+        
         if (isFav) {
           return await deleteCourseFavorite(userFavoriteId);
         } else {

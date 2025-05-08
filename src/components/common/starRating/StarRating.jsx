@@ -6,10 +6,11 @@ import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { postCourseRating } from '../../../core/services/api/courseDetail/postCourseRating';
 import { postBlogRating } from '../../../core/services/api/blogDetail/postBlogRating';
-import { checkAuth } from '../../../core/hooks/auth';
+import { checkAuth } from '../../../core/services/interceptor';
 
-const StarRating = ({ itemId, type, currentUserRateNumber, size }) => {
+const StarRating = ({ itemId, type, currentUserRateNumber, size,  }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [initialUserRateNumber, setInitialUserRateNumber] = useState(currentUserRateNumber);
   const navigate = useNavigate();
 
   const sizes = {
@@ -22,7 +23,7 @@ const StarRating = ({ itemId, type, currentUserRateNumber, size }) => {
     try {
       checkAuth();
       
-      if (currentUserRateNumber > 0) {
+      if (initialUserRateNumber > 0) {
         toast.error('شما قبلاً به این مورد امتیاز داده‌اید');
         return;
       }
@@ -31,6 +32,7 @@ const StarRating = ({ itemId, type, currentUserRateNumber, size }) => {
       await (type === 'course' 
         ? postCourseRating(itemId, RateNumber) 
         : postBlogRating(itemId, RateNumber));
+        setInitialUserRateNumber(RateNumber)
       toast.success('امتیاز ثبت شد');
     } catch (error) {
       if (error.message === 'USER_NOT_LOGGED_IN') {
@@ -63,7 +65,7 @@ const StarRating = ({ itemId, type, currentUserRateNumber, size }) => {
 
   return (
     <Rating
-      value={currentUserRateNumber}
+      value={initialUserRateNumber}
       onChange={handleRatingChange}
       items={5}
       radius="full"
@@ -73,7 +75,9 @@ const StarRating = ({ itemId, type, currentUserRateNumber, size }) => {
         activeFillColor: '#fbbf24',
         inactiveFillColor: '#e5e7eb'
       }}
-      disabled={isSubmitting || currentUserRateNumber > 0}
+      disabled={isSubmitting || initialUserRateNumber > 0}
+      readOnly={initialUserRateNumber > 0}
+      disableFillHover={true}
     />
   );
 };

@@ -10,6 +10,8 @@ import ThemeToggle from "./AnimatedThemeSwitcher";
 import { ColorPickerIcon } from "./Icons/ThemeIcon";
 import ColorThemeModal from "./ThemeModal/ThemeModal";
 import { Link, NavLink } from "react-router-dom";
+import useStore from "../../core/Store/Zustand-Store";
+import { removeItem } from "../../core/utils/storage.services";
 
 const Header = () => {
   const { data: userInfo } = useQuery({
@@ -21,11 +23,17 @@ const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
-
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token);
-  }, []);
+    // const token = localStorage.getItem("token");
+    if (!userInfo?.currentPictureAddress){
+      console.log("not logged in")
+      removeItem("token")
+      setIsLoggedIn(false)
+    }else{
+      setIsLoggedIn(true)
+    }
+
+  }, [userInfo]);
 
   return (
     <div className="flex w-full justify-between">
