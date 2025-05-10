@@ -199,13 +199,13 @@ const UserInfo = () => {
                 </div>
 
                 <div className="w-1/2">
-                  <p className="block font-yekan-600 setuserprofile text-sm  mb-2">
+                  <p className="block font-yekan-600 setuserprofile text-sm mb-2">
                     جنسیت
                   </p>
                   <div className="flex items-center space-x-4">
-                    <p className="text-gray-700 text-sm">مرد</p>
+                    <p className="text-[var(--text-grey)] text-sm">مرد</p>
                     <Field type="radio" name="gender" value="male" />
-                    <p className="text-gray-700 text-sm">زن</p>
+                    <p className="text-[var(--text-grey)] text-sm">زن</p>
                     <Field type="radio" name="gender" value="female" />
                     <div>
                       <button

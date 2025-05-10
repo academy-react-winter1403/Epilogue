@@ -87,19 +87,118 @@ html {
 	--text-primary: #1a1a1a;
 	--text-grey: #707070;
 	--bg-table:#F6F6F6;
+	--bg-table-pro:#232323;
 	--bg-Dashtableِ: #F6F6F6;
 	--bg-HeaderDashtable: #F1F1F1;
-
+	--bg-tablePro:#232323;
+	--bg-tableHeadPro:#353535;
 	}
 .dark{
 	--bg-primary:#232323;
 	--text-primary: #f5f5f5;
 	--text-grey: #ffffff;
 	--bg-table:#232323;
+	--bg-tablePro:#232323;
 	--bg-Dashtableِ: #1f1f1f;
 	--bg-HeaderDashtable: #333333;
+	--bg-tableHeadPro:#353535;
 
 }
+
+:root {
+	--blue: #3b5bda;
+	--green: #2fba81;
+	--red: #d1565a;
+	--purple: #7e57c2;
+	--pink:#7a3c53;
+	--rose:#f1d0e6;
+  }
+  
+  .theme-blue {
+	--bg-primary: #2c3e66;             /* پس‌زمینه آبی پاستیلی تیره */
+	--text-primary: #f1f5f9;           /* سفید خیلی ملایم برای نوشته‌ها */
+	--text-grey: #cbd5e1;              /* خاکستری آبی خیلی روشن برای متن فرعی */
+	--bg-table: #344b70; 
+	--bg-tablePro: #344b70;               /* جدول با کمی تضاد */
+	              /* جدول با کمی تضاد */
+	--bg-Dashtableِ: #3a537c;          /* داشبورد کمی روشن‌تر از بک‌گراند */
+	--bg-HeaderDashtable: #476396;     /* هدر داشبورد با کنتراست بیشتر */
+	--color-primary: #3b82f6;  
+	--bg-tableHeadPro:#476396;
+	        /* آبی اصلی (برای دکمه‌ها و لینک‌ها) */
+  }
+  
+  .theme-green {
+	--bg-primary: #234f46;             /* سبز تیره پاستیلی */
+	--text-primary: #f0fdf4;           /* سفید مایل به سبز خیلی ملایم */
+	--text-grey: #c6f6d5;              /* سبز کم‌رنگ برای متن فرعی */
+	--bg-table: #2e5e54;  
+	--bg-tablePro: #2e5e54;               /* جدول سبز تیره‌تر */
+	             /* جدول سبز تیره‌تر */
+	--bg-Dashtableِ: #376f62;          /* داشبورد سبز متعادل */
+	--bg-HeaderDashtable: #4c8b7d;     /* هدر سبز زیتونی روشن‌تر */
+	--color-primary: #22c55e;  
+	--bg-tableHeadPro:#4c8b7d;
+
+  }
+  .theme-red {
+	--bg-primary: #4a2328;             /* قرمز شرابی پاستیلی تیره */
+	--text-primary: #fef2f2;           /* سفید مایل به صورتی خیلی روشن */
+	--text-grey: #fca5a5;              /* صورتی ملایم برای متن فرعی */
+	--bg-table: #5a2e33;  
+	--bg-tablePro: #5a2e33;               /* جدول قرمز تیره‌تر */
+	             /* جدول قرمز تیره‌تر */
+	--bg-Dashtableِ: #6b383d;          /* داشبورد با قرمز متعادل */
+	--bg-HeaderDashtable: #8c4d52;     /* هدر با قرمز پاستیلی روشن‌تر */
+	--color-primary: #ef4444;  
+	--bg-tableHeadPro:#8c4d52;
+
+	/* قرمز زنده و برجسته برای اکشن‌ها */
+  }
+  
+  .theme-purple {
+	--bg-primary: #3d2f52;             /* بنفش تیره پاستیلی، نرم و عمیق */
+	--text-primary: #f5f3ff;           /* سفید مایل به بنفش خیلی روشن */
+	--text-grey: #d8b4fe;              /* بنفش روشن ملایم برای متن فرعی */
+	--bg-table: #4a3964;
+	--bg-tablePro: #4a3964;               /* بنفش متعادل برای جدول */
+	               /* بنفش متعادل برای جدول */
+	--bg-Dashtableِ: #594178;          /* داشبورد با کمی روشنایی بیشتر */
+	--bg-HeaderDashtable: #7555a3;     /* هدر بنفش پاستیلی گرم‌تر */
+	--color-primary: #a855f7;  
+	        /* بنفش روشن برای دکمه‌ها
+			 و اجزای تعاملی */
+  --bg-tableHeadPro:#7555a3;
+
+  }
+
+  .theme-pink {
+	--bg-primary: #7a3c53;
+	--text-primary: #fce4ec;
+	--text-grey: #d3aebd;
+	--bg-table: #5c2f40;
+	--bg-tablePro: #5c2f40;
+
+	--bg-Dashtableِ: #472531;
+	--bg-HeaderDashtable: #593746;
+	--color-primary: #ff9abf;
+	--bg-tableHeadPro:#593746;
+
+  }
+  .theme-rose {
+	--bg-primary: #d2a1c1; /* گلبه‌ای پاستیلی ملایم */
+	--text-primary: #1a1a1a;
+	--text-grey: #050505;
+	--bg-table: #d280b1;
+	--bg-tablePro: #d280b1;
+
+	--bg-Dashtableِ: #784363;
+	--bg-HeaderDashtable: #e48ca8;
+	--bg-tableHeadPro:#e48ca8;
+
+  }
+  
+  
 
 
 @theme{
@@ -116,8 +215,12 @@ html {
 	--color-text-primary: var(--text-primary);
 	--color-text-grey: var(--text-grey);
 	--color-bg-table:var(--bg-table);
+	--color-bg-tablePro:var(--bg-tablePro);
+
 	--color-bg-Dashtable:var(--bg-Dashtableِ);
 	--color-bg-HeaderDashtable:var(--bg-HeaderDashtable);
+	--color-bg-tableHeadPro:var(--bg-tableHeadPro);
+
 
 
 
