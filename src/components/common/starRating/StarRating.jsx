@@ -6,7 +6,7 @@ import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { postCourseRating } from '../../../core/services/api/courseDetail/postCourseRating';
 import { postBlogRating } from '../../../core/services/api/blogDetail/postBlogRating';
-import { checkAuth } from '../../../core/services/interceptor';
+import useStore from '../../../core/Store/Zustand-Store';
 
 const StarRating = ({ itemId, type, currentUserRateNumber, size,  }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -21,18 +21,22 @@ const StarRating = ({ itemId, type, currentUserRateNumber, size,  }) => {
 
   const handleRatingChange = async (RateNumber) => {
     try {
-      checkAuth();
+      const { isLoggedIn } = useStore.getState();
       
+      if (!isLoggedIn) {
+        throw new Error('USER_NOT_LOGGED_IN');
+      }
+  
       if (initialUserRateNumber > 0) {
         toast.error('شما قبلاً به این مورد امتیاز داده‌اید');
         return;
       }
-
+  
       setIsSubmitting(true);
       await (type === 'course' 
         ? postCourseRating(itemId, RateNumber) 
         : postBlogRating(itemId, RateNumber));
-        setInitialUserRateNumber(RateNumber)
+      setInitialUserRateNumber(RateNumber);
       toast.success('امتیاز ثبت شد');
     } catch (error) {
       if (error.message === 'USER_NOT_LOGGED_IN') {

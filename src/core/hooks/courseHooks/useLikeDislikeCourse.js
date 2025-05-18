@@ -1,15 +1,17 @@
 import {postAddLikeCourse, postAddDislikeCourse, deleteLikeCourse} from '../../services/api/courseDetail/postAddLikeDislikeCourse.js'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-
 import toast from 'react-hot-toast';
-import { checkAuth } from '../../services/interceptor/index.js';
+import useStore from '../../Store/Zustand-Store.js';
 
 export const useLikeCourse = (CourseId) => {
   const queryClient = useQueryClient();
+  const { isLoggedIn } = useStore(state => state);
 
   const likeMutation = useMutation({
     mutationFn: async () => {
-      checkAuth();
+      if (!isLoggedIn) {
+        throw new Error('USER_NOT_LOGGED_IN');
+      }
       return await postAddLikeCourse(CourseId);
     },
     onSuccess: () => {
@@ -32,10 +34,13 @@ export const useLikeCourse = (CourseId) => {
 
 export const useDisLikeCourse = (CourseId) => {
   const queryClient = useQueryClient();
+  const { isLoggedIn } = useStore(state => state);
 
   const dislikeMutation = useMutation({
     mutationFn: async () => {
-      checkAuth();
+      if (!isLoggedIn) {
+        throw new Error('USER_NOT_LOGGED_IN');
+      }
       return await postAddDislikeCourse(CourseId);
     },
     onSuccess: () => {
@@ -55,7 +60,6 @@ export const useDisLikeCourse = (CourseId) => {
 
   return dislikeMutation;
 }
-
 export const useDeleteLikeCourse = () => {
   const queryClient = useQueryClient();
 
