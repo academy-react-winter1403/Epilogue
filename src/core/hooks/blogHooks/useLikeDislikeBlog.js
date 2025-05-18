@@ -2,13 +2,17 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { deletelikeBlog, postLikeBlog, postDislikeBlog } from '../../services/api/blogDetail/likeDislikeBlog.js';
 import { checkAuth } from '../auth.js';
 import toast from 'react-hot-toast';
+import useStore from '../../Store/Zustand-Store.js';
 
 export const useLikeBlog = (newsId) => {
   const queryClient = useQueryClient();
+  const { isLoggedIn } = useStore(state => state);
 
   const likeMutation = useMutation({
     mutationFn: async () => {
-      checkAuth();
+      if (!isLoggedIn) {
+        throw new Error('USER_NOT_LOGGED_IN');
+      }
       return await postLikeBlog(newsId);
     },
     onSuccess: () => {
@@ -31,10 +35,13 @@ export const useLikeBlog = (newsId) => {
 
 export const useDisLikeBlog = (newsId) => {
   const queryClient = useQueryClient();
+  const { isLoggedIn } = useStore(state => state);
 
   const dislikeMutation = useMutation({
     mutationFn: async () => {
-      checkAuth();
+      if (!isLoggedIn) {
+        throw new Error('USER_NOT_LOGGED_IN');
+      }
       return await postDislikeBlog(newsId);
     },
     onSuccess: () => {
