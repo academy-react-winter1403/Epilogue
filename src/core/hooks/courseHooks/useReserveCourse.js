@@ -7,7 +7,7 @@ import useStore from '../../Store/Zustand-Store';
 export const useReserveCourse = (CourseId) => {
   const queryClient = useQueryClient();
   const { isLoggedIn } = useStore(state => state);
-
+console.log(isLoggedIn, 'isLoggedIn')
   const reserveMutation = useMutation({
     mutationFn: async ({ isReserved, reserveId }) => {
       if (!isLoggedIn) {

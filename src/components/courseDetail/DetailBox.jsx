@@ -6,7 +6,7 @@ import AddCourseFavorite from './AddCourseFavorite'
 import { AverageRating } from '../common/starRating/AverageRating'
 import  {formatDate}  from '../common/formatDate/formatDate'
 import { LikeDislikeCourse } from './likeDislike/LikeDislikeCourse'
-import { useReserveCourse } from '../../core/hooks/courseHooks/useReserveCourse '
+import { useReserveCourse } from '../../core/hooks/courseHooks/useReserveCourse' 
 import useStore from '../../core/Store/Zustand-Store'
 
 const DetailBox = ({course, CourseId,}) => {
