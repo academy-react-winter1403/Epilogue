@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
-import {NewCommentForm} from './NewComponentForm';
+import { NewCommentForm } from './NewComponentForm';
 import { formatDate } from '../../common/formatDate/formatDate';
 import { CommentLikeDislikeCourse } from '../../courseDetail/commentCourse/CommentLikeDislikeCourse';
-
+import { useTranslation } from 'react-i18next';
 
 const CommentList = ({
   comments,
@@ -24,6 +24,8 @@ const CommentList = ({
   expandedCommentId,
   toggleCommentExpansion
 }) => {
+  const { t } = useTranslation('blogList'); 
+
   const CommentHeader = ({ 
     author, 
     pictureAddress, 
@@ -41,7 +43,7 @@ const CommentList = ({
         {pictureAddress ?( 
         <img 
           src={pictureAddress} 
-          alt="پروفایل" 
+          alt={t('profileImage')} 
           className="w-10 h-10 rounded-full"
         />
         ):(
@@ -72,10 +74,10 @@ const CommentList = ({
   }) => (
     <div className="flex flex-col md:flex-row items-start md:items-center gap-2 mt-2 w-full">
      <CommentLikeDislikeCourse
-      CourseId={id}
-      likeCount={contentId?.likeCount || 0}
-      dissLikeCount={contentId?.dissLikeCount || 0}
-    />
+       CourseId={id}
+       likeCount={contentId?.likeCount || 0}
+       dissLikeCount={contentId?.dissLikeCount || 0}
+     />
 
       {replyingTo === commentId ? (
         <div className="w-full mt-2">
@@ -99,7 +101,7 @@ const CommentList = ({
           whileTap={{ scale: 0.95 }}
           disabled={isPending}
         >
-          جواب دادن
+          {t('replyButton')} 
         </motion.button>
       )}
     </div>
@@ -110,7 +112,7 @@ const CommentList = ({
     const replyParams = isCourse ? [id, commentId] : [id];
     const { data: replies = [], isLoading: isRepliesLoading } = getReplies(...replyParams);
     
-    if (isRepliesLoading) return <div className="text-center py-4">در حال بارگیری پاسخ‌ها...</div>;
+    if (isRepliesLoading) return <div className="text-center py-4">{t('loadingReplies')}</div>;
     if (!replies.length) return null;
 
     return (
@@ -122,7 +124,7 @@ const CommentList = ({
               {reply?.pictureAddress ?( 
               <img 
                 src={reply?.pictureAddress} 
-                alt="پروفایل" 
+                alt={t('profileImage')} 
                 className="w-10 h-10 rounded-full"
               />
               ):(
@@ -131,13 +133,13 @@ const CommentList = ({
                 <div>
                   <span className="font-DanaFaNum font-medium text-sm">{reply.author}</span>
                   <span className="block text-[#707070] font-DanaFaNum text-xs">
-                     {isBlog
+                      {isBlog
                       ? formatDate(reply?.inserDate)
                       : formatDate(reply?.insertDate)}
                   </span>
                 </div>
               </div>
-           
+            
                 <CommentLikeDislikeCourse
                   CourseId={id}
                   likeCount={reply?.likeCount || 0}
@@ -183,7 +185,7 @@ const CommentList = ({
                 replyTitle={replyTitle}
                 setReplyTitle={setReplyTitle}
                 replyContent={replyContent}
-                setReplyContent={setReplyContent}
+                setContent={setReplyContent}
                 isPending={isPending}
               />
               
@@ -198,4 +200,4 @@ const CommentList = ({
   );
 };
 
-export{ CommentList}
+export{ CommentList};

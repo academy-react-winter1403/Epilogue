@@ -1,15 +1,18 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import {Modal} from './CommentModal';
-import {CommentCard} from './CommentCard';
-import {CommentList} from './CommentList';
-import { NewCommentForm } from './NewComponentForm';
-import  commentBtnIcon from '../../../assets/icons/commentBtnIcon.svg';
-import  sendIcon  from '../../../assets/icons/sendCommentIcon.svg';
-import  emojiIcon from '../../../assets/icons/emojiIcon.svg';
+import { Modal } from './CommentModal';
+import { CommentCard } from './CommentCard'; 
+import { CommentList } from './CommentList'; 
+import { NewCommentForm } from './NewComponentForm'; 
+import commentBtnIcon from '../../../assets/icons/commentBtnIcon.svg';
+import sendIcon from '../../../assets/icons/sendCommentIcon.svg';
+import emojiIcon from '../../../assets/icons/emojiIcon.svg';
 import closeIcon from '../../../assets/icons/closeIcon.svg';
+import { useTranslation } from 'react-i18next';
 
 const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postReply, getReplies }) => {
+  const { t } = useTranslation('blogList'); 
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
   const [showNewCommentForm, setShowNewCommentForm] = useState(false);
@@ -27,7 +30,7 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
   const toggleCommentExpansion = (commentId) => {
     setExpandedCommentId(prev => {
       if (prev === commentId) {
-        setReplyingTo(null); 
+        setReplyingTo(null);
         return null;
       }
       return commentId;
@@ -51,12 +54,12 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
   const handleReplySubmit = (e) => {
     e.preventDefault();
     if (!replyingTo || !addReply) return;
-    
-    addReply({ 
+
+    addReply({
       id,
-      parentId: replyingTo, 
-      title: replyTitle, 
-      content: replyContent 
+      parentId: replyingTo,
+      title: replyTitle,
+      content: replyContent
     }, {
       onSuccess: () => {
         setReplyTitle('');
@@ -69,11 +72,11 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
   const handleCommentSubmit = (e) => {
     e.preventDefault();
     if (!addComment) return;
-    
-    addComment({ 
+
+    addComment({
       id,
-      title: commentTitle, 
-      content: commentContent 
+      title: commentTitle,
+      content: commentContent
     }, {
       onSuccess: () => {
         setCommentTitle('');
@@ -86,7 +89,7 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
 
   const openModal = () => setIsModalOpen(true);
   const openCommentModal = () => setIsCommentModalOpen(true);
-  
+
   const openNewCommentForm = () => {
     if (replyingTo) cancelReply();
     setShowNewCommentForm(true);
@@ -98,7 +101,7 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
     setIsModalOpen(false);
     cancelReply();
     setExpandedCommentId(null);
-    closeNewCommentForm(); 
+    closeNewCommentForm();
   };
 
   const closeCommentModal = () => {
@@ -116,13 +119,13 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
 
   const displayedComments = comments?.slice(0, 3) || [];
 
-  if (isLoading) return <div>در حال بارگذاری نظرات...</div>;
-  if (isError) return <div>خطا در بارگذاری نظرات</div>;
+  if (isLoading) return <div>{t('loadingComments')}</div>;
+  if (isError) return <div>{t('errorLoadingComments')}</div>; 
 
   return (
     <section className="w-full flex flex-col gap-5 mt-[50px] justify-center items-center">
       <div className="pl-90 md:self-start w-[219px] h-[29px] font-dana font-bold text-[20px] leading-[100%] tracking-[0%] text-gray-800 whitespace-nowrap">
-        نظرات دانشجوها و اساتید
+        {t('studentsAndTeachersComments')} 
       </div>
 
       <div className="w-full flex flex-col items-center md:flex-row gap-[8px]">
@@ -133,16 +136,16 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
           whileHover={{ y: -2 }}
         >
           <img src={commentBtnIcon} alt="commentBtnIcon" />
-          <span className='font-semibold text-[18px] leading-[100%] tracking-[0%]'>نظر شما</span>
+          <span className='font-semibold text-[18px] leading-[100%] tracking-[0%]'>{t('yourComment')}</span> 
           <span className='font-medium text-[14px] leading-[100%] tracking-[0%] text-[#F6F6F6]'>
-            برای نظر دادن کلیک کنید
+            {t('clickToComment')} 
           </span>
         </motion.button>
 
         {displayedComments.map((comment) => (
-          <CommentCard 
+          <CommentCard
             key={comment.id}
-            comment={comment} 
+            comment={comment}
             id={id}
             isBlog={isBlog}
           />
@@ -156,11 +159,11 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
           whileTap={{ scale: 0.95 }}
           whileHover={{ y: -2 }}
         >
-          <span>مشاهده بیشتر</span>
+          <span>{t('viewMore')}</span> 
         </motion.button>
       )}
 
-      <Modal isOpen={isModalOpen} onClose={closeModal} title="نظرات دانشجوها و اساتید">
+      <Modal isOpen={isModalOpen} onClose={closeModal} title={t('studentsAndTeachersComments')}> 
         <motion.button
           onClick={openNewCommentForm}
           className={`fixed bottom-60 left-35 w-[345px] h-[56px] md:w-[107px] md:h-[40px] md:static md:transform-none flex items-center justify-center gap-2 bg-[#3772FF] text-white rounded-[40px] px-4 py-2 mb-4 ${
@@ -170,7 +173,7 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
           whileHover={{ y: -2 }}
         >
           <img src={commentBtnIcon} alt="commentBtnIcon" className='w-[8%] md:w-[20px]'/>
-          <span className='whitespace-nowrap'>نظر شما</span>
+          <span className='whitespace-nowrap'>{t('yourComment')}</span> 
         </motion.button>
 
         <CommentList
@@ -184,7 +187,7 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
           replyTitle={replyTitle}
           setReplyTitle={setReplyTitle}
           replyContent={replyContent}
-          setReplyContent={setReplyContent}
+          setContent={setReplyContent}
           SendIcon={sendIcon}
           EmojiIcon={emojiIcon}
           isPending={isReplyPending}
@@ -196,7 +199,7 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
 
         {showNewCommentForm && (
           <div className='mr-5 mb-0 md:mb-20'>
-             <NewCommentForm
+              <NewCommentForm
             onSubmit={handleCommentSubmit}
             onClose={closeNewCommentForm}
             title={commentTitle}
@@ -205,13 +208,12 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
             setContent={setCommentContent}
             CloseIcon={closeIcon}
             isPending={isCommentPending}
-          />
+            />
           </div>
-         
         )}
       </Modal>
 
-      <Modal isOpen={isCommentModalOpen} onClose={closeCommentModal} title="ثبت نظر جدید">
+      <Modal isOpen={isCommentModalOpen} onClose={closeCommentModal} title={t('submitNewComment')}> 
         <div className='mt-30'>
         <NewCommentForm
           onSubmit={handleCommentSubmit}

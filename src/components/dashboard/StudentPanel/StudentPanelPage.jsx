@@ -1,17 +1,20 @@
 import React from "react";
-import WelcomeUser from "./WelcomeUser";
-import DashboardTable from "../../common/Dashboard/Table/DashboardTable";
+import WelcomeUser from "./WelcomeUser"; 
+import DashboardTable from "../../common/Dashboard/Table/DashboardTable"; 
 import {
   buildStyles,
   CircularProgressbarWithChildren,
 } from "react-circular-progressbar";
-import ReservedCoursesTable from "../../common/Dashboard/Table/ReserveCourseTable";
+import ReservedCoursesTable from "../../common/Dashboard/Table/ReserveCourseTable"; 
 import { Link } from "react-router-dom";
-import YourComment from "./YourComment";
-import { PencilEdit01Icon } from "../../common/Icons/PencelIcon";
-import { ArrowLeft01Icon } from "../../common/Icons/ArrowLeftIcon";
+import YourComment from "./YourComment"; 
+import { PencilEdit01Icon } from "../../common/Icons/PencelIcon"; 
+import { ArrowLeft01Icon } from "../../common/Icons/ArrowLeftIcon"; 
+import { useTranslation } from 'react-i18next'; 
+
 const StudentPanelPage = () => {
-  const percentage = 66;
+  const { t } = useTranslation('dashboard');
+  const percentage = 66; 
 
   return (
     <div className="py-6 px-6 grid grid-cols-1 gap-6 md:grid-cols-12">
@@ -19,14 +22,14 @@ const StudentPanelPage = () => {
         <WelcomeUser />
       </div>
 
-      <div className="md:col-span-9 themed-dashTable bg-[#F6F6F6]  rounded-3xl">
+      <div className="md:col-span-9 themed-dashTable bg-[#F6F6F6] rounded-3xl">
         <div className="flex flex-row justify-between items-center">
-          <p className="text-[14px] font-yekan-600 px-4 py-2">دوره من</p>
+          <p className="text-[14px] font-yekan-600 px-4 py-2">{t('myCourses')}</p> 
           <Link
             to={"/StudentPanel/my-courses"}
             className="text-[14px] text-[#3772FF] flex flex-row gap-1 font-yekan-600 px-4 py-2"
           >
-            مشاهده بیشتر
+            {t('viewMore')} 
             <ArrowLeft01Icon color={"#3772FF"} />
           </Link>
         </div>
@@ -35,16 +38,14 @@ const StudentPanelPage = () => {
 
       <div className="md:col-span-3 rounded-3xl md:flex md:flex-col themed-dashTable bg-[#F6F6F6]">
         <div className="justify-between items-center px-4 py-2 flex flex-row ">
-
           <p className="text-[12px] text-nowrap font-yekan-600">
-            وضعیت اطلاعات حساب کاربری
+            {t('accountInfoStatus')}
           </p>
-          <Link to={"/StudentPanel/edite-profile/profile-info"}>
-          <div className="flex items-center">
-            <PencilEdit01Icon width={20} height={20} color={"#3772FF"} />
-          </div>
+          <Link to={"/StudentPanel/edite-profile/profile-info"} aria-label={t('editProfileInfo')}>
+            <div className="flex items-center">
+              <PencilEdit01Icon width={20} height={20} color={"#3772FF"} />
+            </div>
           </Link>
-          
         </div>
         <div className="mt-[22px] m-auto w-[136px] ">
           <CircularProgressbarWithChildren
@@ -60,32 +61,32 @@ const StudentPanelPage = () => {
           </CircularProgressbarWithChildren>
         </div>
         <p className="py-5 flex items-center justify-center text-[12px] text-nowrap font-yekan-600">
-          اطلاعات حساب کاربری شما کامل نیست
+          {t('accountInfoIncomplete')}
         </p>
       </div>
 
       <div className="md:col-span-7 themed-dashTable bg-[#F6F6F6] flex flex-col rounded-3xl">
         <div className="flex flex-row justify-between items-center">
-          <p className="text-[14px] font-yekan-600 px-4  py-2">رزرو من</p>
+          <p className="text-[14px] font-yekan-600 px-4 py-2">{t('myReservations')}</p> 
           <Link
             to={"/StudentPanel/my-reserve"}
             className="text-[14px] text-[#3772FF] px-4 flex flex-row gap-1 font-yekan-600 py-2"
           >
-            مشاهده بیشتر
+            {t('viewMore')} 
             <ArrowLeft01Icon color={"#3772FF"} />
           </Link>
         </div>
         <ReservedCoursesTable showAccept={false} />
       </div>
 
-      <div className="md:col-span-5  h-[487px] rounded-3xl themed-dashTable bg-[#F6F6F6]">
+      <div className="md:col-span-5 h-[487px] rounded-3xl themed-dashTable bg-[#F6F6F6]">
         <div className="justify-between items-center flex flex-row text-nowrap text-[14px] font-yekan-600 px-4 py-2">
-          <p>نظرات شما</p>
+          <p>{t('yourComments')}</p>
           <YourComment/>
-          <p className="text-[#3772FF] flex flex-row gap-1 ">
-            مشاهده بیشتر
+          <Link to={"/StudentPanel/your-comments-route"} className="text-[#3772FF] flex flex-row gap-1"> 
+            {t('viewMore')} 
             <ArrowLeft01Icon color={"#3772FF"} />
-          </p>
+          </Link>
         </div>
       </div>
     </div>

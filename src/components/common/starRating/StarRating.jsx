@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Rating } from '@smastrom/react-rating';
 import { Star } from '@smastrom/react-rating';
@@ -7,8 +6,11 @@ import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { postCourseRating } from '../../../core/services/api/courseDetail/postCourseRating';
 import { postBlogRating } from '../../../core/services/api/blogDetail/postBlogRating';
+import { useTranslation } from 'react-i18next';
 
-const StarRating = ({ itemId, type , initialRating , size , RateNumber, userId}) => {
+const StarRating = ({ itemId, type, initialRating, size, RateNumber, userId }) => {
+  const { t } = useTranslation('dashboard'); 
+
   const [rating, setRating] = useState(initialRating);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
@@ -21,21 +23,21 @@ const StarRating = ({ itemId, type , initialRating , size , RateNumber, userId})
 
   const handleRatingChange = async (newRating) => {
     if (!userId || userId === 0 || userId === false) {
-      toast.custom((t) => (
+      toast.custom((tInstance) => ( 
         <div className="bg-white p-4 rounded-lg shadow-lg border border-gray-200">
-          <p className="text-sm text-gray-700 mb-2">برای امتیاز دادن وارد شوید</p>
+          <p className="text-sm text-gray-700 mb-2">{t('loginToRate')}</p>
           <div className='flex gap-2'>
-            <button 
-              onClick={() => navigate('/auth/login')} 
+            <button
+              onClick={() => navigate('/auth/login')}
               className="px-3 py-1 bg-blue-500 text-white rounded text-sm hover:bg-blue-600"
             >
-              ورود
+              {t('login')}
             </button>
-            <button 
-              onClick={() => toast.dismiss(t.id)} 
+            <button
+              onClick={() => toast.dismiss(tInstance.id)}
               className="px-3 py-1 bg-gray-200 text-gray-700 rounded text-sm hover:bg-gray-300"
             >
-              بستن
+              {t('close')}
             </button>
           </div>
         </div>
@@ -44,13 +46,13 @@ const StarRating = ({ itemId, type , initialRating , size , RateNumber, userId})
     }
     try {
       setIsSubmitting(true);
-      await (type === 'course' 
-        ? postCourseRating(itemId, newRating, RateNumber) 
+      await (type === 'course'
+        ? postCourseRating(itemId, newRating, RateNumber)
         : postBlogRating(itemId, newRating, RateNumber));
       setRating(newRating);
-      toast.success('امتیاز ثبت شد');
+      toast.success(t('ratingSaved')); 
     } catch {
-      toast.error('خطا در ثبت امتیاز');
+      toast.error(t('errorSavingRating')); 
     } finally {
       setIsSubmitting(false);
     }
@@ -73,4 +75,4 @@ const StarRating = ({ itemId, type , initialRating , size , RateNumber, userId})
   );
 };
 
-export { StarRating }
+export { StarRating };
