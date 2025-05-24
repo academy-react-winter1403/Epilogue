@@ -22,7 +22,6 @@ const Header = () => {
   return (
     <div className="flex flex-wrap items-center max-w-7xl justify-between p-2 px-5 ">
       <div className=" flex items-center gap-[39px] ">
-        {/* UserInfo */}
         <div className="flex items-center gap-[50px]">
           <div className=" items-center gap-1 hidden lg:flex">
             <img src={h1} className="pl-1 w-[42px] h-[40px]" />

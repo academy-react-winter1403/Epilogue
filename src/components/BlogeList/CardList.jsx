@@ -42,19 +42,15 @@ const CardList = ({ sortedCards, currentCards }) => {
               </Link>
 
               <div className="flex items-center justify-between flex-row gap-2 w-full">
-                {/* نام کاربر */}
                 <h2 className="text-[#707070] text-[14px] font-medium truncate  ">
                   {card.addUserFullName || "ناشناس"}
                 </h2>
 
                 <div className="flex flex-row gap-3 ">
-                  {/* تاریخ */}
                   <div className="flex items-center gap-1 text-[14px] text-[#707070] font-yekan-500">
                     {dateModifier(card.insertDate)}
                     <Calendar03Icon width="18px" height="18px" />
                   </div>
-
-                  {/* ویو */}
                   <div className="flex items-center gap-1 text-[14px] text-[#707070] font-yekan-500">
                     {card.currentView}
                     <ViewIcon width="18px" height="18px" />
