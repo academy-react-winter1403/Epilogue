@@ -1,11 +1,14 @@
 import faveIcon from "../../assets/icons/faveIcon.svg"
 import { motion } from "framer-motion"
+import { getItem } from "../../core/utils/storage.services"
+import { useNavigate } from "react-router-dom"
 
 const AddFavorites = ({isFav, mutation}) => {
-  
+  const navigat = useNavigate()
   return (
     <motion.button  
-    onClick={()=>{mutation?.mutate(!isFav)}}      
+    onClick={()=>{
+      getItem('token') ? mutation?.mutate(!isFav) : navigat('/auth/login')}}      
     className={"flex justify-center gap-4 items-center whitespace-nowrap text-white text-[16px] md:font-bold cursor-pointer w-[218px] md:w-[90%] lg:w-[90%] h-[50px] rounded-[40px] pt-[13.5px] pr-[47px] pb-[13.5px] pl-[47px] bg-[#2F2F2F]"}
     whileTap={{ scale: 0.95 }}
     animate={{ opacity: [0.8, 1] }}

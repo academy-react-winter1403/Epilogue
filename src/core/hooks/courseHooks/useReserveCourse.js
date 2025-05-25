@@ -1,19 +1,18 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { postAddCourseReserve } from '../../services/api/courseDetail/PostAddCourseReserve';
 import toast from 'react-hot-toast';
-import { deleteCourseReserve } from '../../services/api/Dashboard/dashborad';
-import useStore from '../../Store/Zustand-Store';
+import { deleteCourseReserve } from '../../services/api/courseDetail/deleteCourseReserve';
+import { getItem } from '../../utils/storage.services';
 
 export const useReserveCourse = (CourseId) => {
   const queryClient = useQueryClient();
-  const { isLoggedIn } = useStore(state => state);
-console.log(isLoggedIn, 'isLoggedIn')
+
   const reserveMutation = useMutation({
     mutationFn: async ({ isReserved, reserveId }) => {
-      if (!isLoggedIn) {
-        throw new Error('USER_NOT_LOGGED_IN');
+      if (getItem('token')) {
+        toast.error('لطفاً ابتدا وارد شوید');
+        return;
       }
-      
       if (isReserved) {
         return await deleteCourseReserve({ id: reserveId });
       } else {
@@ -31,9 +30,7 @@ console.log(isLoggedIn, 'isLoggedIn')
       }
     },
     onError: (error) => {
-      if (error.message === 'USER_NOT_LOGGED_IN') {
-        toast.error('لطفاً ابتدا وارد حساب کاربری خود شوید');
-      } else if (error.response?.status === 401) {
+     if (error.response?.status === 401) {
         toast.error('احراز هویت ناموفق بود. لطفاً مجدداً وارد شوید');
       } else if (error.response?.status === 422) {
         const errorMessages = error.response.data?.ErrorMessage || [];

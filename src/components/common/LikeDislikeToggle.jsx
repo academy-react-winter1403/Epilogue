@@ -12,7 +12,6 @@ const LikeDislikeToggle = ({
     userLikeId
   }) => {
   
-  
     const hasLiked = currentUserLike === true;
     const hasDisliked = currentUserDissLike === true ;
     
@@ -39,7 +38,7 @@ const LikeDislikeToggle = ({
         </button>
   
         <button
-          onClick={() => disliked.mutate()}
+          onClick={() => disliked.mutate() }
           className={`w-[56px] h-[56px] flex items-center rounded transition-all duration-200 ${hasDisliked ? 'opacity-50 cursor-not-allowed' : ''}`}
         >
           <img 

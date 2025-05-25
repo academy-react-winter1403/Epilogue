@@ -1,16 +1,15 @@
 import {postAddLikeCourse, postAddDislikeCourse, deleteLikeCourse} from '../../services/api/courseDetail/postAddLikeDislikeCourse.js'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import toast from 'react-hot-toast';
-import useStore from '../../Store/Zustand-Store.js';
+import { getItem } from '../../utils/storage.services.js';
 
 export const useLikeCourse = (CourseId) => {
   const queryClient = useQueryClient();
-  const { isLoggedIn } = useStore(state => state);
-
   const likeMutation = useMutation({
     mutationFn: async () => {
-      if (!isLoggedIn) {
-        throw new Error('USER_NOT_LOGGED_IN');
+      if (!getItem('token')) {
+        toast.error('لطفاً ابتدا وارد شوید');
+        return;
       }
       return await postAddLikeCourse(CourseId);
     },
@@ -34,11 +33,10 @@ export const useLikeCourse = (CourseId) => {
 
 export const useDisLikeCourse = (CourseId) => {
   const queryClient = useQueryClient();
-  const { isLoggedIn } = useStore(state => state);
 
   const dislikeMutation = useMutation({
     mutationFn: async () => {
-      if (!isLoggedIn) {
+      if (!getItem('token')) {
         throw new Error('USER_NOT_LOGGED_IN');
       }
       return await postAddDislikeCourse(CourseId);
