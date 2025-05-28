@@ -11,7 +11,7 @@ const DetailPage = () => {
   
   return (
     <div className='w-auto bg-white'>
-        <div className="max-w-[95rem] mx-auto md:pt-8 pt-4 flex flex-col justify-center items-center">
+        <div className="max-w-[95rem] mx-auto md:pt-8 pt-4 flex flex-col justify-center">
 
             {/* detail */}
             <DetailCourse CourseId={course.courseId} course={course}/>
