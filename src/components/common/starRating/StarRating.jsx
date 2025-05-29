@@ -7,7 +7,6 @@ import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { postCourseRating } from '../../../core/services/api/courseDetail/postCourseRating';
 import { postBlogRating } from '../../../core/services/api/blogDetail/posrBlogRating';
-import { checkAuth } from '../../../core/hooks/auth';
 
 const StarRating = ({ itemId, type, currentUserRateNumber, size }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -21,7 +20,6 @@ const StarRating = ({ itemId, type, currentUserRateNumber, size }) => {
 
 const handleRatingChange = async (RateNumber) => {
   try {
-    const { isLoggedIn } = useStore.getState();
     
     if (!isLoggedIn) {
       throw new Error('USER_NOT_LOGGED_IN');
