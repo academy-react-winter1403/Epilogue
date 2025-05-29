@@ -5,7 +5,6 @@ import { CommentCourse } from './commentCourse/CommentCourse.jsx'
 
 const DetailPage = () => {
   const {  data: course, isLoading,  error } = useCourseDetails();
-  console.log(course,'hey hodaaa')
   if (isLoading) return <div>در حال بارگذاری...</div>;
   if (error) return <div>خطا در دریافت اطلاعات دوره : خطا :{error.message}</div>;
   

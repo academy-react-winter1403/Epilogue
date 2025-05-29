@@ -126,7 +126,6 @@ const CommentSection = ({
   };
 
   const displayedComments = comments?.slice(0, 3) || [];
-  console.log(comments , "fpfij")
   if (isLoading) return <div>در حال بارگذاری نظرات...</div>;
   if (isError) return <div>خطا در بارگذاری نظرات</div>;
 

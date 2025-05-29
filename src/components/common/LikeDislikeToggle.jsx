@@ -13,7 +13,7 @@ const LikeDislikeToggle = ({
   }) => {
   
     const hasLiked = currentUserLike === true;
-    const hasDisliked = currentUserDissLike === true ;
+    const hasDisliked = currentUserDissLike === true || currentUserDissLike === '1' ;
     
     const handleLike = () => {
       if (currentUserLike == true) {
@@ -37,15 +37,17 @@ const LikeDislikeToggle = ({
           />
         </button>
   
+  
         <button
           onClick={() => disliked.mutate() }
-          className={`w-[56px] h-[56px] flex items-center rounded transition-all duration-200 ${hasDisliked ? 'opacity-50 cursor-not-allowed' : ''}`}
+          disabled={hasDisliked}
+          className={`w-[56px] h-[56px] flex items-center rounded transition-all duration-200 ${hasDisliked ? 'opacity-60 cursor-not-allowed' : ''}`}
         >
           <img 
-            src={currentUserDissLike === true || currentUserDissLike === 1 ? dislikeIconActiv : dislikeIcon} 
+            src={hasDisliked ? dislikeIconActiv : dislikeIcon} 
             alt={hasDisliked ? 'Remove dislike' : 'Dislike'} 
-            className="cursor-pointer"
-          />
+            className={hasDisliked ? "cursor-not-allowed" : "cursor-pointer"}
+        />
         </button>
       </div>
     );
