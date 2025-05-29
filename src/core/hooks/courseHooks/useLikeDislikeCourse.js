@@ -8,7 +8,7 @@ export const useLikeCourse = (courseId) => {
   
   const likeMutation = useMutation({
     mutationFn: async () => {
-      if (!getItem('token')) {
+      if (!localStorage.getItem('token')) {
         throw new Error('USER_NOT_LOGGED_IN');
       }
       return await postAddLikeCourse(courseId);
@@ -39,7 +39,7 @@ export const useDisLikeCourse = (courseId) => {
 
   const dislikeMutation = useMutation({
     mutationFn: async () => {
-      if (!getItem('token')) {
+      if (!localStorage.getItem('token')) {
         toast.error('لطفاً ابتدا وارد حساب کاربری خود شوید');
         throw new Error('USER_NOT_LOGGED_IN');
       }

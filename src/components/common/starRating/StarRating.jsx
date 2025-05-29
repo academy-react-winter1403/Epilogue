@@ -21,7 +21,7 @@ const StarRating = ({ itemId, type, currentUserRateNumber, size,  }) => {
 
   const handleRatingChange = async (rateNumber) => {
     try {
-      if (!getItem('token')) {
+      if (!localStorage.getItem('token')) {
         throw new Error('USER_NOT_LOGGED_IN');
       }
   

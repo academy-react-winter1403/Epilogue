@@ -9,19 +9,23 @@ export const useReserveCourse = (courseId) => {
 
   const reserveMutation = useMutation({
     mutationFn: async ({ isReserved, reserveId }) => {
-      if (!getItem('token')) {
+      if (!localStorage.getItem('token')) {
         toast.error('لطفاً ابتدا وارد حساب کاربری خود شوید');
         throw new Error('USER_NOT_LOGGED_IN');
       }
       
-      return isReserved 
+      const reserved = typeof isReserved === 'string' 
+        ? isReserved === "1" 
+        : isReserved;
+      
+      return reserved 
         ? await deleteCourseReserve({ id: reserveId })
         : await postAddCourseReserve(courseId);
     },
     onSuccess: (data, { isReserved }) => {
       queryClient.invalidateQueries(['courseDetails', courseId]);
       toast.success(
-        isReserved
+        isReserved 
           ? 'دوره با موفقیت از لیست رزروهای شما حذف شد'
           : 'دوره با موفقیت به لیست رزروهای شما اضافه شد'
       );

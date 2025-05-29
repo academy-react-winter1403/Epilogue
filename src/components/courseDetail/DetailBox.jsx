@@ -12,18 +12,18 @@ const DetailBox = ({course, CourseId,}) => {
     const [isModalOpen, setIsModalOpen] = useState(false)
     const reserveMutation = useReserveCourse(CourseId);
 
-  const handleReserveAction = () => {
-    reserveMutation.mutate({
-      isReserved: course?.isCourseReseve,
-      reserveId: course?.isCourseReseve
-    }, {
-      onSuccess: () => {
-        if (!course?.isCourseReseve) {
-          setIsModalOpen(true);
-        }
-      }
-    });
-  };
+    const handleReserveAction = () => {
+        reserveMutation.mutate({
+          isReserved: course?.isCourseReseve === "1",
+          reserveId: course?.courseReseveId 
+        }, {
+          onSuccess: () => {
+            if (course?.isCourseReseve === "0") {
+              setIsModalOpen(true);
+            }
+          }
+        });
+      };
     
     const closeOverlay = () => {
         setIsModalOpen(false);
@@ -151,7 +151,9 @@ const DetailBox = ({course, CourseId,}) => {
                         }}
                     >   
                         <img src={reservIcon} alt="reservation"/>
-                        <span className='text-white whitespace-nowrap font-bold'> {course?.isCourseReseve ? 'حذف رزرو دوره' : 'رزرو دوره'} </span>
+                        <span className='text-white whitespace-nowrap font-bold'> 
+                        {course?.isCourseReseve === "1" ? 'حذف رزرو دوره' : 'رزرو دوره'}
+                        </span>
                     </motion.button>
                 </div>
                 <AddCourseFavorite CourseId={CourseId} isFav={course?.isUserFavorite} userFavoriteId={course?.userFavoriteId} />

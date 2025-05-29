@@ -12,28 +12,30 @@ import ColorThemeModal from "./ThemeModal/ThemeModal";
 import { Link, NavLink } from "react-router-dom";
 import useStore from "../../core/Store/Zustand-Store";
 import { removeItem } from "../../core/utils/storage.services";
+import toast from "react-hot-toast";
 
 const Header = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const { data: userInfo } = useQuery({
     queryKey: ["userInfo"],
-    queryFn: getUserInfo,
+    queryFn: async () => {
+      const result = await getUserInfo()
+      if(!result.currentPictureAddress){
+        toast('parsa ')
+        removeItem('token')
+      }else{
+        setIsLoggedIn(true)
+      }
+      return result
+    } ,
   });
   const [isColorModalOpen, setIsColorModalOpen] = useState(false);
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
-  useEffect(() => {
-    // const token = localStorage.getItem("token");
-    if (!userInfo?.currentPictureAddress){
-      console.log("not logged in")
-      removeItem("token")
-      setIsLoggedIn(false)
-    }else{
-      setIsLoggedIn(true)
-    }
 
-  }, [userInfo]);
+
 
   return (
     <div className="flex w-full justify-between">
