@@ -12,6 +12,7 @@ import ColorThemeModal from "./ThemeModal/ThemeModal";
 import { Link, NavLink } from "react-router-dom";
 
 import { useTranslation } from 'react-i18next';
+import { AIChatModal, AIChatIcon } from './AIChatModal'; 
 
 const LanguageIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-languages">
@@ -31,12 +32,13 @@ const Header = () => {
     queryFn: getUserInfo,
   });
   const [isColorModalOpen, setIsColorModalOpen] = useState(false);
+  const [isAIChatModalOpen, setIsAIChatModalOpen] = useState(false);
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null); 
+  const dropdownRef = useRef(null);
 
-  const { t, i18n } = useTranslation('common');
+  const { t, i18n } = useTranslation('common'); 
 
   const languageDropdownContentRef = useRef(null);
 
@@ -58,11 +60,13 @@ const Header = () => {
       );
     } else {
       gsap.to(languageDropdownContentRef.current,
-        { duration: 0.2, opacity: 0, scaleY: 0, ease: "power2.in", onComplete: () => {
-          if (languageDropdownContentRef.current) {
-            languageDropdownContentRef.current.style.display = 'none';
+        {
+          duration: 0.2, opacity: 0, scaleY: 0, ease: "power2.in", onComplete: () => {
+            if (languageDropdownContentRef.current) {
+              languageDropdownContentRef.current.style.display = 'none';
+            }
           }
-        }}
+        }
       );
     }
   }, [isDropdownOpen]);
@@ -82,8 +86,8 @@ const Header = () => {
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
     document.documentElement.lang = lng;
-    document.documentElement.dir = (lng === 'fa') ? 'rtl' : 'ltr'; 
-    setDropdownOpen(false); 
+    document.documentElement.dir = (lng === 'fa') ? 'rtl' : 'ltr';
+    setDropdownOpen(false);
   };
 
   return (
@@ -91,9 +95,9 @@ const Header = () => {
       <div className="flex w-full items-center justify-between p-6 lg:px-10 bg-background text-text">
         <div className="flex flex-row-reverse">
           <span className="pr-2 text-[18px] text-[#22445D] hidden lg:flex">
-            <img src={bahr} alt={t('appName')} /> 
+            <img src={bahr} alt={t('appName')} />
           </span>
-          <img src={h1} className="pr-2 sm:h-9" alt={t('appLogo')} /> 
+          <img src={h1} className="pr-2 sm:h-9" alt={t('appLogo')} />
         </div>
         <div className="flex lg:flex-1">
           <div className="m-auto mx-[235px] items-center justify-center hidden lg:flex lg:gap-x-8 bg-[#2F2F2F] rounded-[56px] pl-1 pr-[24px] py-[5px]">
@@ -102,11 +106,11 @@ const Header = () => {
               className={({ isActive }) =>
                 `relative text-[16px] text-white flex flex-col items-center ${
                   isActive ? "after:block" : "after:hidden"
-                } 
+                }
                 after:content-[''] after:w-1 after:h-1 after:rounded-full after:bg-[#ffff] `
               }
             >
-              {t('home')} 
+              {t('home')}
             </NavLink>
 
             <NavLink
@@ -114,11 +118,11 @@ const Header = () => {
               className={({ isActive }) =>
                 `relative text-white flex flex-col items-center ${
                   isActive ? "after:block" : "after:hidden"
-                } 
+                }
                 after:content-[''] after:w-1 after:h-1 after:rounded-full after:bg-[#FFFF]`
               }
             >
-              {t('courses')} 
+              {t('courses')}
             </NavLink>
 
             <NavLink
@@ -126,11 +130,11 @@ const Header = () => {
               className={({ isActive }) =>
                 `relative text-white flex flex-col items-center ${
                   isActive ? "after:block" : "after:hidden"
-                } 
+                }
                 after:content-[''] after:w-1 after:h-1 after:rounded-full after:bg-[#FFFF] `
               }
             >
-              {t('blogs')} 
+              {t('blogs')}
             </NavLink>
 
             {isLoggedIn ? (
@@ -138,7 +142,7 @@ const Header = () => {
                 <img
                   className="size-full rounded-full w-12 border h-12"
                   src={userInfo?.currentPictureAddress}
-                  alt={t('profilePicture')} 
+                  alt={t('profilePicture')}
                 ></img>
               </Link>
             ) : (
@@ -146,7 +150,7 @@ const Header = () => {
                 to="/auth/RegisterPage"
                 className="text-sm/6 text-[#FCFCFC] bg-[#3772FF] rounded-[56px] px-5 py-[8px]"
               >
-                {t('registerOrLogin')} 
+                {t('registerOrLogin')}
               </Link>
             )}
           </div>
@@ -172,40 +176,51 @@ const Header = () => {
             <ThemeToggle />
           </button>
 
-          <div className="relative" ref={dropdownRef}> 
+          <button
+            className="rounded-full w-[48px] h-[48px] border border-[#DCDCDC] text-black flex items-center justify-center bg-[#2F2F2F] text-white"
+            onClick={() => setIsAIChatModalOpen(true)} 
+          >
+            <AIChatIcon />
+          </button>
+          <AIChatModal
+            isOpen={isAIChatModalOpen}
+            onClose={() => setIsAIChatModalOpen(false)}
+          />
+
+          <div className="relative" ref={dropdownRef}>
             <button
               className="rounded-full w-[48px] h-[48px] border border-[#DCDCDC] text-black flex items-center justify-center bg-[#2F2F2F] text-white"
               onClick={() => setDropdownOpen((prev) => !prev)}
-              aria-expanded={isDropdownOpen} 
-              aria-haspopup="true" 
+              aria-expanded={isDropdownOpen}
+              aria-haspopup="true"
             >
               <LanguageIcon />
             </button>
             <div
-              ref={languageDropdownContentRef} 
+              ref={languageDropdownContentRef}
               className="absolute bg-white dark:bg-gray-800 text-gray-800 dark:text-white rounded-md shadow-lg py-2 mt-2"
               style={{
-                zIndex: 100, 
+                zIndex: 100,
                 minWidth: '120px',
                 [i18n.language === 'fa' ? 'left' : 'right']: 0,
                 [i18n.language === 'fa' ? 'right' : 'left']: 'auto',
-                opacity: 0, 
+                opacity: 0,
                 transform: 'scaleY(0)',
                 transformOrigin: 'top center',
-                display: 'none' 
+                display: 'none'
               }}
             >
               <div
                 className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
                 onClick={() => changeLanguage('fa')}
               >
-                {t('farsi')} 
+                {t('farsi')}
               </div>
               <div
                 className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
                 onClick={() => changeLanguage('en')}
               >
-                {t('english')} 
+                {t('english')}
               </div>
             </div>
           </div>

@@ -2,6 +2,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
+
 import authEn from './app/layout/locales/en/auth.json';
 import authFa from './app/layout/locales/fa/auth.json';
 
@@ -44,13 +45,16 @@ import faCourseDetail from './app/layout/locales/fa/courseDetail.json';
 import enBlogList from './app/layout/locales/en/blogList.json';
 import faBlogList from './app/layout/locales/fa/blogList.json';
 
+import enAiChat from './app/layout/locales/en/aiChat.json';
+import faAiChat from './app/layout/locales/fa/aiChat.json';
+
 
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
     debug: true,
-    fallbackLng: 'fa', 
+    fallbackLng: 'fa',
     interpolation: {
       escapeValue: false,
     },
@@ -70,6 +74,9 @@ i18n
         filter: enFilter,
         courseDetail: enCourseDetail,
         blogList: enBlogList,
+ 
+        aiChat: enAiChat,
+
       },
       fa: {
         auth: authFa,
@@ -86,6 +93,9 @@ i18n
         filter: faFilter,
         courseDetail: faCourseDetail,
         blogList: faBlogList,
+
+        aiChat: faAiChat,
+
       },
     },
     ns: [
@@ -102,9 +112,11 @@ i18n
       'sorting',
       'filter',
       'courseDetail',
-      'blogList'
+      'blogList',
+      'aiChat',
+
     ],
-    defaultNS: 'common', 
+    defaultNS: 'common',
     detection: {
       order: ['cookie', 'localStorage', 'navigator'],
       caches: ['cookie', 'localStorage'],
