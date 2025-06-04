@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion';
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const PageTransition = () => {
     const location = useLocation();
@@ -8,13 +8,15 @@ const PageTransition = () => {
     const [shouldAnimate, setShouldAnimate] = useState(false);
 
 
-    if (prevPathname.current !== location.pathname) {
-        setShouldAnimate(true);
-        prevPathname.current = location.pathname;
-    }
+    useEffect(() => {
+        if (prevPathname.current !== location.pathname) {
+          setShouldAnimate(true);
+          prevPathname.current = location.pathname;
+        }
+      }, [location.pathname]);
 
     return (
-        <AnimatePresence>
+        <AnimatePresence >
             {shouldAnimate && (
                 <motion.div
                     key={location.pathname}
@@ -25,7 +27,7 @@ const PageTransition = () => {
                         transition: { delay: 0.3, ease: [0.22, 1, 0.36, 1] }
                     }}
                     transition={{
-                        duration: 1,
+                        duration: 0.8,
                         ease: [0.22, 1, 0.36, 1],
                     }}
                     style={{
@@ -44,6 +46,5 @@ const PageTransition = () => {
         </AnimatePresence>
     );
 };
-
 
 export default PageTransition;
