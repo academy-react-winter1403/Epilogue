@@ -19,14 +19,14 @@ const CardList = ({ sortedCards, currentCards }) => {
               <img
                 src={
                   card.addUserProfileImage ||
-                  "https://img.freepik.com/free-vector/404-error-template-flat-style_23-2147757271.jpg"
+                  "https://kinsta.com/wp-content/uploads/2022/11/react-best-practices.jpg"
                 }
                 alt={card.title}
                 className="w-full h-full object-cover"
                 onError={(e) => {
                   e.target.onerror = null;
                   e.target.src =
-                    "https://img.freepik.com/free-vector/404-error-template-flat-style_23-2147757271.jpg";
+                    "https://kinsta.com/wp-content/uploads/2022/11/react-best-practices.jpg";
                 }}
               />
             </div>

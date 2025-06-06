@@ -13,7 +13,7 @@ const CardList = ({ sortedCards, currentCards }) => {
               <img
                 src={
                   card.tumbImageAddress ||
-                  "https://img.freepik.com/free-vector/404-error-template-flat-style_23-2147757271.jpg"
+                  "https://designmodo.com/wp-content/uploads/2021/06/bootstrap-react.jpg"
                 }
                 alt={card.title}
                 className="w-full h-full object-cover"
