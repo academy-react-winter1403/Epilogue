@@ -8,7 +8,7 @@ const CardList = ({ sortedCards, currentCards }) => {
   const cards = sortedCards.length > 0 ? sortedCards : currentCards;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full px-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full ">
       {cards.length > 0 ? (
         cards.map((card, index) => (
           <div

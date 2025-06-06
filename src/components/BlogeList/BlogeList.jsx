@@ -31,12 +31,9 @@ export function BlogeList() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
 
-  const {
-    pageNumber,
-    setPageNumber,
-    SortCol,
-    SortType,
-  } = useStore((state) => state);
+  const { pageNumber, setPageNumber, SortCol, SortType } = useStore(
+    (state) => state
+  );
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["news", pageNumber, SortCol, SortType],
@@ -84,16 +81,21 @@ export function BlogeList() {
           تکنولوژی‌هایی که یاد می‌گیرید بیشتر می‌کنیم.
         </p>
       </div>
-      <Sorting/>
 
-      <div className="py-4 gap-8 md:flex">
-        <Filter
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          selectedCategory={selectedCategory}
-        />
-        <div>
-        <CardList sortedCards={filteredCards} currentCards={News} />
+      <div className="py-4 mt-[50px] gap-8 md:flex">
+        <div className="mt-[50px]">
+          <Filter
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            selectedCategory={selectedCategory}
+          />
+        </div>
+
+        <div className=" gap-3 md:flex flex-col">
+          <div className="flex items-start pr-4">
+            <Sorting />
+          </div>
+          <CardList sortedCards={filteredCards} currentCards={News} />
         </div>
       </div>
 

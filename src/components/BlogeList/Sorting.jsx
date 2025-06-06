@@ -33,7 +33,7 @@ const Sorting = () => {
     <div>
 
       <div className="hidden md:block">
-        <div className="flex items-center justify-center mt-[72px]">
+        <div className="flex items-center justify-center ">
           <span className="font-bold mt-1.5 ml-4 text-xl">ترتیب</span>
           <div className="flex gap-2">
             {sortOptions.map((option) => (
