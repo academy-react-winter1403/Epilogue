@@ -81,7 +81,7 @@ const BlogFavTable = ({ searchTerm }) => {
               </p>
 
               <div className="mr-[20px] flex px-2 gap-2">
-                <Link to={`/news-details/${card.id}`}>
+                <Link to={`/news-details/${item.id}`}>
                   <ViewIcon width={24} height={24} cursor={"pointer"} />
                 </Link>{" "}
                 <Cancel01Icon

@@ -8,6 +8,7 @@ import {
 } from "../../../core/services/api/Dashboard/dashborad";
 import dateModifier from "../../../core/utils/dateModifier";
 import CommentModal from "./CommentModal";
+import { UserAiIcon } from "../../common/Icons/UserIcon";
 
 const YourComment = () => {
   const [comments, setComments] = useState([]);
@@ -76,6 +77,7 @@ const YourComment = () => {
               <div className="flex items-center gap-2 mb-1">
                 <div className="w-10 h-10 rounded-full bg-pink-200 flex items-center justify-center text-lg">
                   {/* <UserSquareIcon/> */}
+                  <UserAiIcon/>
                 </div>
                 <div className="flex flex-col">
                   <span className="text-[14px]">{item.title}</span>
