@@ -10,7 +10,8 @@ const AverageRating = ({ value = 0, count, size = 'md' }) => {
   };
 
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center gap-1 justify-center">
+      {count !== undefined && <span className=" text-sm">({count})</span>}
       <Rating
         value={value}
         readOnly
@@ -23,7 +24,7 @@ const AverageRating = ({ value = 0, count, size = 'md' }) => {
           inactiveFillColor: '#e5e7eb'
         }}
       />
-      {count !== undefined && <span className="text-gray-500 text-sm">({count})</span>}
+
     </div>
   );
 };

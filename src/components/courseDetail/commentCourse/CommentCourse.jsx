@@ -8,7 +8,7 @@ const CommentCourse = ({CourseId, course}) => {
         const postComment = usePostCommentCourse()
         const postReply = usePostCommentReply()
         const getReplies = useGetCommentReplies
-        console.log('Comments data:', getComment?.data);
+               
   return (
     <div>
       <CommentSection

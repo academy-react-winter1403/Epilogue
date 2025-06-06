@@ -26,7 +26,7 @@ const RelatedBlogs = ({ newsId }) => {
           .slice(0, 3)
           .map(blog => (
             <Link 
-              to={`/blog-detail/${blog.id}`} 
+              to={`/blog-details/${blog.id}`} 
               key={blog.id} 
               className="md:w-[431px] w-[322px] text-black bg-white rounded-lg"
             >

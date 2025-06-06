@@ -16,10 +16,10 @@ const RelatedCourses = ({ CourseId }) => {
       <div className="mr-2 mb-5 w-full lg:w-[125px] h-[29px] font-dana font-bold text-[20px] leading-[100%] tracking-[0%] text-right text-gray-800 whitespace-nowrap">
         دوره های مرتبط
       </div>
-      <div className="w-full h-auto md:h-[366px] flex gap-2 mb-4">
+      <div className="sm:overflow-x-auto sm:overflow-y-hidden md:w-auto w-[400px] h-auto md:h-[366px] flex gap-2 mb-4  sm:scrollbar sm:scrollbar-track-white sm:scrollbar-thumb-blue-500">
         {courses.map((course) => (
-          <div key={course.courseId} className="min-w-[324px] h-[366px] bg-white flex flex-col gap-[10px]">
-            <Link to={`/course-detail/${course.courseId}`}>
+          <div key={course.courseId} className="min-w-[310px] h-[366px] bg-white flex flex-col gap-[10px]">
+            <Link to={`/course-details/${course.courseId}`}>
               <div className='relative'>
                 <div className='absolute top-2 right-5 w-[65px] h-[24px] rounded-[32px] pt-[2px] pr-[8px] pb-[2px] pl-[8px] gap-[8px] bg-[#FF37F5] text-white whitespace-nowrap'>
                   {course.courseLevelName}
