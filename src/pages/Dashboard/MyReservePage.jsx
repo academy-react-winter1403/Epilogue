@@ -45,7 +45,7 @@ const MyReservePage = () => {
           <div className=" w-full md:w-[248px] themed-dash-input h-[48px] rounded-2xl bg-[#F1F1F1]"></div>
         </div> */}
       </div>
-      <div className="md:col-span-full min-h-full themed-dashTable bg-[#F6F6F6] rounded-3xl">
+      <div className="md:col-span-full min-h-fit themed-dashTable bg-[#F6F6F6] rounded-3xl">
         <ReservedCoursesTable searchTerm={searchTerm} showAccept={true} />
       </div>
     </div>

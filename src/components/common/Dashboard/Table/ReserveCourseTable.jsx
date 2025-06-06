@@ -73,6 +73,7 @@ const ReservedCoursesTable = ({ showAccept, searchTerm }) => {
                   className="min-w-[83px] h-[52px]  rounded-[12px] object-cover"
                 />
               </div>
+
               <p className="w-[37%] truncate font-yekan-600">
                 {item.courseName}
               </p>

@@ -5,6 +5,7 @@ import { getMyCourses } from "../../../../core/services/api/Dashboard/dashborad"
 import { useQuery } from "@tanstack/react-query";
 import { Invoice03Icon } from "../../Icons/PaymentIcon";
 import PaymentModal from "../PaymentModal/PaymentModal";
+import { Link } from "react-router-dom";
 
 const DashboardTable = ({ showIcon, searchTerm }) => {
   const { data: myCourses } = useQuery({
@@ -59,6 +60,7 @@ const DashboardTable = ({ showIcon, searchTerm }) => {
                 />
               </div>
               <div className="w-[37%] font-yekan-600">{item.termName}</div>
+
               <div className="w-[45%] font-yekan-600">{item.fullName}</div>
               <div className="w-[35%] font-yekan-600">
                 {dateModifier(item.lastUpdate)}
@@ -80,7 +82,9 @@ const DashboardTable = ({ showIcon, searchTerm }) => {
                     className="cursor-pointer"
                   />
                 )}
-                <ViewIcon width={24} height={24} cursor={"pointer"} />
+                <Link to={`/course-details/${item.courseId}`}>
+                  <ViewIcon width={24} height={24} cursor={"pointer"} />
+                </Link>
               </div>
             </div>
           ))
