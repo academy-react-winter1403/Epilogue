@@ -19,6 +19,10 @@
   "adminApprovalMessage": "بعد از تایید ادمین ، دوره مورد نظر به لیست دوره من شما اضافه خواهد شد",
   "ok": "باشه",
   "loadingRelatedCourses": "در حال بارگذاری دوره‌های مرتبط...",
+   "summarizeWithAI": "خلاصه با AI",
+  "generatingSummary": "در حال تولید خلاصه...",
+  "aiSummaryTitle": "خلاصه توسط هوش مصنوعی:",
+  "summaryGenerationError": "خطا در تولید خلاصه. لطفا دوباره تلاش کنید.",
   "errorLoadingRelatedCourses": "خطا در دریافت دوره‌های مرتبط",
   "relatedCourses": "دوره‌های مرتبط",
   "courseImage": "تصویر دوره"
