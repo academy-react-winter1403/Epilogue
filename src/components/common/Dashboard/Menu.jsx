@@ -11,6 +11,7 @@ import { LibraryIcon } from "../Icons/LibraryIcon";
 import { UserSquareIcon } from "../Icons/UserSquerIcon";
 import { MoneySend02Icon } from "../Icons/MoneyIcon";
 import { AccountSetting02Icon } from "../Icons/SettingIcon";
+import { BookOpen, PencilIcone, PencilIcone2 } from "../Icons/HomeWorkIcon";
 
 const DashboardMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,6 +29,7 @@ const DashboardMenu = () => {
             ["رزرو من", <Book02Icon />, "/StudentPanel/my-reserve","reserve"],
             ["دوره های موردعلاقه", <Books02Icon />, "/StudentPanel/course-fav","myfavcourse"],
             ["بلاگ های موردعلاقه", <LibraryIcon />, "/StudentPanel/blog-fav","myfavblog"],
+            [" تکالیف", <PencilIcone2 />, "/StudentPanel/sessionList","sessionList"],
             [
               "پروفایل",
               <UserSquareIcon />,
