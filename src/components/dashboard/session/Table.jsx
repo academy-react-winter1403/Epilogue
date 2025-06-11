@@ -29,7 +29,7 @@ const Table = ({ homeworkList }) => {
     return (
       <div className="py-6 px-6 flex flex-col h-full gap-6">
         <p className="text-[24px] text-nowrap font-yekan-600 py-2">
-          لیست جلسات و تکالیف
+          لیست  تکالیف
         </p>
         <div className="flex flex-col md:flex-row">
           <div className="flex flex-col gap-2 p-2">
