@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { getStudentHomeworkList } from '../../../core/services/api/session/getStudentHomeworkList';
 import Table from './Table';
 
-
 const SessionList = () => {
   const { data: homeworkList, isLoading, isError, error } = useQuery({
     queryKey: ['studentHomeworkList'],
@@ -29,6 +28,5 @@ const SessionList = () => {
     </div>
   );
 };
-
 
 export default SessionList
