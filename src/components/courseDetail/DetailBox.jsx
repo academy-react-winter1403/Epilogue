@@ -42,7 +42,7 @@ const DetailBox = ({course, CourseId,}) => {
                             <div className='w-[45px] h-[20px] font-medium text-[14px] leading-[100%] text-gray-800 pr-3 pt-2'> وضعیت</div>
                             <div className=" h-[27px] rounded-[32px] pt-[2px] pr-[8px] pb-[2px] pl-[8px] gap-[8px] bg-red-500 mr-5 mt-1 flex justify-center items-center text-white whitespace-nowrap">{course?.courseStatusName}</div>
                         </div>
-                        <div className="w-[80px] h-0 border-2 -rotate-90 border-gray-400 relative left-[-120px] top-[-31px] md:top-[-30.5px] md:left-[-110px]"></div>
+                        <div className="w-[80px] h-0 border-2 -rotate-90 border-gray-400 relative left-[-120px] top-[-31px] md:top-[-30.5px] md:left-[-130px]"></div>
                     </div>
                     
                     <div>
@@ -52,7 +52,7 @@ const DetailBox = ({course, CourseId,}) => {
                         {course?.techs[0]}
                         </div>
                     </div>
-                    <div className="w-[80px] h-0 border-2 border-transparent -rotate-90  relative top-[-30.5px] left-[-110px] md:border-gray-400"></div>
+                    <div className="w-[80px] h-0 border-2 border-transparent -rotate-90  relative top-[-30.5px] left-[-90px] md:border-gray-400"></div>
                     </div>
                     
                 </div>
@@ -63,13 +63,13 @@ const DetailBox = ({course, CourseId,}) => {
                             <div className="md:pr-[-50px] lg:pr-[40px] mr-3 pt-2 w-[76px] h-[20px] font-dana font-medium text-[14px] leading-[100%] tracking-[0%] text-right text-gray-800 whitespace-nowrap">سطح آموزشی</div>
                             <div className="md:mr-[30px] lg:mr-[50px] mr-3 mt-1  h-[27px] rounded-[32px] pt-[2px] pr-[8px] pb-[2px] pl-[8px] gap-[8px] bg-[#FF37F5] text-white whitespase-nowrap">{course?.courseLevelName}</div>
                         </div>
-                        <div className="w-[80px] h-0 border-2 -rotate-90 border-gray-400 relative top-[-31px] left-[-120px] md:top-[-30.5px] md:left-[-120px] lg:left-[-90px]"></div>
+                        <div className="w-[80px] h-0 border-2 -rotate-90 border-gray-400 relative top-[-31px] left-[-130px] md:top-[-30.5px] md:left-[-120px] lg:left-[-110px]"></div>
                     </div>
 
                     <div>
                         <div className='flex flex-col gap-4'>
-                            <div className="md:pr-10 lg:pr-10 pr-15 pt-2 w-[60px] h-[20px] font-dana font-medium text-[14px] leading-[100%] tracking-[0%] text-right text-gray-800 whitespace-nowrap">استاد دوره</div>
-                            <div className="md:pr-10 pr-15 pt-3 w-[152px] h-[23px] top-[37px] left-[25px] font-dana font-medium text-[16px] leading-[100%] tracking-[0%] text-right text-black whitespace-nowrap">{course?.teacherName || '- - - - -'}</div>
+                            <div className="md:pr-10 lg:pr-5 pr-15 pt-2 w-[60px] h-[20px] font-dana font-medium text-[14px] leading-[100%] tracking-[0%] text-right text-gray-800 whitespace-nowrap">استاد دوره</div>
+                            <div className="md:pr-5 pr-15 pt-3 w-[152px] h-[23px] top-[37px] left-[25px] font-dana font-medium text-[16px] leading-[100%] tracking-[0%] text-right text-black whitespace-nowrap">{course?.teacherName || '__'}</div>
                         </div>
                     </div>
                     
