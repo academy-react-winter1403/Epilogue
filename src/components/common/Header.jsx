@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { gsap } from "gsap";
+import { gsap } from "gsap"; 
 import h1 from "../../assets/img/h1.svg";
 import bahr from "../../assets/img/bahr.svg";
 import Menu from "./Menu";
@@ -13,7 +13,7 @@ import { Link, NavLink } from "react-router-dom";
 
 import { useTranslation } from 'react-i18next';
 import { AIChatModal, AIChatIcon } from './AIChatModal';
-import MultiAccountDropdown from './MultiAccountDropdown'; 
+import MultiAccountDropdown from './MultiAccountDropdown';
 
 const LanguageIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-languages">
@@ -25,8 +25,20 @@ const LanguageIcon = () => (
     <path d="M14 18h6" />
   </svg>
 );
-
-const Header = () => {
+const SuggestedPagesIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-lightbulb">
+    <path d="M15 14c.2-1 .7-2 1.5-3a4.8 4.8 0 0 0-3.5-3.5c-1-.8-2-1.3-3-1.5" />
+    <path d="M9 18c.2-1 .7-2 1.5-3" />
+    <path d="M2 17c.2-1 .7-2 1.5-3" />
+    <path d="M22 17c-.2-1-.7-2-1.5-3" />
+    <path d="M11 20H9a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1" />
+    <path d="M12 5V2" />
+    <path d="M4.2 14.8c1.3.4 2.5 1 3.5 1.7" />
+    <path d="M19.8 14.8a8 8 0 0 0-3.5 1.7" />
+    <path d="M16 16.5A4.8 4.8 0 0 0 17 18c1.3.4 2.5 1 3.5 1.7" />
+  </svg>
+);
+const Header = ({ openSuggestedPagesModal, isSuggestedPagesModalOpen }) => {
   const { data: userInfo } = useQuery({
     queryKey: ["userInfo"],
     queryFn: getUserInfo,
@@ -106,7 +118,7 @@ const Header = () => {
                 `relative text-white flex flex-col items-center ${
                   isActive ? "after:block" : "after:hidden"
                 }
-                after:content-[''] after:w-1 after:h-1 after:rounded-full after:bg-[#FFFF] `
+                after:content-[''] after:w-1 after-h-1 after:rounded-full after:bg-[#FFFF] `
               }
             >
               {t('blogs')}
@@ -131,6 +143,14 @@ const Header = () => {
           </div>
         </div>
         <div className="gap-[8px] hidden lg:flex relative">
+          <button
+            onClick={openSuggestedPagesModal}
+            className="rounded-full w-[48px] h-[48px] border border-[#DCDCDC] text-black flex items-center justify-center bg-[#2F2F2F] text-white"
+            title="صفحات پیشنهادی"
+          >
+            <SuggestedPagesIcon />
+          </button>
+
           <button
             className="rounded-full w-[48px] h-[48px] border border-[#DCDCDC] text-black"
             onClick={() => setIsColorModalOpen((prev) => !prev)}

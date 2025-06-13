@@ -1,47 +1,55 @@
-import React from "react";
-import Header from "../../../components/common/Dashboard/Header"; // Adjust path if needed
-import DashboardMenu from "../../../components/common/Dashboard/Menu"; // Adjust path if needed
+
+import React, { useState, useEffect } from "react"; 
+import Header from "../../../components/common/Dashboard/Header"; 
+import DashboardMenu from "../../../components/common/Dashboard/Menu"; 
 import { Outlet } from "react-router-dom";
-import { useState, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import Joyride from "react-joyride";
 import Cookies from "js-cookie";
-import { useTranslation } from 'react-i18next'; // Import useTranslation
+import { useTranslation } from 'react-i18next';
+
+import { usePageTimeTracker } from '../../../core/hooks/usePageTimeTracker';
+import SuggestedPagesModal from '../../../components/common/SuggestedPagesModal';
 
 const JOYRIDE_COOKIE_NAME = "joyrideCompleted";
 
 const DashboardLayout = () => {
-  const { t } = useTranslation('dashboard'); // Use the 'dashboard' namespace
+  usePageTimeTracker();
+
+  const { t } = useTranslation('dashboard'); 
 
   const steps = [
     {
       placement: "center",
       target: "body",
-      content: t('joyrideWelcome'), // Translated
+      content: t('joyrideWelcome'), 
     },
     {
       target: "#mycourse",
-      content: t('joyrideMyCourses'), // Translated
+      content: t('joyrideMyCourses'), 
     },
     {
       target: "#reserve",
-      content: t('joyrideMyReservations'), // Translated
+      content: t('joyrideMyReservations'), 
     },
     {
       target: "#editprofile",
-      content: t('joyrideEditProfile'), // Translated - Note: original said "پرداخت کنی" (pay), changed to "ویرایش کنی" (edit) in fa.json for consistency with common use-case.
+      content: t('joyrideEditProfile'), 
     },
     {
       placement: "center",
       target: "body",
-      content: t('joyrideFarewell'), // Translated
+      content: t('joyrideFarewell'), 
     },
   ];
 
   const [run, setRun] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
 
   useEffect(() => {
-    // Only run the tour if the cookie is not set
     if (!Cookies.get(JOYRIDE_COOKIE_NAME)) {
       setRun(true);
     }
@@ -51,9 +59,8 @@ const DashboardLayout = () => {
     const { status } = data;
     if (status === "finished" || status === "skipped") {
       setRun(false);
-      // Set cookie only if tour is finished or skipped
-      if (status === "finished" || status === "skipped") { // Ensure cookie is set on skip too
-        Cookies.set(JOYRIDE_COOKIE_NAME, "true", { expires: 30 }); // Store for 30 days
+      if (status === "finished" || status === "skipped") { 
+        Cookies.set(JOYRIDE_COOKIE_NAME, "true", { expires: 30 }); 
       }
     }
   };
@@ -64,17 +71,17 @@ const DashboardLayout = () => {
         callback={handleJoyrideCallback}
         steps={steps}
         continuous
-        run={run} // Use the state directly, as the initial check is in useEffect
+        run={run} 
         showProgress
         showSkipButton
         hideCloseButton
         scrollToFirstStep
         locale={{
-          back: t('joyrideBack'), // Translated
-          close: t('joyrideClose'), // Translated
-          last: t('joyrideLast'), // Translated
-          next: t('joyrideNext'), // Translated
-          skip: t('joyrideSkip'), // Translated
+          back: t('joyrideBack'), 
+          close: t('joyrideClose'), 
+          last: t('joyrideLast'), 
+          next: t('joyrideNext'), 
+          skip: t('joyrideSkip'), 
         }}
         styles={{ options: { primaryColor: "#3772FF" } }}
       />
@@ -82,7 +89,7 @@ const DashboardLayout = () => {
       <div className="w-full h-screen bg-[#242424] flex flex-col">
         <Toaster />
         <div className=" bg-[#242424]">
-          <Header />
+          <Header /> 
         </div>
 
         <div className="flex flex-row flex-grow px-6 py-3 overflow-y-auto">
@@ -94,6 +101,7 @@ const DashboardLayout = () => {
           </div>
         </div>
       </div>
+      <SuggestedPagesModal isOpen={isModalOpen} onClose={closeModal} />
     </>
   );
 };
