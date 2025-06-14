@@ -31,12 +31,9 @@ export function BlogeList() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
 
-  const {
-    pageNumber,
-    setPageNumber,
-    SortCol,
-    SortType,
-  } = useStore((state) => state);
+  const { pageNumber, setPageNumber, SortCol, SortType } = useStore(
+    (state) => state
+  );
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["news", pageNumber, SortCol, SortType],
@@ -75,34 +72,31 @@ export function BlogeList() {
   const totalPages = Math.ceil(totalCount / 9);
 
   return (
-    <div className="container mx-auto px-4">
-      <div className="text-center mt-10">
+    <div className="px-10">
+      <div className="text-center flex flex-col">
         <p className="text-4xl font-bold">اطلاعات بیشتر، درک بهتر</p>
-        <p className="text-lg font-medium text-gray-700 mt-4">
+        <p className="text-lg font-medium text-gray-700 mt-6">
           ما در بلاگ‌ها اطلاعات شما را نسبت به
           <br />
           تکنولوژی‌هایی که یاد می‌گیرید بیشتر می‌کنیم.
         </p>
       </div>
 
-      <div className="block md:hidden mt-10 gap-10 flex">
-        <Sorting />
-        <Filter
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          selectedCategory={selectedCategory}
-        />
-      </div>
+      <div className="py-4 mt-[50px] gap-8 md:flex">
+        <div className="mt-[50px]">
+          <Filter
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            selectedCategory={selectedCategory}
+          />
+        </div>
 
-      <Sorting/>
-
-      <div className="mt-10 gap-10 md:flex">
-        <Filter
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          selectedCategory={selectedCategory}
-        />
-        <CardList sortedCards={filteredCards} currentCards={News} />
+        <div className=" gap-3 md:flex flex-col">
+          <div className="flex items-start pr-4">
+            <Sorting />
+          </div>
+          <CardList sortedCards={filteredCards} currentCards={News} />
+        </div>
       </div>
 
       <Pagination

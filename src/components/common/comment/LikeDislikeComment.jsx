@@ -72,7 +72,7 @@ const LikeDislikeComment = ({
         >
           <img 
             src={hasDisliked ? activeDislikeCommentIcon : dislikeCommentIcon}
-            className="cursor-pointer"
+            className={`cursor-pointer${hasDisliked ? 'opacity-50 cursor-not-allowed' : ''}`}
             alt={hasDisliked ? 'Disliked' : 'Dislike'}
           />
         </button>

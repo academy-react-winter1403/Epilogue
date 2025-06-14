@@ -17,7 +17,7 @@ export const postAddLikeCourse = async (CourseId) => {
 export const postAddDislikeCourse = async (CourseId) => {
     try {
         const result = await http.post(`/Course/AddCourseDissLike?CourseId=${CourseId}`);
-        console.log("dorosteee")
+        console.log("like-course")
         return result;
       
     } catch (error) {   

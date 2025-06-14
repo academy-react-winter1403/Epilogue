@@ -123,3 +123,20 @@ export const changePassword = async (newPassword) => {
         throw error
     }
 }
+
+export const getCourseComments = async () => {
+    try {
+        const response = await http.get("/SharePanel/GetMyCoursesComments")
+        return response
+    } catch (error) {
+        throw error
+    }
+}
+export const getArticlesComments = async () => {
+    try {
+        const response = await http.get("/SharePanel/GetMyNewsComments")
+        return response
+    } catch (error) {
+        throw error
+    }
+}

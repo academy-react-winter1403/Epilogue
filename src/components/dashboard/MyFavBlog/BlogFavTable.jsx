@@ -8,24 +8,25 @@ import {
   getFavoriteArticles,
 } from "../../../core/services/api/Dashboard/dashborad";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
-const BlogFavTable = ({searchTerm}) => {
+const BlogFavTable = ({ searchTerm }) => {
   const { data: favoriteArticles } = useQuery({
     queryKey: ["favoriteArticles"],
     queryFn: getFavoriteArticles,
   });
 
   const [filteredBlogFav, setfilteredBlogFav] = useState([]);
-  
-    useEffect(() => {
-      if (favoriteArticles?.myFavoriteNews) {
-        const term = searchTerm.toLowerCase();
-        const newfilteredBlogFav = favoriteArticles.myFavoriteNews.filter(blog =>
-          blog.title.toLowerCase().includes(term) 
-        );
-        setfilteredBlogFav(newfilteredBlogFav);
-      }
-    }, [favoriteArticles, searchTerm]);
+
+  useEffect(() => {
+    if (favoriteArticles?.myFavoriteNews) {
+      const term = searchTerm.toLowerCase();
+      const newfilteredBlogFav = favoriteArticles.myFavoriteNews.filter(
+        (blog) => blog.title.toLowerCase().includes(term)
+      );
+      setfilteredBlogFav(newfilteredBlogFav);
+    }
+  }, [favoriteArticles, searchTerm]);
 
   const handleDeleteFav = async (favoriteId) => {
     const RemoveFavNews = {
@@ -80,7 +81,9 @@ const BlogFavTable = ({searchTerm}) => {
               </p>
 
               <div className="mr-[20px] flex px-2 gap-2">
-                <ViewIcon width={24} height={24} cursor={"pointer"} />
+                <Link to={`/news-details/${item.id}`}>
+                  <ViewIcon width={24} height={24} cursor={"pointer"} />
+                </Link>{" "}
                 <Cancel01Icon
                   color={"#FF5353"}
                   onClick={() => handleDeleteFav(item.favoriteId)}
