@@ -4,7 +4,7 @@ import dateModifier from "../../../../core/utils/dateModifier";
 import { getMyCourses } from "../../../../core/services/api/Dashboard/dashborad";
 import { useQuery } from "@tanstack/react-query";
 import { Invoice03Icon } from "../../Icons/PaymentIcon";
-
+import PaymentModal from '../PaymentModal/PaymentModal'
 import { useTranslation } from 'react-i18next'; 
 
 const DashboardTable = ({ showIcon, searchTerm }) => {

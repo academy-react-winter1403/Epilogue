@@ -48,7 +48,6 @@ const Header = () => {
   const [isColorModalOpen, setIsColorModalOpen] = useState(false);
   const [isAIChatModalOpen, setIsAIChatModalOpen] = useState(false);
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLanguageDropdownOpen, setLanguageDropdownOpen] = useState(false);
   const languageDropdownRef = useRef(null);
 
