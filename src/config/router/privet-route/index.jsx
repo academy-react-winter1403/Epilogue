@@ -1,3 +1,5 @@
+
+import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../../../app/layout/Dashboard";
 import ProfileLayout from "../../../app/layout/Dashboard/ProfileLayout";
 import SettingLayout from "../../../app/layout/Dashboard/SettingLayOut";
@@ -80,3 +82,7 @@ export const dashboard = {
     },
   ],
 };
+
+const dashboardRouter = createBrowserRouter([dashboard]);
+
+export default dashboardRouter;
