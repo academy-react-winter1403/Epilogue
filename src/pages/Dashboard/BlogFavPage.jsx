@@ -50,7 +50,7 @@ const BlogFavPage = () => {
           <div className=" w-full themed-dash-input md:w-[248px] h-[48px] rounded-2xl bg-[#F1F1F1]"></div>
         </div> */}
       </div>
-      <div className="md:col-span-full themed-dashTable min-h-full bg-[#F6F6F6] rounded-3xl">
+      <div className="md:col-span-full themed-dashTable min-h-fit bg-[#F6F6F6] rounded-3xl">
         <BlogFavTable searchTerm={searchTerm} />
       </div>
     </div>

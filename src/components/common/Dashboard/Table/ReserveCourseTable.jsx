@@ -48,7 +48,7 @@ const ReservedCoursesTable = ({ showAccept, searchTerm }) => {
       <div className="bg-[#F1F1F1] themed-dashTable-header text-[#707070] rounded-[16px] gap-[30px] p-3 flex text-sm font-yekan-600 text-nowrap">
         <p className=" w-[10%]">#</p>
         <p className=" w-[19%]">نام</p>
-        <p className=" w-[19%]">مدرس</p>
+        <p className=" w-[19%]">دانشجو</p>
         <p className=" w-[19%]">تاریخ برگزاری</p>
         {showAccept && <p className=" w-[19%]">وضعیت</p>}
       </div>
@@ -73,6 +73,7 @@ const ReservedCoursesTable = ({ showAccept, searchTerm }) => {
                   className="min-w-[83px] h-[52px]  rounded-[12px] object-cover"
                 />
               </div>
+
               <p className="w-[37%] truncate font-yekan-600">
                 {item.courseName}
               </p>

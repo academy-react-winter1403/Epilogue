@@ -12,7 +12,7 @@ import { PencilEdit01Icon } from "../../common/Icons/PencelIcon";
 import { ArrowLeft01Icon } from "../../common/Icons/ArrowLeftIcon";
 import { useCourseDetails } from "../../../core/hooks/courseHooks/useCourseDetails";
 const StudentPanelPage = () => {
-  const {  data: course, isLoading,  error } = useCourseDetails();
+  const { data: course, isLoading, error } = useCourseDetails();
 
   const percentage = 66;
 
@@ -38,16 +38,14 @@ const StudentPanelPage = () => {
 
       <div className="md:col-span-3 rounded-3xl md:flex md:flex-col themed-dashTable bg-[#F6F6F6]">
         <div className="justify-between items-center px-4 py-2 flex flex-row ">
-
           <p className="text-[12px] text-nowrap font-yekan-600">
             وضعیت اطلاعات حساب کاربری
           </p>
           <Link to={"/StudentPanel/edite-profile/profile-info"}>
-          <div className="flex items-center">
-            <PencilEdit01Icon width={20} height={20} color={"#3772FF"} />
-          </div>
+            <div className="flex items-center">
+              <PencilEdit01Icon width={20} height={20} color={"#3772FF"} />
+            </div>
           </Link>
-          
         </div>
         <div className="mt-[22px] m-auto w-[136px] ">
           <CircularProgressbarWithChildren
@@ -81,16 +79,8 @@ const StudentPanelPage = () => {
         <ReservedCoursesTable showAccept={false} />
       </div>
 
-      <div className="md:col-span-5  h-[487px] rounded-3xl themed-dashTable bg-[#F6F6F6]">
-        <div className="justify-between items-center flex flex-row text-nowrap text-[14px] font-yekan-600 px-4 py-2">
-          <p>نظرات شما</p>
-          {/* <YourComment CourseId={course?.courseId} course={course}/> */}
-
-          <p className="text-[#3772FF] flex flex-row gap-1 ">
-            مشاهده بیشتر
-            <ArrowLeft01Icon color={"#3772FF"} />
-          </p>
-        </div>
+      <div className="md:col-span-5   rounded-3xl themed-dashTable bg-[#F6F6F6]">
+        <YourComment />
       </div>
     </div>
   );
