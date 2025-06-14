@@ -4,23 +4,18 @@ import { formatDate } from '../../common/formatDate/formatDate';
 import { CommentLikeDislikeCourse } from '../../courseDetail/commentCourse/CommentLikeDislikeCourse';
 import { useTranslation } from 'react-i18next';
 
+
 const CommentList = ({
   comments,
   id,
-  contentId,
   isBlog,
   replyingTo,
   startReply,
   handleReplySubmit,
-  replyTitle,
-  setReplyTitle,
-  replyContent,
-  setReplyContent,
   SendIcon,
   EmojiIcon,
   isPending,
   getReplies,
-  postReply,
   expandedCommentId,
   toggleCommentExpansion
 }) => {
@@ -33,7 +28,8 @@ const CommentList = ({
     insertDate, 
     title, 
     describe,
-    commentId 
+    commentId ,
+    isBlog
   }) => (
     <div 
       className="flex flex-col gap-3 pb-4 w-full cursor-pointer"
@@ -63,30 +59,26 @@ const CommentList = ({
 
   const CommentActions = ({
     commentId,
+    comment,
     replyingTo,
     startReply,
     handleReplySubmit,
-    replyTitle,
-    setReplyTitle,
-    replyContent,
-    setReplyContent,
-    isPending
+    isPending,
+    isBlog 
   }) => (
     <div className="flex flex-col md:flex-row items-start md:items-center gap-2 mt-2 w-full">
+
      <CommentLikeDislikeCourse
        CourseId={id}
        likeCount={contentId?.likeCount || 0}
        dissLikeCount={contentId?.dissLikeCount || 0}
      />
 
+
       {replyingTo === commentId ? (
         <div className="w-full mt-2">
           <NewCommentForm
             onSubmit={handleReplySubmit}
-            title={replyTitle}
-            setTitle={setReplyTitle}
-            content={replyContent}
-            setContent={setReplyContent}
             SendIcon={SendIcon}
             EmojiIcon={EmojiIcon}
             isPending={isPending}
@@ -107,7 +99,7 @@ const CommentList = ({
     </div>
   );
 
-  const CommentReplies = ({ commentId }) => {
+  const CommentReplies = ({ commentId, isBlog  }) => {
     const isCourse = comments?.some(c => c && 'courseId' in c);
     const replyParams = isCourse ? [id, commentId] : [id];
     const { data: replies = [], isLoading: isRepliesLoading } = getReplies(...replyParams);
@@ -139,6 +131,7 @@ const CommentList = ({
                   </span>
                 </div>
               </div>
+
             
                 <CommentLikeDislikeCourse
                   CourseId={id}
@@ -147,6 +140,7 @@ const CommentList = ({
                   userId={reply?.userId}
                   compact
                 />
+
             </div>
             <p className="font-DanaFaNum text-sm text-right mt-2 pr-2">
               {reply.describe}
@@ -175,22 +169,27 @@ const CommentList = ({
                 title={comment.title}
                 describe={comment.describe}
                 commentId={comment.id}
+                isBlog={isBlog}
               />
               
               <CommentActions
+                comment={comment}
                 commentId={comment.id}
                 replyingTo={replyingTo}
                 startReply={startReply}
                 handleReplySubmit={handleReplySubmit}
+
                 replyTitle={replyTitle}
                 setReplyTitle={setReplyTitle}
                 replyContent={replyContent}
                 setContent={setReplyContent}
+
                 isPending={isPending}
+                isBlog={isBlog}
               />
               
               {expandedCommentId === comment.id && (
-                <CommentReplies commentId={comment.id} />
+                <CommentReplies commentId={comment.id} isBlog={isBlog } />
               )}
             </div>
           </div>
@@ -200,4 +199,6 @@ const CommentList = ({
   );
 };
 
+
 export{ CommentList};
+

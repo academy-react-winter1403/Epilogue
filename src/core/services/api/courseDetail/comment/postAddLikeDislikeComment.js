@@ -1,8 +1,8 @@
 import http from "../../../interceptor"; //axios//
 
-export const postAddLikeComment = async (CourseId) => {
+export const postAddLikeComment = async (CourseCommandId) => {
     try {
-        const result = await http.post(`/Course/AddCourseCommentLike?CourseCommandId=${CourseId}`);
+        const result = await http.post(`/Course/AddCourseCommentLike?CourseCommandId=${CourseCommandId}`);
         console.log("likeeee shooddd",result);
         return result;
       
@@ -13,9 +13,9 @@ export const postAddLikeComment = async (CourseId) => {
     }
 };
 
-export const postAddDislikeComment = async (CourseId) => {
+export const postAddDislikeComment = async (CourseCommandId) => {
     try {
-        const result = await http.post(`/Course/AddCourseCommentDissLike?CourseCommandId=${CourseId}`);
+        const result = await http.post(`/Course/AddCourseCommentDissLike?CourseCommandId=${CourseCommandId}`);
         console.log("dorosteee")
         return result;
       
@@ -26,9 +26,9 @@ export const postAddDislikeComment = async (CourseId) => {
     }
 };
 
-export const deleteLikeComment = async (CourseId) => {
+export const deleteLikeComment = async (CourseCommandId,currentUserLikeId) => {
     try {
-        const result = await http.delete(`/Course/DeleteCourseCommentLike?CourseCommandId=${CourseId}`);
+        const result = await http.delete(`/Course/DeleteCourseCommentLike?CourseCommandId=${CourseCommandId}`);
         return result;
       
     } catch (error) {   

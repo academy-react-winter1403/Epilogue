@@ -50,11 +50,13 @@ const ReservedCoursesTable = ({ showAccept, searchTerm }) => {
   return (
     <div className="mt-4 px-4 lg:px-4 lg:mt-5 overflow-auto">
       <div className="bg-[#F1F1F1] themed-dashTable-header text-[#707070] rounded-[16px] gap-[30px] p-3 flex text-sm font-yekan-600 text-nowrap">
+
         <p className="w-[10%]">{t('numberSign')}</p> 
         <p className="w-[19%]">{t('name')}</p> 
         <p className="w-[19%]">{t('instructor')}</p> 
         <p className="w-[19%]">{t('holdingDate')}</p> 
         {showAccept && <p className="w-[19%]">{t('status')}</p>} 
+
       </div>
 
       <div className="overflow-y-auto">
@@ -78,6 +80,7 @@ const ReservedCoursesTable = ({ showAccept, searchTerm }) => {
                   alt={item.courseName}
                 />
               </div>
+
               <p className="w-[37%] truncate font-yekan-600">
                 {item.courseName}
               </p>

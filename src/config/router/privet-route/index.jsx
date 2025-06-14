@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../../../app/layout/Dashboard";
 import ProfileLayout from "../../../app/layout/Dashboard/ProfileLayout";
 import SettingLayout from "../../../app/layout/Dashboard/SettingLayOut";
+import SessionList from "../../../components/dashboard/session/SessionList";
 import BlogFavPage from "../../../pages/Dashboard/BlogFavPage";
 import CourseFavPage from "../../../pages/Dashboard/CourseFavPage";
 import MyCoursePage from "../../../pages/Dashboard/MyCoursePage";
@@ -74,6 +75,10 @@ export const dashboard = {
           element: <LinksPage />,
         },
       ]
+    },
+    {
+      path: "/StudentPanel/sessionList",
+      element: <SessionList />,
     },
   ],
 };

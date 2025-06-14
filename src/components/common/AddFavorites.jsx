@@ -1,3 +1,4 @@
+
 import faveIcon from "../../assets/icons/faveIcon.svg";
 import { motion } from "framer-motion";
 import { useTranslation } from 'react-i18next'; 
@@ -30,5 +31,6 @@ const AddFavorites = ({ isFav, mutation }) => {
     </motion.button>
   );
 };
+
 
 export { AddFavorites };
