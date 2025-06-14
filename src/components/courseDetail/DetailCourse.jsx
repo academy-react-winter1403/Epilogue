@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
-import { DetailBox } from './DetailBox';
-import { CopyUrlButton } from '../common/copyUrl/CopyUrlButton';
-import { StarRating } from '../common/starRating/StarRating.jsx';
+
+import { DetailBox } from './DetailBox'
+import { CopyUrlButton } from '../common/copyUrl/CopyUrlButton'
+import { StarRating } from '../common/starRating/StarRating.jsx'
+import { div } from 'framer-motion/client'
 import { useTranslation } from 'react-i18next';
+
+
 
 const DetailCourse = ({ course, CourseId }) => {
     const { t } = useTranslation('courseDetail');

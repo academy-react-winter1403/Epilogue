@@ -8,12 +8,23 @@ import commentBtnIcon from '../../../assets/icons/commentBtnIcon.svg';
 import sendIcon from '../../../assets/icons/sendCommentIcon.svg';
 import emojiIcon from '../../../assets/icons/emojiIcon.svg';
 import closeIcon from '../../../assets/icons/closeIcon.svg';
-
 import { useTranslation } from 'react-i18next';
 
-const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postReply, getReplies }) => {
-  const { t } = useTranslation('blogList'); 
+import { useQueryClient } from '@tanstack/react-query';
 
+const CommentSection = ({ 
+  id,
+  isBlog,
+  contentId, 
+  getComment, 
+  postComment, 
+  postReply, 
+  getReplies,
+  userId,
+}) => {
+  const queryClient = useQueryClient();
+
+   const { t } = useTranslation('blogList'); 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
   const [showNewCommentForm, setShowNewCommentForm] = useState(false);
@@ -25,6 +36,7 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
   const { mutate: addReply, isPending: isReplyPending } = postReply || {};
 
   const toggleCommentExpansion = (commentId) => {
+
     setExpandedCommentId(prev => {
       if (prev === commentId) {
         setReplyingTo(null);
@@ -34,14 +46,14 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
     });
   }
 
+
   const startReply = (commentId) => {
     if (showNewCommentForm) closeNewCommentForm();
     setReplyingTo(commentId);
-    setReplyTitle('');
-    setReplyContent('');
     setExpandedCommentId(commentId);
 
   };
+
 
   const handleAddReply = (commentId) => {
     try {
@@ -54,10 +66,12 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
 
   const toggleCommentExpansion = (commentId) => {
     setExpandedCommentId(prev => prev === commentId ? null : commentId);
+
   };
 
   const handleReplySubmit = (formData) => {
     if (!replyingTo || !addReply) return;
+
 
 
     addReply({
@@ -65,11 +79,14 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
       parentId: replyingTo,
       title: replyTitle,
       content: replyContent
+
     }, {
 
       onSuccess: () => {
         setReplyingTo(null);
+
         queryClient.invalidateQueries(['commentReplies', id]);
+
       }
     });
   };
@@ -78,15 +95,19 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
     if (!addComment) return;
 
 
+
     addComment({
       id,
       title: commentTitle,
       content: commentContent
+
     }, {
 
       onSuccess: () => {
+
         setIsCommentModalOpen(false);
         setShowNewCommentForm(false);
+
         queryClient.invalidateQueries(['blogDetails', id]);
       }
     });
@@ -97,11 +118,13 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
   const openCommentModal = () => setIsCommentModalOpen(true);
 
   const openNewCommentForm = () => {
+
     try {
       checkAuth();
       if (replyingTo) setReplyingTo(null);
       setShowNewCommentForm(true);
     } catch (error) {}
+
   };
 
   const closeModal = () => {
@@ -109,12 +132,20 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
     setReplyingTo(null);
     setExpandedCommentId(null);
 
+
     closeNewCommentForm();
 
   };
 
   const closeCommentModal = () => {
     setIsCommentModalOpen(false);
+
+  };
+
+  const closeNewCommentForm = () => {
+    setShowNewCommentForm(false);
+    cancelReply();
+
   };
 
   const displayedComments = comments?.slice(0, 3) || [];
@@ -151,6 +182,9 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
             comment={comment}
             id={id}
             isBlog={isBlog}
+            startReply={startReply}
+            expanded={expandedCommentId === comment.id}
+            toggleExpansion={toggleCommentExpansion}
           />
         ))}
 
@@ -190,10 +224,12 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
           replyingTo={replyingTo}
           startReply={startReply}
           handleReplySubmit={handleReplySubmit}
+
           replyTitle={replyTitle}
           setReplyTitle={setReplyTitle}
           replyContent={replyContent}
           setContent={setReplyContent}
+
           SendIcon={sendIcon}
           EmojiIcon={emojiIcon}
           isPending={isReplyPending}
@@ -205,6 +241,7 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
 
         {showNewCommentForm && (
           <div className='mr-5 mb-0 md:mb-20'>
+
               <NewCommentForm
             onSubmit={handleCommentSubmit}
             onClose={closeNewCommentForm}
@@ -235,4 +272,5 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
     </section>
   );
 };
+
 export { CommentSection };

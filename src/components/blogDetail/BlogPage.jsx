@@ -5,11 +5,13 @@ import { RelatedBlogs } from './relatedBlogs/RelatedBlog';
 import { useTranslation } from 'react-i18next'; 
 
 const BlogPage = () => {
-  const { t } = useTranslation('blogList'); 
-  const { data: blog, isLoading, error } = useBlogDetails();
 
-  if (isLoading) return <div>{t('loadingBlogDetails')}</div>; 
-  if (error) return <div>{t('errorFetchingBlogDetails', { message: error.message })}</div>; 
+  const {  data: blog, isLoading,  error } = useBlogDetails();
+  console.log(blog, 'blogggggggggg')
+  if (isLoading) return <div>در حال بارگذاری...</div>;
+  if (error) return <div>خطا در دریافت اطلاعات دوره : خطا :{error.message}</div>;
+
+    const { t } = useTranslation('blogList'); 
 
   return (
     <div className='w-auto bg-white'>
@@ -17,7 +19,10 @@ const BlogPage = () => {
 
             <DetailBlog newsId={blog?.detailsNewsDto?.id} blog={blog} />
             
-           <CommentBlog newsId={blog?.detailsNewsDto?.id} blog={blog}/>
+
+            {/* comments */}
+           <CommentBlog newsId={blog?.detailsNewsDto?.id} blog={blog} userId={blog?.detailsNewsDto?.userId} />
+
 
             <RelatedBlogs newsId={blog?.detailsNewsDto?.id} />
             

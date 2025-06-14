@@ -24,11 +24,13 @@ const DetailBox = ({ course, CourseId }) => {
         console.log("closed");
     };
 
+
     return (
         <div className='w-[50%] max-w-2xl xl:max-w-4xl h-auto p-4 sm:p-6 flex flex-col justify-between items-center gap-4'>
             <div className=" w-[183px] md:w-[244px] h-[34px] md:h-[46px] font-bold text-2xl sm:text-3xl lg:text-4xl text-black mr-[-40px] md:mr-[10px] lg:mr-[-30px] self-start md:self-start lg:self-start whitespace-nowrap"><h2>{course?.title}</h2></div>
         
             <div className="lg:w-[660px] md:w-[630px] border-2 border-transparent rounded-[16px] flex flex-col gap-5 md:flex-row lg:flex-row md:border-gray-400 md:border-gray-400 lg:border-gray-400 md:gap-0 lg:gap-0">
+
 
                 
                 <div className='w-[361px] md:w-[325px] lg:w-[325px] h-[80px] flex gap-7 border-2 border-gray-400 md:border-transparent rounded-[16px]'>
@@ -160,8 +162,10 @@ const DetailBox = ({ course, CourseId }) => {
 
                     </motion.button>
                 </div>
+
                 <AddCourseFavorite CourseId={CourseId} isFav={course?.isUserFavorite} userFavoriteId={course?.userFavoriteId} />
                 <LikeDislikeCourse CourseId={CourseId} userLikeId={course?.userLikeId} currentUserLike={course?.currentUserLike} currentUserDissLike={course?.currentUserDissLike}/>
+
             </div>
         <DetailModal isModalOpen={isModalOpen} closeOverlay={closeOverlay} />
         </div>

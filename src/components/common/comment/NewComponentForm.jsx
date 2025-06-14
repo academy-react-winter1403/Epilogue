@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
@@ -7,23 +8,41 @@ const NewCommentForm = ({
   onSubmit,
   isReply = false,
 
+
   isPending,
   onClose,
   SendIcon,
+
 
   EmojiIcon,
   CloseIcon,
   compact = false
 }) => {
 
-  const { t } = useTranslation('blogList'); 
+  const [formData, setFormData] = useState({
+    title: '',
+    content: ''
+  });
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(formData);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+const { t } = useTranslation('blogList'); 
   return (
-    <form onSubmit={onSubmit} className="w-[350px] md:w-full md:w-fullbg-[#FCFCFC] border border-[#3772FF] rounded-[24px] flex items-center relative">
-      {onClose && (
-        <button
-          type="button"
-          onClick={onClose}
+    <form onSubmit={handleSubmit} className={`${compact ? 'w-full' : 'w-[350px]'} md:w-full bg-[#FCFCFC] border border-[#3772FF] rounded-[24px] flex items-center relative`}>
+      {(onClose || onCancel) && (
+        <button 
+          type="button" 
+          onClick={onClose || onCancel}
 
           className="absolute left-2 top-2"
         >
@@ -44,6 +63,7 @@ const NewCommentForm = ({
       </div>
 
 
+
       <div className="w-[490px] h-[100px] flex-1 flex flex-col">
         <input
           type="text"
@@ -62,6 +82,7 @@ const NewCommentForm = ({
           placeholder={isReply ? t('replyContentPlaceholder') : t('commentContentPlaceholder')} 
           value={content}
           onChange={(e) => setContent(e.target.value)}
+
 
           className="p-2 px-4 focus:outline-none text-right resize-none"
           required
