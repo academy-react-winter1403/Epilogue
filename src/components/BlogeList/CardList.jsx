@@ -38,17 +38,20 @@ const CardList = ({ sortedCards, currentCards }) => {
                 </h1>
               </Link>
 
-              <div className="flex items-center justify-between mt-2 flex-wrap gap-2 text-sm text-[#707070]">
-                <span className="truncate">
+              <div className="flex items-center justify-between flex-row gap-2 w-full">
+                <h2 className="text-[#707070] text-[14px] font-medium truncate  ">
+
                   {card.addUserFullName || "ناشناس"}
                 </span>
 
-                <div className="flex gap-4">
-                  <div className="flex items-center gap-1">
+
+                <div className="flex flex-row gap-3 ">
+                  <div className="flex items-center gap-1 text-[14px] text-[#707070] font-yekan-500">
                     {dateModifier(card.insertDate)}
                     <Calendar03Icon width="18px" height="18px" />
                   </div>
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center gap-1 text-[14px] text-[#707070] font-yekan-500">
+
                     {card.currentView}
                     <ViewIcon width="18px" height="18px" />
                   </div>

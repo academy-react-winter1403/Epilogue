@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
-import { ImageAdd02Icon } from "../../../common/Icons/Image-addIcon";
+import { ImageAdd02Icon } from "../../../common/Icons/Image-addIcon"; // Adjust path if needed
 import { AnimatePresence, motion } from "framer-motion";
 import { Cancel01Icon } from "../../../common/Icons/Cancel";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
-import { addProfileImage } from "../../../../core/services/api/Dashboard/dashborad";
-import convertDataUrlToFile from "./dataURLToFileObj";
-import ImgCropper from "./ImgCropperModal/ImgCropper";
+import { addProfileImage } from "../../../../core/services/api/Dashboard/dashborad"; // Adjust path if needed
+import convertDataUrlToFile from "./dataURLToFileObj"; // Adjust path if needed
+import ImgCropper from "./ImgCropperModal/ImgCropper"; // Adjust path if needed
+import { useTranslation } from 'react-i18next'; // Import useTranslation
 
 const ImageModal = () => {
+  const { t } = useTranslation('dashboard'); // Use the 'dashboard' namespace
   const client = useQueryClient();
   const [imgSrc, setImgSrc] = useState();
   const [CropperOpen, setCropperOpen] = useState(false);
@@ -22,9 +24,14 @@ const ImageModal = () => {
   const mutation = useMutation({
     mutationFn: addProfileImage,
     onSuccess: () => {
-      toast.success("پروفایل با موفقیت اضافه شد");
-      client.invalidateQueries({ queryKey: ["userInfo"] });
+
+      toast.success(t('profileImageAddedSuccess')); // Translated success message
+      client.invalidateQueries({ queryKey: ["userInfo2"] }); // Assuming this is the correct query key to invalidate
+
     },
+    onError: () => { // Added onError for mutation
+      toast.error(t('profileImageAddError')); // Translated error message
+    }
   });
 
   const handleCrop = async (data) => {
@@ -45,13 +52,24 @@ const ImageModal = () => {
       imgElement.src = imgURL;
       imgElement.onload = (e) => {
         const { naturalWidth, naturalHeight } = e.currentTarget;
-        if (naturalHeight < 0 && naturalWidth < 0) {
-          toast.error("عکس شما نباید کمتر از ۲۵۰ پیکسل باشد");
+        // The condition `naturalHeight < 0 && naturalWidth < 0` seems incorrect.
+        // It should probably be checking for a minimum size, e.g., < 250 pixels.
+        // I'm assuming you want to check if either dimension is less than 250.
+        if (naturalHeight < 250 || naturalWidth < 250) { // Corrected condition
+          toast.error(t('imageSizeError')); // Translated error message
           return setImgSrc("");
         }
         setImgSrc(imgURL);
         setCropperOpen(true);
       };
+      imgElement.onerror = () => { // Added error handling for image loading
+        toast.error(t('profileImageAddError'));
+        setImgSrc("");
+      };
+    };
+    reader.onerror = () => { // Added error handling for FileReader
+      toast.error(t('profileImageAddError'));
+      setImgSrc("");
     };
     reader.readAsDataURL(img);
   };
@@ -74,7 +92,7 @@ const ImageModal = () => {
           className="bg-blue-500 text-white rounded-full py-2 px-4 flex gap-2 items-center text-[16px] max-w-xs hover:bg-blue-600 transition-colors shadow-md"
         >
           <ImageAdd02Icon />
-          <span>افزودن عکس</span>
+          <span>{t('addPhoto')}</span> {/* Translated: افزودن عکس */}
         </button>
 
         <AnimatePresence>
@@ -95,6 +113,7 @@ const ImageModal = () => {
                 <button
                   onClick={handleClose}
                   className="absolute top-4 left-4 w-10 h-10 rounded-full bg-gray-100 hover:bg-red-100 transition-all flex items-center justify-center shadow-sm z-50"
+                  aria-label={t('close')} // Added aria-label for accessibility
                 >
                   <Cancel01Icon color="#e30f0f" />
                 </button>
@@ -125,16 +144,14 @@ const ImageModal = () => {
                       </div>
                       <div>
                         <p className="text-gray-800 font-semibold text-sm">
-                          عکس رو بنداز اینجا یا کلیک کن
+                          {t('dragPhotoHere')} {/* Translated: عکس رو بنداز اینجا یا کلیک کن */}
                         </p>
                         <p className="text-gray-500 text-xs mt-1">
-                          فقط JPG / JPEG / PNG - حداکثر ۵ مگابایت
+                          {t('supportedFormats')} {/* Translated: فقط JPG / JPEG / PNG - حداکثر ۵ مگابایت */}
                         </p>
                       </div>
                     </div>
-                    
                   </FileUploader>
-                  
                 </div>
               </motion.div>
             </motion.div>

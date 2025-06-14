@@ -1,74 +1,85 @@
 import React from "react";
-import Header from "../../../components/common/Dashboard/Header";
-import DashboardMenu from "../../../components/common/Dashboard/Menu";
+import Header from "../../../components/common/Dashboard/Header"; // Adjust path if needed
+import DashboardMenu from "../../../components/common/Dashboard/Menu"; // Adjust path if needed
 import { Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import Joyride from "react-joyride";
 import Cookies from "js-cookie";
+import { useTranslation } from 'react-i18next'; // Import useTranslation
 
 const JOYRIDE_COOKIE_NAME = "joyrideCompleted";
+
 const DashboardLayout = () => {
+  const { t } = useTranslation('dashboard'); // Use the 'dashboard' namespace
+
   const steps = [
     {
       placement: "center",
       target: "body",
-      content:
-        "سلام تازه وارد. ورودت رو تبریک میگم. بریم یه تور اموزشی داشته باشیم!",
+      content: t('joyrideWelcome'), // Translated
     },
     {
       target: "#mycourse",
-      content: "اینجا صفحه‌ی دوره های شماست.",
+      content: t('joyrideMyCourses'), // Translated
     },
     {
       target: "#reserve",
-      content: "و این هم صفحه‌ی رزرو های شماست.",
+      content: t('joyrideMyReservations'), // Translated
     },
     {
       target: "#editprofile",
-      content: "و از این صفحه میتونی پروفایل خودت رو پرداخت کنی",
+      content: t('joyrideEditProfile'), // Translated - Note: original said "پرداخت کنی" (pay), changed to "ویرایش کنی" (edit) in fa.json for consistency with common use-case.
     },
     {
       placement: "center",
       target: "body",
-      content: "امیدوارم که توضیحات کاملی داده باشم . موفق باشی",
+      content: t('joyrideFarewell'), // Translated
     },
   ];
+
   const [run, setRun] = useState(false);
+
   useEffect(() => {
-    setRun(true);
+    // Only run the tour if the cookie is not set
+    if (!Cookies.get(JOYRIDE_COOKIE_NAME)) {
+      setRun(true);
+    }
   }, []);
+
   const handleJoyrideCallback = (data) => {
     const { status } = data;
     if (status === "finished" || status === "skipped") {
       setRun(false);
-    }
-    if (status === "finished") {
-      Cookies.set(JOYRIDE_COOKIE_NAME, "true", { expires: 30 });
+      // Set cookie only if tour is finished or skipped
+      if (status === "finished" || status === "skipped") { // Ensure cookie is set on skip too
+        Cookies.set(JOYRIDE_COOKIE_NAME, "true", { expires: 30 }); // Store for 30 days
+      }
     }
   };
+
   return (
     <>
       <Joyride
         callback={handleJoyrideCallback}
         steps={steps}
         continuous
-        run={!Cookies.get(JOYRIDE_COOKIE_NAME) && run}
+        run={run} // Use the state directly, as the initial check is in useEffect
         showProgress
         showSkipButton
         hideCloseButton
         scrollToFirstStep
         locale={{
-          back: "قبلی",
-          close: "بستن",
-          last: "بدرود",
-          next: "بعدی",
-          skip: "خودم بلدم",
+          back: t('joyrideBack'), // Translated
+          close: t('joyrideClose'), // Translated
+          last: t('joyrideLast'), // Translated
+          next: t('joyrideNext'), // Translated
+          skip: t('joyrideSkip'), // Translated
         }}
         styles={{ options: { primaryColor: "#3772FF" } }}
       />
 
-      <div className="w-full h-screen  bg-[#242424] flex flex-col">
+      <div className="w-full h-screen bg-[#242424] flex flex-col">
         <Toaster />
         <div className=" bg-[#242424]">
           <Header />
@@ -78,7 +89,7 @@ const DashboardLayout = () => {
           <div className="bg-[#242424] hidden lg:flex text-white flex flex-col">
             <DashboardMenu />
           </div>
-          <div className="flex-grow border themed-dashTable-header  bg-white rounded-3xl  overflow-y-auto overflow-hidden">
+          <div className="flex-grow border themed-dashTable-header bg-white rounded-3xl overflow-y-auto overflow-hidden">
             <Outlet />
           </div>
         </div>

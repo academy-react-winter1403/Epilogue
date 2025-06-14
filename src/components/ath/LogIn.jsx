@@ -12,8 +12,10 @@ import toast, { Toaster } from "react-hot-toast";
 import useStore from "../../core/constant/store/zustand-store";
 
 import ReCAPTCHA from "react-google-recaptcha";
+import { useTranslation } from 'react-i18next'; 
 
 export function LogIn() {
+  const { t } = useTranslation('auth'); 
   const setLoginInfo = useStore((state) => state.setLoginInfo);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
@@ -36,7 +38,7 @@ export function LogIn() {
         navigate("/auth/login2");
       }
     } else if (!data.success) {
-      toast.error("خطا");
+      toast.error(t('passwordRecoveryError')); 
     }
   };
 
@@ -45,14 +47,14 @@ export function LogIn() {
       <div className="flex flex-col">
         <div className="flex gap-65 md:hidden">
           <div className="w-[42px] h-[40px]">
-            <img src={bahrLogo} alt="Bahr Logo" />
+            <img src={bahrLogo} alt="Bahr Logo" /> 
           </div>
           <div className="border border-[#DCDCDC] w-[141px] h-[40px] rounded-[34px]">
             <div className="w-[24px] h-[24px] relative top-[8px] right-[105px]">
-              <img src={Vector} alt="Vector" />
+              <img src={Vector} alt="Vector" /> 
             </div>
             <h3 className="text-base font-medium text-[#3772FF] relative right-[16px] bottom-[18px]">
-              صفحه اصلی
+              {t('homePage')} 
             </h3>
           </div>
         </div>
@@ -62,27 +64,26 @@ export function LogIn() {
               <div className="flex-col">
                 <div className="w-[400px] h-[8px] mt-5 rounded-[9px] bg-[#3772FF] md:w-[246px]"></div>
                 <h3 className="font-semibold text-base text-[#2F2F2F] py-[12px] mr-[119px] md:mr-0">
-                  واردکردن شماره همراه
+                  {t('enterMobileNumber')} 
                 </h3>
               </div>
               <div className="flex-col">
                 <div className="w-[400px] h-[8px] mt-5 rounded-[9px] bg-[#DCDCDC] md:w-[246px] md:mr-[24px]"></div>
                 <h3 className="font-semibold text-base text-[#DCDCDC] py-[12px] mr-[99px] md:mr-6.5">
-                  تایید کد ارسال شده دو مرحله‌ای
+                  {t('twoStepVerification')} 
                 </h3>
                 <h3 className="font-semibold text-sm text-[#DCDCDC] mr-[99px] md:mr-6.5">
-                  ( درصورت فعال بودن دو مرحله‌ای )
+                  {t('ifTwoStepActive')} 
                 </h3>
               </div>
             </div>
             <div className="flex-col mt-5">
               <div className="flex-col">
                 <h1 className="text-2xl font-semibold relative">
-                  خوش برگشتی!
+                  {t('welcomeBack')} 
                 </h1>
                 <h3 className="font-medium text-base text-[#707070] relative top-[12px]">
-                  لطفا شماره همراه یا ایمیل و رمزعبور خود را برای ورود
-                  <br /> به حساب کاربری را وارد کنید
+                  {t('loginDescription')} 
                 </h3>
               </div>
               <div className="relative top-[48px]">
@@ -91,7 +92,7 @@ export function LogIn() {
                     password: "",
                     phoneOrGmail: "",
                   }}
-                  validationSchema={loginValidation}
+                  validationSchema={loginValidation} 
                   onSubmit={(values) => handleSubmit(values, capVal)}
                 >
                   {() => (
@@ -103,11 +104,11 @@ export function LogIn() {
                           htmlFor="phoneOrGmail"
                           className="font-semibold text-base text-[#2F2F2F]"
                         >
-                          شماره همراه یا ایمیل
+                          {t('mobileOrEmail')} 
                         </label>
                         <Field
                           name="phoneOrGmail"
-                          placeholder="شماره همراه یا ایمیل خود را وارد کنید"
+                          placeholder={t('enterMobileOrEmail')} 
                           className="mt-2 w-[398px] h-[48px] p-2 border border-[#DCDCDC] rounded-[24px]"
                         />
                         <ErrorMessage
@@ -122,13 +123,13 @@ export function LogIn() {
                           htmlFor="password"
                           className="font-semibold text-base text-[#2F2F2F]"
                         >
-                          رمز عبور
+                          {t('password')} 
                         </label>
                         <div className="relative">
                           <Field
                             name="password"
                             type={showPassword ? "text" : "password"}
-                            placeholder="رمزعبور خود را وارد کنید"
+                            placeholder={t('enterYourPassword')}
                             className="mt-2 w-[398px] h-[48px] p-2 border border-[#DCDCDC] rounded-[24px]"
                           />
                           <button
@@ -186,14 +187,14 @@ export function LogIn() {
                           htmlFor="rememberMe"
                           className="mr-2 font-semibold text-base"
                         >
-                          مرا به خاطر بسپار
+                          {t('rememberMe')} 
                         </label>
                         <div className="w-[175px] h-[36px] mr-[82px] rounded-[40px] bg-[#F6F6F6] text-center">
                           <Link
                             to={"/auth/forgetPassword"}
                             className="text-[#3772FF] font-semibold text-sm flex items-center justify-center mt-1.5"
                           >
-                            رمزعبور را فراموش کردید؟
+                            {t('forgotPasswordQuestion')} 
                           </Link>
                         </div>
                       </div>
@@ -208,12 +209,12 @@ export function LogIn() {
                         disabled={!capVal}
                         className="w-[398px] cursor-pointer bg-blue-500 text-white p-2 rounded-[40px] hover:bg-blue-600 mt-[31px]"
                       >
-                        ورود به حساب
+                        {t('loginToAccount')}
                       </button>
                       <div className="flex w-[276px] h-[23px] relative right-14 top-[16px]">
                         <div className="w-2.75/5">
                           <h3 className="font-semibold text-base">
-                            حساب کاربری ندارید؟
+                            {t('noAccount')} 
                           </h3>
                         </div>
                         <div className="w-2.25/5 text-center relative right-[8px]">
@@ -221,19 +222,19 @@ export function LogIn() {
                             to={"/auth/RegisterPage"}
                             className="font-semibold text-base text-[#3772FF] underline"
                           >
-                            ایجاد حساب کاربری
+                            {t('createAccount')} 
                           </Link>
                         </div>
                       </div>
                       <div className="border border-[#DCDCDC] w-[141px] h-[40px] rounded-[34px] relative top-[32px] right-[120px] hidden md:block">
                         <div className="w-[24px] h-[24px] relative top-[8px] right-[105px]">
-                          <img src={Vector} alt="Vector" />
+                          <img src={Vector} alt="Vector" /> 
                         </div>
                         <Link
                           to={"/"}
                           className="text-base font-medium text-[#3772FF] relative right-[16px] bottom-[18px]"
                         >
-                          صفحه اصلی
+                          {t('homePage')} 
                         </Link>
                       </div>
                     </Form>

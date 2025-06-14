@@ -4,68 +4,71 @@ import { Formik, ErrorMessage, Field, Form } from "formik";
 import * as Yup from "yup";
 import arrow from "../../assets/arrow.png";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 export function Register() {
+  const { t } = useTranslation('auth'); 
+  const navigate = useNavigate();
+
   const validationSchema = Yup.object().shape({
-    code: Yup.string().required("کد الزامی است."),
+    code: Yup.string().required(t('codeRequired')), 
   });
+
   return (
     <>
       <div className="flex flex-col">
         <Link to="/auth/login">
           <div className="flex gap-65 block md:hidden">
             <div className="w-[42px] h-[40px]">
-              <img src={bahrLogo} />
+              <img src={bahrLogo} alt="Bahr Logo" /> 
             </div>
             <div className="border border-[#DCDCDC] w-[121px] h-[40px] rounded-[34px]">
               <div className="w-[24px] h-[24px] relative top-[8px] right-[90px]">
-                <img src={arrow} alt="Vector" />
+                <img src={arrow} alt="Return Arrow" /> 
               </div>
               <h3 className="text-base font-medium text-[#3772FF] relative right-[16px] bottom-[18px]">
-                بازگشت
+                {t('return')} 
               </h3>
             </div>
           </div>
         </Link>
-        <div className="w-full   flex p-8 gap-0 md:gap-10">
+        <div className="w-full flex p-8 gap-0 md:gap-10">
           <div className="flex flex-col">
             <div className="flex flex-col md:flex-row">
-              <div className="flex-col ">
+              <div className="flex-col">
                 <div className="w-[400px] h-[8px] mt-5 rounded-[9px] bg-[#DCDCDC] md:w-[246px]"></div>
                 <h3 className="font-semibold text-base text-[#DCDCDC] py-[12px] mr-[119px] md:mr-0">
-                  واردکردن شماره همراه
+                  {t('enterMobileNumber')} 
                 </h3>
               </div>
-              <div className=" flex-col">
-                <div className="w-[400px] h-[8px] mt-5 rounded-[9px] bg-[#3772FF]  md:w-[246px]  md:mr-[24px]"></div>
-                <h3 className="font-semibold text-base  py-[12px] mr-[99px] text-[#2F2F2F] md:mr-6.5">
-                  تایید کد ارسال شده دو مرحله‌ای
+              <div className="flex-col">
+                <div className="w-[400px] h-[8px] mt-5 rounded-[9px] bg-[#3772FF] md:w-[246px] md:mr-[24px]"></div>
+                <h3 className="font-semibold text-base py-[12px] mr-[99px] text-[#2F2F2F] md:mr-6.5">
+                  {t('twoStepVerification')}
                 </h3>
-                <h3 className="font-semibold text-sm text-[#2F2F2F] mr-[99px]  md:mr-6.5">
-                  ( درصورت فعال بودن دو مرحله‌ای )
+                <h3 className="font-semibold text-sm text-[#2F2F2F] mr-[99px] md:mr-6.5">
+                  {t('ifTwoStepActive')} 
                 </h3>
               </div>
             </div>
             <div className="flex-col mt-5">
               <div className="flex-col">
-                <h1 className="text-2xl font-semibold  relative">
-                  تایید کد دو مرحله‌ای!{" "}
+                <h1 className="text-2xl font-semibold relative">
+                  {t('twoStepVerificationCodeConfirmation')}{" "} 
                 </h1>
-                <h3 className="font-medium text-base text-[#707070] relative  top-[12px]">
-                  کد دومرحله‌ای به شماره همراه شما ارسال شد لطفا کد را
-                  <br /> وارد کنید
+                <h3 className="font-medium text-base text-[#707070] relative top-[12px]">
+                  {t('twoStepCodeSent')}
                 </h3>
               </div>
-              <div className="relative  top-[48px]">
+              <div className="relative top-[48px]">
                 <Formik
                   initialValues={{
-                    password: "",
-                    email: "",
+                    code: "",
                   }}
                   validationSchema={validationSchema}
                   onSubmit={(values) => {
                     console.log(values);
-                    navigate("/LogIn/Register");
+                    navigate("/auth/login"); 
                   }}
                 >
                   {() => (
@@ -75,12 +78,12 @@ export function Register() {
                           htmlFor="code"
                           className="font-semibold text-base text-[#2F2F2F]"
                         >
-                          کد دو مرحله‌ای
+                          {t('twoStepCode')} 
                         </label>
                         <Field
                           name="code"
                           type="number"
-                          placeholder="کد دو مرحله‌ای خود را وارد کنید"
+                          placeholder={t('enterTwoStepCode')}
                           className="mt-2 w-[398px] h-[48px] p-2 border border-[#DCDCDC] rounded-[24px]"
                         />
                         <ErrorMessage
@@ -89,21 +92,19 @@ export function Register() {
                           className="text-red-600 text-sm"
                         />
                       </div>
-                      <Link to="/auth/Register">
-                        <button
-                          type="submit"
-                          className="w-[398px] bg-blue-500 text-white p-2 rounded-[40px] hover:bg-blue-600 mt-[31px]"
-                        >
-                          ورود به حساب
-                        </button>
-                      </Link>
+                      <button
+                        type="submit"
+                        className="w-[398px] bg-blue-500 text-white p-2 rounded-[40px] hover:bg-blue-600 mt-[31px]"
+                      >
+                        {t('loginToAccount')} 
+                      </button>
                       <Link to="/auth/login">
                         <div className="border border-[#DCDCDC] w-[114px] h-[40px] rounded-[34px] relative top-[16px] right-[140px] hidden md:block">
                           <div className="w-[24px] h-[24px] relative top-[8px] right-[75px]">
-                            <img src={arrow} />
+                            <img src={arrow} alt="Return Arrow" />
                           </div>
                           <h3 className="text-base font-medium text-[#3772FF] relative right-[19px] bottom-[18px]">
-                            بازگشت
+                            {t('return')} 
                           </h3>
                         </div>
                       </Link>
@@ -113,7 +114,6 @@ export function Register() {
               </div>
             </div>
           </div>
-          {/* <Side /> */}
         </div>
       </div>
     </>

@@ -1,0 +1,10 @@
+{
+  "order": "Order",
+  "cheapest": "Cheapest",
+  "mostExpensive": "Most Expensive",
+  "newest": "Newest",
+  "mostPopular": "Most Popular",
+  "remove": "Remove",
+  "filter": "Filter",
+  "sort": "Sort"
+}

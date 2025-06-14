@@ -5,7 +5,6 @@ export const ThemeContext = createContext();
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState('');
 
-  // بارگذاری تم ذخیره‌شده از localStorage
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
@@ -20,7 +19,6 @@ export const ThemeProvider = ({ children }) => {
     }
   }, []);
 
-  // تغییر تم و ذخیره در localStorage
   const changeTheme = (newTheme) => {
     setTheme(newTheme);
     document.documentElement.classList.remove('light', 'dark', 'green', 'blue', 'pink');

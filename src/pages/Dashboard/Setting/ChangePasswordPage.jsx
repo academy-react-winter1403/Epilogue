@@ -1,9 +1,12 @@
 import React from "react";
 import { Field, Form, Formik } from "formik";
-import { changePassword } from "../../../core/services/api/Dashboard/dashborad";
+import { changePassword } from "../../../core/services/api/Dashboard/dashborad"; 
 import toast from "react-hot-toast";
+import { useTranslation } from 'react-i18next'; 
 
 const ChangePasswordPage = () => {
+  const { t } = useTranslation('dashboard'); 
+
   const changeUserPassword = async (values) => {
     const newPassword = {
       oldPassword: values.oldPassword,
@@ -11,10 +14,13 @@ const ChangePasswordPage = () => {
     };
     const result = await changePassword(newPassword);
     if (result.success) {
-      toast.success("تغییر رمز با موفقیت انجام شد");
+      toast.success(t('passwordChangeSuccess'));
+    } else {
+      toast.error(result.message || "An error occurred"); 
     }
     console.log(result);
   };
+
   return (
     <div>
       <Formik
@@ -28,46 +34,54 @@ const ChangePasswordPage = () => {
         <Form className="flex flex-col gap-10 p-4 md:p-6 lg:p-8">
           <div className="flex flex-col gap-2">
             <label
-              className="text-[16px] font-yekan-600  text-black"
+              htmlFor="oldPassword" 
+              className="text-[16px] font-yekan-600 text-black"
             >
-              رمز عبور فعلی{" "}
+              {t('currentPassword')}
             </label>
             <Field
-              type="text"
+              type="password" 
+              id="oldPassword"
               name="oldPassword"
-              placeholder="رمز فعلی خود را وارد کنید"
+              placeholder={t('enterCurrentPassword')} 
               className="border border-[#DCDCDC] rounded-3xl h-[48px] w-6/6 px-4 py-2 text-[12px]"
             />
           </div>
 
           <div className="flex flex-col gap-2">
             <label
-              className="text-[16px] font-yekan-600  text-black"
+              htmlFor="newPassword" 
+              className="text-[16px] font-yekan-600 text-black"
             >
-              رمز عبور جدید{" "}
+              {t('newPassword')}
             </label>
             <Field
-              type="text"
+              type="password" 
+              id="newPassword"
               name="newPassword"
-              placeholder="رمز جدید خود را وارد کنید"
+              placeholder={t('enterNewPassword')}
               className="border border-[#DCDCDC] rounded-3xl h-[48px] w-6/6 px-4 py-2 text-[12px]"
             />
           </div>
 
           <div className="flex flex-col gap-2">
             <label
-              className="text-[16px] font-yekan-600  text-black"
+              htmlFor="repeatNewPassword" 
+              className="text-[16px] font-yekan-600 text-black"
             >
-              تکرار رمز عبور جدید{" "}
+              {t('repeatNewPassword')}
             </label>
             <Field
-              type="text"
+              type="password" 
+              id="repeatNewPassword"
               name="repeatNewPassword"
-              placeholder="رمز جدیدت رو تکرار کن"
+              placeholder={t('repeatYourNewPassword')}
               className="border border-[#DCDCDC] rounded-3xl h-[48px] w-6/6 px-4 py-2 text-[12px]"
             />
           </div>
-          <button type="submit" className="w-[80px] h-[30px] rounded-[20px] text-white bg-[#3772FF]">ثبت</button>
+          <button type="submit" className="w-[80px] h-[30px] rounded-[20px] text-white bg-[#3772FF]">
+            {t('submit')}
+          </button>
         </Form>
       </Formik>
     </div>
