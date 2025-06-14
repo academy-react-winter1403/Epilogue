@@ -9,7 +9,9 @@ import { LibraryIcon } from "../Icons/LibraryIcon";
 import { UserSquareIcon } from "../Icons/UserSquerIcon";
 import { MoneySend02Icon } from "../Icons/MoneyIcon"; // This icon seems unused, consider removing if not needed.
 import { AccountSetting02Icon } from "../Icons/SettingIcon";
+
 import { useTranslation } from 'react-i18next'; // Import useTranslation
+
 
 const DashboardMenu = () => {
   const { t } = useTranslation('dashboard'); // Use the 'dashboard' namespace
@@ -25,11 +27,13 @@ const DashboardMenu = () => {
       <div className="flex flex-col w-[250px] h-full bg-[#242424] text-white">
         <div className="space-y-1 flex flex-col">
           {[
+
             [t('dashboard'), <Activity01Icon />, "/StudentPanel/dashboard", 'dashboard'],
             [t('myCourses'), <CourseIcon />, "/StudentPanel/my-courses", "mycourse"],
             [t('myReservations'), <Book02Icon />, "/StudentPanel/my-reserve", "reserve"],
             [t('favoriteCourses'), <Books02Icon />, "/StudentPanel/course-fav", "myfavcourse"],
             [t('favoriteBlogs'), <LibraryIcon />, "/StudentPanel/blog-fav", "myfavblog"],
+
             [
               t('profile'),
               <UserSquareIcon />,

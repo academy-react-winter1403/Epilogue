@@ -8,6 +8,7 @@ import commentBtnIcon from '../../../assets/icons/commentBtnIcon.svg';
 import sendIcon from '../../../assets/icons/sendCommentIcon.svg';
 import emojiIcon from '../../../assets/icons/emojiIcon.svg';
 import closeIcon from '../../../assets/icons/closeIcon.svg';
+
 import { useTranslation } from 'react-i18next';
 
 const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postReply, getReplies }) => {
@@ -16,11 +17,7 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
   const [showNewCommentForm, setShowNewCommentForm] = useState(false);
-  const [commentTitle, setCommentTitle] = useState('');
-  const [commentContent, setCommentContent] = useState('');
   const [replyingTo, setReplyingTo] = useState(null);
-  const [replyTitle, setReplyTitle] = useState('');
-  const [replyContent, setReplyContent] = useState('');
   const [expandedCommentId, setExpandedCommentId] = useState(null);
 
   const { data: comments = [], isLoading, isError } = getComment || {};
@@ -43,17 +40,25 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
     setReplyTitle('');
     setReplyContent('');
     setExpandedCommentId(commentId);
+
   };
 
-  const cancelReply = () => {
-    setReplyingTo(null);
-    setReplyTitle('');
-    setReplyContent('');
+  const handleAddReply = (commentId) => {
+    try {
+      checkAuth();
+      if (showNewCommentForm) setShowNewCommentForm(false);
+      setReplyingTo(commentId);
+      setExpandedCommentId(commentId);
+    } catch (error) {}
   };
 
-  const handleReplySubmit = (e) => {
-    e.preventDefault();
+  const toggleCommentExpansion = (commentId) => {
+    setExpandedCommentId(prev => prev === commentId ? null : commentId);
+  };
+
+  const handleReplySubmit = (formData) => {
     if (!replyingTo || !addReply) return;
+
 
     addReply({
       id,
@@ -61,66 +66,63 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
       title: replyTitle,
       content: replyContent
     }, {
+
       onSuccess: () => {
-        setReplyTitle('');
-        setReplyContent('');
         setReplyingTo(null);
+        queryClient.invalidateQueries(['commentReplies', id]);
       }
     });
   };
 
-  const handleCommentSubmit = (e) => {
-    e.preventDefault();
+  const handleCommentSubmit = (formData) => {
     if (!addComment) return;
+
 
     addComment({
       id,
       title: commentTitle,
       content: commentContent
     }, {
+
       onSuccess: () => {
-        setCommentTitle('');
-        setCommentContent('');
-        closeCommentModal();
-        closeNewCommentForm();
+        setIsCommentModalOpen(false);
+        setShowNewCommentForm(false);
+        queryClient.invalidateQueries(['blogDetails', id]);
       }
     });
   };
 
   const openModal = () => setIsModalOpen(true);
+
   const openCommentModal = () => setIsCommentModalOpen(true);
 
   const openNewCommentForm = () => {
-    if (replyingTo) cancelReply();
-    setShowNewCommentForm(true);
-    setCommentTitle('');
-    setCommentContent('');
+    try {
+      checkAuth();
+      if (replyingTo) setReplyingTo(null);
+      setShowNewCommentForm(true);
+    } catch (error) {}
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    cancelReply();
+    setReplyingTo(null);
     setExpandedCommentId(null);
+
     closeNewCommentForm();
+
   };
 
   const closeCommentModal = () => {
     setIsCommentModalOpen(false);
-    setCommentTitle('');
-    setCommentContent('');
-  };
-
-  const closeNewCommentForm = () => {
-    setShowNewCommentForm(false);
-    setCommentTitle('');
-    setCommentContent('');
-    cancelReply();
   };
 
   const displayedComments = comments?.slice(0, 3) || [];
 
+
   if (isLoading) return <div>{t('loadingComments')}</div>;
   if (isError) return <div>{t('errorLoadingComments')}</div>; 
+
 
   return (
     <section className="w-full flex flex-col gap-5 mt-[50px] justify-center items-center">
@@ -142,6 +144,7 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
           </span>
         </motion.button>
 
+
         {displayedComments.map((comment) => (
           <CommentCard
             key={comment.id}
@@ -150,23 +153,26 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
             isBlog={isBlog}
           />
         ))}
+
       </div>
 
       {comments?.length > 3 && (
         <motion.button
           onClick={openModal}
-          className="flex items-center justify-center gap-2 text-white bg-[#2F2F2F] hover:bg-[#1f1f1f] rounded-[40px] px-4 py-2 transition-colors"
+          className="flex items-center justify-center text-white bg-[#2F2F2F] hover:bg-[#1f1f1f] rounded-[40px] px-4 py-2 transition-colors"
           whileTap={{ scale: 0.95 }}
           whileHover={{ y: -2 }}
         >
+
           <span>{t('viewMore')}</span> 
+
         </motion.button>
       )}
 
       <Modal isOpen={isModalOpen} onClose={closeModal} title={t('studentsAndTeachersComments')}> 
         <motion.button
           onClick={openNewCommentForm}
-          className={`fixed bottom-60 left-35 w-[345px] h-[56px] md:w-[107px] md:h-[40px] md:static md:transform-none flex items-center justify-center gap-2 bg-[#3772FF] text-white rounded-[40px] px-4 py-2 mb-4 ${
+          className={`fixed bottom-60 left-45 w-[345px] h-[56px] md:w-[107px] md:h-[40px] md:static md:transform-none flex items-center justify-center gap-2 bg-[#3772FF] text-white rounded-[40px] px-4 py-2 mb-4 ${
             showNewCommentForm ? 'hidden md:flex' : 'flex'
           }`}
           whileTap={{ scale: 0.95 }}
@@ -209,24 +215,21 @@ const CommentSection = ({ contentId, id, isBlog, getComment, postComment, postRe
             CloseIcon={closeIcon}
             isPending={isCommentPending}
             />
+
           </div>
         )}
       </Modal>
 
       <Modal isOpen={isCommentModalOpen} onClose={closeCommentModal} title={t('submitNewComment')}> 
         <div className='mt-30'>
-        <NewCommentForm
-          onSubmit={handleCommentSubmit}
-          onCancel={closeCommentModal}
-          title={commentTitle}
-          setTitle={setCommentTitle}
-          content={commentContent}
-          setContent={setCommentContent}
-          CloseIcon={closeIcon}
-          SendIcon={sendIcon}
-          isPending={isCommentPending}
-          EmojiIcon={emojiIcon}
-        />
+          <NewCommentForm
+            onSubmit={handleCommentSubmit}
+            onCancel={closeCommentModal}
+            CloseIcon={closeIcon}
+            SendIcon={sendIcon}
+            isPending={isCommentPending}
+            EmojiIcon={emojiIcon}
+          />
         </div>
       </Modal>
     </section>

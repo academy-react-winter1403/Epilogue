@@ -42,6 +42,7 @@ const DetailCourse = ({ course, CourseId }) => {
                             size="md" 
                         />
                         </div>
+
                     </div>
                 <div >
                     <CopyUrlButton/>

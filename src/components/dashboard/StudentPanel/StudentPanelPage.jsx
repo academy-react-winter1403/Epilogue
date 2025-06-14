@@ -7,6 +7,7 @@ import {
 } from "react-circular-progressbar";
 import ReservedCoursesTable from "../../common/Dashboard/Table/ReserveCourseTable"; 
 import { Link } from "react-router-dom";
+
 import YourComment from "./YourComment"; 
 import { PencilEdit01Icon } from "../../common/Icons/PencelIcon"; 
 import { ArrowLeft01Icon } from "../../common/Icons/ArrowLeftIcon"; 
@@ -15,6 +16,7 @@ import { useTranslation } from 'react-i18next';
 const StudentPanelPage = () => {
   const { t } = useTranslation('dashboard');
   const percentage = 66; 
+
 
   return (
     <div className="py-6 px-6 grid grid-cols-1 gap-6 md:grid-cols-12">
@@ -41,7 +43,9 @@ const StudentPanelPage = () => {
           <p className="text-[12px] text-nowrap font-yekan-600">
             {t('accountInfoStatus')}
           </p>
+
           <Link to={"/StudentPanel/edite-profile/profile-info"} aria-label={t('editProfileInfo')}>
+
             <div className="flex items-center">
               <PencilEdit01Icon width={20} height={20} color={"#3772FF"} />
             </div>
@@ -88,6 +92,7 @@ const StudentPanelPage = () => {
             <ArrowLeft01Icon color={"#3772FF"} />
           </Link>
         </div>
+
       </div>
     </div>
   );

@@ -43,7 +43,7 @@ const CourseFavPage = () => {
           </form>
         </div>
       </div>
-      <div className="md:col-span-full themed-dashTable min-h-full bg-[#F6F6F6] rounded-3xl">
+      <div className="md:col-span-full themed-dashTable min-h-fit bg-[#F6F6F6] rounded-3xl">
         <CourseFavTable searchTerm={searchTerm} />
       </div>
     </div>

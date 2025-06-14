@@ -9,7 +9,9 @@ import {
   getFavoriteCourses,
 } from "../../../core/services/api/Dashboard/dashborad";
 import toast from "react-hot-toast";
+
 import { useTranslation } from 'react-i18next'; 
+
 
 const CourseFavTable = ({ searchTerm }) => {
   const { t } = useTranslation('dashboard'); 
@@ -93,8 +95,9 @@ const CourseFavTable = ({ searchTerm }) => {
                 {item.levelName}
               </p>
               <div className="mr-[20px] flex px-2 gap-2">
-                <ViewIcon width={24} height={24} cursor={"pointer"} />
-                <BookDownloadIcon color={"#707070"} />
+                <Link to={"/course-details/"+item.courseId}>
+                  <ViewIcon width={24} height={24} cursor={"pointer"} />
+                </Link>                <BookDownloadIcon color={"#707070"} />
                 <Cancel01Icon
                   color={"#FF5353"}
                   onClick={() => deleteCourseFavUser(item.favoriteId)}

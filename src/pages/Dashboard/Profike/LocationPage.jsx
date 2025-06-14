@@ -63,6 +63,7 @@ const LocationPage = () => {
       {!showMap ? (
         <div
           onClick={() => setShowMap(true)}
+
           className="w-full h-[404px] bg-[#D9D9D9] p-4 ml-3 rounded-2xl cursor-pointer flex items-center justify-center"
           role="button" 
           tabIndex={0}
@@ -72,6 +73,7 @@ const LocationPage = () => {
             }
           }}
           aria-label={t('clickToSelectLocation')}
+
         >
           <span className="text-gray-500">{t('clickToSelectLocation')}</span>
         </div>

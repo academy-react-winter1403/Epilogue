@@ -66,10 +66,12 @@ const Sorting = () => {
                 </div>
             </div>
 
+
             <div className="flex gap-[110px] pt-[63px] md:hidden">
                 <button onClick={toggleModal} className="w-[95px] h-[48px] bg-[#2F2F2F] rounded-[40px] text-white">{t('filter')}</button>
                 <button className="w-[95px] h-[48px] bg-[#2F2F2F] rounded-[40px] text-white">{t('sort')}</button>
             </div>
+
         </div>
     );
 };
