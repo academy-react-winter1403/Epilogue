@@ -63,7 +63,7 @@ const LocationPage = () => {
       {!showMap ? (
         <div
           onClick={() => setShowMap(true)}
-          className="w-full h-[404px] bg-[#D9D9D9]  p-4 ml-3 rounded-2xl cursor-pointer flex items-center justify-center"
+          className="w-full  h-[404px] bg-[#D9D9D9]  p-4 ml-3 rounded-2xl cursor-pointer flex items-center justify-center"
         >
           <span className="text-gray-500">برای انتخاب موقعیت، کلیک کنید</span>
         </div>

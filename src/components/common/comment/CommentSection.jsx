@@ -9,6 +9,7 @@ import  sendIcon  from '../../../assets/icons/sendCommentIcon.svg';
 import  emojiIcon from '../../../assets/icons/emojiIcon.svg';
 import closeIcon from '../../../assets/icons/closeIcon.svg';
 import { useQueryClient } from '@tanstack/react-query';
+import { checkAuth } from '../../../core/hooks/checkAuth';
 
 const CommentSection = ({ 
   id,
@@ -34,18 +35,24 @@ const CommentSection = ({
   const { mutate: addComment, isPending: isCommentPending } = postComment || {};
   const { mutate: addReply, isPending: isReplyPending } = postReply || {};
 
+  const handleAddComment = () => {
+    try {
+      checkAuth();
+      setIsCommentModalOpen(true);
+    } catch (error) {}
+  };
+
+  const handleAddReply = (commentId) => {
+    try {
+      checkAuth();
+      if (showNewCommentForm) setShowNewCommentForm(false);
+      setReplyingTo(commentId);
+      setExpandedCommentId(commentId);
+    } catch (error) {}
+  };
+
   const toggleCommentExpansion = (commentId) => {
     setExpandedCommentId(prev => prev === commentId ? null : commentId);
-  };
-
-  const startReply = (commentId) => {
-    if (showNewCommentForm) closeNewCommentForm();
-    setReplyingTo(commentId);
-    setExpandedCommentId(commentId);
-  };
-
-  const cancelReply = () => {
-    setReplyingTo(null);
   };
 
   const handleReplySubmit = (formData) => {
@@ -64,7 +71,7 @@ const CommentSection = ({
           id: id,
           title: formData.title || initialTitle,
           describe: formData.content || initialDescribe,
-          commentId:replyingTo
+          commentId: replyingTo
         };
   
     addReply(replyData, {
@@ -94,39 +101,36 @@ const CommentSection = ({
   
     addComment(commentData, {
       onSuccess: () => {
-        closeCommentModal();
-        closeNewCommentForm();
+        setIsCommentModalOpen(false);
+        setShowNewCommentForm(false);
         queryClient.invalidateQueries(['blogDetails', id]);
       }
     });
   };
 
   const openModal = () => setIsModalOpen(true);
-  const openCommentModal = () => setIsCommentModalOpen(true);
+  const openCommentModal = () => handleAddComment();
   
   const openNewCommentForm = () => {
-    if (replyingTo) cancelReply();
-    setShowNewCommentForm(true);
+    try {
+      checkAuth();
+      if (replyingTo) setReplyingTo(null);
+      setShowNewCommentForm(true);
+    } catch (error) {}
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    cancelReply();
+    setReplyingTo(null);
     setExpandedCommentId(null);
-    closeNewCommentForm();
+    setShowNewCommentForm(false);
   };
 
   const closeCommentModal = () => {
     setIsCommentModalOpen(false);
   };
 
-  const closeNewCommentForm = () => {
-    setShowNewCommentForm(false);
-    cancelReply();
-  };
-
   const displayedComments = comments?.slice(0, 3) || [];
-
   if (isLoading) return <div>در حال بارگذاری نظرات...</div>;
   if (isError) return <div>خطا در بارگذاری نظرات</div>;
 
@@ -150,17 +154,26 @@ const CommentSection = ({
           </span>
         </motion.button>
 
-        {displayedComments.map((comment) => (
-          <CommentCard 
-            key={comment.id}
-            comment={comment} 
-            id={id}
-            isBlog={isBlog}
-            startReply={startReply}
-            expanded={expandedCommentId === comment.id}
-            toggleExpansion={toggleCommentExpansion}
-          />
-        ))}
+        {displayedComments.length > 0 ? (
+          displayedComments.map((comment) => (
+            <CommentCard 
+              key={comment.id}
+              comment={comment} 
+              id={id}
+              isBlog={isBlog}
+              startReply={handleAddReply}
+              expanded={expandedCommentId === comment.id}
+              toggleExpansion={toggleCommentExpansion}
+            />
+          ))
+        ) : (
+          <div className="w-full flex justify-center items-center py-10">
+            <div className="text-gray-500 text-center">
+              <p className="text-lg">هنوز نظری ثبت نشده است</p>
+              <p className="text-sm mt-2">اولین نفری باشید که نظر می‌دهد</p>
+            </div>
+          </div>
+        )}
       </div>
 
       {comments?.length > 3 && (
@@ -187,31 +200,42 @@ const CommentSection = ({
           <span className='whitespace-nowrap'>نظر شما</span>
         </motion.button>
 
-        <CommentList
-          comments={comments}
-          id={id}
-          isBlog={isBlog}
-          contentId={contentId}
-          replyingTo={replyingTo}
-          startReply={startReply}
-          handleReplySubmit={handleReplySubmit}
-          SendIcon={sendIcon}
-          EmojiIcon={emojiIcon}
-          isPending={isReplyPending}
-          getReplies={getReplies}
-          postReply={postReply}
-          expandedCommentId={expandedCommentId}
-          toggleCommentExpansion={toggleCommentExpansion}
-        />
-
-        {showNewCommentForm && (
-          <div className='mr-5 mb-0 md:mb-20'>
-            <NewCommentForm
-              onSubmit={handleCommentSubmit}
-              onClose={closeNewCommentForm}
-              CloseIcon={closeIcon}
-              isPending={isCommentPending}
+        {comments.length > 0 ? (
+          <>
+            <CommentList
+              comments={comments}
+              id={id}
+              isBlog={isBlog}
+              contentId={contentId}
+              replyingTo={replyingTo}
+              startReply={handleAddReply}
+              handleReplySubmit={handleReplySubmit}
+              SendIcon={sendIcon}
+              EmojiIcon={emojiIcon}
+              isPending={isReplyPending}
+              getReplies={getReplies}
+              postReply={postReply}
+              expandedCommentId={expandedCommentId}
+              toggleCommentExpansion={toggleCommentExpansion}
             />
+
+            {showNewCommentForm && (
+              <div className='mr-5 mb-0 md:mb-20'>
+                <NewCommentForm
+                  onSubmit={handleCommentSubmit}
+                  onClose={() => setShowNewCommentForm(false)}
+                  CloseIcon={closeIcon}
+                  isPending={isCommentPending}
+                />
+              </div>
+            )}
+          </>
+        ) : (
+          <div className="w-full flex justify-center items-center py-10">
+            <div className="text-gray-500 text-center">
+              <p className="text-lg">هنوز نظری ثبت نشده است</p>
+              <p className="text-sm mt-2">اولین نفری باشید که نظر می‌دهد</p>
+            </div>
           </div>
         )}
       </Modal>
