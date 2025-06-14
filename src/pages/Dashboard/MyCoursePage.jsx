@@ -21,7 +21,8 @@ const MyCoursePage = () => {
 
 
       </div>
-
+</div>
+</div>
       <div className="md:col-span-full themed-dashTable min-h-full bg-[#F6F6F6] rounded-3xl">
 
         <DashboardTable searchTerm={searchTerm} showIcon={true} />
@@ -30,4 +31,4 @@ const MyCoursePage = () => {
   );
 };
 
-export default MyCoursePage;
+export default MyCoursePage

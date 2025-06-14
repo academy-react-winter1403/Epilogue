@@ -42,7 +42,7 @@ const CardList = ({ sortedCards, currentCards }) => {
                 <h2 className="text-[#707070] text-[14px] font-medium truncate  ">
 
                   {card.addUserFullName || "ناشناس"}
-                </span>
+                </h2>
 
 
                 <div className="flex flex-row gap-3 ">
