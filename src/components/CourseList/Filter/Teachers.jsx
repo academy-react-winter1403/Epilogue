@@ -1,31 +1,33 @@
-
 import Select from "react-select";
 import teacherIcon from "../../../assets/teacher.png";
+import { useTranslation } from 'react-i18next'; 
 
 export const InstructorSelect = ({ isLoading, error, uniqueTeachers, setTeacherId }) => {
+  const { t } = useTranslation('filter'); 
+
   return (
     <div className="pb-4">
       <div className="flex gap-2 px-5">
         <div className="w-[24px] h-[24px]">
-          <img src={teacherIcon} alt="Teacher Icon" />
+          <img src={teacherIcon} alt={t('instructors')} /> 
         </div>
-        <label className="font-medium block mb-[9px] text-base" htmlFor="instructor">
-          اساتید
-        </label>
+        <p className="font-medium block mb-[9px] text-base" htmlFor="instructor">
+          {t('instructors')} 
+        </p>
       </div>
       {isLoading ? (
-        <div>در حال بارگذاری...</div>
+        <div>{t('loadingTeachers')}</div>
       ) : error ? (
-        <div>خطا در بارگذاری اساتید: {error.message}</div>
+        <div>{t('errorLoadingTeachers', { message: error.message })}</div>
       ) : (
         <Select
           name="instructor"
           options={uniqueTeachers}
-          placeholder="استاد مورد نظر را انتخاب کنید"
+          placeholder={t('selectInstructorPlaceholder')}
           onChange={(option) => {
             setTeacherId(option.value);
           }}
-          className="react-select-container px-5 w-[450px] md:w-[298px] h-[48px] rounded-lg "
+          className="react-select-container text-[14px] px-5 w-[450px] md:w-[298px] h-[48px] rounded-lg "
           classNamePrefix="react-select"
           styles={{
             control: (base) => ({

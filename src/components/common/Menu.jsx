@@ -56,8 +56,14 @@ const Menu = () => {
                   <img src={h1} className="w-[42px]" />
                   <img src={bahr} className="w-[159px] pt-[10px]" />
                 </div>
-                <div className="p-4">
+                <div className="p-4 ">
                   <Cancel01Icon />
+                  <div
+                    className="absolute top-0 bottom-0 w-full z-10 "
+                    onClick={() => {
+                      setIsOpen(false);
+                    }}
+                  ></div>
                 </div>
               </div>
 
@@ -78,12 +84,7 @@ const Menu = () => {
                     <div className="border-b w-full px-[20px]"></div>
                   </Link>
                 </a>
-                <a className="py-2">
-                  <Link to="/AboutUs" className="font-bold">
-                    درباره ما
-                    <div className="border-b w-full px-[20px]"></div>
-                  </Link>
-                </a>
+
                 <a className="py-2">
                   <Link to="/AboutUs" className="font-bold">
                     ارتباط باما
@@ -101,12 +102,6 @@ const Menu = () => {
                 </div>
               </div>
             </motion.div>
-            <div
-              className="absolute top-0 bottom-0 w-full z-10"
-              onClick={() => {
-                setIsOpen(false);
-              }}
-            ></div>
           </>
         )}
       </AnimatePresence>

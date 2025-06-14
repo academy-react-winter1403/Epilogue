@@ -1,8 +1,9 @@
+import { formDataModifire } from "../../../utils/formDateModifier";
 import http from "../../interceptor"; //axios//
 
 export const postAddCourseFavorite = async (CourseId) => {
     try {
-        const result = await http.post(`/Course/AddCourseFavorite`,{CourseId});
+        const result = await http.post(`/Course/AddCourseFavorite`, {courseId: CourseId});
         return result;
       
     } catch (error) {   
@@ -12,14 +13,14 @@ export const postAddCourseFavorite = async (CourseId) => {
     }
 };
 
-export const deleteCourseFavorite = async (CourseId) => {
+export const deleteCourseFavorite = async (userFavoriteId) => {
     try {
-        const result = await http.delete(`/Course/DeleteCourseFavorite`,{CourseId});
+         const formData = formDataModifire({CourseFavoriteId: userFavoriteId })
+
+        const result = await http.delete('/Course/DeleteCourseFavorite', {data: formData});
         return result;
-      
-    } catch (error) {   
-        console.log(error,"deleteFave");
-        return false;
-        
-    }
+    } catch (error) {
+        console.log(error, 'deleteFave');
+        return false; 
 };
+}

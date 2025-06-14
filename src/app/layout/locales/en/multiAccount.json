@@ -1,0 +1,12 @@
+{
+  "active": "Active",
+  "addAnotherAccount": "Add Another Account",
+  "removeAccount": "Remove Account",
+  "noAccountsAdded": "No accounts added yet.",
+  "logoutAllAccounts": "Logout All Accounts",
+  "switchedAccount": "Switched to selected account.",
+  "maxAccountsReached": "You can only manage up to 3 accounts.",
+  "cannotRemoveLastAccount": "Cannot remove the last account. Add another account first to remove this one.",
+  "accountRemoved": "Account removed successfully.",
+  "defaultAccountName": "Account {{index}}"
+}

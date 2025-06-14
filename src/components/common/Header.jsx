@@ -1,165 +1,241 @@
 import React, { useEffect, useState, useRef } from "react";
-import { gsap } from "gsap";
+import { gsap } from "gsap"; 
 import h1 from "../../assets/img/h1.svg";
 import bahr from "../../assets/img/bahr.svg";
 import Menu from "./Menu";
-import { Moon02Icon } from "./Icons/MoonIcon";
-import { PaintBoardIcon } from "./Icons/paintIcon";
+
+import { getUserInfo } from "../../core/services/api/Dashboard/dashborad";
+import { useQuery } from "@tanstack/react-query";
+import ThemeToggle from "./AnimatedThemeSwitcher";
+import { ColorPickerIcon } from "./Icons/ThemeIcon";
+import ColorThemeModal from "./ThemeModal/ThemeModal";
+import { Link, NavLink } from "react-router-dom";
 import useStore from "../../core/Store/Zustand-Store";
-import { NavLink, Link } from "react-router-dom";
+import { removeItem } from "../../core/utils/storage.services";
+import toast from "react-hot-toast";
 
-const Header = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
+import { useTranslation } from 'react-i18next';
+import { AIChatModal, AIChatIcon } from './AIChatModal';
+import MultiAccountDropdown from './MultiAccountDropdown';
 
-  const setTheme = useStore((state) => state.setTheme);
-  const theme = useStore((state) => state.theme);
+const LanguageIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-languages">
+    <path d="m5 8 6 6" />
+    <path d="m4 14 6-6 2-3" />
+    <path d="M2 5h12" />
+    <path d="M7 2h1" />
+    <path d="m22 22-5-10-5 10" />
+    <path d="M14 18h6" />
+  </svg>
+);
+
+const SuggestedPagesIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-lightbulb">
+    <path d="M15 14c.2-1 .7-2 1.5-3a4.8 4.8 0 0 0-3.5-3.5c-1-.8-2-1.3-3-1.5" />
+    <path d="M9 18c.2-1 .7-2 1.5-3" />
+    <path d="M2 17c.2-1 .7-2 1.5-3" />
+    <path d="M22 17c-.2-1-.7-2-1.5-3" />
+    <path d="M11 20H9a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1" />
+    <path d="M12 5V2" />
+    <path d="M4.2 14.8c1.3.4 2.5 1 3.5 1.7" />
+    <path d="M19.8 14.8a8 8 0 0 0-3.5 1.7" />
+    <path d="M16 16.5A4.8 4.8 0 0 0 17 18c1.3.4 2.5 1 3.5 1.7" />
+  </svg>
+);
+const Header = ({ openSuggestedPagesModal, isSuggestedPagesModalOpen ,isLoggedIn}) => {
+
+  const { data: userInfo } = useQuery({
+    queryKey: ["userInfo"],
+    queryFn: async () => {
+      const result = await getUserInfo()
+      if(!result.currentPictureAddress){
+        toast('parsa ')
+        removeItem('token')
+      }else{
+        setIsLoggedIn(true)
+      }
+      return result
+    } ,
+  });
+  const [isColorModalOpen, setIsColorModalOpen] = useState(false);
+  const [isAIChatModalOpen, setIsAIChatModalOpen] = useState(false);
+
+  const [isLanguageDropdownOpen, setLanguageDropdownOpen] = useState(false);
+  const languageDropdownRef = useRef(null);
+
+
+  const { t, i18n } = useTranslation('common');
+
+
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token);
+    const handleClickOutsideLanguage = (event) => {
+      if (languageDropdownRef.current && !languageDropdownRef.current.contains(event.target)) {
+        setLanguageDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutsideLanguage);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutsideLanguage);
+    };
   }, []);
 
-  const toggleDropdown = () => {
-    if (isDropdownOpen) {
-      gsap.to(dropdownRef.current, {
-        y: "-20px",
-        opacity: 0,
-        duration: 0.5,
-        ease: "power2.out",
-        onComplete: () => setDropdownOpen(false),
-      });
-    } else {
-      setDropdownOpen(true);
-    }
-  };
-
-  useEffect(() => {
-    if (isDropdownOpen && dropdownRef.current) {
-      gsap.fromTo(
-        dropdownRef.current,
-        { y: "-20px", opacity: 0 },
-        { y: "0px", opacity: 1, duration: 0.5, ease: "power2.out" }
-      );
-    }
-  }, [isDropdownOpen]);
-
-  const changeTheme = (newTheme) => {
-    setTheme(newTheme);
-    document.documentElement.setAttribute("data-theme", newTheme);
-    console.log(`Theme changed to: ${newTheme}`);
-    console.log(
-      "Background Color:",
-      getComputedStyle(document.documentElement).getPropertyValue("--bg-color")
-    );
-    console.log(
-      "Text Color:",
-      getComputedStyle(document.documentElement).getPropertyValue("--text-color")
-    );
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+    document.documentElement.lang = lng;
+    document.documentElement.dir = (lng === 'fa') ? 'rtl' : 'ltr';
+    setLanguageDropdownOpen(false);
   };
 
   return (
-    <div>
-    <div className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-10 bg-background text-text">
-      <div className="flex flex-row-reverse">
-        <span className="pr-2 text-[18px] text-[#22445D] hidden lg:flex">
-          <img src={bahr} alt="Brand" />
-        </span>
-        <img src={h1} className="pr-2 sm:h-9" alt="Logo" />
-      </div>
-      <div className="flex lg:flex-1">
-        <div className="m-auto mx-[175px] items-center justify-center hidden lg:flex lg:gap-x-8 bg-[#2F2F2F] rounded-[56px] pl-1 pr-[24px] py-[5px]">
-          <NavLink to="/" className="relative py-2 text-[16px] text-white">
-            خانه
-          </NavLink>
-          <NavLink to="/CourseList" className="relative py-2 text-white">
-            دوره ها
-          </NavLink>
-          <NavLink to="/BlogeList" className="relative py-2 text-white">
-            بلاگ ها
-          </NavLink>
-           <NavLink
-              to="/AboutUs"
+    <div className="flex w-full justify-between">
+      <div className="flex w-full items-center justify-between p-6 lg:px-10 bg-background text-text">
+        <div className="flex flex-row-reverse">
+          <span className="pr-2 text-[18px] text-[#22445D] hidden lg:flex">
+            <img src={bahr} alt={t('appName')} />
+          </span>
+          <img src={h1} className="pr-2 sm:h-9" alt={t('appLogo')} />
+        </div>
+        <div className="flex lg:flex-1">
+          <div className="m-auto mx-[235px] items-center justify-center hidden lg:flex lg:gap-x-8 bg-[#2F2F2F] rounded-[56px] pl-1 pr-[24px] py-[5px]">
+            <NavLink
+              to="/"
+
               className={({ isActive }) =>
-                `relative py-2 text-white ${
-                  isActive
-                    ? "before:content-['•'] before:absolute before:-bottom-1 before:left-1/2 before:-translate-x-1/2"
-                    : ""
-                }`
+                `relative text-[16px] text-white flex flex-col items-center ${
+                  isActive ? "after:block" : "after:hidden"
+                }
+                after:content-[''] after:w-1 after:h-1 after:rounded-full after:bg-[#ffff] `
               }
             >
-              درباره ما
+              {t('home')}
             </NavLink>
+
+            <NavLink
+              to="/CourseList"
+
+              className={({ isActive }) =>
+                `relative text-white flex flex-col items-center ${
+                  isActive ? "after:block" : "after:hidden"
+                }
+                after:content-[''] after:w-1 after:h-1 after:rounded-full after:bg-[#FFFF]`
+              }
+            >
+              {t('courses')}
+            </NavLink>
+
+            <NavLink
+              to="/BlogeList"
+
+              className={({ isActive }) =>
+                `relative text-white flex flex-col items-center ${
+                  isActive ? "after:block" : "after:hidden"
+                }
+                after:content-[''] after:w-1 after-h-1 after:rounded-full after:bg-[#FFFF] `
+              }
+            >
+              {t('blogs')}
+            </NavLink>
+
             {isLoggedIn ? (
-              <Link to={"/StudentPanel/dashboard"}>
-                {/* <img
-                  className="size-full rounded-full  w-12 border h-12"
-                  src={currentPictureAddress}
-                ></img> */}
+              <Link to={"/StudentPanel/edite-profile/profile-info"}>
+                <img
+                  className="size-full rounded-full w-12 border h-12"
+                  src={userInfo?.currentPictureAddress}
+                  alt={t('profilePicture')}
+                ></img>
               </Link>
             ) : (
               <Link
                 to="/auth/RegisterPage"
+
                 className="text-sm/6 text-[#FCFCFC] bg-[#3772FF] rounded-[56px] px-5 py-[8px]"
               >
-                ثبت نام یا ورود
+                {t('registerOrLogin')}
               </Link>
+            )}
+          </div>
+        </div>
+        <div className="gap-[8px] hidden lg:flex relative">
+          <button
+            onClick={openSuggestedPagesModal}
+            className="rounded-full w-[48px] h-[48px] border border-[#DCDCDC] text-black flex items-center justify-center bg-[#2F2F2F] text-white"
+            title="صفحات پیشنهادی"
+          >
+            <SuggestedPagesIcon />
+          </button>
+
+          <button
+            className="rounded-full w-[48px] h-[48px] border border-[#DCDCDC] text-black"
+            onClick={() => setIsColorModalOpen((prev) => !prev)}
+          >
+            <div className="flex items-center justify-center">
+              <ColorPickerIcon color={"#000"} />
+            </div>
+          </button>
+          <ColorThemeModal
+            isOpen={isColorModalOpen}
+            onClose={() => setIsColorModalOpen(false)}
+            onSelect={(color) => {
+              setIsColorModalOpen(false);
+            }}
+          />
+          <button className="rounded-full p-3 bg-[#2F2F2F]">
+            <ThemeToggle />
+          </button>
+
+          <button
+            className="rounded-full w-[48px] h-[48px] border border-[#DCDCDC] text-black flex items-center justify-center bg-[#2F2F2F] text-white"
+            onClick={() => setIsAIChatModalOpen(true)}
+          >
+            <AIChatIcon />
+          </button>
+          <AIChatModal
+            isOpen={isAIChatModalOpen}
+            onClose={() => setIsAIChatModalOpen(false)}
+          />
+
+          <MultiAccountDropdown />
+
+          <div className="relative" ref={languageDropdownRef}>
+            <button
+              className="rounded-full w-[48px] h-[48px] border border-[#DCDCDC] text-black flex items-center justify-center bg-[#2F2F2F] text-white"
+              onClick={() => setLanguageDropdownOpen((prev) => !prev)}
+              aria-expanded={isLanguageDropdownOpen}
+              aria-haspopup="true"
+            >
+              <LanguageIcon />
+            </button>
+            {isLanguageDropdownOpen && (
+              <div
+                className="absolute bg-white dark:bg-gray-800 text-gray-800 dark:text-white rounded-md shadow-lg py-2 mt-2"
+                style={{
+                  zIndex: 100,
+                  minWidth: '120px',
+                  [i18n.language === 'fa' ? 'left' : 'right']: 0,
+                  [i18n.language === 'fa' ? 'right' : 'left']: 'auto',
+                }}
+              >
+                <div
+                  className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
+                  onClick={() => changeLanguage('fa')}
+                >
+                  {t('farsi')}
+                </div>
+                <div
+                  className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
+                  onClick={() => changeLanguage('en')}
+                >
+                  {t('english')}
+                </div>
+              </div>
             )}
           </div>
         </div>
       </div>
 
-      <div className="gap-[8px] hidden lg:flex relative">
-        <button
-          className="rounded-full w-[48px] h-[48px] bg-[#FCFCFC] border border-[#DCDCDC] text-black"
-          onClick={toggleDropdown}
-        >
-          <div className="flex items-center justify-center">
-            <PaintBoardIcon />
-          </div>
-        </button>
-
-        {isDropdownOpen && (
-          <div
-            ref={dropdownRef}
-            className="absolute top-[60px] left-0 bg-white shadow-lg rounded-lg p-4"
-          >
-            <ul>
-              <li
-                className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
-                onClick={() => changeTheme("red")}
-              >
-                قرمز
-              </li>
-              <li
-                className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
-                onClick={() => changeTheme("blue")}
-              >
-                آبی
-              </li>
-              <li
-                className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
-                onClick={() => changeTheme("green")}
-              >
-                سبز
-              </li>
-            </ul>
-          </div>
-        )}
-       
-        <div className=" gap-[8px] hidden lg:flex">
-          <button className="rounded-full w-[48px] h-[48px] bg-[#FCFCFC] border border-[#DCDCDC] text-black">
-            <div className="flex items-center justify-center">
-              {/* <Notification02Icon /> */}
-            </div>
-          </button>
-          <button className="rounded-full p-3 bg-[#2F2F2F]">
-            <Moon02Icon />
-          </button>
-        </div>
-        <Menu />
-      </div>
+      <Menu />
     </div>
   );
 };

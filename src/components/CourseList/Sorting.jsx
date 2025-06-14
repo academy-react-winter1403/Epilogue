@@ -4,7 +4,7 @@ import useStore from "../../core/Store/Zustand-Store";
 import gsap from "gsap";
 import { Calendar03Icon } from "../common/Icons/Calender";
 import { Cancel01Icon } from "../common/Icons/Cancel";
-
+import { useTranslation } from 'react-i18next'; 
 
 const Sorting = () => {
   const { setSortCol, setSortType } = useStore((state) => state);
@@ -14,11 +14,13 @@ const Sorting = () => {
   const isDragging = useRef(false);
   const startPosition = useRef(0);
 
+  const { t } = useTranslation('sorting'); 
+
   const sortOptions = [
-    { type: "cheap", label: "ارزان‌ترین", col: "Cost", order: "ASC" },
-    { type: "expensive", label: "گران‌ترین", col: "Cost", order: "DESC" },
-    { type: "newest", label: "جدیدترین", col: "lastUpdate", order: "DESC" },
-    { type: "popular", label: "محبوب‌ترین", col: "currentLikeCount", order: "DESC" },
+    { type: "cheap", label: t('cheapest'), col: "Cost", order: "ASC" }, 
+    { type: "expensive", label: t('mostExpensive'), col: "Cost", order: "DESC" }, 
+    { type: "newest", label: t('newest'), col: "lastUpdate", order: "DESC" }, 
+    { type: "popular", label: t('mostPopular'), col: "currentLikeCount", order: "DESC" }, 
   ];
 
   const handleSortClick = (option) => {
@@ -75,36 +77,33 @@ const Sorting = () => {
     <div>
       <div className="hidden md:block">
         <div className="flex items-center justify-center mt-[72px]">
-          <span className="font-bold mt-1.5 ml-4 text-xl">ترتیب</span>
-          <div className="flex gap-2 items-center text-center justify-center">
+          <span className="font-bold mt-1.5 ml-4 text-xl">{t('order')}</span> 
+          <div className="flex gap-2  ">
             {sortOptions.map((option) => (
               <div
                 key={option.type}
                 onClick={() => handleSortClick(option)}
-                className={`border rounded-full h-10 flex items-center px-4 text-lg font-medium cursor-pointer ${
+                className={`border rounded-full h-10 w-[110px] themed-dash-input flex items-center text-center justify-center text-lg font-medium cursor-pointer ${
                   activeSort === option.type
                     ? "border-[#FF5353] text-[#FF5353]"
                     : "border-gray-300 text-black"
                 }`}
               >
-                 {activeSort === option.type && (
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleSortClick(option);
-                    }}
-                    className=""
-                    aria-label="حذف"
-                  >
-                    <div className="px-2">
-                      <Cancel01Icon width={"20px"}  color={"#FF5353"}/>
-                    
-
-                    </div>
-                  </button>
-                )}
+                  {activeSort === option.type && (
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleSortClick(option);
+                      }}
+                      className=""
+                      aria-label={t('remove')} 
+                    >
+                      <div className="px-2">
+                        <Cancel01Icon width={"20px"}  color={"#FF5353"}/>
+                      </div>
+                    </button>
+                  )}
                 {option.label}
-               
               </div>
             ))}
           </div>
@@ -112,11 +111,10 @@ const Sorting = () => {
       </div>
 
       <div className="flex gap-[110px] pt-[63px] md:hidden">
-        <button className="w-[95px] h-[48px] bg-[#2F2F2F] rounded-[40px] text-white">فیلتر</button>
-        <button className="w-[95px] h-[48px] bg-[#2F2F2F] rounded-[40px] text-white">ترتیب</button>
+        <button className="w-[95px] h-[48px] bg-[#2F2F2F] rounded-[40px] text-white">{t('filter')}</button>
+        <button className="w-[95px] h-[48px] bg-[#2F2F2F] rounded-[40px] text-white">{t('sort')}</button>
       </div>
 
-  
     </div>
   );
 };

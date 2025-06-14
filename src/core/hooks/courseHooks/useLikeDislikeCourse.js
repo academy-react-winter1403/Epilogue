@@ -1,37 +1,59 @@
 import {postAddLikeCourse, postAddDislikeCourse, deleteLikeCourse} from '../../services/api/courseDetail/postAddLikeDislikeCourse.js'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import toast from 'react-hot-toast';
+import { checkAuth } from '../checkAuth.js';
 
-export const useLikeCourse = (CourseId) => {
-    const queryClient = useQueryClient();
-
-     const likeMutation  = useMutation({
-        mutationFn: () => postAddLikeCourse(CourseId),
-        onSuccess: () => {
-          queryClient.invalidateQueries(['courseDetails']);
-        },
-        onError: (error) => {
-          console.error('Error in like:', error);
+export const useLikeCourse = (courseId) => {
+  const queryClient = useQueryClient();
+  
+  const likeMutation = useMutation({
+    mutationFn: async () => {
+      checkAuth();
+      return await postAddLikeCourse(courseId);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['courseDetails', courseId]);
+    },
+    onError: (error) => {
+      if (error.message !== 'USER_NOT_LOGGED_IN') {
+        if (error.response?.status === 401) {
+          toast.error('احراز هویت ناموفق بود. لطفاً مجدداً وارد شوید');
+        } else {
+          toast.error('خطا در ثبت پسندیدن دوره');
         }
-      });
-      
-  return likeMutation
-}
+        console.error('Error in course like:', error);
+      }
+    }
+  });
 
-export const useDisLikeCourse = (CourseId) => {
-    const queryClient = useQueryClient();
+  return likeMutation;
+};
 
-    const dislikeMutation  = useMutation({
-        mutationFn: () => postAddDislikeCourse(CourseId),
-        onSuccess: () => {
-          queryClient.invalidateQueries(['courseDetails-dis']);
-        },
-        onError: (error) => {
-          console.error('Error in dislike:', error);
+export const useDisLikeCourse = (courseId) => {
+  const queryClient = useQueryClient();
+
+  const dislikeMutation = useMutation({
+    mutationFn: async () => {
+      checkAuth();
+      return await postAddDislikeCourse(courseId);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(['courseDetails', courseId]);
+    },
+    onError: (error) => {
+      if (error.message !== 'USER_NOT_LOGGED_IN') {
+        if (error.response?.status === 401) {
+          toast.error('احراز هویت ناموفق بود. لطفاً مجدداً وارد شوید');
+        } else {
+          toast.error('خطا در ثبت نپسندیدن دوره');
+
         }
-      })
-      
-  return dislikeMutation
-}
+      }
+    }
+  });
+
+  return dislikeMutation;
+};
 
 export const useDeleteLikeCourse = () => {
   const queryClient = useQueryClient();

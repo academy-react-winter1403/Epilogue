@@ -4,12 +4,14 @@ import { Calendar03Icon } from "../../common/Icons/Calender";
 import { ViewIcon } from "../../common/Icons/ViewIcon";
 import { useRelatedBlogs } from "../../../core/hooks/blogHooks/useRelatedBlog";
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const RelatedBlogs = ({ newsId }) => {
+  const { t } = useTranslation('blogList'); 
   const { data, isLoading, error } = useRelatedBlogs(newsId);
 
-  if (isLoading) return <div>در حال بارگذاری مطالب مرتبط...</div>;
-  if (error) return <div>خطا در دریافت مطالب مرتبط</div>;
+  if (isLoading) return <div>{t('loadingRelatedBlogs')}</div>; 
+  if (error) return <div>{t('errorFetchingRelatedBlogs')}</div>; 
   
   const blogsArray = data?.news || [];
   
@@ -18,7 +20,9 @@ const RelatedBlogs = ({ newsId }) => {
   return (
     <section className='w-auto md:mt-10 md:mr-10 mr-130 mb-15'>
       <div className="font-yekan-700 font-bold flex flex-col items-center justify-center text-nowrap text-[32px]">
-        <h3 className="self-start pb-5">بلاگ های مرتبط</h3>
+
+        <h3 className="self-start">{t('relatedBlogsTitle')}</h3>
+
       </div>
       <div className="flex justify-center items-center gap-2">
         {blogsArray
@@ -26,7 +30,7 @@ const RelatedBlogs = ({ newsId }) => {
           .slice(0, 3)
           .map(blog => (
             <Link 
-              to={`/blog-detail/${blog.id}`} 
+              to={`/blog-details/${blog.id}`} 
               key={blog.id} 
               className="md:w-[431px] w-[322px] text-black bg-white rounded-lg"
             >
@@ -36,7 +40,7 @@ const RelatedBlogs = ({ newsId }) => {
                     <img
                       className="rounded-[32px] w-full h-full object-cover"
                       src={blog.currentImageAddressTumb}
-                      alt={blog.title}
+                      alt={blog.title || t('blogImage')} 
                     />
                   </div>
                 ):(
@@ -49,7 +53,7 @@ const RelatedBlogs = ({ newsId }) => {
                   </h5>
                   <div className="gap-[20px] lg:gap-[116px] flex flex-row">
                     <p className="mb-3 text-nowrap text-[14px] font-yekan-500 text-[#707070]">
-                      {blog.author || 'نویسنده ناشناس'}
+                      {blog.author || t('unknownAuthor')}
                     </p>
 
                     <div className="flex flex-row gap-4">

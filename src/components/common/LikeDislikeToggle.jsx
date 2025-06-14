@@ -4,6 +4,7 @@ import likeIcone1 from '../../assets/icons/like1.svg'
 import dislikeIconActiv from '../../assets/icons/dislike2.svg'
 
 const LikeDislikeToggle = ({
+
   currentUserLike,
   currentUserDissLike,
   liked,
@@ -51,6 +52,8 @@ const LikeDislikeToggle = ({
       </button>
     </div>
   );
+
+
 };
 
 export { LikeDislikeToggle }

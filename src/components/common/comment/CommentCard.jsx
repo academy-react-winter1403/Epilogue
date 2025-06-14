@@ -54,6 +54,7 @@ const CommentCard = ({
              currentUserIsLike={comment?.currentUserIsLike}
              currentUserIsDissLike={comment?.currentUserIsDissLike}
            />
+
         ) : (
           <CommentLikeDislikeCourse
             id={id}
@@ -65,6 +66,7 @@ const CommentCard = ({
             currentUserIsDissLike={comment?.currentUserIsDissLike}
           />
         )}
+
         
       </div>
     </div>

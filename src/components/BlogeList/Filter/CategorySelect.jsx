@@ -1,22 +1,25 @@
 import Select from "react-select";
 import layersIcon from "../../../assets/layers.png";
+import { useTranslation } from 'react-i18next'; 
 
 export const CategorySelect = ({
   technologyOptions,
   setTechnologies,
   setTechCount,
 }) => {
+  const { t } = useTranslation('blogList'); 
+
   return (
     <div className="pb-4">
       <div className="flex gap-2 px-5">
         <div className="w-[24px] h-[24px]">
-          <img src={layersIcon} alt="Category Icon" />
+          <img src={layersIcon} alt={t('category')} /> 
         </div>
         <label
           className="font-medium block mb-[9px] text-base"
           htmlFor="category"
         >
-          دسته بندی
+          {t('category')} 
         </label>
       </div>
       <Select
@@ -27,9 +30,9 @@ export const CategorySelect = ({
           setTechnologies(option.value);
           setTechCount(1);
         }}
-        placeholder="دسته مورد نظر را انتخاب کنید"
-        className="react-select-container px-5 w-[450px] md:w-[278px]"
-        classNamePrefix="react-select"
+        placeholder={t('selectCategoryPlaceholder')} 
+        className="react-select-container text-[14px] px-5 w-[450px] md:w-[278px]"
+        classNamePrefix="react-select "
         styles={{
           control: (base) => ({
             ...base,

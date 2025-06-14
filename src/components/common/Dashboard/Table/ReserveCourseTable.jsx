@@ -8,11 +8,15 @@ import {
   getReservedCourses,
 } from "../../../../core/services/api/Dashboard/dashborad";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next'; 
 
-const ReservedCoursesTable = ({ showAccept,searchTerm }) => {
-  const { data: courseReserved} = useQuery({
-    queryKey: ["courseReserved"], 
-    queryFn: () => getReservedCourses(), 
+const ReservedCoursesTable = ({ showAccept, searchTerm }) => {
+  const { t } = useTranslation('dashboard'); 
+
+  const { data: courseReserved, refetch } = useQuery({ 
+    queryKey: ["courseReserved"],
+    queryFn: () => getReservedCourses(),
   });
 
   const [filteredReservedCourses, setfilteredReservedCourses] = useState([]);
@@ -20,13 +24,12 @@ const ReservedCoursesTable = ({ showAccept,searchTerm }) => {
   useEffect(() => {
     if (courseReserved) {
       const term = searchTerm?.toLowerCase();
-      const newFilteredCourses = courseReserved.filter(course =>
-        course.courseName.toLowerCase().includes(term)
+      const newFilteredCourses = courseReserved?.filter((course) =>
+        course?.courseName.toLowerCase().includes(term)
       );
       setfilteredReservedCourses(newFilteredCourses);
     }
   }, [courseReserved, searchTerm]);
-
 
   const deleteReservedCourse = (courseId) => {
     const deletedCourse = { id: courseId };
@@ -36,27 +39,30 @@ const ReservedCoursesTable = ({ showAccept,searchTerm }) => {
   const mutation = useMutation({
     mutationFn: deleteCourseReserve,
     onSuccess: () => {
-      toast.success("دوره حذف شد");
+      toast.success(t('courseDeleted'));
       refetch();
     },
     onError: () => {
-      toast.error("خطا");
+      toast.error(t('errorDeletingCourse')); 
     },
   });
+
   return (
-    <div className="mt-4 px-4 lg:px-4 lg:mt-5  overflow-auto">
-      <div className="bg-[#F1F1F1] text-[#707070] rounded-[16px] gap-[30px] p-3 flex text-sm font-yekan-600 text-nowrap">
-        <p className=" w-[10%]">#</p>
-        <p className=" w-[19%]">نام</p>
-        <p className=" w-[19%]">مدرس</p>
-        <p className=" w-[19%]">تاریخ برگزاری</p>
-        {showAccept && <p className=" w-[19%]">وضعیت</p>}
+    <div className="mt-4 px-4 lg:px-4 lg:mt-5 overflow-auto">
+      <div className="bg-[#F1F1F1] themed-dashTable-header text-[#707070] rounded-[16px] gap-[30px] p-3 flex text-sm font-yekan-600 text-nowrap">
+
+        <p className="w-[10%]">{t('numberSign')}</p> 
+        <p className="w-[19%]">{t('name')}</p> 
+        <p className="w-[19%]">{t('instructor')}</p> 
+        <p className="w-[19%]">{t('holdingDate')}</p> 
+        {showAccept && <p className="w-[19%]">{t('status')}</p>} 
+
       </div>
 
-      <div className=" overflow-y-auto">
+      <div className="overflow-y-auto">
         {filteredReservedCourses?.length === 0 ? (
           <p className="flex items-center justify-center py-16">
-            دوره ای وجود ندارد
+            {t('noCoursesFound')} 
           </p>
         ) : (
           filteredReservedCourses?.map((item) => (
@@ -70,13 +76,15 @@ const ReservedCoursesTable = ({ showAccept,searchTerm }) => {
                     item.tumbImageAddress ||
                     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRoQIX__QPQ_Gz0pBbMdAC-VTN9M64Q0FXgg&s"
                   }
-                  className="min-w-[83px] h-[52px]  rounded-[12px] object-cover"
+                  className="min-w-[83px] h-[52px] rounded-[12px] object-cover"
+                  alt={item.courseName}
                 />
               </div>
+
               <p className="w-[37%] truncate font-yekan-600">
                 {item.courseName}
               </p>
-              <p className="w-[45%] truncate  font-yekan-600">
+              <p className="w-[45%] truncate font-yekan-600">
                 {item.studentName}
               </p>
               <p className="w-[35%] font-yekan-600">
@@ -88,11 +96,13 @@ const ReservedCoursesTable = ({ showAccept,searchTerm }) => {
                     item.accept ? "bg-[#3772FF]" : "bg-[#FF5353]"
                   }`}
                 >
-                  {item.accept ? "تایید شده" : "تایید نشده"}
+                  {item.accept ? t('confirmed') : t('pending')} 
                 </div>
               )}
               <div className="mr-[20px] flex px-2 gap-2">
-                <ViewIcon width={24} height={24} cursor={"pointer"} />
+                <Link to={"/course-details/" + item.courseId}>
+                  <ViewIcon width={24} height={24} cursor={"pointer"} />
+                </Link>
                 <Cancel01Icon
                   onClick={() => deleteReservedCourse(item.courseId)}
                   color={"#FF5353"}
@@ -101,7 +111,7 @@ const ReservedCoursesTable = ({ showAccept,searchTerm }) => {
               </div>
             </div>
           ))
-        )}{" "}
+        )}
       </div>
     </div>
   );

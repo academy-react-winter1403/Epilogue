@@ -16,18 +16,28 @@ const onSuccess = (response) => {
 };
 
 const onError = (err) => {
-  console.log(err);
   
-  return Promise.reject(err);
+   return Promise.reject(err);
 };
 
 instance.interceptors.response.use(onSuccess, onError);
 
 instance.interceptors.request.use((opt) => {
 
-  const token = JSON.parse(getItem("token"))
-  if (token) opt.headers.Authorization = "Bearer " + token;
+  const token = localStorage.getItem("token")
+  if (token) opt.headers.Authorization = `Bearer ${token}` ;
   return opt;
 });
+
+
+// export const checkAuth = () => {
+//   const token = localStorage.getItem('token');
+//   console.log(token)
+//   if (!token) {
+//     console.log('yam')
+//     throw new Error('USER_NOT_LOGGED_IN');
+//   }
+//   return true;
+// };
 
 export default instance;

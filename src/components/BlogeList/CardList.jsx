@@ -2,65 +2,66 @@ import { ViewIcon } from "../common/Icons/ViewIcon";
 import dateModifier from "../../core/utils/dateModifier";
 import React from "react";
 import { Calendar03Icon } from "../common/Icons/Calender";
+import { Link } from "react-router-dom";
 
 const CardList = ({ sortedCards, currentCards }) => {
+  const cards = sortedCards.length > 0 ? sortedCards : currentCards;
+
   return (
-    <div className="w-screen h-auto flex-col  md:grid grid-cols-2 gap-[32px] w-[971px]">
-      {sortedCards.length > 0 ? (
-        sortedCards.map((card, index) => (
+    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full ">
+      {cards.length > 0 ? (
+        cards.map((card, index) => (
           <div
             key={index}
-            className="card w-[322px] ml-auto mr-auto h-[365px] flex flex-col mt-5 md:mt-0 md:w-[462px]"
+            className="flex flex-col mt-5 md:mt-0 w-full max-w-md mx-auto"
           >
-            <div className="w-full h-[293px] rounded-[32px] flex flex-col relative text-[#FCFCFC]">
+            <div className="relative w-full max-w-[499px] aspect-[499/293] rounded-[32px] overflow-hidden">
               <img
                 src={
                   card.addUserProfileImage ||
-                  "https://img.freepik.com/free-vector/404-error-template-flat-style_23-2147757271.jpg"
+                  "https://kinsta.com/wp-content/uploads/2022/11/react-best-practices.jpg"
                 }
                 alt={card.title}
-                className="w-full h-full rounded-[32px]"
+                className="w-full h-full object-cover"
                 onError={(e) => {
                   e.target.onerror = null;
-                  e.target.src = "path/to/default/image.jpg";
+                  e.target.src =
+                    "https://kinsta.com/wp-content/uploads/2022/11/react-best-practices.jpg";
                 }}
               />
             </div>
-            <div className="w-[302px] bg-white p-4 flex flex-col">
-              <h1
-                className="text-2xl font-bold truncate"
-                style={{
-                  whiteSpace: "nowrap",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                }}
-              >
-                {card.title || "بدون عنوان"}
-              </h1>
-              <div className="flex justify-between items-center mt-2">
-                <h2 className="font-medium text-[#707070]">
+
+            <div className="p-4 flex flex-col w-full">
+              <Link to={`/news-details/${card.id}`}>
+                <h1 className="text-base font-bold truncate">
+                  {card.title || "بدون عنوان"}
+                </h1>
+              </Link>
+
+              <div className="flex items-center justify-between flex-row gap-2 w-full">
+                <h2 className="text-[#707070] text-[14px] font-medium truncate  ">
+
                   {card.addUserFullName || "ناشناس"}
                 </h2>
-                <div className="flex flex-row gap-4">
-                  <p class="mb-3 flex flex-row gap-1 text-nowrap text-[14px] font-yekan-500 text-[#707070] ">
+
+
+                <div className="flex flex-row gap-3 ">
+                  <div className="flex items-center gap-1 text-[14px] text-[#707070] font-yekan-500">
                     {dateModifier(card.insertDate)}
-                    <div className="m-auto">
-                      <Calendar03Icon width={"20px"}height={"20px"} />
-                    </div>
-                  </p>
-                  <p class="mb-3 flex flex-row gap-1 text-nowrap text-[14px] font-yekan-500 text-[#707070] ">
+                    <Calendar03Icon width="18px" height="18px" />
+                  </div>
+                  <div className="flex items-center gap-1 text-[14px] text-[#707070] font-yekan-500">
+
                     {card.currentView}
-                    <div className="m-auto">
-                      <ViewIcon width={"20px"}height={"20px"} />
-                    </div>
-                  </p>
+                    <ViewIcon width="18px" height="18px" />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         ))
       ) : (
-        <div className="col-span-3 text-center">
+        <div className="col-span-full text-center text-gray-600">
           کارتی برای نمایش وجود ندارد.
         </div>
       )}

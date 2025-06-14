@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+
 import { deletelikeBlog, postLikeBlog, postDislikeBlog } from '../../services/api/blogDetail/likeDislikeBlog.js';
 import toast from 'react-hot-toast';
 import { getItem } from '../../utils/storage.services.js';
@@ -29,6 +30,7 @@ export const useLikeBlog = (newsId) => {
   });
 
   return likeMutation;
+
 }
 
 export const useDisLikeBlog = (newsId) => {
@@ -63,7 +65,9 @@ export const useDelLikeBlog = () => {
   const queryClient = useQueryClient();
 
   const deletelikeMutation  = useMutation({
+
       mutationFn: (likeId) => deletelikeBlog(likeId),
+
       onSuccess: () => {
         queryClient.invalidateQueries(['blogDetails']);
       },
@@ -74,4 +78,4 @@ export const useDelLikeBlog = () => {
     
       
 return deletelikeMutation
-}
+

@@ -7,10 +7,12 @@ import useStore from "../../../core/Store/Zustand-Store";
 import { SearchFilter } from "./Search";
 import { CategorySelect } from "./CategorySelect";
 import { DateRangePicker } from "./DateRangePicker";
-import cancel from '../../../assets/cancel.png'
-import filter from '../../../assets/filter.png'
+import cancel from '../../../assets/cancel.png';
+import { useTranslation } from 'react-i18next';
+
 
 function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
+  const { t } = useTranslation('blogList');
   const [priceRangeState, setPriceRangeState] = useState([0, 100000000]);
   const [dateRange, setDateRange] = useState([null, null]);
   const [isFormOpen, setFormOpen] = useState(false);
@@ -34,7 +36,7 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
         );
         return response.data;
       } catch (error) {
-        console.error("خطا در بارگذاری اساتید:", error);
+        console.error(t('errorLoadingCategories'), error); 
         throw error;
       }
     },
@@ -94,9 +96,9 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
     <div>
       <div className="hidden md:block">
         <div
-          className={`w-[278px] h-[665px] border border-[#DCDCDC] rounded-3xl`}
+          className={`w-[278px] h-[370px] border border-[#DCDCDC] rounded-3xl`}
         >
-          <h1 className="font-bold text-2xl mt-4 mr-5">فیلتر</h1>
+          <h1 className="font-bold text-2xl mt-4 mr-5">{t('filter')}</h1> 
           <Formik
             initialValues={{
               search: "",
@@ -132,14 +134,6 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
       </div>
 
       <div className="block md:hidden">
-        <div
-          className="w-[95px] h-[48px] rounded-[40px] bg-[#2F2F2F] flex text-[#FCFCFC] cursor-pointer flex items-center justify-center"
-          onClick={openForm}
-        >
-          <img src={filter}/>
-          <span>فیلتر</span>
-        </div>
-
         {isFormOpen && (
           <div
             ref={modalRef}
@@ -159,15 +153,16 @@ function Filter({ searchTerm, setSearchTerm, setPriceRange }) {
                 onMouseMove={handleMouseMove}
                 onMouseUp={handleMouseUp}
               ></div>
-<div className="flex">
-<h1 className="font-bold text-2xl mb-5 mr-5">فیلتر</h1>
-              <div
-                className="absolute top-8 left-8 cursor-pointer border border-red-500 text-red-500 p-1 rounded-md flex"
-                onClick={closeForm}
-              >
-                <img src={cancel}/>
-                بستن
-              </div></div>
+              <div className="flex">
+                <h1 className="font-bold text-2xl mb-5 mr-5">{t('filter')}</h1> 
+                <div
+                  className="absolute top-8 left-8 cursor-pointer border border-red-500 text-red-500 p-1 rounded-md flex"
+                  onClick={closeForm}
+                >
+                  <img src={cancel} alt={t('close')} /> 
+                  {t('close')} 
+                </div>
+              </div>
 
               <Formik
                 initialValues={{

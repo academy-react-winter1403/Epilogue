@@ -3,10 +3,11 @@ const setItem = (key, value) => {
 };
 
 const getItem = (key) => {
-  const item = localStorage.getItem(key);
-  return item ? item : false;
-};
+  if(localStorage.getItem(key)){
+    return JSON.parse(localStorage.getItem(key))
+  }return false
 
+}
 
 const getItemGeneric = (key) => {
   if (localStorage.getItem(key)) return localStorage.getItem(key);

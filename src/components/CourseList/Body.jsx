@@ -6,6 +6,7 @@ import Pagination from "./Pagination";
 import CardList from "./CardList";
 import Filter from "./Filter/Filter";
 import Sorting from "./Sorting";
+import { useTranslation } from 'react-i18next'; 
 
 const fetchCourses = async (
   pageNumber,
@@ -45,6 +46,8 @@ export function Body() {
   const [selectedInstructor, setSelectedInstructor] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedLevel, setSelectedLevel] = useState(null);
+
+  const { t } = useTranslation('body'); 
 
   const {
     pageNumber,
@@ -88,13 +91,13 @@ export function Body() {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <h1 className="text-xl">در حال بارگذاری...</h1>
+        <h1 className="text-xl">{t('loading')}</h1> 
       </div>
     );
   }
 
   if (error) {
-    return <div>خطا: {error.message}</div>;
+    return <div>{t('error', { message: error.message })}</div>; 
   }
 
   const filteredCards = courses.filter((card) => {
@@ -127,20 +130,18 @@ export function Body() {
   const totalPages = Math.ceil(totalCount / 9);
 
   return (
-    <div className="px-4">
+    <div className="px-10">
       <div className="text-center flex flex-col">
-        <h1 className="text-4xl font-bold">شروع ماجراجویی جدید</h1>
-        <h2 className="text-lg font-medium text-gray-700 mt-6">
-          یک شروع قوی برای یادگیری یک مسئله
-        </h2>
-        <h1>جدید میتونه تو پیشرفت کمکت کنه</h1>
+        <h1 className="text-4xl font-bold">{t('startNewAdventure')}</h1> 
+        <p className="text-lg font-medium text-gray-700 mt-6">
+          {t('strongStart')} 
+        </p>
+        <h1>{t('newTopicProgress')}</h1>
       </div>
-
-
 
       <Sorting />
 
-      <div className="py-4 gap-10 md:flex">
+      <div className="py-4 gap-8 md:flex">
         <Filter
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
@@ -152,7 +153,10 @@ export function Body() {
           setSelectedLevel={setSelectedLevel}
         />
 
+        <div>
         <CardList sortedCards={filteredCards} currentCards={courses} />
+        </div>
+
       </div>
 
       <Pagination
