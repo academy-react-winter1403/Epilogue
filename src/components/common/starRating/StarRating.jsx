@@ -6,13 +6,16 @@ import { toast } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { postCourseRating } from '../../../core/services/api/courseDetail/postCourseRating';
 import { postBlogRating } from '../../../core/services/api/blogDetail/postBlogRating';
+
 import { useTranslation } from 'react-i18next';
 
 const StarRating = ({ itemId, type, initialRating, size, RateNumber, userId }) => {
   const { t } = useTranslation('dashboard'); 
 
   const [rating, setRating] = useState(initialRating);
+
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [initialUserRateNumber, setInitialUserRateNumber] = useState(currentUserRateNumber);
   const navigate = useNavigate();
 
   const sizes = {
@@ -44,8 +47,10 @@ const StarRating = ({ itemId, type, initialRating, size, RateNumber, userId }) =
       ));
       return;
     }
-    try {
+try{
+ 
       setIsSubmitting(true);
+
       await (type === 'course'
         ? postCourseRating(itemId, newRating, RateNumber)
         : postBlogRating(itemId, newRating, RateNumber));
@@ -53,6 +58,7 @@ const StarRating = ({ itemId, type, initialRating, size, RateNumber, userId }) =
       toast.success(t('ratingSaved')); 
     } catch {
       toast.error(t('errorSavingRating')); 
+
     } finally {
       setIsSubmitting(false);
     }

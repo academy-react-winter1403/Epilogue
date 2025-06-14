@@ -130,7 +130,7 @@ export function Body() {
   const totalPages = Math.ceil(totalCount / 9);
 
   return (
-    <div className="px-4">
+    <div className="px-10">
       <div className="text-center flex flex-col">
         <h1 className="text-4xl font-bold">{t('startNewAdventure')}</h1> 
         <p className="text-lg font-medium text-gray-700 mt-6">
@@ -141,7 +141,7 @@ export function Body() {
 
       <Sorting />
 
-      <div className="py-4 gap-10 md:flex">
+      <div className="py-4 gap-8 md:flex">
         <Filter
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
@@ -153,7 +153,10 @@ export function Body() {
           setSelectedLevel={setSelectedLevel}
         />
 
+        <div>
         <CardList sortedCards={filteredCards} currentCards={courses} />
+        </div>
+
       </div>
 
       <Pagination

@@ -24,8 +24,10 @@ const ImageModal = () => {
   const mutation = useMutation({
     mutationFn: addProfileImage,
     onSuccess: () => {
+
       toast.success(t('profileImageAddedSuccess')); // Translated success message
       client.invalidateQueries({ queryKey: ["userInfo2"] }); // Assuming this is the correct query key to invalidate
+
     },
     onError: () => { // Added onError for mutation
       toast.error(t('profileImageAddError')); // Translated error message

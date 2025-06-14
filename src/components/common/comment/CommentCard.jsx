@@ -1,5 +1,6 @@
 import { formatDate } from '../../common/formatDate/formatDate'
 import { CommentLikeDislikeCourse } from '../../courseDetail/commentCourse/CommentLikeDislikeCourse';
+import { CommentLikeDislikeBlog } from '../../blogDetail/commentBlog/CommentLikeDislikeBlog';
 import { motion } from 'framer-motion';
 
 const CommentCard = ({ 
@@ -9,7 +10,7 @@ const CommentCard = ({
 }) => {
   
   return (
-    <div className="flex flex-col gap-5 w-[334px] min-h-[282px] rounded-[24px] bg-gray-100 p-4">
+    <div className="flex flex-col justify-between gap-5 w-[334px] min-h-[282px] rounded-[24px] bg-gray-100 p-4">
       <div className="flex flex-col gap-3 h-[157px]">
         <h3 className="font-bold text-[18px] text-right">
           {comment?.title}
@@ -42,12 +43,28 @@ const CommentCard = ({
           </div>
         </div>
 
-        <CommentLikeDislikeCourse
-          CourseId={id}
-          likeCount={comment?.likeCount || 0}
-          dissLikeCount={comment?.dissLikeCount || 0}
-          userId={comment?.userId}
-        />
+          {isBlog ? (
+             <CommentLikeDislikeBlog
+             id={id}
+             commentId={comment.id} 
+             likeCount={comment?.likeCount || 0}
+             dissLikeCount={comment?.dissLikeCount || 0}
+             userId={comment?.userId}
+             currentUserLikeId={comment?.currentUserLikeId}
+             currentUserIsLike={comment?.currentUserIsLike}
+             currentUserIsDissLike={comment?.currentUserIsDissLike}
+           />
+            ) : (
+              <CommentLikeDislikeCourse
+              id={id}
+              currentUserEmotion={comment?.currentUserEmotion}
+              CourseCommandId={comment?.id}
+              likeCount={comment?.likeCount || 0}
+              dissLikeCount={comment?.disslikeCount || 0}
+              currentUserLikeId={comment?.currentUserLikeId}
+            />
+          )}
+        
       </div>
     </div>
   );

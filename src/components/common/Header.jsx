@@ -10,6 +10,9 @@ import ThemeToggle from "./AnimatedThemeSwitcher";
 import { ColorPickerIcon } from "./Icons/ThemeIcon";
 import ColorThemeModal from "./ThemeModal/ThemeModal";
 import { Link, NavLink } from "react-router-dom";
+import useStore from "../../core/Store/Zustand-Store";
+import { removeItem } from "../../core/utils/storage.services";
+import toast from "react-hot-toast";
 
 import { useTranslation } from 'react-i18next';
 import { AIChatModal, AIChatIcon } from './AIChatModal';
@@ -27,9 +30,20 @@ const LanguageIcon = () => (
 );
 
 const Header = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const { data: userInfo } = useQuery({
     queryKey: ["userInfo"],
-    queryFn: getUserInfo,
+    queryFn: async () => {
+      const result = await getUserInfo()
+      if(!result.currentPictureAddress){
+        toast('parsa ')
+        removeItem('token')
+      }else{
+        setIsLoggedIn(true)
+      }
+      return result
+    } ,
   });
   const [isColorModalOpen, setIsColorModalOpen] = useState(false);
   const [isAIChatModalOpen, setIsAIChatModalOpen] = useState(false);
@@ -38,12 +52,10 @@ const Header = () => {
   const [isLanguageDropdownOpen, setLanguageDropdownOpen] = useState(false);
   const languageDropdownRef = useRef(null);
 
+
   const { t, i18n } = useTranslation('common');
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    setIsLoggedIn(!!token);
-  }, []);
+
 
   useEffect(() => {
     const handleClickOutsideLanguage = (event) => {
@@ -78,6 +90,7 @@ const Header = () => {
           <div className="m-auto mx-[235px] items-center justify-center hidden lg:flex lg:gap-x-8 bg-[#2F2F2F] rounded-[56px] pl-1 pr-[24px] py-[5px]">
             <NavLink
               to="/"
+
               className={({ isActive }) =>
                 `relative text-[16px] text-white flex flex-col items-center ${
                   isActive ? "after:block" : "after:hidden"
@@ -90,6 +103,7 @@ const Header = () => {
 
             <NavLink
               to="/CourseList"
+
               className={({ isActive }) =>
                 `relative text-white flex flex-col items-center ${
                   isActive ? "after:block" : "after:hidden"
@@ -102,6 +116,7 @@ const Header = () => {
 
             <NavLink
               to="/BlogeList"
+
               className={({ isActive }) =>
                 `relative text-white flex flex-col items-center ${
                   isActive ? "after:block" : "after:hidden"
@@ -123,6 +138,7 @@ const Header = () => {
             ) : (
               <Link
                 to="/auth/RegisterPage"
+
                 className="text-sm/6 text-[#FCFCFC] bg-[#3772FF] rounded-[56px] px-5 py-[8px]"
               >
                 {t('registerOrLogin')}

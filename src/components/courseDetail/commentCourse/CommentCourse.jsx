@@ -1,14 +1,15 @@
 import React from 'react'
 import { CommentSection } from '../../common/comment/CommentSection.jsx'
 import { useGetCommentCourse, usePostCommentCourse, usePostCommentReply, useGetCommentReplies } from '../../../core/hooks/courseHooks/useCommentCourse'
+import toast from 'react-hot-toast';
 
 const CommentCourse = ({CourseId, course}) => {
 
-        const getComment = useGetCommentCourse(CourseId)
-        const postComment = usePostCommentCourse()
-        const postReply = usePostCommentReply()
-        const getReplies = useGetCommentReplies
-        console.log('Comments data:', getComment?.data);
+    const getComment = useGetCommentCourse(CourseId)
+    const postComment = usePostCommentCourse()
+    const postReply = usePostCommentReply()
+    const getReplies = useGetCommentReplies
+               
   return (
     <div>
       <CommentSection

@@ -13,17 +13,16 @@ const BestBlogs = ({ data }) => {
   } = data;
   return (
     <div>
-      <div class="max-w-[431px] text-black rounded-lg ">
+      <div class="max-w-[431px]  rounded-lg ">
         <div class=" h-[293px]">
           <img
             className="rounded-[32px] w-full h-full"
-            src={addUserProfileImage}
-            alt=""
+            src={addUserProfileImage || "این بلاگ بدون عکس میباشد"}
           />
         </div>
 
         <div class="p-5">
-          <h5 class="mb-1 font-yekan-700 text-[24px] font-bold tracking-tight text-nowrap text-gray-900">
+          <h5 class="mb-1 truncate font-yekan-700 text-[24px] font-bold tracking-tight text-nowrap text-gray-900">
             {title}
           </h5>
           <div className="gap-[156px] lg:gap-[116px] flex flex-row">
