@@ -2,7 +2,6 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-
 import authEn from './app/layout/locales/en/auth.json';
 import authFa from './app/layout/locales/fa/auth.json';
 
@@ -10,7 +9,7 @@ import dashboardEn from './app/layout/locales/en/dashboard.json';
 import dashboardFa from './app/layout/locales/fa/dashboard.json';
 
 import enCommon from './app/layout/locales/en/Header.json';
-import faCommon from './app/layout/locales/fa/Header.json';
+import faCommon from './app/layout/locales/fa/Header.json'; 
 
 import enFirstSection from './app/layout/locales/en/firstSection.json';
 import faFirstSection from './app/layout/locales/fa/firstSection.json';
@@ -49,6 +48,9 @@ import enAiChat from './app/layout/locales/en/aiChat.json';
 import faAiChat from './app/layout/locales/fa/aiChat.json';
 
 
+import multiAccountEn from './app/layout/locales/en/multiAccount.json';
+import multiAccountFa from './app/layout/locales/fa/multiAccount.json';
+
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
@@ -56,7 +58,7 @@ i18n
     debug: true,
     fallbackLng: 'fa',
     interpolation: {
-      escapeValue: false,
+      escapeValue: false, 
     },
     resources: {
       en: {
@@ -74,9 +76,8 @@ i18n
         filter: enFilter,
         courseDetail: enCourseDetail,
         blogList: enBlogList,
- 
         aiChat: enAiChat,
-
+        multiAccount: multiAccountEn, 
       },
       fa: {
         auth: authFa,
@@ -93,9 +94,8 @@ i18n
         filter: faFilter,
         courseDetail: faCourseDetail,
         blogList: faBlogList,
-
         aiChat: faAiChat,
-
+        multiAccount: multiAccountFa,
       },
     },
     ns: [
@@ -114,7 +114,7 @@ i18n
       'courseDetail',
       'blogList',
       'aiChat',
-
+      'multiAccount', 
     ],
     defaultNS: 'common',
     detection: {

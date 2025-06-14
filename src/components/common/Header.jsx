@@ -15,7 +15,8 @@ import { removeItem } from "../../core/utils/storage.services";
 import toast from "react-hot-toast";
 
 import { useTranslation } from 'react-i18next';
-import { AIChatModal, AIChatIcon } from './AIChatModal'; 
+import { AIChatModal, AIChatIcon } from './AIChatModal';
+import MultiAccountDropdown from './MultiAccountDropdown'; 
 
 const LanguageIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-languages">
@@ -27,7 +28,6 @@ const LanguageIcon = () => (
     <path d="M14 18h6" />
   </svg>
 );
-
 
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -48,48 +48,25 @@ const Header = () => {
   const [isColorModalOpen, setIsColorModalOpen] = useState(false);
   const [isAIChatModalOpen, setIsAIChatModalOpen] = useState(false);
 
-  const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLanguageDropdownOpen, setLanguageDropdownOpen] = useState(false);
+  const languageDropdownRef = useRef(null);
 
-  const { t, i18n } = useTranslation('common'); 
 
-  const languageDropdownContentRef = useRef(null);
-
-  const [themeColor, setThemeColor] = useState('#3772FF');
+  const { t, i18n } = useTranslation('common');
 
 
 
   useEffect(() => {
-    if (!languageDropdownContentRef.current) return;
-
-    if (isDropdownOpen) {
-      languageDropdownContentRef.current.style.display = 'block';
-      gsap.fromTo(languageDropdownContentRef.current,
-        { opacity: 0, scaleY: 0, transformOrigin: 'top center' },
-        { duration: 0.3, opacity: 1, scaleY: 1, ease: "power2.out" }
-      );
-    } else {
-      gsap.to(languageDropdownContentRef.current,
-        {
-          duration: 0.2, opacity: 0, scaleY: 0, ease: "power2.in", onComplete: () => {
-            if (languageDropdownContentRef.current) {
-              languageDropdownContentRef.current.style.display = 'none';
-            }
-          }
-        }
-      );
-    }
-  }, [isDropdownOpen]);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setDropdownOpen(false);
+    const handleClickOutsideLanguage = (event) => {
+      if (languageDropdownRef.current && !languageDropdownRef.current.contains(event.target)) {
+        setLanguageDropdownOpen(false);
       }
     };
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutsideLanguage);
+
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutsideLanguage);
     };
   }, []);
 
@@ -97,7 +74,7 @@ const Header = () => {
     i18n.changeLanguage(lng);
     document.documentElement.lang = lng;
     document.documentElement.dir = (lng === 'fa') ? 'rtl' : 'ltr';
-    setDropdownOpen(false);
+    setLanguageDropdownOpen(false);
   };
 
   return (
@@ -182,7 +159,6 @@ const Header = () => {
             isOpen={isColorModalOpen}
             onClose={() => setIsColorModalOpen(false)}
             onSelect={(color) => {
-              setThemeColor(color);
               setIsColorModalOpen(false);
             }}
           />
@@ -192,7 +168,7 @@ const Header = () => {
 
           <button
             className="rounded-full w-[48px] h-[48px] border border-[#DCDCDC] text-black flex items-center justify-center bg-[#2F2F2F] text-white"
-            onClick={() => setIsAIChatModalOpen(true)} 
+            onClick={() => setIsAIChatModalOpen(true)}
           >
             <AIChatIcon />
           </button>
@@ -201,42 +177,41 @@ const Header = () => {
             onClose={() => setIsAIChatModalOpen(false)}
           />
 
-          <div className="relative" ref={dropdownRef}>
+          <MultiAccountDropdown />
+
+          <div className="relative" ref={languageDropdownRef}>
             <button
               className="rounded-full w-[48px] h-[48px] border border-[#DCDCDC] text-black flex items-center justify-center bg-[#2F2F2F] text-white"
-              onClick={() => setDropdownOpen((prev) => !prev)}
-              aria-expanded={isDropdownOpen}
+              onClick={() => setLanguageDropdownOpen((prev) => !prev)}
+              aria-expanded={isLanguageDropdownOpen}
               aria-haspopup="true"
             >
               <LanguageIcon />
             </button>
-            <div
-              ref={languageDropdownContentRef}
-              className="absolute bg-white dark:bg-gray-800 text-gray-800 dark:text-white rounded-md shadow-lg py-2 mt-2"
-              style={{
-                zIndex: 100,
-                minWidth: '120px',
-                [i18n.language === 'fa' ? 'left' : 'right']: 0,
-                [i18n.language === 'fa' ? 'right' : 'left']: 'auto',
-                opacity: 0,
-                transform: 'scaleY(0)',
-                transformOrigin: 'top center',
-                display: 'none'
-              }}
-            >
+            {isLanguageDropdownOpen && (
               <div
-                className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
-                onClick={() => changeLanguage('fa')}
+                className="absolute bg-white dark:bg-gray-800 text-gray-800 dark:text-white rounded-md shadow-lg py-2 mt-2"
+                style={{
+                  zIndex: 100,
+                  minWidth: '120px',
+                  [i18n.language === 'fa' ? 'left' : 'right']: 0,
+                  [i18n.language === 'fa' ? 'right' : 'left']: 'auto',
+                }}
               >
-                {t('farsi')}
+                <div
+                  className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
+                  onClick={() => changeLanguage('fa')}
+                >
+                  {t('farsi')}
+                </div>
+                <div
+                  className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
+                  onClick={() => changeLanguage('en')}
+                >
+                  {t('english')}
+                </div>
               </div>
-              <div
-                className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
-                onClick={() => changeLanguage('en')}
-              >
-                {t('english')}
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
