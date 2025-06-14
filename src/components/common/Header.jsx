@@ -42,7 +42,7 @@ const SuggestedPagesIcon = () => (
     <path d="M16 16.5A4.8 4.8 0 0 0 17 18c1.3.4 2.5 1 3.5 1.7" />
   </svg>
 );
-const Header = ({ openSuggestedPagesModal, isSuggestedPagesModalOpen }) => {
+const Header = ({ openSuggestedPagesModal, isSuggestedPagesModalOpen ,isLoggedIn}) => {
 
   const { data: userInfo } = useQuery({
     queryKey: ["userInfo"],
