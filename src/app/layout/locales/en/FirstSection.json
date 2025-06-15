@@ -14,6 +14,7 @@
   "rapidProgress": "Rapid Progress",
   "academyName": "Bahr Specialized Programming Education Academy",
   "ageRange": "From children to adults",
-  "startLearningNow": "Start learning now!",
-  "latestCourses": "Latest Courses"
+  "startLearningNow": "right now",
+  "latestCourses": "Latest Courses",
+  "startLearningPhrase":"startLearningPhrase!"
 }
