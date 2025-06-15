@@ -211,7 +211,7 @@ const Header = ({ openSuggestedPagesModal, isSuggestedPagesModalOpen }) => {
             {isLoggedIn ? (
               <Link to={"/StudentPanel/edite-profile/profile-info"}>
                 <img
-                  className="size-full rounded-full w-12 border h-12"
+                  className="size-full rounded-full p-6 w-12 border h-12"
                   src={userInfo?.currentPictureAddress}
                   alt={t("profilePicture")}
                 ></img>
