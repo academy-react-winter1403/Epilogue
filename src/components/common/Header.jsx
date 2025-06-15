@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { gsap } from "gsap"; 
+import { gsap } from "gsap";
 import h1 from "../../assets/img/h1.svg";
 import bahr from "../../assets/img/bahr.svg";
 import Menu from "./Menu";
@@ -14,7 +14,6 @@ import { Link, NavLink } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { AIChatModal, AIChatIcon } from './AIChatModal';
 import MultiAccountDropdown from './MultiAccountDropdown';
-
 const LanguageIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-languages">
     <path d="m5 8 6 6" />
@@ -25,6 +24,7 @@ const LanguageIcon = () => (
     <path d="M14 18h6" />
   </svg>
 );
+
 const SuggestedPagesIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-lightbulb">
     <path d="M15 14c.2-1 .7-2 1.5-3a4.8 4.8 0 0 0-3.5-3.5c-1-.8-2-1.3-3-1.5" />
@@ -38,17 +38,38 @@ const SuggestedPagesIcon = () => (
     <path d="M16 16.5A4.8 4.8 0 0 0 17 18c1.3.4 2.5 1 3.5 1.7" />
   </svg>
 );
+
+const ThreeDotsIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-more-horizontal">
+    <circle cx="12" cy="12" r="1" />
+    <circle cx="19" cy="12" r="1" />
+    <circle cx="5" cy="12" r="1" />
+  </svg>
+);
+const UserAccountIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-user">
+    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+    <circle cx="12" cy="7" r="4" />
+  </svg>
+);
+
+
 const Header = ({ openSuggestedPagesModal, isSuggestedPagesModalOpen }) => {
   const { data: userInfo } = useQuery({
     queryKey: ["userInfo"],
     queryFn: getUserInfo,
   });
+
   const [isColorModalOpen, setIsColorModalOpen] = useState(false);
   const [isAIChatModalOpen, setIsAIChatModalOpen] = useState(false);
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLanguageDropdownOpen, setLanguageDropdownOpen] = useState(false);
+  const [isMoreDropdownOpen, setIsMoreDropdownOpen] = useState(false);
+  const [isMultiAccountOpen, setIsMultiAccountOpen] = useState(false); 
+
   const languageDropdownRef = useRef(null);
+  const moreDropdownRef = useRef(null);
+  const moreDropdownContentRef = useRef(null);
 
   const { t, i18n } = useTranslation('common');
 
@@ -58,17 +79,35 @@ const Header = ({ openSuggestedPagesModal, isSuggestedPagesModalOpen }) => {
   }, []);
 
   useEffect(() => {
-    const handleClickOutsideLanguage = (event) => {
+    const handleClickOutside = (event) => {
       if (languageDropdownRef.current && !languageDropdownRef.current.contains(event.target)) {
         setLanguageDropdownOpen(false);
       }
+      if (moreDropdownRef.current && !moreDropdownRef.current.contains(event.target)) {
+        setIsMoreDropdownOpen(false);
+      }
     };
-    document.addEventListener("mousedown", handleClickOutsideLanguage);
+    document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutsideLanguage);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    if (moreDropdownContentRef.current) {
+      if (isMoreDropdownOpen) {
+        gsap.fromTo(moreDropdownContentRef.current,
+          { opacity: 0, y: -10, scaleY: 0.8, transformOrigin: "top" },
+          { opacity: 1, y: 0, scaleY: 1, duration: 0.2, ease: "power2.out", display: "block" }
+        );
+      } else {
+        gsap.to(moreDropdownContentRef.current,
+          { opacity: 0, y: -10, scaleY: 0.8, duration: 0.2, ease: "power2.in", transformOrigin: "top", display: "none" }
+        );
+      }
+    }
+  }, [isMoreDropdownOpen]);
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
@@ -151,14 +190,76 @@ const Header = ({ openSuggestedPagesModal, isSuggestedPagesModalOpen }) => {
             <SuggestedPagesIcon />
           </button>
 
-          <button
-            className="rounded-full w-[48px] h-[48px] border border-[#DCDCDC] text-black"
-            onClick={() => setIsColorModalOpen((prev) => !prev)}
-          >
-            <div className="flex items-center justify-center">
-              <ColorPickerIcon color={"#000"} />
-            </div>
+          <button className="rounded-full p-3 bg-[#2F2F2F]">
+            <ThemeToggle />
           </button>
+          <div className="relative" ref={moreDropdownRef}>
+            <button
+              className="rounded-full w-[48px] h-[48px] border border-[#DCDCDC] text-black flex items-center justify-center bg-[#2F2F2F] text-white"
+              onClick={() => setIsMoreDropdownOpen((prev) => !prev)}
+              title="بیشتر"
+            >
+              <ThreeDotsIcon />
+            </button>
+            <div
+              ref={moreDropdownContentRef}
+              className={`absolute bg-white dark:bg-gray-800 text-gray-800 dark:text-white rounded-md shadow-lg py-2 mt-2
+                         ${isMoreDropdownOpen ? "block" : "hidden"}
+                         ${i18n.language === 'fa' ? 'left-0' : 'right-0'}`}
+              style={{ zIndex: 100, minWidth: '160px' }}
+            >
+
+              <div
+                className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer flex items-center gap-3 transition-colors"
+                onClick={() => { setIsAIChatModalOpen(true); setIsMoreDropdownOpen(false); }}
+              >
+                <AIChatIcon />
+                <span>{t('aichat')}</span>
+              </div>
+              <div
+                className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer flex items-center gap-3 transition-colors"
+                onClick={() => { setIsMultiAccountOpen(true); setIsMoreDropdownOpen(false); }}
+              >
+                <UserAccountIcon /> 
+                <span>{t('multyi')}</span>
+              </div>
+              <div className="relative" ref={languageDropdownRef}>
+                <div
+                  className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer flex items-center gap-3 transition-colors"
+                  onClick={() => setLanguageDropdownOpen((prev) => !prev)}
+                  aria-expanded={isLanguageDropdownOpen}
+                  aria-haspopup="true"
+                >
+                  <LanguageIcon />
+                  <span>{t('language')}</span>
+                </div>
+                {isLanguageDropdownOpen && (
+                  <div
+                    className={`absolute bg-white dark:bg-gray-800 text-gray-800 dark:text-white rounded-md shadow-lg py-2
+                               ${i18n.language === 'fa' ? 'left-full top-0 ml-2' : 'right-full top-0 mr-2'}`}
+                    style={{ zIndex: 101, minWidth: '120px' }}
+                  >
+                    <div
+                      className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors"
+                      onClick={() => changeLanguage('fa')}
+                    >
+                      {t('farsi')}
+                    </div>
+                    <div
+                      className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors"
+                      onClick={() => changeLanguage('en')}
+                    >
+                      {t('english')}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+          <AIChatModal
+            isOpen={isAIChatModalOpen}
+            onClose={() => setIsAIChatModalOpen(false)}
+          />
           <ColorThemeModal
             isOpen={isColorModalOpen}
             onClose={() => setIsColorModalOpen(false)}
@@ -166,60 +267,22 @@ const Header = ({ openSuggestedPagesModal, isSuggestedPagesModalOpen }) => {
               setIsColorModalOpen(false);
             }}
           />
-          <button className="rounded-full p-3 bg-[#2F2F2F]">
-            <ThemeToggle />
-          </button>
-
-          <button
-            className="rounded-full w-[48px] h-[48px] border border-[#DCDCDC] text-black flex items-center justify-center bg-[#2F2F2F] text-white"
-            onClick={() => setIsAIChatModalOpen(true)}
-          >
-            <AIChatIcon />
-          </button>
-          <AIChatModal
-            isOpen={isAIChatModalOpen}
-            onClose={() => setIsAIChatModalOpen(false)}
-          />
-
-          <MultiAccountDropdown />
-
-          <div className="relative" ref={languageDropdownRef}>
-            <button
-              className="rounded-full w-[48px] h-[48px] border border-[#DCDCDC] text-black flex items-center justify-center bg-[#2F2F2F] text-white"
-              onClick={() => setLanguageDropdownOpen((prev) => !prev)}
-              aria-expanded={isLanguageDropdownOpen}
-              aria-haspopup="true"
-            >
-              <LanguageIcon />
-            </button>
-            {isLanguageDropdownOpen && (
-              <div
-                className="absolute bg-white dark:bg-gray-800 text-gray-800 dark:text-white rounded-md shadow-lg py-2 mt-2"
-                style={{
-                  zIndex: 100,
-                  minWidth: '120px',
-                  [i18n.language === 'fa' ? 'left' : 'right']: 0,
-                  [i18n.language === 'fa' ? 'right' : 'left']: 'auto',
-                }}
-              >
-                <div
-                  className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
-                  onClick={() => changeLanguage('fa')}
-                >
-                  {t('farsi')}
-                </div>
-                <div
-                  className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer"
-                  onClick={() => changeLanguage('en')}
-                >
-                  {t('english')}
-                </div>
+          {isMultiAccountOpen && (
+              <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[1000]">
+                  <div className="bg-white p-6 rounded-lg shadow-lg dark:bg-gray-700 dark:text-white">
+                      <h3 className="text-xl font-bold mb-4">{t('multiAccountTitle')}</h3>
+                      <MultiAccountDropdown onClose={() => setIsMultiAccountOpen(false)} />
+                      <button
+                          onClick={() => setIsMultiAccountOpen(false)}
+                          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                      >
+                          {t('close')}
+                      </button>
+                  </div>
               </div>
-            )}
-          </div>
+          )}
         </div>
       </div>
-
       <Menu />
     </div>
   );

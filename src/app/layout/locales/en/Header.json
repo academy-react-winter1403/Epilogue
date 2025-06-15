@@ -12,5 +12,10 @@
   "profilePicture": "Profile Picture",
   "registerOrLogin": "Register or Login",
   "english": "English",
-  "farsi": "Farsi"
+  "farsi": "Farsi",
+  "aichat":"aiChat",
+  "multyi":"multyiAccount",
+  "language":"language",
+  "suggested":"suggested",
+  "info":"Theres still no information to show or there is not enough time to visit pages"
 }
