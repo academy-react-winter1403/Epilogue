@@ -5,6 +5,7 @@ import { ThumbsUpIcon } from "../../common/Icons/LikeIcon";
 import { ThumbsDownIcon } from "../../common/Icons/DisLikeIcon";
 
 const CommentModal = ({ isOpen, onClose, courseComments, blogComments }) => {
+
   const [activeTab, setActiveTab] = useState("course");
 
   const comments = activeTab === "course" ? courseComments : blogComments;

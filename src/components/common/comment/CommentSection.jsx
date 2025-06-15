@@ -35,16 +35,16 @@ const CommentSection = ({
   const { mutate: addComment, isPending: isCommentPending } = postComment || {};
   const { mutate: addReply, isPending: isReplyPending } = postReply || {};
 
-  const toggleCommentExpansion = (commentId) => {
+  // const toggleCommentExpansion = (commentId) => {
 
-    setExpandedCommentId(prev => {
-      if (prev === commentId) {
-        setReplyingTo(null);
-        return null;
-      }
-      return commentId;
-    });
-  }
+  //   setExpandedCommentId(prev => {
+  //     if (prev === commentId) {
+  //       setReplyingTo(null);
+  //       return null;
+  //     }
+  //     return commentId;
+  //   });
+  // }
 
 
   const startReply = (commentId) => {

@@ -66,7 +66,7 @@ const WelcomeUser = () => {
           <p className="text-2xl text-nowrap font-yekan-700">
             {t('hello')} {userInfo?.fName} , {dateTime.greeting}👋
           </p>
-          <p className="text-[14px] text-nowrap text-[#707070] font-yekan-500 pt-2">
+          <p className="text-[14px]  text-nowrap text-[#707070] font-yekan-500 pt-2">
             {t('hopeYouHaveAGoodDay')}
           </p>
         </div>
