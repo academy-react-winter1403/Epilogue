@@ -12,6 +12,7 @@ const DashboardTable = ({ showIcon, searchTerm }) => {
     queryKey: ["myCourses"],
     queryFn: getMyCourses,
   });
+  console.log(myCourses?.listOfMyCourses , "myCourses?.listOfMyCourses")
 
   // const [filteredCourses, setfilteredCourses] = useState([]);
   const [selectedCourse, setSelectedCourse] = useState(null);
