@@ -21,9 +21,5 @@
   "loadingRelatedCourses": "Loading related courses...",
   "errorLoadingRelatedCourses": "Error loading related courses",
   "relatedCourses": "Related Courses",
-   "summarizeWithAI": "Summarize with AI",
-  "generatingSummary": "Generating summary...",
-  "aiSummaryTitle": "AI-Generated Summary:",
-  "summaryGenerationError": "Error generating summary. Please try again.",
   "courseImage": "Course Image"
 }
