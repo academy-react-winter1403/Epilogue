@@ -36,6 +36,7 @@ const UserInfo = () => {
   });
 
   const userProfile = useUserStore((state) => state.userProfile);
+
   const editUserProfile = async (values) => {
     const userProfileInfo = new FormData();
     const birthdayFormatted = values.birthday instanceof Date
