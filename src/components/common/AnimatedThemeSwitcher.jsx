@@ -6,7 +6,7 @@ const ThemeToggle = () => {
   
   const getInitialTheme = () => {
     const saved = localStorage.getItem("theme");
-    // if (saved) return JSON.parse(saved);
+    if (saved) return JSON.parse(saved);
 
     const hour = new Date().getHours();
     const isDayTime = hour >= 7 && hour <= 19;
