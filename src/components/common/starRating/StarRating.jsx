@@ -12,7 +12,9 @@ import { useTranslation } from 'react-i18next';
 const StarRating = ({ itemId, type, initialRating, size, RateNumber, userId }) => {
   const { t } = useTranslation('dashboard'); 
 
+
   const [rating, setRating] = useState(initialRating);
+
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [initialUserRateNumber, setInitialUserRateNumber] = useState(currentUserRateNumber);
@@ -23,6 +25,8 @@ const StarRating = ({ itemId, type, initialRating, size, RateNumber, userId }) =
     md: { maxWidth: 150 },
     lg: { maxWidth: 200 }
   };
+
+  
 
   const handleRatingChange = async (newRating) => {
     if (!userId || userId === 0 || userId === false) {
@@ -48,6 +52,7 @@ const StarRating = ({ itemId, type, initialRating, size, RateNumber, userId }) =
       return;
     }
 try{
+  
  
       setIsSubmitting(true);
 
@@ -59,6 +64,7 @@ try{
     } catch {
       toast.error(t('errorSavingRating')); 
 
+
     } finally {
       setIsSubmitting(false);
     }
@@ -66,7 +72,7 @@ try{
 
   return (
     <Rating
-      value={rating}
+      value={initialUserRateNumber}
       onChange={handleRatingChange}
       items={5}
       radius="full"
@@ -76,9 +82,12 @@ try{
         activeFillColor: '#fbbf24',
         inactiveFillColor: '#e5e7eb'
       }}
-      disabled={isSubmitting}
+      disabled={isSubmitting || initialUserRateNumber > 0}
+      readOnly={initialUserRateNumber > 0}
+      disableFillHover={true}
     />
   );
 };
 
-export { StarRating };
+export { StarRating }
+

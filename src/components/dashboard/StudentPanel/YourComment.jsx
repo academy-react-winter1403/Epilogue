@@ -9,12 +9,16 @@ import {
 import dateModifier from "../../../core/utils/dateModifier";
 import CommentModal from "./CommentModal";
 import { UserAiIcon } from "../../common/Icons/UserIcon";
+import { useTranslation } from 'react-i18next'; 
+
 
 const YourComment = () => {
   const [comments, setComments] = useState([]);
   const [courseComments, setCourseComments] = useState([]);
   const [blogComments, setBlogComments] = useState([]);
   const [open, setOpen] = useState(false);
+    const { t } = useTranslation('dashboard');
+  
 
   const fetchAllComments = async () => {
     try {
@@ -47,12 +51,13 @@ const YourComment = () => {
     <>
       <div className="max-w-md mx-auto h-[487px] p-1 flex flex-col">
         <div className="justify-between items-center flex flex-row text-nowrap text-[14px] font-yekan-600 px-4 py-2">
-          <p>نظرات شما</p>
+          {/* <p>نظرات شما</p> */}
+          <p>{t('yourComments')}</p>
           <div
             className="text-[#3772FF] flex flex-row gap-1 "
             onClick={() => setOpen(true)}
           >
-            مشاهده بیشتر
+            {t('viewMore')}
             <ArrowLeft01Icon color={"#3772FF"} />
             <CommentModal
               isOpen={open}
@@ -74,7 +79,7 @@ const YourComment = () => {
         <div className="flex-1 overflow-y-scroll space-y-4 pr-2">
           {comments?.map((item, i) => (
             <div key={i} className=" pb-3 ">
-              <div className="flex items-center gap-2 mb-1">
+              <div className="flex items-center gap-2 mb-3">
                 <div className="w-10 h-10 rounded-full bg-pink-200 flex items-center justify-center text-lg">
                   {/* <UserSquareIcon/> */}
                   <UserAiIcon/>

@@ -1,11 +1,11 @@
 import { useFavoriteMutation } from "../../core/hooks/blogHooks/useFavoriteMutation";
 import { AddFavorites } from "../common/AddFavorites";
 
-const BlogFavorite = ({newsId,isFav}) => {
-  const favMutate = useFavoriteMutation(newsId, isFav);
+const BlogFavorite = ({newsId, isFav, currentUserFavoriteId}) => {
+  const favMutate = useFavoriteMutation(newsId, isFav , currentUserFavoriteId);
 
   return (
-    <AddFavorites isFav={isFav} newsId={newsId} mutation={favMutate}/>
+    <AddFavorites isFav={isFav} newsId={newsId} mutation={favMutate} currentUserFavoriteId={currentUserFavoriteId} />
   )
 }
 

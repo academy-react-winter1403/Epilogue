@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { useTranslation } from 'react-i18next'; 
 import { BlogFavorite } from "./BlogFavorite"; 
@@ -5,6 +6,7 @@ import { CopyUrlButton } from "../common/copyUrl/CopyUrlButton";
 import { LikeDislikeBlog } from "./LikeDislikeBlog"; 
 import { AverageRating } from "../common/starRating/AverageRating";
 import { formatDate } from "../common/formatDate/formatDate"; 
+
 
 const DetailBlogBox = ({ newsId, blog }) => {
   const { t } = useTranslation('blogList');
@@ -81,8 +83,12 @@ const DetailBlogBox = ({ newsId, blog }) => {
             <div className="md:pr-8 pr-5 pt-2 md:mr-[15px] w-[58px] h-[20px] font-dana font-medium text-[14px] leading-[100%] tracking-[0%] text-right text-gray-800 whitespace-nowrap">
               {t('dislikeCount')} {/* Translated: تعداد دیسلایک */}
             </div>
-            <div className="md:pr-8 pr-5 pt-2 md:mr-[15px] w-[96px] h-[23px] font-dana font-medium text-[16px] leading-[100%] tracking-[0%] text-right text-black whitespace-nowrap">
-              {blog?.detailsNewsDto?.currentDissLikeCount}
+            
+            <div className='w-full flex gap-2 items-center justify-center'>
+                <div className='hidden md:block'> <CopyUrlButton/> </div>
+                <BlogFavorite newsId={newsId} isFav={blog?.detailsNewsDto?.isCurrentUserFavorite} currentUserFavoriteId={blog?.detailsNewsDto?.currentUserFavoriteId} />
+                <LikeDislikeBlog likeId={blog?.detailsNewsDto?.likeId} newsId={newsId} currentLikeCount={blog?.detailsNewsDto?.currentUserIsLike} currentDissLikeCount={blog?.detailsNewsDto?.currentUserIsDissLike } />
+
             </div>
           </div>
         </div>

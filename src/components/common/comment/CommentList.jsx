@@ -2,7 +2,11 @@ import { motion } from 'framer-motion';
 import { NewCommentForm } from './NewComponentForm';
 import { formatDate } from '../../common/formatDate/formatDate';
 import { CommentLikeDislikeCourse } from '../../courseDetail/commentCourse/CommentLikeDislikeCourse';
+
+import { CommentLikeDislikeBlog } from '../../blogDetail/commentBlog/CommentLikeDislikeBlog';
+
 import { useTranslation } from 'react-i18next';
+
 
 
 const CommentList = ({
@@ -68,11 +72,27 @@ const CommentList = ({
   }) => (
     <div className="flex flex-col md:flex-row items-start md:items-center gap-2 mt-2 w-full">
 
-     <CommentLikeDislikeCourse
-       CourseId={id}
-       likeCount={contentId?.likeCount || 0}
-       dissLikeCount={contentId?.dissLikeCount || 0}
-     />
+        {isBlog ? (
+          <CommentLikeDislikeBlog
+            id={id}
+            commentId={commentId}
+            likeCount={comment?.likeCount || 0}
+            dissLikeCount={comment?.dissLikeCount || 0}
+            currentUserLikeId={comment?.currentUserLikeId}
+            currentUserIsLike={comment?.currentUserIsLike}
+            currentUserIsDissLike={comment?.currentUserIsDissLike}
+          />
+        ) : (
+          <CommentLikeDislikeCourse
+            id={id}
+            commentId={commentId}
+            likeCount={comment?.likeCount || 0}
+            dissLikeCount={comment?.dissLikeCount || 0}
+            currentUserLikeId={comment?.currentUserLikeId}
+            currentUserIsLike={comment?.currentUserIsLike}
+            currentUserIsDissLike={comment?.currentUserIsDissLike}
+          />
+        )}
 
 
       {replyingTo === commentId ? (
@@ -132,14 +152,30 @@ const CommentList = ({
                 </div>
               </div>
 
-            
-                <CommentLikeDislikeCourse
-                  CourseId={id}
-                  likeCount={reply?.likeCount || 0}
-                  dissLikeCount={reply?.dissLikeCount || 0}
-                  userId={reply?.userId}
-                  compact
-                />
+           
+                {isBlog ? (
+                   <CommentLikeDislikeBlog
+                   id={id}
+                   commentId={reply.id}
+                   likeCount={reply?.likeCount || 0}
+                   dissLikeCount={reply?.dissLikeCount || 0}
+                   userId={reply?.userId}
+                   currentUserLikeId={reply?.currentUserLikeId}
+                   currentUserIsLike={reply?.currentUserIsLike}
+                   currentUserIsDissLike={reply?.currentUserIsDissLike}
+                   compact
+                 />
+                  ) : (
+                  <CommentLikeDislikeCourse
+                    id={id}
+                    commentId={commentId}
+                    likeCount={reply?.likeCount || 0}
+                    dissLikeCount={reply?.dissLikeCount || 0}
+                    currentUserLikeId={reply?.currentUserLikeId}
+                    currentUserIsLike={reply?.currentUserIsLike}
+                    currentUserIsDissLike={reply?.currentUserIsDissLike}
+                  />
+                  )}
 
             </div>
             <p className="font-DanaFaNum text-sm text-right mt-2 pr-2">
@@ -179,10 +215,12 @@ const CommentList = ({
                 startReply={startReply}
                 handleReplySubmit={handleReplySubmit}
 
+
                 replyTitle={replyTitle}
                 setReplyTitle={setReplyTitle}
                 replyContent={replyContent}
                 setContent={setReplyContent}
+
 
                 isPending={isPending}
                 isBlog={isBlog}
