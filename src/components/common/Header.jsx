@@ -11,12 +11,23 @@ import { ColorPickerIcon } from "./Icons/ThemeIcon";
 import ColorThemeModal from "./ThemeModal/ThemeModal";
 import { Link, NavLink } from "react-router-dom";
 
-import { useTranslation } from 'react-i18next';
-import { AIChatModal, AIChatIcon } from './AIChatModal';
-import MultiAccountDropdown from './MultiAccountDropdown'; 
+import { useTranslation } from "react-i18next";
+import { AIChatModal, AIChatIcon } from "./AIChatModal";
+import MultiAccountDropdown from "./MultiAccountDropdown";
 
 const LanguageIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-languages">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="lucide lucide-languages"
+  >
     <path d="m5 8 6 6" />
     <path d="m4 14 6-6 2-3" />
     <path d="M2 5h12" />
@@ -27,7 +38,16 @@ const LanguageIcon = () => (
 );
 
 const SuggestedPagesIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-lightbulb">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="lucide lucide-lightbulb"
+  >
     <path d="M15 14c.2-1 .7-2 1.5-3a4.8 4.8 0 0 0-3.5-3.5c-1-.8-2-1.3-3-1.5" />
     <path d="M9 18c.2-1 .7-2 1.5-3" />
     <path d="M2 17c.2-1 .7-2 1.5-3" />
@@ -41,7 +61,18 @@ const SuggestedPagesIcon = () => (
 );
 
 const ThreeDotsIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-more-horizontal">
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="lucide lucide-more-horizontal"
+  >
     <circle cx="12" cy="12" r="1" />
     <circle cx="19" cy="12" r="1" />
     <circle cx="5" cy="12" r="1" />
@@ -64,7 +95,7 @@ const Header = ({ openSuggestedPagesModal, isSuggestedPagesModalOpen }) => {
   const moreDropdownRef = useRef(null);
   const moreDropdownContentRef = useRef(null);
 
-  const { t, i18n } = useTranslation('common'); 
+  const { t, i18n } = useTranslation("common");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -73,10 +104,16 @@ const Header = ({ openSuggestedPagesModal, isSuggestedPagesModalOpen }) => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (languageDropdownRef.current && !languageDropdownRef.current.contains(event.target)) {
+      if (
+        languageDropdownRef.current &&
+        !languageDropdownRef.current.contains(event.target)
+      ) {
         setLanguageDropdownOpen(false);
       }
-      if (moreDropdownRef.current && !moreDropdownRef.current.contains(event.target)) {
+      if (
+        moreDropdownRef.current &&
+        !moreDropdownRef.current.contains(event.target)
+      ) {
         setIsMoreDropdownOpen(false);
         setLanguageDropdownOpen(false);
       }
@@ -91,14 +128,28 @@ const Header = ({ openSuggestedPagesModal, isSuggestedPagesModalOpen }) => {
   useEffect(() => {
     if (moreDropdownContentRef.current) {
       if (isMoreDropdownOpen) {
-        gsap.fromTo(moreDropdownContentRef.current,
+        gsap.fromTo(
+          moreDropdownContentRef.current,
           { opacity: 0, y: -10, scaleY: 0.8, transformOrigin: "top" },
-          { opacity: 1, y: 0, scaleY: 1, duration: 0.2, ease: "power2.out", display: "block" }
+          {
+            opacity: 1,
+            y: 0,
+            scaleY: 1,
+            duration: 0.2,
+            ease: "power2.out",
+            display: "block",
+          }
         );
       } else {
-        gsap.to(moreDropdownContentRef.current,
-          { opacity: 0, y: -10, scaleY: 0.8, duration: 0.2, ease: "power2.in", transformOrigin: "top", display: "none" }
-        );
+        gsap.to(moreDropdownContentRef.current, {
+          opacity: 0,
+          y: -10,
+          scaleY: 0.8,
+          duration: 0.2,
+          ease: "power2.in",
+          transformOrigin: "top",
+          display: "none",
+        });
       }
     }
   }, [isMoreDropdownOpen]);
@@ -106,7 +157,7 @@ const Header = ({ openSuggestedPagesModal, isSuggestedPagesModalOpen }) => {
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
     document.documentElement.lang = lng;
-    document.documentElement.dir = (lng === 'fa') ? 'rtl' : 'ltr';
+    document.documentElement.dir = lng === "fa" ? "rtl" : "ltr";
     setLanguageDropdownOpen(false);
   };
 
@@ -115,9 +166,9 @@ const Header = ({ openSuggestedPagesModal, isSuggestedPagesModalOpen }) => {
       <div className="flex w-full items-center justify-between p-6 lg:px-10 bg-background text-text">
         <div className="flex flex-row-reverse">
           <span className="pr-2 text-[18px] text-[#22445D] hidden lg:flex">
-            <img src={bahr} alt={t('appName')} />
+            <img src={bahr} alt={t("appName")} />
           </span>
-          <img src={h1} className="pr-2 sm:h-9" alt={t('appLogo')} />
+          <img src={h1} className="pr-2 sm:h-9" alt={t("appLogo")} />
         </div>
         <div className="flex lg:flex-1">
           <div className="m-auto mx-[235px] items-center justify-center hidden lg:flex lg:gap-x-8 bg-[#2F2F2F] rounded-[56px] pl-1 pr-[24px] py-[5px]">
@@ -130,7 +181,7 @@ const Header = ({ openSuggestedPagesModal, isSuggestedPagesModalOpen }) => {
                 after:content-[''] after:w-1 after:h-1 after:rounded-full after:bg-[#ffff] `
               }
             >
-              {t('home')}
+              {t("home")}
             </NavLink>
 
             <NavLink
@@ -142,7 +193,7 @@ const Header = ({ openSuggestedPagesModal, isSuggestedPagesModalOpen }) => {
                 after:content-[''] after:w-1 after:h-1 after:rounded-full after:bg-[#FFFF]`
               }
             >
-              {t('courses')}
+              {t("courses")}
             </NavLink>
 
             <NavLink
@@ -154,7 +205,7 @@ const Header = ({ openSuggestedPagesModal, isSuggestedPagesModalOpen }) => {
                 after:content-[''] after:w-1 after-h-1 after:rounded-full after:bg-[#FFFF] `
               }
             >
-              {t('blogs')}
+              {t("blogs")}
             </NavLink>
 
             {isLoggedIn ? (
@@ -162,31 +213,20 @@ const Header = ({ openSuggestedPagesModal, isSuggestedPagesModalOpen }) => {
                 <img
                   className="size-full rounded-full w-12 border h-12"
                   src={userInfo?.currentPictureAddress}
-                  alt={t('profilePicture')}
+                  alt={t("profilePicture")}
                 ></img>
               </Link>
             ) : (
               <Link
                 to="/auth/RegisterPage"
-                className="text-sm/6 text-[#FCFCFC] bg-[#3772FF] rounded-[56px] px-5 py-[8px]"
+                className="text-[10px] text-nowrap text-[#FCFCFC] bg-[#3772FF] rounded-[56px] px-5 py-3 "
               >
-                {t('registerOrLogin')}
+                {t("registerOrLogin")}
               </Link>
             )}
           </div>
         </div>
         <div className="gap-[8px] hidden lg:flex relative">
-          <button
-            onClick={openSuggestedPagesModal}
-            className="rounded-full w-[48px] h-[48px] border border-[#DCDCDC] text-black flex items-center justify-center bg-[#2F2F2F] text-white"
-            title="صفحات پیشنهادی"
-          >
-            <SuggestedPagesIcon />
-          </button>
-
-          <button className="rounded-full p-3 bg-[#2F2F2F]">
-            <ThemeToggle />
-          </button>
           <div className="relative" ref={moreDropdownRef}>
             <button
               className="rounded-full w-[48px] h-[48px] border border-[#DCDCDC] text-black flex items-center justify-center bg-[#2F2F2F] text-white"
@@ -199,18 +239,22 @@ const Header = ({ openSuggestedPagesModal, isSuggestedPagesModalOpen }) => {
               ref={moreDropdownContentRef}
               className={`absolute bg-white dark:bg-gray-800 text-gray-800 dark:text-white rounded-md shadow-lg py-2 mt-2
                           ${isMoreDropdownOpen ? "block" : "hidden"}
-                          ${i18n.language === 'fa' ? 'left-0' : 'right-0'}`}
-              style={{ zIndex: 100, minWidth: '160px' }}
+                          ${i18n.language === "fa" ? "left-0" : "right-0"}`}
+              style={{ zIndex: 100, minWidth: "160px" }}
             >
-
               <div
                 className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer flex items-center gap-3 transition-colors"
-                onClick={() => { setIsAIChatModalOpen(true); setIsMoreDropdownOpen(false); }}
+                onClick={() => {
+                  setIsAIChatModalOpen(true);
+                  setIsMoreDropdownOpen(false);
+                }}
               >
                 <AIChatIcon />
-                <span>{t('aichat')}</span>
+                <span>{t("aichat")}</span>
               </div>
-              <MultiAccountDropdown onCloseParentDropdown={() => setIsMoreDropdownOpen(false)} />
+              <MultiAccountDropdown
+                onCloseParentDropdown={() => setIsMoreDropdownOpen(false)}
+              />
 
               <div className="relative" ref={languageDropdownRef}>
                 <div
@@ -220,38 +264,63 @@ const Header = ({ openSuggestedPagesModal, isSuggestedPagesModalOpen }) => {
                   aria-haspopup="true"
                 >
                   <LanguageIcon />
-                  <span>{t('language')}</span>
+                  <span>{t("language")}</span>
                 </div>
                 {isLanguageDropdownOpen && (
                   <div
                     className={`absolute bg-white dark:bg-gray-800 text-gray-800 dark:text-white rounded-md shadow-lg py-2
-                                ${i18n.language === 'fa' ? 'left-full top-0 ml-2' : 'right-full top-0 mr-2'}`}
+                                ${
+                                  i18n.language === "fa"
+                                    ? "left-full top-0 ml-2"
+                                    : "right-full top-0 mr-2"
+                                }`}
                     style={{
                       zIndex: 101,
-                      minWidth: '120px',
-                      [i18n.language === 'fa' ? 'right' : 'left']: '100%',
-                      [i18n.language === 'fa' ? 'left' : 'right']: 'auto',
+                      minWidth: "120px",
+                      [i18n.language === "fa" ? "right" : "right"]: "100%",
+                      [i18n.language === "en" ? "right" : "right"]: "auto",
                       top: 0,
-                      transform: i18n.language === 'fa' ? 'translateX(8px)' : 'translateX(-8px)'
+                      transform:
+                        i18n.language === "en"
+                          ? "translateX(8px)"
+                          : "translateX(-8px)",
                     }}
                   >
                     <div
                       className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors"
-                      onClick={() => { changeLanguage('fa'); setIsMoreDropdownOpen(false); }}
+                      onClick={() => {
+                        changeLanguage("fa");
+                        setIsMoreDropdownOpen(false);
+                      }}
                     >
-                      {t('farsi')}
+                      {t("farsi")}
                     </div>
                     <div
                       className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer transition-colors"
-                      onClick={() => { changeLanguage('en'); setIsMoreDropdownOpen(false); }}
+                      onClick={() => {
+                        changeLanguage("en");
+                        setIsMoreDropdownOpen(false);
+                      }}
                     >
-                      {t('english')}
+                      {t("english")}
                     </div>
                   </div>
                 )}
               </div>
             </div>
           </div>
+          <button
+            onClick={openSuggestedPagesModal}
+            className="rounded-full w-[48px] h-[48px] border border-[#DCDCDC] text-black flex items-center justify-center bg-[#2F2F2F] text-white"
+            title="صفحات پیشنهادی"
+          >
+            <SuggestedPagesIcon />
+          </button>
+
+          <button className="rounded-full p-3 bg-[#2F2F2F]">
+            <ThemeToggle />
+          </button>
+
           <AIChatModal
             isOpen={isAIChatModalOpen}
             onClose={() => setIsAIChatModalOpen(false)}
