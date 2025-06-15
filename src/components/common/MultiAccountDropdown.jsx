@@ -108,15 +108,14 @@ const MultiAccountDropdown = ({ onCloseParentDropdown }) => {
       </div>
       {isAccountDropdownOpen && (
         <div
-          className={`absolute bg-white dark:bg-gray-800 text-gray-800 dark:text-white rounded-md shadow-lg py-2
-            ${i18n.language === 'fa' ? 'left-full top-0 ml-2' : 'right-full top-0 mr-2'}`}
+          className={`absolute bg-white dark:bg-gray-800 text-gray-800 dark:text-white rounded-md shadow-lg py-2`}
           style={{
             zIndex: 101, 
             minWidth: '220px',
-            [i18n.language === 'fa' ? 'right' : 'left']: '100%',
-            [i18n.language === 'fa' ? 'left' : 'right']: 'auto',
-            top: 0,
-            transform: i18n.language === 'fa' ? 'translateX(8px)' : 'translateX(-8px)' 
+            top: '100%',
+            right: i18n.language === 'fa' ? '0' : 'auto', 
+            left: i18n.language === 'fa' ? 'auto' : '0',  
+            marginTop: '8px'
           }}
         >
           {accounts.length > 0 ? (
@@ -132,17 +131,17 @@ const MultiAccountDropdown = ({ onCloseParentDropdown }) => {
                   <img
                     src={account.profilePicture || "https://via.placeholder.com/24"}
                     alt={account.username || t('defaultAccountName', { index: index + 1 })}
-                    className="w-6 h-6 rounded-full mr-2"
+                    className={`w-6 h-6 rounded-full ${i18n.language === 'fa' ? 'ml-2' : 'mr-2'}`} 
                   />
                   <span className="truncate">{account.username || t('defaultAccountName', { index: index + 1 })}</span>
                   {localStorage.getItem("token") === account.token && (
-                    <span className="ml-2 text-green-500 text-xs"> ({t('active')})</span>
+                    <span className={`text-green-500 text-xs ${i18n.language === 'fa' ? 'mr-2' : 'ml-2'}`}> ({t('active')})</span> 
                   )}
                 </div>
                 {accounts.length > 1 && (
                   <button
                     onClick={() => handleRemoveAccount(account.token)}
-                    className="ml-2 text-red-500 hover:text-red-700 p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600"
+                    className={`text-red-500 hover:text-red-700 p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 ${i18n.language === 'fa' ? 'mr-2' : 'ml-2'}`} 
                     title={t('removeAccount')}
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-x">
@@ -159,10 +158,10 @@ const MultiAccountDropdown = ({ onCloseParentDropdown }) => {
           )}
           {accounts.length < 3 && (
             <div
-              className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer border-t border-gray-200 dark:border-gray-700 flex items-center"
+              className={`px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer border-t border-gray-200 dark:border-gray-700 flex items-center ${i18n.language === 'fa' ? 'flex-row-reverse' : ''}`} 
               onClick={handleAddAccount}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucude-plus mr-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`lucide lucude-plus ${i18n.language === 'fa' ? 'ml-2' : 'mr-2'}`}> 
                 <path d="M12 5v14"/><path d="M5 12h14"/>
               </svg>
               {t('addAnotherAccount')}
@@ -170,10 +169,10 @@ const MultiAccountDropdown = ({ onCloseParentDropdown }) => {
           )}
           {accounts.length > 0 && (
             <div
-              className="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer border-t border-gray-200 dark:border-gray-700 flex items-center text-red-500"
+              className={`px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 cursor-pointer border-t border-gray-200 dark:border-gray-700 flex items-center text-red-500 ${i18n.language === 'fa' ? 'flex-row-reverse' : ''}`} 
               onClick={handleLogoutAllAccounts}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-log-out mr-2">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`lucide lucide-log-out ${i18n.language === 'fa' ? 'ml-2' : 'mr-2'}`}> 
                 <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="17 16 22 12 17 8"/><line x1="22" x2="10" y1="12" y2="12"/>
               </svg>
               {t('loggedOutAllAccounts')}
