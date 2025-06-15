@@ -1,32 +1,40 @@
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { Calendar03Icon } from "../../common/Icons/Calender";
+import { useTranslation } from 'react-i18next';
+import DatePicker from 'react-multi-date-picker';
+import persian from 'react-date-object/calendars/persian';
+import persian_fa from 'react-date-object/locales/persian_fa';
+import { Calendar03Icon } from '../../common/Icons/Calender';
 
 export const DateRangePicker = ({ dateRange, setDateRange }) => {
+  const { t } = useTranslation('filter');
+
   return (
     <div className="mb-4">
       <div className="flex gap-2 px-5">
         <div className="w-[24px] h-[24px]">
-          <Calendar03Icon color={"#00000"}/>
+          <Calendar03Icon color="#00000" />
         </div>
         <label className="font-medium block pb-[9px] text-base" htmlFor="dateRange">
-          تاریخ برگزاری - اتمام
+          {t('dateRangeLabel')}
         </label>
       </div>
       <div className="flex gap-4 px-5">
         <DatePicker
-          selected={dateRange[0]}
-          onChange={(date) => setDateRange([date, dateRange[1]])}
-          dateFormat="yyyy/MM/dd"
-          placeholderText="تاریخ شروع"
-          className="w-full border text-center border-gray-300 rounded-2xl p-2"
+          value={dateRange[0]}
+          onChange={(date) => setDateRange([date?.toDate(), dateRange[1]])}
+          calendar={persian}
+          locale={persian_fa}
+          format="YYYY/MM/DD"
+          placeholder={t('startDatePlaceholder')}
+          inputClass="w-full border text-center border-gray-300 rounded-2xl p-2"
         />
         <DatePicker
-          selected={dateRange[1]}
-          onChange={(date) => setDateRange([dateRange[0], date])}
-          dateFormat="yyyy/MM/dd"
-          placeholderText="تاریخ پایان"
-          className="w-full border text-center border-gray-300 rounded-2xl p-2"
+          value={dateRange[1]}
+          onChange={(date) => setDateRange([dateRange[0], date?.toDate()])}
+          calendar={persian}
+          locale={persian_fa}
+          format="YYYY/MM/DD"
+          placeholder={t('endDatePlaceholder')}
+          inputClass="w-full border text-center border-gray-300 rounded-2xl p-2"
         />
       </div>
     </div>

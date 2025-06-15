@@ -13,9 +13,9 @@ export const postAddBlogFavorite = async (newsId) => {
     }
 };
 
-export const deleteBlogFavorite = async (newsId) => {
+export const deleteBlogFavorite = async (currentUserFavoriteId) => {
     try {
-        const result = await http.delete(`/News/DeleteFavoriteNews`,{data: {deleteEntityId:newsId} }, {
+        const result = await http.delete(`/News/DeleteFavoriteNews`,{data: {deleteEntityId:currentUserFavoriteId} }, {
             headers: {
                 "Content-Type": "application/json"
             }

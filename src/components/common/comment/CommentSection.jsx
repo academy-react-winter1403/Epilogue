@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import {Modal} from './CommentModal';
-import {CommentCard} from './CommentCard';
-import {CommentList} from './CommentList';
-import { NewCommentForm } from './NewComponentForm';
-import  commentBtnIcon from '../../../assets/icons/commentBtnIcon.svg';
-import  sendIcon  from '../../../assets/icons/sendCommentIcon.svg';
-import  emojiIcon from '../../../assets/icons/emojiIcon.svg';
+import { Modal } from './CommentModal';
+import { CommentCard } from './CommentCard'; 
+import { CommentList } from './CommentList'; 
+import { NewCommentForm } from './NewComponentForm'; 
+import commentBtnIcon from '../../../assets/icons/commentBtnIcon.svg';
+import sendIcon from '../../../assets/icons/sendCommentIcon.svg';
+import emojiIcon from '../../../assets/icons/emojiIcon.svg';
 import closeIcon from '../../../assets/icons/closeIcon.svg';
+import { useTranslation } from 'react-i18next';
+
 import { useQueryClient } from '@tanstack/react-query';
 
 const CommentSection = ({ 
@@ -19,11 +21,10 @@ const CommentSection = ({
   postReply, 
   getReplies,
   userId,
-  title: initialTitle,
-  describe: initialDescribe,
-  parentId
 }) => {
   const queryClient = useQueryClient();
+
+   const { t } = useTranslation('blogList'); 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCommentModalOpen, setIsCommentModalOpen] = useState(false);
   const [showNewCommentForm, setShowNewCommentForm] = useState(false);
@@ -35,104 +36,129 @@ const CommentSection = ({
   const { mutate: addReply, isPending: isReplyPending } = postReply || {};
 
   const toggleCommentExpansion = (commentId) => {
-    setExpandedCommentId(prev => prev === commentId ? null : commentId);
-  };
+
+    setExpandedCommentId(prev => {
+      if (prev === commentId) {
+        setReplyingTo(null);
+        return null;
+      }
+      return commentId;
+    });
+  }
+
 
   const startReply = (commentId) => {
     if (showNewCommentForm) closeNewCommentForm();
     setReplyingTo(commentId);
     setExpandedCommentId(commentId);
+
   };
 
-  const cancelReply = () => {
-    setReplyingTo(null);
+
+  const handleAddReply = (commentId) => {
+    try {
+      checkAuth();
+      if (showNewCommentForm) setShowNewCommentForm(false);
+      setReplyingTo(commentId);
+      setExpandedCommentId(commentId);
+    } catch (error) {}
+  };
+
+  const toggleCommentExpansion = (commentId) => {
+    setExpandedCommentId(prev => prev === commentId ? null : commentId);
+
   };
 
   const handleReplySubmit = (formData) => {
     if (!replyingTo || !addReply) return;
-    
-    const replyData = isBlog 
-      ? { 
-          id: id,
-          userIpAddress: '', 
-          title: formData.title || initialTitle,
-          describe: formData.content || initialDescribe,
-          userId: userId,
-          parentId: parentId
-        }
-      : {
-          id: id,
-          title: formData.title || initialTitle,
-          describe: formData.content || initialDescribe,
-          commentId:replyingTo
-        };
-  
-    addReply(replyData, {
+
+
+
+    addReply({
+      id,
+      parentId: replyingTo,
+      title: replyTitle,
+      content: replyContent
+
+    }, {
+
       onSuccess: () => {
         setReplyingTo(null);
+
         queryClient.invalidateQueries(['commentReplies', id]);
+
       }
     });
   };
 
   const handleCommentSubmit = (formData) => {
     if (!addComment) return;
-    
-    const commentData = isBlog
-      ? {
-          id: id,
-          userIpAddress: '',
-          title: formData.title || initialTitle,
-          describe: formData.content || initialDescribe,
-          userId: userId
-        }
-      : {
-          id: id,
-          title: formData.title || initialTitle,
-          describe: formData.content || initialDescribe
-        };
-  
-    addComment(commentData, {
+
+
+
+    addComment({
+      id,
+      title: commentTitle,
+      content: commentContent
+
+    }, {
+
       onSuccess: () => {
-        closeCommentModal();
-        closeNewCommentForm();
+
+        setIsCommentModalOpen(false);
+        setShowNewCommentForm(false);
+
         queryClient.invalidateQueries(['blogDetails', id]);
       }
     });
   };
 
   const openModal = () => setIsModalOpen(true);
+
   const openCommentModal = () => setIsCommentModalOpen(true);
-  
+
   const openNewCommentForm = () => {
-    if (replyingTo) cancelReply();
-    setShowNewCommentForm(true);
+
+    try {
+      checkAuth();
+      if (replyingTo) setReplyingTo(null);
+      setShowNewCommentForm(true);
+    } catch (error) {}
+
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    cancelReply();
+    setReplyingTo(null);
     setExpandedCommentId(null);
+
+
     closeNewCommentForm();
+
   };
 
   const closeCommentModal = () => {
     setIsCommentModalOpen(false);
+
   };
 
   const closeNewCommentForm = () => {
     setShowNewCommentForm(false);
     cancelReply();
+
   };
 
   const displayedComments = comments?.slice(0, 3) || [];
-  if (isLoading) return <div>در حال بارگذاری نظرات...</div>;
-  if (isError) return <div>خطا در بارگذاری نظرات</div>;
+
+
+  if (isLoading) return <div>{t('loadingComments')}</div>;
+  if (isError) return <div>{t('errorLoadingComments')}</div>; 
+
 
   return (
     <section className="w-full flex flex-col gap-5 mt-[50px] justify-center items-center">
       <div className="pl-90 md:self-start w-[219px] h-[29px] font-dana font-bold text-[20px] leading-[100%] tracking-[0%] text-gray-800 whitespace-nowrap">
-        نظرات دانشجوها و اساتید
+        {t('studentsAndTeachersComments')} 
       </div>
 
       <div className="w-full flex flex-col items-center md:flex-row gap-[8px]">
@@ -143,16 +169,17 @@ const CommentSection = ({
           whileHover={{ y: -2 }}
         >
           <img src={commentBtnIcon} alt="commentBtnIcon" />
-          <span className='font-semibold text-[18px] leading-[100%] tracking-[0%]'>نظر شما</span>
+          <span className='font-semibold text-[18px] leading-[100%] tracking-[0%]'>{t('yourComment')}</span> 
           <span className='font-medium text-[14px] leading-[100%] tracking-[0%] text-[#F6F6F6]'>
-            برای نظر دادن کلیک کنید
+            {t('clickToComment')} 
           </span>
         </motion.button>
 
+
         {displayedComments.map((comment) => (
-          <CommentCard 
+          <CommentCard
             key={comment.id}
-            comment={comment} 
+            comment={comment}
             id={id}
             isBlog={isBlog}
             startReply={startReply}
@@ -160,6 +187,7 @@ const CommentSection = ({
             toggleExpansion={toggleCommentExpansion}
           />
         ))}
+
       </div>
 
       {comments?.length > 3 && (
@@ -169,11 +197,13 @@ const CommentSection = ({
           whileTap={{ scale: 0.95 }}
           whileHover={{ y: -2 }}
         >
-          <span className='mb-1'>مشاهده بیشتر</span>
+
+          <span>{t('viewMore')}</span> 
+
         </motion.button>
       )}
 
-      <Modal isOpen={isModalOpen} onClose={closeModal} title="نظرات دانشجوها و اساتید">
+      <Modal isOpen={isModalOpen} onClose={closeModal} title={t('studentsAndTeachersComments')}> 
         <motion.button
           onClick={openNewCommentForm}
           className={`fixed bottom-60 left-45 w-[345px] h-[56px] md:w-[107px] md:h-[40px] md:static md:transform-none flex items-center justify-center gap-2 bg-[#3772FF] text-white rounded-[40px] px-4 py-2 mb-4 ${
@@ -183,7 +213,7 @@ const CommentSection = ({
           whileHover={{ y: -2 }}
         >
           <img src={commentBtnIcon} alt="commentBtnIcon" className='w-[8%] md:w-[20px]'/>
-          <span className='whitespace-nowrap'>نظر شما</span>
+          <span className='whitespace-nowrap'>{t('yourComment')}</span> 
         </motion.button>
 
         <CommentList
@@ -194,6 +224,12 @@ const CommentSection = ({
           replyingTo={replyingTo}
           startReply={startReply}
           handleReplySubmit={handleReplySubmit}
+
+          replyTitle={replyTitle}
+          setReplyTitle={setReplyTitle}
+          replyContent={replyContent}
+          setContent={setReplyContent}
+
           SendIcon={sendIcon}
           EmojiIcon={emojiIcon}
           isPending={isReplyPending}
@@ -205,17 +241,23 @@ const CommentSection = ({
 
         {showNewCommentForm && (
           <div className='mr-5 mb-0 md:mb-20'>
-            <NewCommentForm
-              onSubmit={handleCommentSubmit}
-              onClose={closeNewCommentForm}
-              CloseIcon={closeIcon}
-              isPending={isCommentPending}
+
+              <NewCommentForm
+            onSubmit={handleCommentSubmit}
+            onClose={closeNewCommentForm}
+            title={commentTitle}
+            setTitle={setCommentTitle}
+            content={commentContent}
+            setContent={setCommentContent}
+            CloseIcon={closeIcon}
+            isPending={isCommentPending}
             />
+
           </div>
         )}
       </Modal>
 
-      <Modal isOpen={isCommentModalOpen} onClose={closeCommentModal} title="ثبت نظر جدید">
+      <Modal isOpen={isCommentModalOpen} onClose={closeCommentModal} title={t('submitNewComment')}> 
         <div className='mt-30'>
           <NewCommentForm
             onSubmit={handleCommentSubmit}
@@ -230,4 +272,5 @@ const CommentSection = ({
     </section>
   );
 };
+
 export { CommentSection };

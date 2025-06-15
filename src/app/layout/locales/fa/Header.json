@@ -1,0 +1,16 @@
+{
+  "appName": "اپلیکیشن عالی من",
+  "welcome": "خوش آمدید!",
+  "login": "ورود",
+  "logout": "خروج",
+  "change_language_text": "تغییر زبان به {{newLang}}",
+  "current_language": "زبان فعلی: {{lang}}",
+  "appLogo": "لوگوی برنامه",  
+  "home": "خانه",              
+  "courses": "دوره‌ها",        
+  "blogs": "بلاگ‌ها",          
+  "profilePicture": "عکس پروفایل",
+  "registerOrLogin": "ثبت نام یا ورود",
+  "english": "انگلیسی",       
+  "farsi": "فارسی"             
+}

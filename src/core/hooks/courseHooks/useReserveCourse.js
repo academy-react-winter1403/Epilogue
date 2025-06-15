@@ -2,17 +2,14 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { postAddCourseReserve } from '../../services/api/courseDetail/PostAddCourseReserve';
 import toast from 'react-hot-toast';
 import { deleteCourseReserve } from '../../services/api/courseDetail/deleteCourseReserve';
-import { getItem } from '../../utils/storage.services';
+import { checkAuth } from '../checkAuth';
 
 export const useReserveCourse = (courseId) => {
   const queryClient = useQueryClient();
 
   const reserveMutation = useMutation({
     mutationFn: async ({ isReserved, reserveId }) => {
-      if (!localStorage.getItem('token')) {
-        toast.error('لطفاً ابتدا وارد حساب کاربری خود شوید');
-        throw new Error('USER_NOT_LOGGED_IN');
-      }
+      checkAuth();
       
       const reserved = typeof isReserved === 'string' 
         ? isReserved === "1" 

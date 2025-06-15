@@ -1,0 +1,12 @@
+{
+  "active": "فعال",
+  "addAnotherAccount": "افزودن حساب دیگر",
+  "removeAccount": "حذف حساب",
+  "noAccountsAdded": "تاکنون حسابی اضافه نشده است.",
+  "logoutAllAccounts": "خروج از همه حساب‌ها",
+  "switchedAccount": "به حساب انتخاب شده سوییچ شد.",
+  "maxAccountsReached": "شما فقط می‌توانید تا ۳ حساب را مدیریت کنید.",
+  "cannotRemoveLastAccount": "نمی‌توانید آخرین حساب را حذف کنید. ابتدا یک حساب دیگر اضافه کنید.",
+  "accountRemoved": "حساب با موفقیت حذف شد.",
+  "defaultAccountName": "حساب {{index}}"
+}

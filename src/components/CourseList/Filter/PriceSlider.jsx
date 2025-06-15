@@ -2,8 +2,10 @@ import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import moneyIcon from "../../../assets/money.png";
 import useStore from "../../../core/Store/Zustand-Store";
+import { useTranslation } from 'react-i18next'; 
 
 export const PriceSlider = () => {
+  const { t } = useTranslation('filter'); 
   const { priceRange, setPriceRange } = useStore((state) => state);
 
   const handlePriceChange = (range) => {
@@ -16,10 +18,10 @@ export const PriceSlider = () => {
     <div className="pb-6">
       <div className="flex gap-2 px-5">
         <div className="w-[24px] h-[24px]">
-          <img src={moneyIcon} alt="Money Icon" />
+          <img src={moneyIcon} alt={t('price')} />
         </div>
         <label className="font-medium block mb-[9px] text-base" htmlFor="price">
-          قیمت
+          {t('price')}
         </label>
       </div>
       <div style={wrapperStyle}>
@@ -34,8 +36,8 @@ export const PriceSlider = () => {
       </div>
 
       <div className="flex justify-between px-5 pt-3">
-        <span>{priceRange[0]} از</span>
-        <span>{priceRange[1]} تا</span>
+        <span>{priceRange[0]} {t('from')}</span> 
+        <span>{priceRange[1]} {t('to')}</span> 
       </div>
     </div>
   );

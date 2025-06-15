@@ -30,14 +30,14 @@ instance.interceptors.request.use((opt) => {
 });
 
 
-export const checkAuth = () => {
-  const token = localStorage.getItem('token');
-  console.log(token)
-  if (!token) {
-    console.log('yam')
-    throw new Error('USER_NOT_LOGGED_IN');
-  }
-  return true;
-};
+// export const checkAuth = () => {
+//   const token = localStorage.getItem('token');
+//   console.log(token)
+//   if (!token) {
+//     console.log('yam')
+//     throw new Error('USER_NOT_LOGGED_IN');
+//   }
+//   return true;
+// };
 
 export default instance;
