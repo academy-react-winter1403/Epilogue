@@ -73,6 +73,7 @@ const FirstSection = () => {
         </p>
         <p className="m-auto text-nowrap font-yekan-500 text-[#707070] text-[18px]">
           {t('ageRange')} 
+
         </p>
       </div>
       <div className="w-[150px] h-[111px] flex flex-col order-3 lg:order-3">

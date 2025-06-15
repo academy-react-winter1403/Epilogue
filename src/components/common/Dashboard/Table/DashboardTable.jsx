@@ -26,6 +26,7 @@ const DashboardTable = ({ showIcon, searchTerm }) => {
         <p className="w-[19%]">{t("instructor")}</p>
         <p className="w-[19%]">{t("holdingDate")}</p>
         <p className="w-[19%]">{t("level")}</p>
+
       </div>
 
       <div className="overflow-y-auto ">

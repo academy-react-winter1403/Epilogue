@@ -137,6 +137,7 @@ export function Body() {
           {t('strongStart')} 
         </p>
         <h1>{t('newTopicProgress')}</h1>
+
       </div>
 
       <Sorting />

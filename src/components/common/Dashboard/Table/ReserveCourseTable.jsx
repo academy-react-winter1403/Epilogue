@@ -47,6 +47,7 @@ const ReservedCoursesTable = ({ showAccept, searchTerm }) => {
         <p className="w-[19%]">{t('holdingDate')}</p> 
         {showAccept && <p className="w-[19%]">{t('status')}</p>} 
 
+
       </div>
 
       <div className="overflow-y-auto">

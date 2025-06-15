@@ -20,11 +20,12 @@ const StudentPanelPage = () => {
 
   return (
     <div className="py-6 px-6 grid grid-cols-1 gap-6 md:grid-cols-12">
-      <div className="md:col-span-12">
+      <div className="md:col-span-12 ">
         <WelcomeUser />
       </div>
 
       <div className="md:col-span-9 themed-dashTable bg-[#F6F6F6] rounded-3xl">
+
         <div className="flex flex-row justify-between items-center">
           <p className="text-[14px] font-yekan-600 px-4 py-2">{t('myCourses')}</p> 
           <Link
@@ -38,7 +39,7 @@ const StudentPanelPage = () => {
         <DashboardTable showIcon={false} />
       </div>
 
-      <div className="md:col-span-3 rounded-3xl md:flex md:flex-col themed-dashTable bg-[#F6F6F6]">
+      <div className="md:col-span-3 rounded-3xl md:flex md:flex-col text-[color:var(--color-text-primary)] bg-bg-Dashtable">
         <div className="justify-between items-center px-4 py-2 flex flex-row ">
           <p className="text-[12px] text-nowrap font-yekan-600">
             {t('accountInfoStatus')}
@@ -69,7 +70,7 @@ const StudentPanelPage = () => {
         </p>
       </div>
 
-      <div className="md:col-span-7 themed-dashTable bg-[#F6F6F6] flex flex-col rounded-3xl">
+      <div className="md:col-span-7 text-[color:var(--color-text-primary)] bg-bg-Dashtable flex flex-col rounded-3xl">
         <div className="flex flex-row justify-between items-center">
           <p className="text-[14px] font-yekan-600 px-4 py-2">{t('myReservations')}</p> 
           <Link
@@ -85,6 +86,7 @@ const StudentPanelPage = () => {
 
       <div className="md:col-span-5 h-[490px] rounded-3xl themed-dashTable bg-[#F6F6F6]">
           {/* <p>{t('yourComments')}</p> */}
+
           <YourComment/>
           {/* <Link to={"/StudentPanel/your-comments-route"} className="text-[#3772FF] flex flex-row gap-1">  */}
             {/* {t('viewMore')}  */}

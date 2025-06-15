@@ -123,6 +123,7 @@ const DetailCourse = ({ course, CourseId }) => {
                             />
                         </div>
 
+
                     </div>
                     <div>
                         <CopyUrlButton />

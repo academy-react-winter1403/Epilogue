@@ -16,6 +16,7 @@ const MyCoursePage = () => {
       <p className="text-[24px] text-nowrap font-yekan-600 py-2">{t('myCourses')}</p>
       <div className="flex flex-col md:flex-row">
 
+
         <div className="flex flex-col gap-2 p-2">
           <div className="flex flex-row gap-2">
 

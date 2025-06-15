@@ -18,6 +18,7 @@ const Links = () => {
             <div className="flex flex-col gap-2">
               <p
                 className="text-[16px] font-yekan-600 text-black"
+
               >
                 {t('telegram')}
               </p>
@@ -35,6 +36,7 @@ const Links = () => {
               <label
                 htmlFor="linkedin"
                 className="text-[16px] font-yekan-600 text-black"
+
               >
                 {t('linkedin')}
               </label>

@@ -41,6 +41,7 @@ const CardList = ({ sortedCards, currentCards }) => {
               <div className="flex items-center justify-between flex-row gap-2 w-full">
                 <h2 className="text-[#707070] text-[14px] font-medium truncate  ">
 
+
                   {card.addUserFullName || "ناشناس"}
                 </h2>
 
@@ -51,6 +52,7 @@ const CardList = ({ sortedCards, currentCards }) => {
                     <Calendar03Icon width="18px" height="18px" />
                   </div>
                   <div className="flex items-center gap-1 text-[14px] text-[#707070] font-yekan-500">
+
 
                     {card.currentView}
                     <ViewIcon width="18px" height="18px" />

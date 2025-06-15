@@ -56,6 +56,7 @@ const BlogFavTable = ({ searchTerm }) => {
         <p className="w-[15%]">{t('score')}</p>
         <p className="w-[18%]">{t('holdingDate')}</p>
         <p className="w-[10%]">{t('viewCount')}</p>
+
       </div>
 
       <div className="overflow-y-auto">

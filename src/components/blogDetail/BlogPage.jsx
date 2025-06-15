@@ -14,7 +14,7 @@ const BlogPage = () => {
     const { t } = useTranslation('blogList'); 
 
   return (
-    <div className='w-auto bg-white'>
+    <div className='w-auto '>
         <div className="max-w-[95rem] mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center items-center">
 
             <DetailBlog newsId={blog?.detailsNewsDto?.id} blog={blog} />

@@ -29,6 +29,7 @@ const DetailBox = ({ course, CourseId }) => {
         <div className='w-[50%] max-w-2xl xl:max-w-4xl h-auto p-4 sm:p-6 flex flex-col justify-between items-center gap-4'>
             <div className=" w-[183px] md:w-[244px] h-[34px] md:h-[46px] font-bold text-2xl sm:text-3xl lg:text-4xl text-black mr-[-40px] md:mr-[10px] lg:mr-[-30px] self-start md:self-start lg:self-start whitespace-nowrap"><h2>{course?.title}</h2></div>
         
+
             <div className="lg:w-[660px] md:w-[630px] border-2 border-transparent rounded-[16px] flex flex-col gap-5 md:flex-row lg:flex-row md:border-gray-400 md:border-gray-400 lg:border-gray-400 md:gap-0 lg:gap-0">
 
 
@@ -38,6 +39,7 @@ const DetailBox = ({ course, CourseId }) => {
                     <div>
                         <div className='flex flex-col gap-4'>
                             <div className='w-[45px] h-[20px] font-medium text-[14px] leading-[100%] text-gray-800 pr-3 pt-2'> {t('status')}</div> 
+
                             <div className=" h-[27px] rounded-[32px] pt-[2px] pr-[8px] pb-[2px] pl-[8px] gap-[8px] bg-red-500 mr-5 mt-1 flex justify-center items-center text-white whitespace-nowrap">{course?.courseStatusName}</div>
                         </div>
                         <div className="w-[80px] h-0 border-2 -rotate-90 border-gray-400 relative left-[-120px] top-[-31px] md:top-[-30.5px] md:left-[-130px]"></div>
@@ -50,6 +52,7 @@ const DetailBox = ({ course, CourseId }) => {
                             <div className="flex justify-center items-center whitespace-nowrap w-[99px] h-[27px] rounded-[32px] pt-[2px] pr-[8px] pb-[2px] pl-[8px] gap-[8px] bg-blue-500 mr-7 md:mr-2 mt-1 text-white">
                             {course?.techs[0]}
                             </div>
+
                         </div>
                         <div className="w-[80px] h-0 border-2 border-transparent -rotate-90  relative top-[-30.5px] left-[-110px] md:border-gray-400"></div>
 
@@ -62,6 +65,7 @@ const DetailBox = ({ course, CourseId }) => {
                         <div className='flex flex-col gap-4 md:mr-[5px] lg:mr-[-30px]'>
 
                             <div className="md:pr-[-20px] lg:pr-[25px] mr-3 pt-2 w-[76px] h-[20px] font-dana font-medium text-[14px] leading-[100%] tracking-[0%] text-right text-gray-800 whitespace-nowrap">{t('educationLevel')}</div> 
+
                             <div className="md:mr-[10px] lg:mr-[30px] mr-3 mt-1  h-[27px] rounded-[32px] pt-[2px] pr-[8px] pb-[2px] pl-[8px] gap-[8px] bg-[#FF37F5] text-white whitespase-nowrap">{course?.courseLevelName}</div>
 
                         </div>
@@ -73,6 +77,7 @@ const DetailBox = ({ course, CourseId }) => {
 
                             <div className="md:pr-10 lg:pr-5 pr-15 pt-2 w-[60px] h-[20px] font-dana font-medium text-[14px] leading-[100%] tracking-[0%] text-right text-gray-800 whitespace-nowrap">{t('courseInstructor')}</div> 
                             <div className="md:pr-5 pr-15 pt-3 w-[152px] h-[23px] top-[37px] left-[25px] font-dana font-medium text-[16px] leading-[100%] tracking-[0%] text-right text-black whitespace-nowrap">{course?.teacherName}</div>
+
 
                         </div>
                     </div>
@@ -88,6 +93,7 @@ const DetailBox = ({ course, CourseId }) => {
                         <div className='flex flex-col gap-4'> 
                             <div className='pr-3 pt-2 w-[45px] h-[20px] font-medium text-[14px] leading-[100%] text-gray-800 whitespace-nowrap'>{t('startDate')}</div>
                             <div className="pr-3 pt-2 w-[124px] h-[23px] font-dana font-medium text-[16px] leading-[100%] tracking-[0%]  text-right text-black whitespace-nowrap">{formatDate(course?.startTime)}</div>
+
                         </div>
                         <div className="w-[80px] h-0 border-2 -rotate-90 border-gray-400 relative top-[-23px] left-[-120px] md:top-[-22.5px] md:left-[-130px]"></div>
                     </div>
@@ -98,6 +104,7 @@ const DetailBox = ({ course, CourseId }) => {
                             <div className="md:pr-8 pr-5 pt-2 w-[96px] h-[23px] font-dana font-medium text-[16px] leading-[100%] tracking-[0%] text-right text-black whitespace-nowrap">{formatDate(course?.endTime)}</div>
                         </div>
                         <div className="w-[80px] h-0 border-2 border-transparent -rotate-90  relative top-[-22px] left-[-130px] md:border-gray-400"></div>
+
                     </div>
                     
                 </div>
@@ -109,6 +116,7 @@ const DetailBox = ({ course, CourseId }) => {
                             <div className="pr-3 pt-2 w-[76px] h-[20px] font-dana font-medium text-[14px] leading-[100%] tracking-[0%] text-right text-gray-800 whitespace-nowrap">{t('likeCount')}</div>
                             <div className="pr-3 pt-2 w-[47px] h-[23px] font-dana font-medium text-[16px] leading-[100%] tracking-[0%] text-right text-black">{course?.likeCount}</div>
 
+
                         </div>
                         <div className="w-[80px] h-0 border-2 -rotate-90 border-gray-400 relative top-[-23px] md:top-[-22.5px] left-[-120px]"></div>
                     </div>
@@ -117,6 +125,7 @@ const DetailBox = ({ course, CourseId }) => {
                         <div className='flex flex-col gap-4'>
                             <div className="pr-16 pt-2 w-[60px] h-[20px] font-dana font-medium text-[14px] leading-[100%] tracking-[0%] text-right text-gray-800 whitespace-nowrap">{t('dislikeCount')}</div> 
                             <div className="pr-16 pt-2 w-[39px] h-[23px] top-[37px] left-[25px] font-dana font-medium text-[16px] leading-[100%] tracking-[0%] text-right text-black">{course?.dissLikeCount}</div>
+
                         </div>
                     </div>
                     

@@ -13,7 +13,7 @@ const DetailBlogBox = ({ newsId, blog }) => {
 
   return (
     <div className="w-[50%] max-w-2xl xl:max-w-4xl h-auto p-4 sm:p-6 flex flex-col justify-between items-center gap-4">
-      <div className="w-[183px] md:w-[244px] h-[34px] md:h-[46px] font-bold text-2xl sm:text-3xl lg:text-4xl text-black mr-[-40px] md:mr-[10px] lg:mr-[0] self-start md:self-start lg:self-start whitespace-nowrap">
+      <div className="w-[183px] md:w-[244px] h-[34px] md:h-[46px] font-bold text-2xl sm:text-3xl lg:text-4xl  mr-[-40px] md:mr-[10px] lg:mr-[0] self-start md:self-start lg:self-start whitespace-nowrap">
         <h2>{blog?.detailsNewsDto?.title}</h2>
       </div>
 
@@ -23,8 +23,9 @@ const DetailBlogBox = ({ newsId, blog }) => {
             <div className="flex flex-col gap-4">
               <div className="w-[45px] h-[20px] font-medium text-[14px] leading-[100%] text-gray-800 pr-3 pt-2 whitespace-nowrap">
                 {t('category')}
+
               </div>
-              <div className="max-w-[100px] truncate h-[27px] rounded-[32px] pt-[2px] pr-[8px] pb-[2px] pl-[8px] gap-[8px] bg-red-500 mr-5 mt-1 text-white">
+              <div className="max-w-[100px] truncate h-[27px] rounded-[32px] pt-[2px] pr-[8px] pb-[2px] pl-[8px] gap-[8px] bg-red-500 mr-5 mt-1 text-white ">
                 {blog?.detailsNewsDto?.keyword}
               </div>
             </div>
@@ -34,6 +35,7 @@ const DetailBlogBox = ({ newsId, blog }) => {
           <div>
             <div className="md:pr-4 pr-6 pt-2 w-[58px] h-[20px] font-dana font-medium text-[14px] leading-[100%] tracking-[0%] text-right text-gray-800 whitespace-nowrap">
               {blog?.detailsNewsDto?.addUserName || t('publisher')} 
+
             </div>
             <div className="w-[80px] h-0 border-2 border-transparent -rotate-90 relative top-[16.6px] left-[-110px] md:border-gray-400"></div>
           </div>
@@ -44,8 +46,9 @@ const DetailBlogBox = ({ newsId, blog }) => {
             <div className="flex flex-col gap-4">
               <div className="md:pr-[-20px] lg:pr-[5px] mr-3 pt-2 w-[76px] h-[20px] font-dana font-medium text-[14px] leading-[100%] tracking-[0%] text-right text-gray-800 whitespace-nowrap">
                 {t('publishDate')} 
+
               </div>
-              <div className="pr-5 pt-2 w-[124px] h-[23px] font-dana font-medium text-[16px] leading-[100%] tracking-[0%] text-right text-black whitespace-nowrap">
+              <div className="pr-5 pt-2 w-[124px] h-[23px] font-dana font-medium text-[16px] leading-[100%] tracking-[0%] text-right  whitespace-nowrap">
                 {formatDate(blog?.detailsNewsDto?.insertDate)}
               </div>
             </div>
@@ -56,8 +59,9 @@ const DetailBlogBox = ({ newsId, blog }) => {
             <div className="flex flex-col gap-4">
               <div className="mr-[-40px] md:mr-0 md:pr-7 pr-15 pt-2 w-[60px] h-[20px] font-dana font-medium text-[14px] leading-[100%] tracking-[0%] text-right text-gray-800 whitespace-nowrap">
                 {t('visitors')} 
+
               </div>
-              <div className="md:pr-8 pr-15 pt-3 w-[152px] h-[23px] top-[37px] left-[25px] font-dana font-medium text-[16px] leading-[100%] tracking-[0%] text-right text-black whitespace-nowrap">
+              <div className="md:pr-8 pr-15 pt-3 w-[152px] h-[23px] top-[37px] left-[25px] font-dana font-medium text-[16px] leading-[100%] tracking-[0%] text-right  whitespace-nowrap">
                 {blog?.detailsNewsDto?.currentView}
               </div>
             </div>
@@ -71,8 +75,9 @@ const DetailBlogBox = ({ newsId, blog }) => {
             <div className="flex flex-col gap-4">
               <div className="pr-3 md:mr-[-35px] pt-2 w-[45px] h-[20px] font-medium text-[14px] leading-[100%] text-gray-800 whitespace-nowrap">
                 {t('likeCount')} {/* Translated: تعداد لایک */}
+
               </div>
-              <div className="pr-3 pt-2 md:mr-[-35px] w-[124px] h-[23px] font-dana font-medium text-[16px] leading-[100%] tracking-[0%] text-right text-black whitespace-nowrap">
+              <div className="pr-3 pt-2 md:mr-[-35px] w-[124px] h-[23px] font-dana font-medium text-[16px] leading-[100%] tracking-[0%] text-right  whitespace-nowrap">
                 {blog?.detailsNewsDto?.currentLikeCount}
               </div>
             </div>
@@ -88,6 +93,7 @@ const DetailBlogBox = ({ newsId, blog }) => {
                 <div className='hidden md:block'> <CopyUrlButton/> </div>
                 <BlogFavorite newsId={newsId} isFav={blog?.detailsNewsDto?.isCurrentUserFavorite} currentUserFavoriteId={blog?.detailsNewsDto?.currentUserFavoriteId} />
                 <LikeDislikeBlog likeId={blog?.detailsNewsDto?.likeId} newsId={newsId} currentLikeCount={blog?.detailsNewsDto?.currentUserIsLike} currentDissLikeCount={blog?.detailsNewsDto?.currentUserIsDissLike } />
+
 
             </div>
           </div>

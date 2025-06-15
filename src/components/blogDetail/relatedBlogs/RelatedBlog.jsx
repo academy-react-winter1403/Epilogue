@@ -23,6 +23,7 @@ const RelatedBlogs = ({ newsId }) => {
 
         <h3 className="self-start">{t('relatedBlogsTitle')}</h3>
 
+
       </div>
       <div className="flex justify-center items-center gap-2">
         {blogsArray
@@ -32,7 +33,7 @@ const RelatedBlogs = ({ newsId }) => {
             <Link 
               to={`/blog-details/${blog.id}`} 
               key={blog.id} 
-              className="md:w-[431px] w-[322px] text-black bg-white rounded-lg"
+              className="md:w-[431px] w-[322px]   rounded-lg"
             >
               <div>
                 {blog.currentImageAddressTumb ? (
@@ -48,24 +49,25 @@ const RelatedBlogs = ({ newsId }) => {
                 )}
                 
                 <div className="p-5 w-[432px] h-[60px]">
-                  <h5 className="mb-1 font-yekan-700 text-[24px] font-bold tracking-tight text-nowrap text-gray-900">
+                  <h5 className="mb-1 font-yekan-700 text-[24px] font-bold tracking-tight text-nowrap ">
                     {blog.title}
                   </h5>
                   <div className="gap-[20px] lg:gap-[116px] flex flex-row">
                     <p className="mb-3 text-nowrap text-[14px] font-yekan-500 text-[#707070]">
                       {blog.author || t('unknownAuthor')}
+
                     </p>
 
                     <div className="flex flex-row gap-4">
                       {blog.insertDate && (
-                        <p className="mb-3 flex flex-row gap-1 text-nowrap text-[14px] font-yekan-500 text-[#707070]">
+                        <p className="mb-3 flex flex-row gap-1 text-nowrap text-[14px] font-yekan-500 text-[var(--text-grey)]">
                           {formatDate(blog.insertDate)}
                           <div className="m-auto">
                             <Calendar03Icon />
                           </div>
                         </p>
                       )}
-                      <p className="mb-3 flex flex-row gap-1 text-nowrap text-[14px] font-yekan-500 text-[#707070]">
+                      <p className="mb-3 flex flex-row gap-1 text-nowrap text-[14px] font-yekan-500 text-[var(--text-grey)]">
                         {blog.currentView || 0}
                         <div className="m-auto">
                           <ViewIcon width={24} height={24} cursor="pointer" />

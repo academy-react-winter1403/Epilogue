@@ -43,6 +43,7 @@ const CardList = ({ sortedCards, currentCards }) => {
                 <span className="font-bold">
                   {card.cost ? `${card.cost.toLocaleString()} تومان` : "رایگان"}
                 </span>
+
               </div>
             </div>
           </div>

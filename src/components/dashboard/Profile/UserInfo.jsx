@@ -94,12 +94,14 @@ const UserInfo = () => {
                   <div className="w-1/2">
                     <p className="block font-yekan-600 text-black text-sm mb-2">
                       {t('firstName')} 
+
                     </p>
                     <Field
                       type="text"
                       name="firstName"
                       className="border themed-dash-input border-[#DCDCDC] rounded-3xl w-full py-3 px-3 text-black text-[12px] "
                       placeholder={t('enterFirstName')} 
+
                     />
                     <ErrorMessage
                       name="firstName"
@@ -110,12 +112,14 @@ const UserInfo = () => {
                   <div className="w-1/2">
                     <p className="block font-yekan-600 text-black text-sm mb-2">
                       {t('lastName')}
+
                     </p>
                     <Field
                       type="text"
                       name="lastName"
                       className="border themed-dash-input border-[#DCDCDC] rounded-3xl w-full py-3 px-3 text-black text-[12px] "
                       placeholder={t('enterLastName')} 
+
                     />
                     <ErrorMessage
                       name="lastName"
@@ -129,12 +133,14 @@ const UserInfo = () => {
               <div className="mb-6">
                 <p className="block font-yekan-600 text-black text-sm mb-2">
                   {t('aboutMe')}
+
                 </p>
                 <Field
                   as="textarea"
                   name="userAbout"
                   className="border themed-dash-input border-[#DCDCDC] rounded-3xl w-full h-[123px] py-3 px-3 text-black text-[12px] "
                   placeholder={t('enterAboutMe')} 
+
                 />
                 <ErrorMessage
                   name="userAbout"
@@ -148,12 +154,14 @@ const UserInfo = () => {
                   <div className="w-1/2">
                     <p className="block font-yekan-600 text-black text-sm mb-2">
                       {t('phoneNumber')}
+
                     </p>
                     <Field
                       type="tel"
                       name="phoneNumber"
                       className="border themed-dash-input border-[#DCDCDC] rounded-3xl w-full py-3 px-3 text-black text-[12px] "
                       placeholder={t('enterPhoneNumber')} 
+
                     />
                     <ErrorMessage
                       name="phoneNumber"
@@ -164,12 +172,14 @@ const UserInfo = () => {
                   <div className="w-1/2">
                     <p className="block font-yekan-600 text-black text-sm mb-2">
                       {t('nationalCode')}
+
                     </p>
                     <Field
                       type="text"
                       name="nationalCode"
                       className="border themed-dash-input border-[#DCDCDC] rounded-3xl w-full py-3 px-3 text-black text-[12px]"
                       placeholder={t('enterNationalCode')} 
+
                     />
                     <ErrorMessage
                       name="nationalCode"
@@ -184,6 +194,7 @@ const UserInfo = () => {
                 <div className="w-1/2">
                   <p className="block font-yekan-600 text-black text-sm mb-2">
                     {t('birthday')}
+
                   </p>
                   <div className="relative">
                     <Field
@@ -191,6 +202,7 @@ const UserInfo = () => {
                       name="birthday"
                       className="border themed-dash-input border-[#DCDCDC] rounded-3xl w-full py-3 px-3 text-black text-[12px] "
                       placeholder={t('enterBirthday')} 
+
                     />
                     <div className="absolute top-1/2 left-3 -translate-y-1/2"> 
                       <Calendar02Icon />
@@ -211,6 +223,7 @@ const UserInfo = () => {
                     <p className="text-gray-700 text-sm">{t('male')}</p> 
                     <Field type="radio" name="gender" value="male" />
                     <p className="text-gray-700 text-sm">{t('female')}</p> 
+
                     <Field type="radio" name="gender" value="female" />
                     <div>
                       <button
@@ -232,12 +245,14 @@ const UserInfo = () => {
               <div className="mb-6">
                 <p className="block font-yekan-600 text-black text-sm mb-2">
                   {t('email')} 
+
                 </p>
                 <Field
                   type="email"
                   name="email"
                   className="border themed-dash-input border-[#DCDCDC] rounded-3xl w-full py-3 px-3 text-black text-[12px] "
                   placeholder={t('emailRequired')} 
+
                 />
                 <ErrorMessage
                   name="email"
@@ -249,12 +264,14 @@ const UserInfo = () => {
               <div className="mb-6">
                 <p className="block font-yekan-600 text-black text-sm mb-2">
                   {t('homeAddress')} 
+
                 </p>
                 <Field
                   type="text"
                   name="homeAddress"
                   className="border themed-dash-input border-[#DCDCDC] rounded-3xl w-full py-3 px-3 text-black text-[12px] "
                   placeholder={t('enterHomeAddress')}
+
                 />
                 <ErrorMessage
                   name="homeAddress"

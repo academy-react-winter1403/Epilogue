@@ -159,6 +159,7 @@ const CommentSection = ({
     <section className="w-full flex flex-col gap-5 mt-[50px] justify-center items-center">
       <div className="pl-90 md:self-start w-[219px] h-[29px] font-dana font-bold text-[20px] leading-[100%] tracking-[0%] text-gray-800 whitespace-nowrap">
         {t('studentsAndTeachersComments')} 
+
       </div>
 
       <div className="w-full flex flex-col items-center md:flex-row gap-[8px]">

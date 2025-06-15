@@ -18,7 +18,7 @@ const TopProfessors = () => {
   }, []);
 
   return (
-    <div className=" flex flex-col lg:flex-row text-white p-8 min-h-[420px] rounded-[32px] bg-[#2F2F2F]">
+    <div className=" flex flex-col lg:flex-row text-white p-8 min-h-[420px] rounded-[32px] bg-bg-tablePro">
       <div className="text-white py-14 px-10 ">
         <p className="font-bold font-yekan-700 pb-6 text-[24px]">
           {t('topProfessorsOfWeek')}
@@ -31,7 +31,7 @@ const TopProfessors = () => {
         </button>
       </div>
 
-      <div className="w-[361px] flex flex-col relative sm:flex-row lg:w-[768px] lg:min-h-[351px] min-h-[700px] m-auto bg-[#353535] rounded-[24px] ">
+      <div className="w-[361px] flex flex-col relative sm:flex-row lg:w-[768px] lg:min-h-[351px] min-h-[700px] m-auto bg-bg-tableHeadPro rounded-[24px] ">
         <div className="w-full h-full flex items-center justify-center absolute inset-0 ">
           <img className="w-full h-full sm:object-contain hidden sm:block " src={VectorT} alt="Decorative background pattern" />
           <img className="w-full h-full object-contain block sm:hidden " src={VectorVertical} alt="Decorative background pattern" />

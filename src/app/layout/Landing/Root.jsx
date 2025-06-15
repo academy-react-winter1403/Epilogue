@@ -18,6 +18,7 @@ const Root = () => {
       <Header openSuggestedPagesModal={openModal} /> 
       
       <main className="">
+
         <Outlet />
       </main>
       <div className='px-10'>

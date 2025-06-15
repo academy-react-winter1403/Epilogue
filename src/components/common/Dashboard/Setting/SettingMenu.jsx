@@ -21,6 +21,7 @@ const SettingMenu = () => {
             url={item[1]}
           />
         ))}
+
       </div>
     </div>
   );

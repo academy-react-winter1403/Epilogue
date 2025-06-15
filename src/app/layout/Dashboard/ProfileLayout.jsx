@@ -10,8 +10,8 @@ const ProfileLayout = () => {
         <ProfileMenu />
       </div>
 
-      <div className="flex-grow overflow-x-auto  overflow-hidden">
-        <div className="px-6 pb-6  mt-[90px]">
+      <div className="flex-grow  overflow-x-auto  overflow-hidden">
+        <div className="px-6 pb-6   mt-[90px]">
           <Outlet />
         </div>
         <div className="md:hidden flex items-center justify-center ">

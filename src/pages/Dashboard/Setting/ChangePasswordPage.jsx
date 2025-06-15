@@ -45,6 +45,7 @@ const ChangePasswordPage = () => {
               name="oldPassword"
               placeholder={t('enterCurrentPassword')} 
               className="border border-[#DCDCDC] rounded-3xl h-[48px] w-6/6 px-4 py-2 text-[12px]"
+
             />
           </div>
 
@@ -52,6 +53,7 @@ const ChangePasswordPage = () => {
             <label
               htmlFor="newPassword" 
               className="text-[16px] font-yekan-600 text-black"
+
             >
               {t('newPassword')}
             </label>
@@ -61,6 +63,7 @@ const ChangePasswordPage = () => {
               name="newPassword"
               placeholder={t('enterNewPassword')}
               className="border border-[#DCDCDC] rounded-3xl h-[48px] w-6/6 px-4 py-2 text-[12px]"
+
             />
           </div>
 
@@ -68,6 +71,7 @@ const ChangePasswordPage = () => {
             <label
               htmlFor="repeatNewPassword" 
               className="text-[16px] font-yekan-600 text-black"
+
             >
               {t('repeatNewPassword')}
             </label>
@@ -77,6 +81,7 @@ const ChangePasswordPage = () => {
               name="repeatNewPassword"
               placeholder={t('repeatYourNewPassword')}
               className="border border-[#DCDCDC] rounded-3xl h-[48px] w-6/6 px-4 py-2 text-[12px]"
+
             />
           </div>
           <button type="submit" className="w-[80px] h-[30px] rounded-[20px] text-white bg-[#3772FF]">

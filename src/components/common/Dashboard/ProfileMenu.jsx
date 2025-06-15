@@ -23,6 +23,7 @@ const ProfileMenu = () => {
             url={item[1]}
           />
         ))}
+
       </div>
     </div>
   );

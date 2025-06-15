@@ -97,6 +97,7 @@ const DashboardLayout = () => {
             <DashboardMenu />
           </div>
           <div className="flex-grow border themed-dashTable-header bg-white rounded-3xl overflow-y-auto overflow-hidden">
+
             <Outlet />
           </div>
         </div>

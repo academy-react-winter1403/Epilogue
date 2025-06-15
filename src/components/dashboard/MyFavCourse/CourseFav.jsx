@@ -60,6 +60,7 @@ const CourseFavTable = ({ searchTerm }) => {
         <p className="w-[15%]">{t('instructor')}</p>
         <p className="w-[18%]">{t('holdingDate')}</p> 
         <p className="w-[10%]">{t('level')}</p> 
+
       </div>
 
       <div className="overflow-y-auto">

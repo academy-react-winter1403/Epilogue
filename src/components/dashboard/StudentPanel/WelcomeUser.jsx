@@ -39,6 +39,7 @@ const WelcomeUser = () => {
       setDateTime({ time, date, greeting });
     };
 
+
     updateDateTime(); 
 
     const interval = setInterval(updateDateTime, 1000); 
@@ -80,6 +81,7 @@ const WelcomeUser = () => {
             <div className="flex flex-col">
               <p className="text-[14px] text-[#707070]">{t('time')}</p> 
               <p className="font-yekan-600">{dateTime.time}</p>
+
             </div>
           </div>
           <div className="w-[174px] h-[43px] flex flex-row gap-2 ">
