@@ -15,17 +15,7 @@ const DashboardTable = ({ showIcon, searchTerm }) => {
   });
   console.log(myCourses?.listOfMyCourses , "myCourses?.listOfMyCourses")
 
-  const [filteredCourses, setfilteredCourses] = useState([]);
 
-  useEffect(() => {
-    if (myCourses?.listOfMyCourses) {
-      const term = searchTerm?.toLowerCase();
-      const newFilteredCourses = myCourses.listOfMyCourses.filter(course =>
-        course.termName.toLowerCase().includes(term)
-      );
-      setfilteredCourses(newFilteredCourses);
-    }
-  }, [myCourses, searchTerm]);
 
   return (
     <div className="mt-4 px-4 lg:px-4 lg:mt-5 overflow-auto">
@@ -38,12 +28,12 @@ const DashboardTable = ({ showIcon, searchTerm }) => {
       </div>
 
       <div className="overflow-y-auto ">
-        {filteredCourses?.length === 0 ? (
+        {myCourses?.listOfMyCourses?.length === 0 ? (
           <p className="flex items-center justify-center py-16">
             {t('noCoursesFound')} 
           </p>
         ) : (
-          filteredCourses?.map((item) => (
+          myCourses?.listOfMyCourses?.map((item) => (
             <div
               key={item.courseId}
               className="flex items-center gap-[30px] py-[22px] text-nowrap text-sm text-black"

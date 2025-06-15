@@ -11,6 +11,7 @@ import {
 import toast from "react-hot-toast";
 
 import { useTranslation } from 'react-i18next'; 
+import { Link } from "react-router-dom";
 
 
 const CourseFavTable = ({ searchTerm }) => {

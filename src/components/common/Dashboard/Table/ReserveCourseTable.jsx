@@ -19,17 +19,7 @@ const ReservedCoursesTable = ({ showAccept, searchTerm }) => {
     queryFn: () => getReservedCourses(),
   });
 
-  const [filteredReservedCourses, setfilteredReservedCourses] = useState([]);
 
-  useEffect(() => {
-    if (courseReserved) {
-      const term = searchTerm?.toLowerCase();
-      const newFilteredCourses = courseReserved?.filter((course) =>
-        course?.courseName.toLowerCase().includes(term)
-      );
-      setfilteredReservedCourses(newFilteredCourses);
-    }
-  }, [courseReserved, searchTerm]);
 
   const deleteReservedCourse = (courseId) => {
     const deletedCourse = { id: courseId };
@@ -60,12 +50,12 @@ const ReservedCoursesTable = ({ showAccept, searchTerm }) => {
       </div>
 
       <div className="overflow-y-auto">
-        {filteredReservedCourses?.length === 0 ? (
+        {courseReserved?.length === 0 ? (
           <p className="flex items-center justify-center py-16">
             {t('noCoursesFound')} 
           </p>
         ) : (
-          filteredReservedCourses?.map((item) => (
+          courseReserved?.map((item) => (
             <div
               key={item.courseId}
               className="flex items-center gap-[30px] py-[22px] text-nowrap text-sm text-black"
