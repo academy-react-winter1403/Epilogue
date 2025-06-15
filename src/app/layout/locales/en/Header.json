@@ -17,5 +17,17 @@
   "multyi":"multyiAccount",
   "language":"language",
   "suggested":"suggested",
-  "info":"Theres still no information to show or there is not enough time to visit pages"
+  "info":"Theres still no information to show or there is not enough time to visit pages",
+      "title": "Multi Account",
+    "switchedAccount": "Switched account successfully!",
+    "maxAccountsReached": "Maximum of 3 accounts reached. Please remove one to add another.",
+    "cannotRemoveLastAccount": "Cannot remove the last account.",
+    "accountRemoved": "Account removed successfully!",
+    "loggedOutAllAccounts": "Logged out from all accounts.",
+    "defaultAccountName": "Account {index}",
+    "active": "active",
+    "removeAccount": "Remove Account",
+    "addAnotherAccount": "Add Another Account",
+    "noAccountsAdded": "No accounts added yet.",
+    "close": "Close"
 }
