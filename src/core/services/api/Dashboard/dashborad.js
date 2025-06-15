@@ -140,3 +140,14 @@ export const getArticlesComments = async () => {
         throw error
     }
 }
+
+
+export const addCoursePayment = async (data) => {
+    console.log(data , "payment Data : ")
+    try {
+        const response = await http.post("/CoursePayment", data)
+        return response
+    } catch (error) {
+        throw error
+    }
+}
