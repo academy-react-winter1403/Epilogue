@@ -18,11 +18,26 @@ const DetailBox = ({ course, CourseId }) => {
         setIsModalOpen(true);
         console.log("opend");
     };
+
+     const handleReserveAction = () => {
+        reserveMutation.mutate({
+          isReserved: course?.isCourseReseve === "1",
+          reserveId: course?.courseReseveId 
+        }, {
+          onSuccess: () => {
+            if (course?.isCourseReseve === "0") {
+              setIsModalOpen(true);
+            }
+          }
+        });
+      };
     
     const closeOverlay = () => {
         setIsModalOpen(false);
         console.log("closed");
     };
+
+
 
 
     return (
