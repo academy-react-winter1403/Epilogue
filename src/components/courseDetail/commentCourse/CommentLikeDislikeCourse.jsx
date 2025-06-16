@@ -57,33 +57,15 @@ const CommentLikeDislikeCourse = ({ likeCount, dissLikeCount, CourseCommandId, c
     }
   });
 
-// <<<<<<< HEAD
-
-    return (
-      <LikeDislikeComment 
-        likeCount={likeCount} 
-        dissLikeCount={dissLikeCount} 
-        liked={liked} 
-        disliked={disliked} 
-        delLike={delLike} 
-        currentUserEmotion={currentUserEmotion}
-   
-      />
-    )
-}
-  
+  return (
+    <LikeDislikeComment 
+      likeCount={likeCount} 
+      dissLikeCount={dissLikeCount} 
+      liked={liked} 
+      disliked={disliked} 
+      delLike={delLike} 
+      currentUserEmotion={currentUserEmotion}
+    />
+  );
+};
 export { CommentLikeDislikeCourse }
-// =======
-//   return (
-//     <LikeDislikeComment 
-//       likeCount={likeCount} 
-//       dissLikeCount={dissLikeCount} 
-//       liked={liked} 
-//       disliked={disliked} 
-//       delLike={delLike} 
-//       currentUserEmotion={currentUserEmotion}
-//     />
-//   );
-// };
-// export { CommentLikeDislikeCourse }
-// >>>>>>> 16fa08bbc913c752abbe8a7f0d5700de6a72e405

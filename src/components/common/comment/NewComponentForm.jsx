@@ -1,24 +1,17 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 
-import { useTranslation } from 'react-i18next';
-
-
 const NewCommentForm = ({
   onSubmit,
   isReply = false,
-
-
-  isPending,
-  onClose,
-  SendIcon,
-
-
+  isPending, 
+  onClose, 
+  onCancel,
+  SendIcon, 
   EmojiIcon,
   CloseIcon,
   compact = false
 }) => {
-
   const [formData, setFormData] = useState({
     title: '',
     content: ''
@@ -36,20 +29,19 @@ const NewCommentForm = ({
       [name]: value
     }));
   };
-const { t } = useTranslation('blogList'); 
+
   return (
     <form onSubmit={handleSubmit} className={`${compact ? 'w-full' : 'w-[350px]'} md:w-full bg-[#FCFCFC] border border-[#3772FF] rounded-[24px] flex items-center relative`}>
       {(onClose || onCancel) && (
         <button 
           type="button" 
           onClick={onClose || onCancel}
-
           className="absolute left-2 top-2"
         >
-          <img src={CloseIcon} alt={t('closeButton')} className="w-5 h-5" /> 
+          <img src={CloseIcon} alt="بستن" className="w-5 h-5" />
         </button>
       )}
-
+      
       <div className="flex">
         <motion.button
           type="submit"
@@ -57,20 +49,18 @@ const { t } = useTranslation('blogList');
           whileTap={{ scale: 0.95 }}
           disabled={isPending}
         >
-          <img src={SendIcon} alt={t('sendButton')} /> 
+          <img src={SendIcon} alt="ارسال"/>
         </motion.button>
-        {EmojiIcon && <img src={EmojiIcon} alt="Emoji" />} 
+        <img src={EmojiIcon} alt=""/>
       </div>
-
-
-
-      <div className="w-[490px] h-[100px] flex-1 flex flex-col">
+      
+      <div className={`${compact ? 'w-full' : 'w-[490px]'} h-[100px] flex-1 flex flex-col`}>
         <input
           type="text"
-          placeholder={isReply ? t('replyTitlePlaceholder') : t('commentTitlePlaceholder')} 
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-
+          name="title"
+          placeholder={isReply ? "عنوان پاسخ خود را بنویسید" : "عنوان نظر خود را بنویسید"}
+          value={formData.title}
+          onChange={handleChange}
           className="p-2 px-4 focus:outline-none text-right"
           required
           disabled={isPending}
@@ -78,12 +68,10 @@ const { t } = useTranslation('blogList');
         />
         <div className="border-t border-[#DCDCDC] mx-2" />
         <textarea
-
-          placeholder={isReply ? t('replyContentPlaceholder') : t('commentContentPlaceholder')} 
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-
-
+          name="content"
+          placeholder={isReply ? "متن پاسخ خود را بنویسید" : "متن نظر خود را بنویسید"}
+          value={formData.content}
+          onChange={handleChange}
           className="p-2 px-4 focus:outline-none text-right resize-none"
           required
           rows={compact ? 1 : 3}
@@ -95,4 +83,4 @@ const { t } = useTranslation('blogList');
   );
 };
 
-export { NewCommentForm };
+export { NewCommentForm}

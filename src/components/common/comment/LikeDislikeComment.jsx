@@ -10,7 +10,6 @@ const LikeDislikeComment = ({
   delLike,
   disliked,
   liked,
-
   currentUserIsLike, 
   currentUserIsDissLike,
   currentUserEmotion 
@@ -29,14 +28,11 @@ const LikeDislikeComment = ({
       delLike.mutate(); 
     } else {
       liked.mutate(); 
-
     }
   };
 
   const handleDislike = () => {
-
     disliked.mutate(); 
-
   };
 
   return (
@@ -49,11 +45,9 @@ const LikeDislikeComment = ({
           className='w-[56px] h-[56px]'
         >
           <img 
-
             src={hasLiked ? activelikeCommentIcon : likeCommentIcon} 
             className="cursor-pointer"
             alt={hasLiked ? 'Remove like' : 'Like'}
-
           />
         </button>
         <AnimatePresence mode="wait">
@@ -77,11 +71,9 @@ const LikeDislikeComment = ({
           className="w-[56px] h-[56px] mt-1.5"
         >
           <img 
-
             src={hasDisliked ? activeDislikeCommentIcon : dislikeCommentIcon}
             className={`cursor-pointer${hasDisliked ? 'opacity-50 cursor-not-allowed' : ''}`}
             alt={hasDisliked ? 'Disliked' : 'Dislike'}
-
           />
         </button>
         <AnimatePresence mode="wait">
@@ -100,5 +92,4 @@ const LikeDislikeComment = ({
     </div>
   );
 };
-
 export { LikeDislikeComment }

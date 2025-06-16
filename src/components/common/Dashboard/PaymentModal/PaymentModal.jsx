@@ -1,13 +1,10 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-<<<<<<< HEAD
-=======
 import { useMutation } from "@tanstack/react-query";
 import { addCoursePayment } from "../../../../core/services/api/Dashboard/dashborad";
 import { useTranslation } from "react-i18next";
 import generateInvoiceNumber from "../../../../core/utils/PaymentInvoiceNumber";
 import toast from "react-hot-toast";
->>>>>>> d5c08654a79ea7d73f51850d86ddeb830faae053
 
 const backdropVariants = {
   hidden: { opacity: 0 },
@@ -86,14 +83,10 @@ const PaymentModal = ({ isOpen, onClose, course }) => {
               >
                 بستن
               </button>
-<<<<<<< HEAD
-              <button className="bg-blue-500  cursor-pointer text-white rounded-xl px-4 py-2 text-sm">
-=======
               <button
                 className="bg-blue-500  cursor-pointer text-white rounded-xl px-4 py-2 text-sm"
                 onClick={handlePayment}
               >
->>>>>>> d5c08654a79ea7d73f51850d86ddeb830faae053
                 پرداخت
               </button>
             </div>

@@ -4,14 +4,12 @@ import { Calendar03Icon } from "../../common/Icons/Calender";
 import { ViewIcon } from "../../common/Icons/ViewIcon";
 import { useRelatedBlogs } from "../../../core/hooks/blogHooks/useRelatedBlog";
 import { Link } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
 
 const RelatedBlogs = ({ newsId }) => {
-  const { t } = useTranslation('blogList'); 
   const { data, isLoading, error } = useRelatedBlogs(newsId);
 
-  if (isLoading) return <div>{t('loadingRelatedBlogs')}</div>; 
-  if (error) return <div>{t('errorFetchingRelatedBlogs')}</div>; 
+  if (isLoading) return <div>در حال بارگذاری مطالب مرتبط...</div>;
+  if (error) return <div>خطا در دریافت مطالب مرتبط</div>;
   
   const blogsArray = data?.news || [];
   
@@ -20,9 +18,7 @@ const RelatedBlogs = ({ newsId }) => {
   return (
     <section className='w-auto md:mt-10 md:mr-10 mr-130 mb-15'>
       <div className="font-yekan-700 font-bold flex flex-col items-center justify-center text-nowrap text-[32px]">
-
-        <h3 className="self-start">{t('relatedBlogsTitle')}</h3>
-
+        <h3 className="self-start">بلاگ های مرتبط</h3>
       </div>
       <div className="flex justify-center items-center gap-2">
         {blogsArray
@@ -40,7 +36,7 @@ const RelatedBlogs = ({ newsId }) => {
                     <img
                       className="rounded-[32px] w-full h-full object-cover"
                       src={blog.currentImageAddressTumb}
-                      alt={blog.title || t('blogImage')} 
+                      alt={blog.title}
                     />
                   </div>
                 ):(
@@ -53,7 +49,7 @@ const RelatedBlogs = ({ newsId }) => {
                   </h5>
                   <div className="gap-[20px] lg:gap-[116px] flex flex-row">
                     <p className="mb-3 text-nowrap text-[14px] font-yekan-500 text-[#707070]">
-                      {blog.author || t('unknownAuthor')}
+                      {blog.author || 'نویسنده ناشناس'}
                     </p>
 
                     <div className="flex flex-row gap-4">
