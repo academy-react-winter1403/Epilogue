@@ -1,0 +1,20 @@
+{
+  "appName": "My Awesome App",
+  "appLogo": "App Logo",
+  "home": "Home",
+  "courses": "Courses",
+  "blogs": "Blogs",
+  "profilePicture": "Profile Picture",
+  "registerOrLogin": "Register or Login",
+  "english": "English",
+  "farsi": "Farsi",
+  "activeStudents": "Active students",
+  "topTeachers": "Top teachers in the world",
+  "modernEducation": "Modern Education",
+  "rapidProgress": "Rapid Progress",
+  "academyName": "Bahr Specialized Programming Education Academy",
+  "ageRange": "From children to adults",
+  "startLearningNow": "right now",
+  "latestCourses": "Latest Courses",
+  "startLearningPhrase":"startLearningPhrase!"
+}

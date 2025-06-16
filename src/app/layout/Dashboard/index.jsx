@@ -1,88 +1,107 @@
-import React from "react";
-import Header from "../../../components/common/Dashboard/Header";
-import DashboardMenu from "../../../components/common/Dashboard/Menu";
+
+import React, { useState, useEffect } from "react"; 
+import Header from "../../../components/common/Dashboard/Header"; 
+import DashboardMenu from "../../../components/common/Dashboard/Menu"; 
 import { Outlet } from "react-router-dom";
-import { useState, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import Joyride from "react-joyride";
 import Cookies from "js-cookie";
+import { useTranslation } from 'react-i18next';
+
+import { usePageTimeTracker } from '../../../core/hooks/usePageTimeTracker';
+import SuggestedPagesModal from '../../../components/common/SuggestedPagesModal';
 
 const JOYRIDE_COOKIE_NAME = "joyrideCompleted";
+
 const DashboardLayout = () => {
+  usePageTimeTracker();
+
+  const { t } = useTranslation('dashboard'); 
+
   const steps = [
     {
       placement: "center",
       target: "body",
-      content:
-        "سلام تازه وارد. ورودت رو تبریک میگم. بریم یه تور اموزشی داشته باشیم!",
+      content: t('joyrideWelcome'), 
     },
     {
       target: "#mycourse",
-      content: "اینجا صفحه‌ی دوره های شماست.",
+      content: t('joyrideMyCourses'), 
     },
     {
       target: "#reserve",
-      content: "و این هم صفحه‌ی رزرو های شماست.",
+      content: t('joyrideMyReservations'), 
     },
     {
       target: "#editprofile",
-      content: "و از این صفحه میتونی پروفایل خودت رو پرداخت کنی",
+      content: t('joyrideEditProfile'), 
     },
     {
       placement: "center",
       target: "body",
-      content: "امیدوارم که توضیحات کاملی داده باشم . موفق باشی",
+      content: t('joyrideFarewell'), 
     },
   ];
+
   const [run, setRun] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   useEffect(() => {
-    setRun(true);
+    if (!Cookies.get(JOYRIDE_COOKIE_NAME)) {
+      setRun(true);
+    }
   }, []);
+
   const handleJoyrideCallback = (data) => {
     const { status } = data;
     if (status === "finished" || status === "skipped") {
       setRun(false);
-    }
-    if (status === "finished") {
-      Cookies.set(JOYRIDE_COOKIE_NAME, "true", { expires: 30 });
+      if (status === "finished" || status === "skipped") { 
+        Cookies.set(JOYRIDE_COOKIE_NAME, "true", { expires: 30 }); 
+      }
     }
   };
+
   return (
     <>
       <Joyride
         callback={handleJoyrideCallback}
         steps={steps}
         continuous
-        run={!Cookies.get(JOYRIDE_COOKIE_NAME) && run}
+        run={run} 
         showProgress
         showSkipButton
         hideCloseButton
         scrollToFirstStep
         locale={{
-          back: "قبلی",
-          close: "بستن",
-          last: "بدرود",
-          next: "بعدی",
-          skip: "خودم بلدم",
+          back: t('joyrideBack'), 
+          close: t('joyrideClose'), 
+          last: t('joyrideLast'), 
+          next: t('joyrideNext'), 
+          skip: t('joyrideSkip'), 
         }}
         styles={{ options: { primaryColor: "#3772FF" } }}
       />
 
-      <div className="w-full h-screen  bg-[#242424] flex flex-col">
+      <div className="w-full h-screen bg-[#242424] flex flex-col">
         <Toaster />
         <div className=" bg-[#242424]">
-          <Header />
+          <Header /> 
         </div>
 
         <div className="flex flex-row flex-grow px-6 py-3 overflow-y-auto">
           <div className="bg-[#242424] hidden lg:flex text-white flex flex-col">
             <DashboardMenu />
           </div>
-          <div className="flex-grow border themed-dashTable-header  bg-white rounded-3xl  overflow-y-auto overflow-hidden">
+          <div className="flex-grow border themed-dashTable-header bg-white rounded-3xl overflow-y-auto overflow-hidden">
             <Outlet />
           </div>
         </div>
       </div>
+      <SuggestedPagesModal isOpen={isModalOpen} onClose={closeModal} />
     </>
   );
 };

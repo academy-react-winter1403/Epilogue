@@ -6,13 +6,18 @@ import arrow from "../../assets/arrow.png";
 import { Link, useNavigate } from "react-router-dom";
 import { RegisterStep2 } from "../../core/services/api/auth/Register/RegisterStep2.api";
 import useStore from "../../core/constant/store/zustand-store";
+import { useTranslation } from 'react-i18next'; 
 
 export function RegisterPage2() {
+  const { t } = useTranslation('auth'); 
+
   const PhoneNumber = useStore((state) => state.phoneNumber);
   const navigate = useNavigate();
+
   const validationSchema = Yup.object().shape({
-    verifyCode: Yup.string().required("کد تایید الزامی است."),
+    verifyCode: Yup.string().required(t('verificationCodeRequired')), 
   });
+
   const handleSubmit = async (value) => {
     const data = await RegisterStep2({
       phoneNumber: PhoneNumber,
@@ -20,64 +25,64 @@ export function RegisterPage2() {
     });
     console.log(data);
     if (data.success) {
-      if(data.message !== "درخواست نامعتبر است") {
+      if (data.message !== "درخواست نامعتبر است") { 
         navigate("/auth/RegisterPage/RegisterPage3");
       }
     } else {
       console.error(data.message);
     }
   };
+
   return (
     <>
       <div className="flex flex-col">
         <Link to="/auth/RegisterPage">
           <div className="flex gap-65 block md:hidden">
             <div className="w-[42px] h-[40px]">
-              <img src={bahrLogo} />
+              <img src={bahrLogo} alt="Bahr Logo" /> 
             </div>
             <div className="border border-[#DCDCDC] w-[121px] h-[40px] rounded-[34px]">
               <div className="w-[24px] h-[24px] relative top-[8px] right-[90px]">
-                <img src={arrow} alt="Vector" />
+                <img src={arrow} alt="Return Arrow" /> 
               </div>
               <h3 className="text-base font-medium text-[#3772FF] relative right-[16px] bottom-[18px]">
-                بازگشت
+                {t('return')} 
               </h3>
             </div>
           </div>
         </Link>
-        <div className="w-full   flex p-8 gap-0 md:gap-10">
+        <div className="w-full flex p-8 gap-0 md:gap-10">
           <div className="flex flex-col">
             <div className="flex flex-col md:flex-row">
-              <div className="flex-col ">
+              <div className="flex-col">
                 <div className="w-[400px] h-[8px] mt-5 rounded-[9px] bg-[#DCDCDC] md:w-[157px]"></div>
                 <h3 className="font-semibold text-base text-[#DCDCDC] py-[12px] mr-[119px] md:mr-0">
-                  واردکردن شماره همراه
+                  {t('enterMobileNumber')}
                 </h3>
               </div>
-              <div className=" flex-col">
-                <div className="w-[400px] h-[8px] mt-5 rounded-[9px]  bg-[#3772FF] md:w-[157px]  md:mr-[24px]"></div>
-                <h3 className="font-semibold text-base text-[#2F2F2F]  py-[12px] mr-[99px]  md:mr-6.5">
-                  تایید کد ارسال شده
+              <div className="flex-col">
+                <div className="w-[400px] h-[8px] mt-5 rounded-[9px] bg-[#3772FF] md:w-[157px] md:mr-[24px]"></div>
+                <h3 className="font-semibold text-base text-[#2F2F2F] py-[12px] mr-[99px] md:mr-6.5">
+                  {t('confirmCodeSent')} 
                 </h3>
               </div>
-              <div className=" flex-col">
-                <div className="w-[400px] h-[8px] mt-5 rounded-[9px]  bg-[#DCDCDC] md:w-[157px]  md:mr-[24px]"></div>
-                <h3 className="font-semibold text-base text-[#DCDCDC] py-[12px] mr-[99px]  md:mr-6.5">
-                  واردکردن اطلاعات شخصی
+              <div className="flex-col">
+                <div className="w-[400px] h-[8px] mt-5 rounded-[9px] bg-[#DCDCDC] md:w-[157px] md:mr-[24px]"></div>
+                <h3 className="font-semibold text-base text-[#DCDCDC] py-[12px] mr-[99px] md:mr-6.5">
+                  {t('enterPersonalInfo')}
                 </h3>
               </div>
             </div>
             <div className="flex-col mt-5">
               <div className="flex-col">
-                <h1 className="text-2xl font-semibold  relative">
-                  تایید کد ارسال شده
+                <h1 className="text-2xl font-semibold relative">
+                  {t('confirmCodeSent')} 
                 </h1>
-                <h3 className="font-medium text-base text-[#707070] relative  top-[12px]">
-                  لطفا کد ارسال شده به شماره همراه 09381235486 را <br />
-                  وارد کنید
+                <h3 className="font-medium text-base text-[#707070] relative top-[12px]">
+                  {t('enterCodeSentToNumber')} {PhoneNumber} {t('enter')}{" "} 
                 </h3>
               </div>
-              <div className="relative  top-[48px]">
+              <div className="relative top-[48px]">
                 <Formik
                   initialValues={{
                     verifyCode: "",
@@ -92,11 +97,11 @@ export function RegisterPage2() {
                           htmlFor="verifyCode"
                           className="font-semibold text-base text-[#2F2F2F]"
                         >
-                          کد تایید
+                          {t('twoStepCode')} 
                         </label>
                         <Field
                           name="verifyCode"
-                          placeholder="کد تایید خود را وارد کنید"
+                          placeholder={t('enterVerificationCode')} 
                           className="mt-2 w-[398px] h-[48px] p-2 border border-[#DCDCDC] rounded-[24px]"
                         />
                         <ErrorMessage
@@ -106,21 +111,21 @@ export function RegisterPage2() {
                         />
                       </div>
                       <button className="w-[190px] h-[36px] cursor-pointer bg-[#F6F6F6] mt-2 rounded-10 text-[#3772FF]">
-                        ارسال مجدد کد تایید
+                        {t('resendVerificationCode')}
                       </button>
                       <button
                         type="submit"
                         className="w-[398px] bg-blue-500 text-white p-2 rounded-[40px] hover:bg-blue-600 mt-[31px]"
                       >
-                        تایید
+                        {t('confirm')} 
                       </button>
                       <Link to="/auth/RegisterPage">
                         <div className="border border-[#DCDCDC] w-[114px] h-[40px] rounded-[34px] relative top-[16px] right-[140px] hidden md:block">
                           <div className="w-[24px] h-[24px] relative top-[8px] right-[75px]">
-                            <img src={arrow} />
+                            <img src={arrow} alt="Return Arrow" />
                           </div>
                           <h3 className="text-base font-medium text-[#3772FF] relative right-[19px] bottom-[18px]">
-                            بازگشت
+                            {t('return')} 
                           </h3>
                         </div>
                       </Link>
@@ -130,7 +135,6 @@ export function RegisterPage2() {
               </div>
             </div>
           </div>
-          {/* <Side /> */}
         </div>
       </div>
     </>

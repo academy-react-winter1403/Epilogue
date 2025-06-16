@@ -28,13 +28,17 @@ export const postAddDislikeCourse = async (CourseId) => {
 };
 
 export const deleteLikeCourse = async (userLikeId) => {
+
     const formData = formDataModifire({ CourseLikeId: userLikeId })
     try {
         const result = await http.delete(`/Course/DeleteCourseLike`,{data:formData});
+
         return result;
 
     } catch (error) {
         console.log(error, 'delete-like-course');
         return error;
-    }
+
+}
+
 };

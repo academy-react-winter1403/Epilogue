@@ -5,19 +5,22 @@ import ReactCrop, {
   makeAspectCrop,
 } from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
-import setCanvasPreview from "./setCanvasPreview";
+import setCanvasPreview from "./setCanvasPreview"; 
+import { useTranslation } from 'react-i18next'; 
 
 const MIN_DIMENSION = 250;
 const ASPECT = 1;
 
 const ImgCropper = ({
   imgSrc,
-  Open,
+  Open, 
   setOpen,
   setDataUrl,
   setLoading,
   loading,
 }) => {
+  const { t } = useTranslation('dashboard'); 
+
   const [crop, setCrop] = useState();
   const imgRef = useRef(null);
   const canvasRef = useRef(null);
@@ -25,6 +28,7 @@ const ImgCropper = ({
   const onImageLoad = (e) => {
     const { width, height } = e.currentTarget;
     const CropWidthPercentage = (MIN_DIMENSION / width) * 100;
+    
     const cropObj = makeAspectCrop(
       {
         unit: "%",
@@ -39,11 +43,13 @@ const ImgCropper = ({
   };
 
   useEffect(() => {
-    document.body.style.overflow = "hidden";
+    if (Open) { 
+      document.body.style.overflow = "hidden";
+    }
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = ""; 
     };
-  }, [Open]);
+  }, [Open]); 
 
   return (
     <div className="fixed top-0 left-0 w-full h-full z-[1000] bg-black/50 flex items-center justify-center">
@@ -54,8 +60,8 @@ const ImgCropper = ({
           keepSelection
           aspect={ASPECT}
           minWidth={MIN_DIMENSION}
-          onChange={(pixel, percent) => {
-            setCrop(percent);
+          onChange={(pixelCrop, percentCrop) => {
+            setCrop(percentCrop);
           }}
         >
           <img
@@ -63,6 +69,7 @@ const ImgCropper = ({
             src={imgSrc}
             className="rounded-lg shadow-md max-h-[80vh] w-auto transition-all"
             onLoad={onImageLoad}
+            alt={t('imageCropperAltText') || "Image to crop"}
           />
         </ReactCrop>
 
@@ -82,8 +89,9 @@ const ImgCropper = ({
               setDataUrl(canvasRef.current.toDataURL());
             }}
             className="bg-blue-500 text-white font-semibold py-3 px-6 rounded-lg shadow-lg hover:bg-blue-600 transition-all ease-in-out transform hover:scale-105"
+            disabled={loading} 
           >
-            تایید
+            {t('confirm')}
           </button>
 
           <button
@@ -92,7 +100,7 @@ const ImgCropper = ({
             }}
             className="bg-transparent text-gray-600 font-semibold py-3 px-6 rounded-lg border-2 border-gray-600 hover:border-red-500 hover:text-red-500 transition-all ease-in-out transform hover:scale-105"
           >
-            لغو
+            {t('cancel')}
           </button>
         </div>
 

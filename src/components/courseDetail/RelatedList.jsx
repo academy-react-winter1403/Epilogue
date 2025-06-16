@@ -1,12 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useRelatedCourses } from '../../core/hooks/courseHooks/useRelatedCourses';
+import { useTranslation } from 'react-i18next';
 
 const RelatedCourses = ({ CourseId }) => {
+  const { t } = useTranslation('courseDetail');
   const { data, isLoading, isError } = useRelatedCourses(CourseId);
 
-  if (isLoading) return <div className="text-center py-4">در حال بارگذاری دوره‌های مرتبط...</div>;
-  if (isError) return <div className="text-center py-4 text-red-500">خطا در دریافت دوره‌های مرتبط</div>;
+  if (isLoading) return <div className="text-center py-4">{t('loadingRelatedCourses')}</div>;
+  if (isError) return <div className="text-center py-4 text-red-500">{t('errorLoadingRelatedCourses')}</div>;
   if (!data?.courseFilterDtos || data.courseFilterDtos.length === 0) return null;
 
   const courses = data.courseFilterDtos.filter(course => course.courseId !== CourseId).slice(0, 4);
@@ -14,11 +16,12 @@ const RelatedCourses = ({ CourseId }) => {
   return (
     <section className="w-auto py-6">
       <div className="mr-2 mb-5 w-full lg:w-[125px] h-[29px] font-dana font-bold text-[20px] leading-[100%] tracking-[0%] text-right text-gray-800 whitespace-nowrap">
-        دوره های مرتبط
+        {t('relatedCourses')}
       </div>
       <div className="sm:overflow-x-auto sm:overflow-y-hidden md:w-auto w-[400px] h-auto md:h-[366px] flex gap-2 mb-4  sm:scrollbar sm:scrollbar-track-white sm:scrollbar-thumb-blue-500">
         {courses.map((course) => (
-          <div key={course.courseId} className="min-w-[310px] h-[366px] bg-white flex flex-col gap-[10px]">
+          <div key={course.courseId} className="min-w-[324px] h-[366px] bg-white flex flex-col gap-[10px]">
+
             <Link to={`/course-details/${course.courseId}`}>
               <div className='relative'>
                 <div className='absolute top-2 right-5 w-[65px] h-[24px] rounded-[32px] pt-[2px] pr-[8px] pb-[2px] pl-[8px] gap-[8px] bg-[#FF37F5] text-white whitespace-nowrap'>
@@ -34,7 +37,7 @@ const RelatedCourses = ({ CourseId }) => {
                   />
                 ) : (
                   <div className="w-full h-[293px] rounded-[24px] flex items-center justify-center bg-gray-200 text-gray-500">
-                    تصویر دوره
+                    {t('courseImage')}
                   </div>
                 )}
               </div>
@@ -44,7 +47,7 @@ const RelatedCourses = ({ CourseId }) => {
               <div className='flex items-center justify-between p-2'>
                 <p className="text-sm text-gray-500">{course.teacherName}</p>
                 <span className="text-gray-900 font-dana-bold">
-                  {course.cost.toLocaleString()} تومان
+                  {course.cost.toLocaleString()} {t('toman')} 
                 </span>
               </div>
             </Link>

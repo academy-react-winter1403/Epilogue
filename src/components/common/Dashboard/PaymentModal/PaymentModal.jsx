@@ -1,5 +1,13 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
+<<<<<<< HEAD
+=======
+import { useMutation } from "@tanstack/react-query";
+import { addCoursePayment } from "../../../../core/services/api/Dashboard/dashborad";
+import { useTranslation } from "react-i18next";
+import generateInvoiceNumber from "../../../../core/utils/PaymentInvoiceNumber";
+import toast from "react-hot-toast";
+>>>>>>> d5c08654a79ea7d73f51850d86ddeb830faae053
 
 const backdropVariants = {
   hidden: { opacity: 0 },
@@ -13,6 +21,35 @@ const modalVariants = {
 };
 
 const PaymentModal = ({ isOpen, onClose, course }) => {
+    const { t } = useTranslation('dashboard'); 
+  
+  const generatedInvoiceNumber = generateInvoiceNumber();
+  const handlePayment = async () => {
+    const coursePayment = new FormData();
+    const now = new Date()
+    now.setMonth(now.getMonth()-1)
+  
+    coursePayment.append("CourseId", course?.courseId);
+    coursePayment.append("StudentId", course?.studentId);
+    coursePayment.append("Paid", course?.cost);
+    coursePayment.append("PeymentDate",now.toISOString());
+    coursePayment.append("PaymentInvoiceNumber", generatedInvoiceNumber);
+    mutation.mutate(coursePayment);
+  };
+
+  const mutation = useMutation({
+    mutationFn: (data) => {
+      const res = addCoursePayment(data);
+      return res;
+    },
+    onSuccess: () => {
+      toast.success(t("profileEditSuccess"));
+    },
+    onError: () => {
+      toast.error(t("profileEditError"));
+    },
+  });
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -49,7 +86,14 @@ const PaymentModal = ({ isOpen, onClose, course }) => {
               >
                 بستن
               </button>
+<<<<<<< HEAD
               <button className="bg-blue-500  cursor-pointer text-white rounded-xl px-4 py-2 text-sm">
+=======
+              <button
+                className="bg-blue-500  cursor-pointer text-white rounded-xl px-4 py-2 text-sm"
+                onClick={handlePayment}
+              >
+>>>>>>> d5c08654a79ea7d73f51850d86ddeb830faae053
                 پرداخت
               </button>
             </div>

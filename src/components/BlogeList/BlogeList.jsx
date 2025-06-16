@@ -6,6 +6,7 @@ import Pagination from "./Pageination";
 import CardList from "./CardList";
 import Filter from "./Filter/Filter";
 import Sorting from "./Sorting";
+import { useTranslation } from 'react-i18next';
 
 const fetchNews = async (pageNumber, SortCol, SortType) => {
   const params = {
@@ -28,15 +29,13 @@ const fetchNews = async (pageNumber, SortCol, SortType) => {
 };
 
 export function BlogeList() {
+  const { t } = useTranslation('blogList'); 
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
 
-  const {
-    pageNumber,
-    setPageNumber,
-    SortCol,
-    SortType,
-  } = useStore((state) => state);
+  const { pageNumber, setPageNumber, SortCol, SortType } = useStore(
+    (state) => state
+  );
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["news", pageNumber, SortCol, SortType],
@@ -49,13 +48,13 @@ export function BlogeList() {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <h1 className="text-xl">در حال بارگذاری...</h1>
+        <h1 className="text-xl">{t('loading')}</h1>
       </div>
     );
   }
 
   if (error) {
-    return <div>خطا: {error.message}</div>;
+    return <div>{t('error', { message: error.message })}</div>; 
   }
 
   const filteredCards = News.filter((card) => {
@@ -75,34 +74,36 @@ export function BlogeList() {
   const totalPages = Math.ceil(totalCount / 9);
 
   return (
+
     <div className="container mx-auto px-4">
       <div className="text-center mt-10">
-        <p className="text-4xl font-bold">اطلاعات بیشتر، درک بهتر</p>
+        <p className="text-4xl font-bold">{t('moreInfoBetterUnderstanding')}</p> 
         <p className="text-lg font-medium text-gray-700 mt-4">
-          ما در بلاگ‌ها اطلاعات شما را نسبت به
-          <br />
-          تکنولوژی‌هایی که یاد می‌گیرید بیشتر می‌کنیم.
+          {t('blogDescription').split('\n').map((line, index) => (
+            <React.Fragment key={index}>
+              {line}
+              {index < t('blogDescription').split('\n').length - 1 && <br />}
+            </React.Fragment>
+          ))}
+
         </p>
       </div>
 
-      <div className="block md:hidden mt-10 gap-10 flex">
-        <Sorting />
-        <Filter
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          selectedCategory={selectedCategory}
-        />
-      </div>
+      <div className="py-4 mt-[50px] gap-8 md:flex">
+        <div className="mt-[50px]">
+          <Filter
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            selectedCategory={selectedCategory}
+          />
+        </div>
 
-      <Sorting/>
-
-      <div className="mt-10 gap-10 md:flex">
-        <Filter
-          searchTerm={searchTerm}
-          setSearchTerm={setSearchTerm}
-          selectedCategory={selectedCategory}
-        />
-        <CardList sortedCards={filteredCards} currentCards={News} />
+        <div className=" gap-3 md:flex flex-col">
+          <div className="flex items-start pr-4">
+            <Sorting />
+          </div>
+          <CardList sortedCards={filteredCards} currentCards={News} />
+        </div>
       </div>
 
       <Pagination

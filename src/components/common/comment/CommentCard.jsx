@@ -54,16 +54,19 @@ const CommentCard = ({
              currentUserIsLike={comment?.currentUserIsLike}
              currentUserIsDissLike={comment?.currentUserIsDissLike}
            />
-            ) : (
-              <CommentLikeDislikeCourse
-              id={id}
-              currentUserEmotion={comment?.currentUserEmotion}
-              CourseCommandId={comment?.id}
-              likeCount={comment?.likeCount || 0}
-              dissLikeCount={comment?.disslikeCount || 0}
-              currentUserLikeId={comment?.currentUserLikeId}
-            />
-          )}
+
+        ) : (
+          <CommentLikeDislikeCourse
+            id={id}
+            commentId={comment.id} 
+            likeCount={comment?.likeCount || 0}
+            dissLikeCount={comment?.dissLikeCount || 0}
+            currentUserLikeId={comment?.currentUserLikeId}
+            currentUserIsLike={comment?.currentUserIsLike}
+            currentUserIsDissLike={comment?.currentUserIsDissLike}
+          />
+        )}
+
         
       </div>
     </div>
