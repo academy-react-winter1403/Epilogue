@@ -3,6 +3,7 @@ import { Moon02Icon } from "./Icons/MoonIcon";
 import { AnimatePresence, motion } from "framer-motion";
 
 const ThemeToggle = () => {
+  
   const getInitialTheme = () => {
     const saved = localStorage.getItem("theme");
     if (saved) return JSON.parse(saved);
